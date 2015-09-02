@@ -13,17 +13,15 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.ECS;
-    using UniRx;
+    using uFrame.Kernel;
     
     
-    public partial class Player : uFrame.ECS.EcsComponent {
+    public partial class ShooterLoader : uFrame.Kernel.SystemLoader {
         
-        public int ComponentID {
-            get {
-                return 7;
-            }
+        public override void Load() {
+            EcsSystem system = null;
+            system = this.AddSystem<Shooter>();
         }
     }
 }
