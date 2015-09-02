@@ -32,4 +32,8 @@ namespace uFrameECSDemo {
     [uFrame.Attributes.uFrameEvent("MoveRight")]
     public partial class MoveRight : object {
     }
+    
+    [uFrame.Attributes.uFrameEvent("PlayGame")]
+    public partial class PlayGame : object {
+    }
 }

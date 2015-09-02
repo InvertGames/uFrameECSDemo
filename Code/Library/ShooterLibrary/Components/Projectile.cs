@@ -16,6 +16,7 @@ namespace uFrameECSDemo {
     using UnityEngine;
     using uFrame.ECS;
     using UniRx;
+    using uFrameECSDemo;
     
     
     public partial class Projectile : uFrame.ECS.EcsComponent {
@@ -27,7 +28,7 @@ namespace uFrameECSDemo {
         
         public int ComponentID {
             get {
-                return 9;
+                return 8;
             }
         }
         

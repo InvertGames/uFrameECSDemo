@@ -16,13 +16,14 @@ namespace uFrameECSDemo {
     using UnityEngine;
     using uFrame.ECS;
     using UniRx;
+    using uFrameECSDemo;
     
     
     public partial class Asteroid : uFrame.ECS.EcsComponent {
         
         public int ComponentID {
             get {
-                return 8;
+                return 7;
             }
         }
     }
