@@ -1,0 +1,8 @@
+{
+	"Identifier":"144a041e-b30e-427c-be2e-4b5aa8a6d727"	, 
+	"Time":"9/2/2015 5:40:00 PM"	, 
+	"Group":"17400"	, 
+	"DataRecordId":"00c25556-6344-4892-80f1-1a496f137ff2"	, 
+	"Type":1	, 
+	"RecordType":"Invert.Core.GraphDesigner.FilterItem, Invert.Core.GraphDesigner, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null"	, 
+	"Data":"{\r\n\t\"Identifier\":\"00c25556-6344-4892-80f1-1a496f137ff2\"\t, \r\n\t\"Collapsed\":false\t, \r\n\t\"NodeId\":\"ca0c6689-cadd-4b31-a247-19acdb9f299a\"\t, \r\n\t\"FilterId\":\"ddc54619-c5f5-4974-848b-a9a4727e85a0\"\t, \r\n\t\"Position\":\t{\r\n\t\t\"x\":756\t\t, \r\n\t\t\"y\":336\t}\r\n}\r\n"}
