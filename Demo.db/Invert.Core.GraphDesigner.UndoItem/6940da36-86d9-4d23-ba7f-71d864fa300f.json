@@ -1,0 +1,8 @@
+{
+	"Identifier":"6940da36-86d9-4d23-ba7f-71d864fa300f"	, 
+	"Time":"9/3/2015 1:05:25 AM"	, 
+	"Group":"1525"	, 
+	"DataRecordId":"3283a0ef-4c03-4a0b-af71-3ba4bbc5dd13"	, 
+	"Type":2	, 
+	"RecordType":"Invert.uFrame.ECS.VariableSelection, Assembly-CSharp-Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"	, 
+	"Data":"{\r\n\t\"Identifier\":\"3283a0ef-4c03-4a0b-af71-3ba4bbc5dd13\"\t, \r\n\t\"NodeId\":\"65a226dc-3c7e-461b-a697-6d9e26c1fb5c\"\t, \r\n\t\"ItemId\":\"65a226dc-3c7e-461b-a697-6d9e26c1fb5c:Vector3Library:component\"}\r\n"}

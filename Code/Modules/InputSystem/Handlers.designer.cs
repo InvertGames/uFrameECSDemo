@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     
     
     public class HandleMovementInputHandler {
@@ -73,7 +73,6 @@ namespace uFrameECSDemo {
             ecbafaaecafebdcf.System = System;
             while (this.DebugInfo("58e68772-c5ba-44fa-a3e9-cafebd0002cf", this) == 1) yield return new WaitForEndOfFrame();
             ecbafaaecafebdcf.Execute();
-            yield break;
         }
         
         private System.Collections.IEnumerator ProcessInput_MoveBackwards() {
@@ -82,7 +81,6 @@ namespace uFrameECSDemo {
             bacafbba.System = System;
             while (this.DebugInfo("77109731-0175-4bac-af9b-7b04a6995745", this) == 1) yield return new WaitForEndOfFrame();
             bacafbba.Execute();
-            yield break;
         }
         
         private System.Collections.IEnumerator ProcessInput_MoveForwards() {
@@ -91,7 +89,6 @@ namespace uFrameECSDemo {
             acabaccbbbee.System = System;
             while (this.DebugInfo("172a122c-0a4b-4337-a79c-c0b318bb1e5e", this) == 1) yield return new WaitForEndOfFrame();
             acabaccbbbee.Execute();
-            yield break;
         }
         
         private System.Collections.IEnumerator ProcessInput_MoveLeft() {
@@ -100,7 +97,6 @@ namespace uFrameECSDemo {
             efadd.System = System;
             while (this.DebugInfo("8e4f1808-a532-4d20-801d-571632385313", this) == 1) yield return new WaitForEndOfFrame();
             efadd.Execute();
-            yield break;
         }
     }
 }

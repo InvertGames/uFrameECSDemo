@@ -1,0 +1,8 @@
+{
+	"Identifier":"a67560a7-cc7a-4c1b-9118-a704a110a448"	, 
+	"Time":"9/3/2015 1:01:49 AM"	, 
+	"Group":"1149"	, 
+	"DataRecordId":"a2246913-811a-4b5e-9f15-2124b5583d23"	, 
+	"Type":1	, 
+	"RecordType":"Invert.uFrame.ECS.ActionNode, Assembly-CSharp-Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"	, 
+	"Data":"{\r\n\t\"MetaType\":\"Assets.uFrameECS.Framework.Actions.MathLibrary.Multiply\"\t, \r\n\t\"Name\":\"RenameMe\"\t, \r\n\t\"GraphId\":\"a301a390-c18b-409f-b9d2-d21d3b5904f7\"\t, \r\n\t\"Identifier\":\"a2246913-811a-4b5e-9f15-2124b5583d23\"\t, \r\n\t\"Expanded\":false}\r\n"}

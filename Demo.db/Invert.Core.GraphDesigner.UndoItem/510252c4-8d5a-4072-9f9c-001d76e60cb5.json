@@ -1,0 +1,8 @@
+{
+	"Identifier":"510252c4-8d5a-4072-9f9c-001d76e60cb5"	, 
+	"Time":"9/3/2015 1:04:42 AM"	, 
+	"Group":"1442"	, 
+	"DataRecordId":"05ed70e8-54d5-46fe-922a-98b375815787"	, 
+	"Type":2	, 
+	"RecordType":"Invert.Core.GraphDesigner.ConnectionData, Invert.Core.GraphDesigner, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null"	, 
+	"Data":"{\r\n\t\"Identifier\":\"05ed70e8-54d5-46fe-922a-98b375815787\"}\r\n"}

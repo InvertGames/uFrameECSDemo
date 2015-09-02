@@ -14,14 +14,46 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrame.ECS;
     using uFrame.Kernel;
+    using uFrame.ECS;
     
     
-    public partial class ScrollSystem : uFrame.ECS.EcsSystem {
+    public partial class ScrollSystem : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemUpdate {
+        
+        private IEcsComponentManagerOf<ContinuousMovement> _ContinuousMovementManager;
+        
+        public IEcsComponentManagerOf<ContinuousMovement> ContinuousMovementManager {
+            get {
+                return _ContinuousMovementManager;
+            }
+            set {
+                _ContinuousMovementManager = value;
+            }
+        }
         
         public override void Setup() {
             base.Setup();
+            ContinuousMovementManager = ComponentSystem.RegisterComponent<ContinuousMovement>();
+        }
+        
+        protected void UpdateConstantMovementsHandler(ContinuousMovement group) {
+            var handler = new UpdateConstantMovementsHandler();
+            handler.System = this;
+            handler.Group = group;
+            StartCoroutine(handler.Execute());
+        }
+        
+        protected void UpdateConstantMovementsFilter() {
+            var ContinuousMovementItems = ContinuousMovementManager.Components.GetEnumerator();
+            for (
+            ; ContinuousMovementItems.MoveNext(); 
+            ) {
+                this.UpdateConstantMovementsHandler(ContinuousMovementItems.Current);
+            }
+        }
+        
+        public virtual void SystemUpdate() {
+            UpdateConstantMovementsFilter();
         }
     }
 }
