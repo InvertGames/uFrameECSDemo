@@ -1,0 +1,8 @@
+{
+	"Identifier":"55caada6-e8c2-4ae2-8d3d-8c73f2b70c2e"	, 
+	"Time":"9/3/2015 1:29:46 AM"	, 
+	"Group":"12946"	, 
+	"DataRecordId":"45b7ec39-8278-4b1c-9158-5610d6ad6223"	, 
+	"Type":0	, 
+	"RecordType":"Invert.uFrame.ECS.HandlerNode, Assembly-CSharp-Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"	, 
+	"Data":"{\r\n\t\"MetaType\":\"uFrameECSDemo.SpawnEnemy\"\t, \r\n\t\"GraphId\":\"45574ac7-7181-4321-a392-3be2bf7e3f0b\"\t, \r\n\t\"Identifier\":\"45b7ec39-8278-4b1c-9158-5610d6ad6223\"\t, \r\n\t\"Expanded\":false}\r\n"}

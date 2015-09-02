@@ -13,10 +13,10 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.ECS;
     using UniRx;
     using uFrameECSDemo;
+    using UnityEngine;
     
     
     public partial class Asteroid : uFrame.ECS.EcsComponent {

@@ -13,9 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.ECS;
     using UniRx;
+    using UnityEngine;
     
     
     public partial class Deadly : uFrame.ECS.EcsComponent {

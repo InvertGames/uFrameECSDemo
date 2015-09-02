@@ -1,0 +1,8 @@
+{
+	"Identifier":"9b193b69-83a9-4d20-9eeb-ac5362d0719f"	, 
+	"Time":"9/3/2015 1:29:39 AM"	, 
+	"Group":"12939"	, 
+	"DataRecordId":"279a7acf-6792-4e05-b9b0-4292d6f9f25d"	, 
+	"Type":2	, 
+	"RecordType":"Invert.uFrame.ECS.BehaviourWorkspace, Assembly-CSharp-Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"	, 
+	"Data":"{\r\n\t\"Identifier\":\"279a7acf-6792-4e05-b9b0-4292d6f9f25d\"\t, \r\n\t\"Name\":\"ShooterBehaviour\"\t, \r\n\t\"CurrentGraphId\":\"a301a390-c18b-409f-b9d2-d21d3b5904f7\"}\r\n"}

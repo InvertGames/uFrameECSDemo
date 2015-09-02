@@ -20,8 +20,50 @@ namespace uFrameECSDemo {
     
     public partial class GameSystem : uFrame.ECS.EcsSystem {
         
+        private IEcsComponentManagerOf<GameSettings> _GameSettingsManager;
+        
+        public IEcsComponentManagerOf<GameSettings> GameSettingsManager {
+            get {
+                return _GameSettingsManager;
+            }
+            set {
+                _GameSettingsManager = value;
+            }
+        }
+        
         public override void Setup() {
             base.Setup();
+            GameSettingsManager = ComponentSystem.RegisterComponent<GameSettings>();
+            this.OnEvent<uFrameECSDemo.SpawnEnemy>().Subscribe(_=>{ NewHandlerNodeFilter(_); }).DisposeWith(this);
+            this.OnEvent<uFrameECSDemo.PlayGame>().Subscribe(_=>{ GameStartedFilter(_); }).DisposeWith(this);
+        }
+        
+        protected void NewHandlerNodeHandler(uFrameECSDemo.SpawnEnemy data) {
+            var handler = new NewHandlerNodeHandler();
+            handler.System = this;
+            handler.Event = data;
+            StartCoroutine(handler.Execute());
+        }
+        
+        protected void NewHandlerNodeFilter(uFrameECSDemo.SpawnEnemy data) {
+            this.NewHandlerNodeHandler(data);
+        }
+        
+        protected void GameStartedHandler(uFrameECSDemo.PlayGame data, GameSettings group) {
+            var handler = new GameStartedHandler();
+            handler.System = this;
+            handler.Event = data;
+            handler.Group = group;
+            StartCoroutine(handler.Execute());
+        }
+        
+        protected void GameStartedFilter(uFrameECSDemo.PlayGame data) {
+            var GameSettingsItems = GameSettingsManager.Components.GetEnumerator();
+            for (
+            ; GameSettingsItems.MoveNext(); 
+            ) {
+                this.GameStartedHandler(data, GameSettingsItems.Current);
+            }
         }
     }
 }
