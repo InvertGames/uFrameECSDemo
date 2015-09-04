@@ -13,17 +13,69 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using uFrameECSDemo;
+    using UniRx;
     using UnityEngine;
     using uFrame.ECS;
-    using UniRx;
-    using uFrameECSDemo;
     
     
     public partial class Movable : uFrame.ECS.EcsComponent {
         
+        private Subject<Single> _HorizontalObservable;
+        
+        private Subject<Single> _VerticalObservable;
+        
+        [UnityEngine.SerializeField()]
+        private Single _Horizontal;
+        
+        [UnityEngine.SerializeField()]
+        private Single _Vertical;
+        
         public int ComponentID {
             get {
                 return 5;
+            }
+        }
+        
+        public IObservable<Single> HorizontalObservable {
+            get {
+                if (_HorizontalObservable == null) {
+                    _HorizontalObservable = new Subject<Single>();
+                }
+                return _HorizontalObservable;
+            }
+        }
+        
+        public IObservable<Single> VerticalObservable {
+            get {
+                if (_VerticalObservable == null) {
+                    _VerticalObservable = new Subject<Single>();
+                }
+                return _VerticalObservable;
+            }
+        }
+        
+        public Single Horizontal {
+            get {
+                return _Horizontal;
+            }
+            set {
+                _Horizontal = value;
+                if (_HorizontalObservable != null) {
+                    _HorizontalObservable.OnNext(value);
+                }
+            }
+        }
+        
+        public Single Vertical {
+            get {
+                return _Vertical;
+            }
+            set {
+                _Vertical = value;
+                if (_VerticalObservable != null) {
+                    _VerticalObservable.OnNext(value);
+                }
             }
         }
     }

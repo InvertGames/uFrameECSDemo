@@ -21,6 +21,10 @@ namespace uFrameECSDemo {
     public partial class MoveBackwards : object {
     }
     
+    [uFrame.Attributes.uFrameEvent("PlayGame")]
+    public partial class PlayGame : object {
+    }
+    
     [uFrame.Attributes.uFrameEvent("MoveForwards")]
     public partial class MoveForwards : object {
     }
@@ -33,7 +37,7 @@ namespace uFrameECSDemo {
     public partial class MoveRight : object {
     }
     
-    [uFrame.Attributes.uFrameEvent("PlayGame")]
-    public partial class PlayGame : object {
+    [uFrame.Attributes.uFrameEvent("GameOver")]
+    public partial class GameOver : object {
     }
 }
