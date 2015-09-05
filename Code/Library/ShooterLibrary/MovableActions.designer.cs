@@ -24,10 +24,16 @@ namespace uFrameECSDemo {
         public uFrame.ECS.EcsComponent Beside;
         
         [uFrame.Attributes.In()]
+        public Single Vertical;
+        
+        [uFrame.Attributes.In()]
         public Single Horizontal;
         
         [uFrame.Attributes.In()]
-        public Single Vertical;
+        public Single Tilt;
+        
+        [uFrame.Attributes.In()]
+        public Single Speed;
         
         public override void Execute() {
             Beside.gameObject.AddComponent<Movable>();

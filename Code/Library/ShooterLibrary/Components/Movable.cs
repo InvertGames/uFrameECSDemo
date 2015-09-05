@@ -13,27 +13,46 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrameECSDemo;
-    using UniRx;
-    using UnityEngine;
     using uFrame.ECS;
+    using UniRx;
+    using uFrameECSDemo;
+    using UnityEngine;
     
     
     public partial class Movable : uFrame.ECS.EcsComponent {
         
+        private Subject<Single> _VerticalObservable;
+        
         private Subject<Single> _HorizontalObservable;
         
-        private Subject<Single> _VerticalObservable;
+        private Subject<Single> _TiltObservable;
+        
+        private Subject<Single> _SpeedObservable;
+        
+        [UnityEngine.SerializeField()]
+        private Single _Vertical;
         
         [UnityEngine.SerializeField()]
         private Single _Horizontal;
         
         [UnityEngine.SerializeField()]
-        private Single _Vertical;
+        private Single _Tilt;
+        
+        [UnityEngine.SerializeField()]
+        private Single _Speed;
         
         public int ComponentID {
             get {
                 return 5;
+            }
+        }
+        
+        public IObservable<Single> VerticalObservable {
+            get {
+                if (_VerticalObservable == null) {
+                    _VerticalObservable = new Subject<Single>();
+                }
+                return _VerticalObservable;
             }
         }
         
@@ -46,12 +65,33 @@ namespace uFrameECSDemo {
             }
         }
         
-        public IObservable<Single> VerticalObservable {
+        public IObservable<Single> TiltObservable {
             get {
-                if (_VerticalObservable == null) {
-                    _VerticalObservable = new Subject<Single>();
+                if (_TiltObservable == null) {
+                    _TiltObservable = new Subject<Single>();
                 }
-                return _VerticalObservable;
+                return _TiltObservable;
+            }
+        }
+        
+        public IObservable<Single> SpeedObservable {
+            get {
+                if (_SpeedObservable == null) {
+                    _SpeedObservable = new Subject<Single>();
+                }
+                return _SpeedObservable;
+            }
+        }
+        
+        public Single Vertical {
+            get {
+                return _Vertical;
+            }
+            set {
+                _Vertical = value;
+                if (_VerticalObservable != null) {
+                    _VerticalObservable.OnNext(value);
+                }
             }
         }
         
@@ -67,14 +107,26 @@ namespace uFrameECSDemo {
             }
         }
         
-        public Single Vertical {
+        public Single Tilt {
             get {
-                return _Vertical;
+                return _Tilt;
             }
             set {
-                _Vertical = value;
-                if (_VerticalObservable != null) {
-                    _VerticalObservable.OnNext(value);
+                _Tilt = value;
+                if (_TiltObservable != null) {
+                    _TiltObservable.OnNext(value);
+                }
+            }
+        }
+        
+        public Single Speed {
+            get {
+                return _Speed;
+            }
+            set {
+                _Speed = value;
+                if (_SpeedObservable != null) {
+                    _SpeedObservable.OnNext(value);
                 }
             }
         }

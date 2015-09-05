@@ -14,11 +14,11 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using uFrame.ECS;
-    using uFrame.Kernel;
     using UniRx;
+    using uFrame.Kernel;
     
     
-    public partial class Shooter : uFrame.ECS.EcsSystem {
+    public partial class Shooter : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemFixedUpdate {
         
         private IEcsComponentManagerOf<Movable> _MovableManager;
         
@@ -34,78 +34,26 @@ namespace uFrameECSDemo {
         public override void Setup() {
             base.Setup();
             MovableManager = ComponentSystem.RegisterComponent<Movable>();
-            this.OnEvent<uFrameECSDemo.MoveBackwards>().Subscribe(_=>{ MoveBackFilter(_); }).DisposeWith(this);
-            this.OnEvent<uFrameECSDemo.MoveForwards>().Subscribe(_=>{ MoveForwardFilter(_); }).DisposeWith(this);
-            this.OnEvent<uFrameECSDemo.MoveRight>().Subscribe(_=>{ MoveRightFilter(_); }).DisposeWith(this);
-            this.OnEvent<uFrameECSDemo.MoveLeft>().Subscribe(_=>{ MoveLeftFilter(_); }).DisposeWith(this);
         }
         
-        protected void MoveBackHandler(uFrameECSDemo.MoveBackwards data, Movable group) {
-            var handler = new MoveBackHandler();
+        protected void ShooterFixedUpdateHandler(Movable group) {
+            var handler = new ShooterFixedUpdateHandler();
             handler.System = this;
-            handler.Event = data;
             handler.Group = group;
             StartCoroutine(handler.Execute());
         }
         
-        protected void MoveBackFilter(uFrameECSDemo.MoveBackwards data) {
+        protected void ShooterFixedUpdateFilter() {
             var MovableItems = MovableManager.Components.GetEnumerator();
             for (
             ; MovableItems.MoveNext(); 
             ) {
-                this.MoveBackHandler(data, MovableItems.Current);
+                this.ShooterFixedUpdateHandler(MovableItems.Current);
             }
         }
         
-        protected void MoveForwardHandler(uFrameECSDemo.MoveForwards data, Movable group) {
-            var handler = new MoveForwardHandler();
-            handler.System = this;
-            handler.Event = data;
-            handler.Group = group;
-            StartCoroutine(handler.Execute());
-        }
-        
-        protected void MoveForwardFilter(uFrameECSDemo.MoveForwards data) {
-            var MovableItems = MovableManager.Components.GetEnumerator();
-            for (
-            ; MovableItems.MoveNext(); 
-            ) {
-                this.MoveForwardHandler(data, MovableItems.Current);
-            }
-        }
-        
-        protected void MoveRightHandler(uFrameECSDemo.MoveRight data, Movable group) {
-            var handler = new MoveRightHandler();
-            handler.System = this;
-            handler.Event = data;
-            handler.Group = group;
-            StartCoroutine(handler.Execute());
-        }
-        
-        protected void MoveRightFilter(uFrameECSDemo.MoveRight data) {
-            var MovableItems = MovableManager.Components.GetEnumerator();
-            for (
-            ; MovableItems.MoveNext(); 
-            ) {
-                this.MoveRightHandler(data, MovableItems.Current);
-            }
-        }
-        
-        protected void MoveLeftHandler(uFrameECSDemo.MoveLeft data, Movable group) {
-            var handler = new MoveLeftHandler();
-            handler.System = this;
-            handler.Event = data;
-            handler.Group = group;
-            StartCoroutine(handler.Execute());
-        }
-        
-        protected void MoveLeftFilter(uFrameECSDemo.MoveLeft data) {
-            var MovableItems = MovableManager.Components.GetEnumerator();
-            for (
-            ; MovableItems.MoveNext(); 
-            ) {
-                this.MoveLeftHandler(data, MovableItems.Current);
-            }
+        public virtual void SystemFixedUpdate() {
+            ShooterFixedUpdateFilter();
         }
     }
 }

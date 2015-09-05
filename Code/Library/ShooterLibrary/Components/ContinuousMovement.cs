@@ -13,10 +13,10 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using uFrame.ECS;
+    using UniRx;
     using uFrameECSDemo;
     using UnityEngine;
-    using UniRx;
-    using uFrame.ECS;
     
     
     public partial class ContinuousMovement : uFrame.ECS.EcsComponent {

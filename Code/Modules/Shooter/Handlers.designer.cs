@@ -17,15 +17,57 @@ namespace uFrameECSDemo {
     using uFrame.Kernel;
     
     
-    public class MoveForwardHandler {
+    public class ShooterFixedUpdateHandler {
         
         public Movable Group;
         
-        private uFrameECSDemo.MoveForwards _Event;
+        private uFrame.ECS.ISystemFixedUpdate _Event;
         
         private uFrame.ECS.EcsSystem _System;
         
-        public uFrameECSDemo.MoveForwards Event {
+        private string variable1 = default( System.String );
+        
+        private string variable2 = "Horizontal";
+        
+        private float variable3 = default( System.Single );
+        
+        private string variable4 = default( System.String );
+        
+        private string variable5 = "Vertical";
+        
+        private float variable6 = default( System.Single );
+        
+        private UnityEngine.GameObject variable7 = default( UnityEngine.GameObject );
+        
+        private UnityEngine.MonoBehaviour variable8 = default( UnityEngine.MonoBehaviour );
+        
+        private UnityEngine.Rigidbody variable0 = default( UnityEngine.Rigidbody );
+        
+        private UnityEngine.Rigidbody variable9 = default( UnityEngine.Rigidbody );
+        
+        private float variable10 = default( System.Single );
+        
+        private float variable11 = default( System.Single );
+        
+        private float variable12 = default( System.Single );
+        
+        private float variable13 = default( System.Single );
+        
+        private UnityEngine.Rigidbody variable14 = default( UnityEngine.Rigidbody );
+        
+        private float variable15 = default( System.Single );
+        
+        private float variable16 = default( System.Single );
+        
+        private float variable17 = default( System.Single );
+        
+        private float variable18 = default( System.Single );
+        
+        private float variable19 = default( System.Single );
+        
+        private float variable20 = default( System.Single );
+        
+        public uFrame.ECS.ISystemFixedUpdate Event {
             get {
                 return _Event;
             }
@@ -44,103 +86,48 @@ namespace uFrameECSDemo {
         }
         
         public virtual System.Collections.IEnumerator Execute() {
-            // HANDLER: MoveForward
-            yield break;
-        }
-    }
-    
-    public class MoveRightHandler {
-        
-        public Movable Group;
-        
-        private uFrameECSDemo.MoveRight _Event;
-        
-        private uFrame.ECS.EcsSystem _System;
-        
-        public uFrameECSDemo.MoveRight Event {
-            get {
-                return _Event;
-            }
-            set {
-                _Event = value;
-            }
-        }
-        
-        public uFrame.ECS.EcsSystem System {
-            get {
-                return _System;
-            }
-            set {
-                _System = value;
-            }
-        }
-        
-        public virtual System.Collections.IEnumerator Execute() {
-            // HANDLER: MoveRight
-            yield break;
-        }
-    }
-    
-    public class MoveLeftHandler {
-        
-        public Movable Group;
-        
-        private uFrameECSDemo.MoveLeft _Event;
-        
-        private uFrame.ECS.EcsSystem _System;
-        
-        public uFrameECSDemo.MoveLeft Event {
-            get {
-                return _Event;
-            }
-            set {
-                _Event = value;
-            }
-        }
-        
-        public uFrame.ECS.EcsSystem System {
-            get {
-                return _System;
-            }
-            set {
-                _System = value;
-            }
-        }
-        
-        public virtual System.Collections.IEnumerator Execute() {
-            // HANDLER: MoveLeft
-            yield break;
-        }
-    }
-    
-    public class MoveBackHandler {
-        
-        public Movable Group;
-        
-        private uFrameECSDemo.MoveBackwards _Event;
-        
-        private uFrame.ECS.EcsSystem _System;
-        
-        public uFrameECSDemo.MoveBackwards Event {
-            get {
-                return _Event;
-            }
-            set {
-                _Event = value;
-            }
-        }
-        
-        public uFrame.ECS.EcsSystem System {
-            get {
-                return _System;
-            }
-            set {
-                _System = value;
-            }
-        }
-        
-        public virtual System.Collections.IEnumerator Execute() {
-            // HANDLER: MoveBack
+            // Before visit UnityEngine.Input.GetAxis
+            variable1 = variable2;
+            // Visit UnityEngine.Input.GetAxis
+            while (this.DebugInfo("8d4dde43-3481-451f-8725-34470dfab500", this) == 1) yield return new WaitForEndOfFrame();
+            variable3 = UnityEngine.Input.GetAxis(variable1);
+            // Visit Output
+            // Before visit UnityEngine.Input.GetAxis
+            variable4 = variable5;
+            // Visit UnityEngine.Input.GetAxis
+            while (this.DebugInfo("73d130d8-a7ae-457e-a9b6-ff156bd38bb3", this) == 1) yield return new WaitForEndOfFrame();
+            variable6 = UnityEngine.Input.GetAxis(variable4);
+            // Visit Output
+            Group.Vertical = (System.Single)variable6;
+            Group.Horizontal = (System.Single)variable3;
+            // Before visit RigidbodyLibrary.SetVelocityWithSpeed
+            // Before visit uFrame.Actions.UnityLibrary.GetRigidbody
+            variable7 = Group.Entity.gameObject;
+            // Visit uFrame.Actions.UnityLibrary.GetRigidbody
+            while (this.DebugInfo("80244fdb-97b7-44b3-adb0-daea66fa82b0", this) == 1) yield return new WaitForEndOfFrame();
+            variable0 = uFrame.Actions.UnityLibrary.GetRigidbody(variable7, variable8);
+            // Visit Output
+            variable9 = variable0;
+            variable10 = Group.Horizontal;
+            variable12 = Group.Vertical;
+            variable13 = Group.Speed;
+            // Visit RigidbodyLibrary.SetVelocityWithSpeed
+            while (this.DebugInfo("abe712ab-a116-4855-b9e3-ee79b3714c1b", this) == 1) yield return new WaitForEndOfFrame();
+            RigidbodyLibrary.SetVelocityWithSpeed(variable9, variable10, variable11, variable12, variable13);
+            // Before visit RigidbodyLibrary.SetRigidbodyRotation
+            variable14 = variable0;
+            // Before visit Assets.uFrameECS.Framework.Actions.MathLibrary.Multiply
+            variable17 = variable0.velocity.x;
+            variable18 = Group.Tilt;
+            // Visit Assets.uFrameECS.Framework.Actions.MathLibrary.Multiply
+            while (this.DebugInfo("978ce53c-9116-4089-809a-617d10a0d551", this) == 1) yield return new WaitForEndOfFrame();
+            Assets.uFrameECS.Framework.Actions.MathLibrary.Multiply(variable17, variable18, out variable19);
+            // Visit Output
+            variable20 = variable19;
+            // Visit RigidbodyLibrary.SetRigidbodyRotation
+            while (this.DebugInfo("59f7cdc1-0e33-4c33-a7c5-63bb2bd9e8c0", this) == 1) yield return new WaitForEndOfFrame();
+            RigidbodyLibrary.SetRigidbodyRotation(variable14, variable15, variable16, variable20);
+            // HANDLER: ShooterFixedUpdate
             yield break;
         }
     }
