@@ -14,16 +14,16 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using uFrame.ECS;
-    using UniRx;
-    using uFrameECSDemo;
     using UnityEngine;
+    using uFrameECSDemo;
+    using UniRx;
     
     
     public partial class Player : uFrame.ECS.EcsComponent {
         
         public int ComponentID {
             get {
-                return 6;
+                return 11;
             }
         }
     }

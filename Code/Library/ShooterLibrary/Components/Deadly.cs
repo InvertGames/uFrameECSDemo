@@ -14,15 +14,15 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using uFrame.ECS;
-    using UniRx;
     using UnityEngine;
+    using UniRx;
     
     
     public partial class Deadly : uFrame.ECS.EcsComponent {
         
         public int ComponentID {
             get {
-                return 2;
+                return 7;
             }
         }
     }

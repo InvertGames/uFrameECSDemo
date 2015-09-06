@@ -92,6 +92,7 @@ namespace uFrameECSDemo {
             while (this.DebugInfo("8d4dde43-3481-451f-8725-34470dfab500", this) == 1) yield return new WaitForEndOfFrame();
             variable3 = UnityEngine.Input.GetAxis(variable1);
             // Visit Output
+            Group.Horizontal = (System.Single)variable3;
             // Before visit UnityEngine.Input.GetAxis
             variable4 = variable5;
             // Visit UnityEngine.Input.GetAxis
@@ -99,7 +100,6 @@ namespace uFrameECSDemo {
             variable6 = UnityEngine.Input.GetAxis(variable4);
             // Visit Output
             Group.Vertical = (System.Single)variable6;
-            Group.Horizontal = (System.Single)variable3;
             // Before visit RigidbodyLibrary.SetVelocityWithSpeed
             // Before visit uFrame.Actions.UnityLibrary.GetRigidbody
             variable7 = Group.Entity.gameObject;

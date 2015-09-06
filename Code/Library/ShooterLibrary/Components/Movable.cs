@@ -14,9 +14,9 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using uFrame.ECS;
-    using UniRx;
-    using uFrameECSDemo;
     using UnityEngine;
+    using uFrameECSDemo;
+    using UniRx;
     
     
     public partial class Movable : uFrame.ECS.EcsComponent {
@@ -43,7 +43,7 @@ namespace uFrameECSDemo {
         
         public int ComponentID {
             get {
-                return 5;
+                return 10;
             }
         }
         
