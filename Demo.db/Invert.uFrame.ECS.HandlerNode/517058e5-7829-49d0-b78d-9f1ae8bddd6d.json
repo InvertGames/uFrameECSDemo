@@ -1,5 +1,7 @@
 {
 	"MetaType":"uFrame.ECS.ISystemUpdate"	, 
+	"VariableCount":4	, 
+	"VariableName":"HandlerNode0"	, 
 	"Name":"WeaponSystemUpdate"	, 
 	"GraphId":"817ce8f6-eeb7-4114-98e8-63d908c89ef7"	, 
 	"Identifier":"517058e5-7829-49d0-b78d-9f1ae8bddd6d"	, 
