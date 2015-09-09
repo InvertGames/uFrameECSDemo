@@ -13,10 +13,10 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UniRx;
-    using uFrame.ECS;
     using uFrameECSDemo;
     using UnityEngine;
+    using uFrame.ECS;
+    using UniRx;
     
     
     public partial class ContinuousMovement : uFrame.ECS.EcsComponent {
@@ -33,7 +33,7 @@ namespace uFrameECSDemo {
         
         public int ComponentID {
             get {
-                return 36;
+                return 2;
             }
         }
         

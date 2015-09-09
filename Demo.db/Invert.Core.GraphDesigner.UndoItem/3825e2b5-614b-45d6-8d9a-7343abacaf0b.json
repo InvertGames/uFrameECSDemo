@@ -1,8 +1,0 @@
-{
-	"Identifier":"3825e2b5-614b-45d6-8d9a-7343abacaf0b"	, 
-	"Time":"9/2/2015 5:41:43 PM"	, 
-	"Group":"174143"	, 
-	"DataRecordId":"dbc09e55-1452-425c-b395-9ed03bc7731a"	, 
-	"Type":2	, 
-	"RecordType":"Invert.uFrame.ECS.PropertiesChildItem, Assembly-CSharp-Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"	, 
-	"Data":"{\r\n\t\"FriendlyName\":\"Speed\"\t, \r\n\t\"RelatedType\":\"\"\t, \r\n\t\"Identifier\":\"dbc09e55-1452-425c-b395-9ed03bc7731a\"\t, \r\n\t\"NodeId\":\"1516f0be-809e-4475-81b5-7cf983b2b8e7\"\t, \r\n\t\"Name\":\"Speed\"}\r\n"}

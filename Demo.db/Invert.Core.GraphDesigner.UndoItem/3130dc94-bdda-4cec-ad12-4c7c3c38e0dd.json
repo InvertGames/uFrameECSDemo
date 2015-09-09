@@ -1,8 +1,0 @@
-{
-	"Identifier":"3130dc94-bdda-4cec-ad12-4c7c3c38e0dd"	, 
-	"Time":"9/2/2015 6:46:01 PM"	, 
-	"Group":"18461"	, 
-	"DataRecordId":"22c05b60-40af-4433-bbd7-d403ab88dcf8"	, 
-	"Type":2	, 
-	"RecordType":"Invert.uFrame.ECS.ActionNode, Assembly-CSharp-Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"	, 
-	"Data":"{\r\n\t\"MetaType\":\"uFrame.Actions.EntityTransform.SetLocalPosition\"\t, \r\n\t\"Name\":\"NewActionNode\"\t, \r\n\t\"GraphId\":\"e00c4d00-41ca-40a8-938a-50598886473a\"\t, \r\n\t\"Identifier\":\"22c05b60-40af-4433-bbd7-d403ab88dcf8\"\t, \r\n\t\"Expanded\":false}\r\n"}

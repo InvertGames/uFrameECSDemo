@@ -1,8 +1,0 @@
-{
-	"Identifier":"938023a0-f134-4acf-a9d7-f6cad65443bb"	, 
-	"Time":"9/2/2015 5:55:01 PM"	, 
-	"Group":"17551"	, 
-	"DataRecordId":"4643a7dd-8520-415e-b6b8-387394c470e4"	, 
-	"Type":0	, 
-	"RecordType":"Invert.uFrame.ECS.HandlerNode, Assembly-CSharp-Editor, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"	, 
-	"Data":"{\r\n\t\"MetaType\":\"uFrame.ECS.ISystemUpdate\"\t, \r\n\t\"GraphId\":\"2f47aeb8-f9c9-4612-a21a-69438f768cc8\"\t, \r\n\t\"Identifier\":\"4643a7dd-8520-415e-b6b8-387394c470e4\"\t, \r\n\t\"Expanded\":false}\r\n"}

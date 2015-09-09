@@ -20,9 +20,20 @@ namespace uFrameECSDemo {
     
     public partial class WeaponSystem : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemUpdate {
         
+        private IEcsComponentManagerOf<Ship> _ShipManager;
+        
         private IEcsComponentManagerOf<GunnerInput> _GunnerInputManager;
         
         private IEcsComponentManagerOf<Gunner> _GunnerManager;
+        
+        public IEcsComponentManagerOf<Ship> ShipManager {
+            get {
+                return _ShipManager;
+            }
+            set {
+                _ShipManager = value;
+            }
+        }
         
         public IEcsComponentManagerOf<GunnerInput> GunnerInputManager {
             get {
@@ -44,30 +55,44 @@ namespace uFrameECSDemo {
         
         public override void Setup() {
             base.Setup();
+            ShipManager = ComponentSystem.RegisterComponent<Ship>();
             GunnerInputManager = ComponentSystem.RegisterComponent<GunnerInput>();
             GunnerManager = ComponentSystem.RegisterComponent<Gunner>();
+            this.OnEvent<uFrameECSDemo.PlayGame>().Subscribe(_=>{ WeaponSystemPlayGameFilter(_); }).DisposeWith(this);
             this.OnEvent<uFrameECSDemo.GunnerFire>().Subscribe(_=>{ WeaponSystemGunnerFireFilter(_); }).DisposeWith(this);
         }
         
-        protected void WeaponSystemGunnerFireHandler(uFrameECSDemo.GunnerFire data, Gunner group, Gunner gunnerid) {
-            var handler = new WeaponSystemGunnerFireHandler();
+        protected void WeaponSystemPlayGameHandler(uFrameECSDemo.PlayGame data, Ship group) {
+            var handler = new WeaponSystemPlayGameHandler();
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
+            StartCoroutine(handler.Execute());
+        }
+        
+        protected void WeaponSystemPlayGameFilter(uFrameECSDemo.PlayGame data) {
+            var ShipItems = ShipManager.Components.GetEnumerator();
+            for (
+            ; ShipItems.MoveNext(); 
+            ) {
+                this.WeaponSystemPlayGameHandler(data, ShipItems.Current);
+            }
+        }
+        
+        protected void WeaponSystemGunnerFireHandler(uFrameECSDemo.GunnerFire data, Gunner gunnerid) {
+            var handler = new WeaponSystemGunnerFireHandler();
+            handler.System = this;
+            handler.Event = data;
             handler.GunnerId = gunnerid;
             StartCoroutine(handler.Execute());
         }
         
         protected void WeaponSystemGunnerFireFilter(uFrameECSDemo.GunnerFire data) {
-            //var GroupGunner = GunnerManager[data.EntityId];
-            //if (GroupGunner == null) {
-            //    return;
-            //}
             var GunnerIdGunner = GunnerManager[data.GunnerId];
             if (GunnerIdGunner == null) {
                 return;
             }
-            this.WeaponSystemGunnerFireHandler(data, null, GunnerIdGunner);
+            this.WeaponSystemGunnerFireHandler(data, GunnerIdGunner);
         }
         
         protected void WeaponSystemUpdateHandler(GunnerInput group) {

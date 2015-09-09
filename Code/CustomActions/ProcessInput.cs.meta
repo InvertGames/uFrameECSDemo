@@ -1,9 +1,12 @@
 fileFormatVersion: 2
 guid: a339acbf3f695ab47a3f7d9e41181c53
-folderAsset: yes
-timeCreated: 1441583809
+timeCreated: 1441756490
 licenseType: Free
-DefaultImporter:
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
   userData: 
   assetBundleName: 
   assetBundleVariant: 

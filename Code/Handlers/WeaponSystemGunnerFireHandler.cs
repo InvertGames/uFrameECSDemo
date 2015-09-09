@@ -19,8 +19,6 @@ namespace uFrameECSDemo {
     
     public class WeaponSystemGunnerFireHandler {
         
-        public Gunner Group;
-        
         public Gunner GunnerId;
         
         private uFrameECSDemo.GunnerFire _Event;
@@ -52,9 +50,9 @@ namespace uFrameECSDemo {
         public virtual System.Collections.IEnumerator Execute() {
             // Loop Collection
             for (var LoopCollectionNode1_ItemIndex = 0
-            ; LoopCollectionNode1_ItemIndex < Group.Guns.Count; LoopCollectionNode1_ItemIndex++
+            ; LoopCollectionNode1_ItemIndex < GunnerId.Guns.Count; LoopCollectionNode1_ItemIndex++
             ) {
-                LoopCollectionNode1_Item = Group.Guns[LoopCollectionNode1_ItemIndex];
+                LoopCollectionNode1_Item = GunnerId.Guns[LoopCollectionNode1_ItemIndex];
                 LoopCollectionNode1_Next();
             }
             // HANDLER: WeaponSystemGunnerFire

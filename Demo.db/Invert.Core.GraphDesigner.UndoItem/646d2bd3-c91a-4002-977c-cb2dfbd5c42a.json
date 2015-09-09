@@ -1,8 +1,0 @@
-{
-	"Identifier":"646d2bd3-c91a-4002-977c-cb2dfbd5c42a"	, 
-	"Time":"9/2/2015 5:23:25 PM"	, 
-	"Group":"172325"	, 
-	"DataRecordId":"dca25034-7bd7-4a39-94d5-f23554ec29f0"	, 
-	"Type":2	, 
-	"RecordType":"Invert.Core.GraphDesigner.uFrameDatabaseConfig, Invert.Core.GraphDesigner, Version=1.1.0.0, Culture=neutral, PublicKeyToken=null"	, 
-	"Data":"{\r\n\t\"Identifier\":\"dca25034-7bd7-4a39-94d5-f23554ec29f0\"\t, \r\n\t\"CodeOutputPath\":\"Code\"\t, \r\n\t\"Namespace\":\"uFrameECSDemo\"}\r\n"}

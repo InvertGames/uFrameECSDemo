@@ -18,42 +18,10 @@ namespace uFrameECSDemo {
     using uFrame.ECS;
     
     
-    public partial class InputSystem : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemUpdate {
-        
-        private IEcsComponentManagerOf<Movable> _MovableManager;
-        
-        public IEcsComponentManagerOf<Movable> MovableManager {
-            get {
-                return _MovableManager;
-            }
-            set {
-                _MovableManager = value;
-            }
-        }
+    public partial class InputSystem : uFrame.ECS.EcsSystem {
         
         public override void Setup() {
             base.Setup();
-            MovableManager = ComponentSystem.RegisterComponent<Movable>();
-        }
-        
-        protected void HandleMovementInputHandler(Movable group) {
-            var handler = new HandleMovementInputHandler();
-            handler.System = this;
-            handler.Group = group;
-            StartCoroutine(handler.Execute());
-        }
-        
-        protected void HandleMovementInputFilter() {
-            var MovableItems = MovableManager.Components.GetEnumerator();
-            for (
-            ; MovableItems.MoveNext(); 
-            ) {
-                this.HandleMovementInputHandler(MovableItems.Current);
-            }
-        }
-        
-        public virtual void SystemUpdate() {
-            HandleMovementInputFilter();
         }
     }
 }
