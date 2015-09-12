@@ -13,29 +13,44 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
+    using UnityEngine;
+    using uFrame.ECS;
     
     
     public class WeaponSystemUpdateHandler {
         
-        public GunnerInput Group;
+        public ShootingGuns Group;
         
         private uFrame.ECS.ISystemUpdate _Event;
         
         private uFrame.ECS.EcsSystem _System;
         
-        private string ActionNode1_name = default( System.String );
+        private float ActionNode10_Result = default( System.Single );
         
-        private string StringNode4 = "Fire";
+        private float ActionNode15_a = default( System.Single );
         
-        private bool ActionNode1_Result = default( System.Boolean );
+        private float ActionNode15_b = default( System.Single );
         
-        private bool ActionNode2_value = default( System.Boolean );
+        private bool ActionNode15_Result = default( System.Boolean );
         
-        private int ActionNode3_GunnerId = default( System.Int32 );
+        private float ActionNode13_a = default( System.Single );
         
-        private uFrameECSDemo.PublishGunnerFireAction ActionNode3 = new uFrameECSDemo.PublishGunnerFireAction();
+        private float ActionNode13_b = default( System.Single );
+        
+        private float ActionNode13_Result = default( System.Single );
+        
+        private string ActionNode9_PoolName = default( System.String );
+        
+        private string ActionNode9_PrefabName = default( System.String );
+        
+        private UnityEngine.Vector3 ActionNode9_Position = default( UnityEngine.Vector3 );
+        
+        private UnityEngine.Vector3 ActionNode9_Rotation = default( UnityEngine.Vector3 );
+        
+        private uFrame.ECS.Spawn ActionNode9 = new uFrame.ECS.Spawn();
+        
+        private uFrame.ECS.Entity ActionNode9_Result = default( uFrame.ECS.Entity );
         
         public uFrame.ECS.ISystemUpdate Event {
             get {
@@ -56,29 +71,38 @@ namespace uFrameECSDemo {
         }
         
         public virtual System.Collections.IEnumerator Execute() {
-            ActionNode1_name = StringNode4;
-            // Visit UnityEngine.Input.GetKeyDown
-            while (this.DebugInfo("4e301112-83cb-4289-a007-e7b6b8b0d25a", this) == 1) yield return new WaitForEndOfFrame();
-            ActionNode1_Result = UnityEngine.Input.GetKeyDown(ActionNode1_name);
-            ActionNode2_value = ActionNode1_Result;
-            // Visit uFrame.Actions.Comparisons.IsTrue
-            while (this.DebugInfo("fa1a8feb-0a1d-49b6-9ca4-1a8993947f56", this) == 1) yield return new WaitForEndOfFrame();
-            uFrame.Actions.Comparisons.IsTrue(ActionNode2_value, ()=> { System.StartCoroutine(ActionNode2_yes()); }, ()=> { System.StartCoroutine(ActionNode2_no()); });
+            // Visit uFrame.Actions.TimeLibrary.GetTime
+            while (this.DebugInfo("a87839a8-50e9-4ddc-af31-c79cbc5bd2e9", this) == 1) yield return new WaitForEndOfFrame();
+            ActionNode10_Result = uFrame.Actions.TimeLibrary.GetTime();
+            ActionNode15_a = ActionNode10_Result;
+            ActionNode15_b = Group.Gun.NextFire;
+            // Visit uFrame.Actions.Comparisons.GreaterThan
+            while (this.DebugInfo("f3a81b87-3370-47f9-a4b1-bde0b43274f6", this) == 1) yield return new WaitForEndOfFrame();
+            ActionNode15_Result = uFrame.Actions.Comparisons.GreaterThan(ActionNode15_a, ActionNode15_b, ()=> { System.StartCoroutine(ActionNode15_yes()); }, ()=> { System.StartCoroutine(ActionNode15_no()); });
             // HANDLER: WeaponSystemUpdate
             yield break;
         }
         
-        private System.Collections.IEnumerator ActionNode2_yes() {
-            ActionNode3_GunnerId = Group.EntityId;
-            // Visit uFrameECSDemo.PublishGunnerFireAction
-            ActionNode3.GunnerId = ActionNode3_GunnerId;
-            ActionNode3.System = System;
-            while (this.DebugInfo("ff6ba7fa-80e4-49bd-9f33-e042dac66a08", this) == 1) yield return new WaitForEndOfFrame();
-            ActionNode3.Execute();
+        private System.Collections.IEnumerator ActionNode15_yes() {
+            ActionNode13_a = ActionNode10_Result;
+            ActionNode13_b = Group.Gun.FireRate;
+            // Visit uFrame.Actions.FloatLibrary.Add
+            while (this.DebugInfo("1d23ddfa-6b42-4aa3-8b95-52ee6a77032f", this) == 1) yield return new WaitForEndOfFrame();
+            ActionNode13_Result = uFrame.Actions.FloatLibrary.Add(ActionNode13_a, ActionNode13_b);
+            Group.Gun.NextFire = (System.Single)ActionNode13_Result;
+            ActionNode9_PoolName = Group.Gun.ProjectilePrefab;
+            ActionNode9_Position = Group.Entity.transform.position;
+            // Visit uFrame.ECS.Spawn
+            ActionNode9.PoolName = ActionNode9_PoolName;
+            ActionNode9.Position = ActionNode9_Position;
+            ActionNode9.System = System;
+            while (this.DebugInfo("fcb101ff-026c-4aa0-914b-f00ca4a39de0", this) == 1) yield return new WaitForEndOfFrame();
+            ActionNode9.Execute();
+            ActionNode9_Result = ActionNode9.Result;
             yield break;
         }
         
-        private System.Collections.IEnumerator ActionNode2_no() {
+        private System.Collections.IEnumerator ActionNode15_no() {
             yield break;
         }
     }

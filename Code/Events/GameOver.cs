@@ -19,5 +19,17 @@ namespace uFrameECSDemo {
     
     [uFrame.Attributes.uFrameEvent("GameOver")]
     public partial class GameOver : object {
+        
+        [UnityEngine.SerializeField()]
+        private Int32 _Properties;
+        
+        public Int32 Properties {
+            get {
+                return _Properties;
+            }
+            set {
+                _Properties = value;
+            }
+        }
     }
 }

@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Actions;
+    using UnityEngine;
     
     
     [uFrame.Attributes.ActionTitle("Add Gun Component")]
@@ -24,7 +24,16 @@ namespace uFrameECSDemo {
         public uFrame.ECS.EcsComponent Beside;
         
         [uFrame.Attributes.In()]
+        public Single FireRate;
+        
+        [uFrame.Attributes.In()]
+        public Single NextFire;
+        
+        [uFrame.Attributes.In()]
         public String ProjectilePrefab;
+        
+        [uFrame.Attributes.In()]
+        public GunState State;
         
         public override void Execute() {
             Beside.gameObject.AddComponent<Gun>();

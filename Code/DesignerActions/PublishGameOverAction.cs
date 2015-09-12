@@ -13,15 +13,19 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Actions;
+    using UnityEngine;
     
     
     [uFrame.Attributes.ActionTitle("Publish GameOver")]
     public class PublishGameOverAction : uFrame.Actions.UFAction {
         
+        [uFrame.Attributes.In()]
+        public Int32 Properties;
+        
         public override void Execute() {
             var evt = new GameOver();
+            evt.Properties = Properties;
             System.Publish(evt);
         }
     }

@@ -1,6 +1,6 @@
 {
 	"MetaType":"uFrame.ECS.ISystemFixedUpdate"	, 
-	"VariableCount":9	, 
+	"VariableCount":903	, 
 	"VariableName":"HandlerNode0"	, 
 	"Name":"ShooterFixedUpdate"	, 
 	"GraphId":"e00c4d00-41ca-40a8-938a-50598886473a"	, 

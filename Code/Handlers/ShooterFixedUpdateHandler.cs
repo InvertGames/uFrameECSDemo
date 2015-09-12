@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
     public class ShooterFixedUpdateHandler {
@@ -43,21 +43,21 @@ namespace uFrameECSDemo {
         
         private UnityEngine.Rigidbody ActionNode0_Result = default( UnityEngine.Rigidbody );
         
-        private UnityEngine.Rigidbody ActionNode6_rigidBody = default( UnityEngine.Rigidbody );
+        private UnityEngine.Rigidbody ActionNode0_rigidBody = default( UnityEngine.Rigidbody );
         
-        private float ActionNode6_x = default( System.Single );
+        private float ActionNode0_x = default( System.Single );
         
-        private float ActionNode6_y = default( System.Single );
+        private float ActionNode0_y = default( System.Single );
         
-        private float ActionNode6_z = default( System.Single );
+        private float ActionNode0_z = default( System.Single );
         
-        private float ActionNode6_speed = default( System.Single );
+        private float ActionNode0_speed = default( System.Single );
         
-        private UnityEngine.Rigidbody ActionNode7_rigidBody = default( UnityEngine.Rigidbody );
+        private UnityEngine.Rigidbody ActionNode1_rigidBody = default( UnityEngine.Rigidbody );
         
-        private float ActionNode7_x = default( System.Single );
+        private float ActionNode1_x = default( System.Single );
         
-        private float ActionNode7_y = default( System.Single );
+        private float ActionNode1_y = default( System.Single );
         
         private float ActionNode8_a = default( System.Single );
         
@@ -65,7 +65,7 @@ namespace uFrameECSDemo {
         
         private float ActionNode8_result = default( System.Single );
         
-        private float ActionNode7_z = default( System.Single );
+        private float ActionNode1_z = default( System.Single );
         
         public uFrame.ECS.ISystemFixedUpdate Event {
             get {
@@ -100,23 +100,23 @@ namespace uFrameECSDemo {
             // Visit uFrame.Actions.UnityLibrary.GetRigidbody
             while (this.DebugInfo("80244fdb-97b7-44b3-adb0-daea66fa82b0", this) == 1) yield return new WaitForEndOfFrame();
             ActionNode0_Result = uFrame.Actions.UnityLibrary.GetRigidbody(ActionNode0_go, ActionNode0_component);
-            ActionNode6_rigidBody = ActionNode0_Result;
-            ActionNode6_x = Group.Horizontal;
-            ActionNode6_z = Group.Vertical;
-            ActionNode6_speed = Group.Speed;
-            // Visit RigidbodyLibrary.SetVelocityWithSpeed
-            while (this.DebugInfo("abe712ab-a116-4855-b9e3-ee79b3714c1b", this) == 1) yield return new WaitForEndOfFrame();
-            RigidbodyLibrary.SetVelocityWithSpeed(ActionNode6_rigidBody, ActionNode6_x, ActionNode6_y, ActionNode6_z, ActionNode6_speed);
-            ActionNode7_rigidBody = ActionNode0_Result;
+            ActionNode0_rigidBody = ActionNode0_Result;
+            ActionNode0_x = Group.Horizontal;
+            ActionNode0_z = Group.Vertical;
+            ActionNode0_speed = Group.Speed;
+            // Visit uFrame.Actions.RigidbodyLibrary.SetVelocityWithSpeed
+            while (this.DebugInfo("25afa3ef-ca2d-41f3-b5ce-c4f84ccd23cc", this) == 1) yield return new WaitForEndOfFrame();
+            uFrame.Actions.RigidbodyLibrary.SetVelocityWithSpeed(ActionNode0_rigidBody, ActionNode0_x, ActionNode0_y, ActionNode0_z, ActionNode0_speed);
+            ActionNode1_rigidBody = ActionNode0_Result;
             ActionNode8_a = ActionNode0_Result.velocity.x;
             ActionNode8_b = Group.Tilt;
             // Visit Assets.uFrameECS.Framework.Actions.MathLibrary.Multiply
             while (this.DebugInfo("978ce53c-9116-4089-809a-617d10a0d551", this) == 1) yield return new WaitForEndOfFrame();
             Assets.uFrameECS.Framework.Actions.MathLibrary.Multiply(ActionNode8_a, ActionNode8_b, out ActionNode8_result);
-            ActionNode7_z = ActionNode8_result;
-            // Visit RigidbodyLibrary.SetRigidbodyRotation
-            while (this.DebugInfo("59f7cdc1-0e33-4c33-a7c5-63bb2bd9e8c0", this) == 1) yield return new WaitForEndOfFrame();
-            RigidbodyLibrary.SetRigidbodyRotation(ActionNode7_rigidBody, ActionNode7_x, ActionNode7_y, ActionNode7_z);
+            ActionNode1_z = ActionNode8_result;
+            // Visit uFrame.Actions.RigidbodyLibrary.SetRigidbodyRotation
+            while (this.DebugInfo("12fae0e0-3723-4d36-9b84-c418fd17e038", this) == 1) yield return new WaitForEndOfFrame();
+            uFrame.Actions.RigidbodyLibrary.SetRigidbodyRotation(ActionNode1_rigidBody, ActionNode1_x, ActionNode1_y, ActionNode1_z);
             // HANDLER: ShooterFixedUpdate
             yield break;
         }
