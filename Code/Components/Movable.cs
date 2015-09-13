@@ -14,8 +14,8 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using uFrame.ECS;
-    using UniRx;
     using UnityEngine;
+    using UniRx;
     
     
     public partial class Movable : uFrame.ECS.EcsComponent {

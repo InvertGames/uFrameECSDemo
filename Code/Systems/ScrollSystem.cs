@@ -18,10 +18,59 @@ namespace uFrameECSDemo {
     using uFrame.ECS;
     
     
-    public partial class ScrollSystem : uFrame.ECS.EcsSystem {
+    public partial class ScrollSystem : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemUpdate {
+        
+        private IEcsComponentManagerOf<BackgroundScroller> _BackgroundScrollerManager;
+        
+        public IEcsComponentManagerOf<BackgroundScroller> BackgroundScrollerManager {
+            get {
+                return _BackgroundScrollerManager;
+            }
+            set {
+                _BackgroundScrollerManager = value;
+            }
+        }
         
         public override void Setup() {
             base.Setup();
+            BackgroundScrollerManager = ComponentSystem.RegisterComponent<BackgroundScroller>();
+            BackgroundScrollerManager.CreatedObservable.Subscribe(BackgroundScrollerComponentCreatedFilter).DisposeWith(this);
+        }
+        
+        protected void BackgroundScrollerComponentCreated(BackgroundScroller data, BackgroundScroller group) {
+            var handler = new BackgroundScrollerComponentCreated();
+            handler.System = this;
+            handler.Event = data;
+            handler.Group = group;
+            StartCoroutine(handler.Execute());
+        }
+        
+        protected void BackgroundScrollerComponentCreatedFilter(BackgroundScroller data) {
+            var GroupBackgroundScroller = BackgroundScrollerManager[data.EntityId];
+            if (GroupBackgroundScroller == null) {
+                return;
+            }
+            this.BackgroundScrollerComponentCreated(data, GroupBackgroundScroller);
+        }
+        
+        protected void ScrollSystemUpdateHandler(BackgroundScroller group) {
+            var handler = new ScrollSystemUpdateHandler();
+            handler.System = this;
+            handler.Group = group;
+            StartCoroutine(handler.Execute());
+        }
+        
+        protected void ScrollSystemUpdateFilter() {
+            var BackgroundScrollerItems = BackgroundScrollerManager.Components.GetEnumerator();
+            for (
+            ; BackgroundScrollerItems.MoveNext(); 
+            ) {
+                this.ScrollSystemUpdateHandler(BackgroundScrollerItems.Current);
+            }
+        }
+        
+        public virtual void SystemUpdate() {
+            ScrollSystemUpdateFilter();
         }
     }
 }

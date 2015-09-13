@@ -52,6 +52,12 @@ namespace uFrameECSDemo {
         
         private uFrame.ECS.Entity ActionNode9_Result = default( uFrame.ECS.Entity );
         
+        private UnityEngine.GameObject ActionNode26_gameObject = default( UnityEngine.GameObject );
+        
+        private float ActionNode26_time = default( System.Single );
+        
+        private float FloatNode27 = 3F;
+        
         public uFrame.ECS.ISystemUpdate Event {
             get {
                 return _Event;
@@ -99,6 +105,11 @@ namespace uFrameECSDemo {
             while (this.DebugInfo("fcb101ff-026c-4aa0-914b-f00ca4a39de0", this) == 1) yield return new WaitForEndOfFrame();
             ActionNode9.Execute();
             ActionNode9_Result = ActionNode9.Result;
+            ActionNode26_gameObject = ActionNode9_Result.gameObject;
+            ActionNode26_time = FloatNode27;
+            // Visit uFrame.Actions.DestroyLibrary.DestroyGameObject
+            while (this.DebugInfo("1221df01-fe08-4b24-969b-757ac2504a9e", this) == 1) yield return new WaitForEndOfFrame();
+            uFrame.Actions.DestroyLibrary.DestroyGameObject(ActionNode26_gameObject, ActionNode26_time);
             yield break;
         }
         

@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Actions;
     using UnityEngine;
+    using uFrame.Actions;
     
     
     [uFrame.Attributes.ActionTitle("ContinuousMovement Loop")]
