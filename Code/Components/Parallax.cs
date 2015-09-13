@@ -14,9 +14,8 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using uFrame.ECS;
-    using UnityEngine;
     using UniRx;
-    using uFrameECSDemo;
+    using UnityEngine;
     
     
     public partial class Parallax : uFrame.ECS.EcsComponent {

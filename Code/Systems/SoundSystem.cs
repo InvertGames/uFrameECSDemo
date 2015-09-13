@@ -14,26 +14,14 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrame.ECS;
     using uFrame.Kernel;
+    using uFrame.ECS;
     
     
     public partial class SoundSystem : uFrame.ECS.EcsSystem {
         
         public override void Setup() {
             base.Setup();
-            this.OnEvent<uFrameECSDemo.GameOver>().Subscribe(_=>{ SoundSystemGameOverFilter(_); }).DisposeWith(this);
-        }
-        
-        protected void SoundSystemGameOverHandler(uFrameECSDemo.GameOver data) {
-            var handler = new SoundSystemGameOverHandler();
-            handler.System = this;
-            handler.Event = data;
-            StartCoroutine(handler.Execute());
-        }
-        
-        protected void SoundSystemGameOverFilter(uFrameECSDemo.GameOver data) {
-            this.SoundSystemGameOverHandler(data);
         }
     }
 }
