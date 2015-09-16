@@ -13,21 +13,37 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrameECSDemo;
     using UniRx;
+    using uFrame.ECS;
     
     
+    [uFrame.Attributes.uFrameIdentifier("94f65036-c558-4329-9688-353472d6bba9")]
     public partial class Projectile : uFrame.ECS.EcsComponent {
         
+        private Subject<Vector3> _DirectionObservable;
+        
         private Subject<Single> _SpeedObservable;
+        
+        [UnityEngine.SerializeField()]
+        private Vector3 _Direction;
         
         [UnityEngine.SerializeField()]
         private Single _Speed;
         
         public int ComponentID {
             get {
-                return 9;
+                return 10;
+            }
+        }
+        
+        public IObservable<Vector3> DirectionObservable {
+            get {
+                if (_DirectionObservable == null) {
+                    _DirectionObservable = new Subject<Vector3>();
+                }
+                return _DirectionObservable;
             }
         }
         
@@ -37,6 +53,18 @@ namespace uFrameECSDemo {
                     _SpeedObservable = new Subject<Single>();
                 }
                 return _SpeedObservable;
+            }
+        }
+        
+        public Vector3 Direction {
+            get {
+                return _Direction;
+            }
+            set {
+                _Direction = value;
+                if (_DirectionObservable != null) {
+                    _DirectionObservable.OnNext(value);
+                }
             }
         }
         

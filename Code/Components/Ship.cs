@@ -13,11 +13,13 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrameECSDemo;
     using UniRx;
+    using uFrame.ECS;
     
     
+    [uFrame.Attributes.uFrameIdentifier("2f9e0113-045b-4110-b755-dd19f754727f")]
     public partial class Ship : uFrame.ECS.EcsComponent {
         
         public int ComponentID {

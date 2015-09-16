@@ -13,11 +13,13 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrameECSDemo;
     using UniRx;
+    using uFrame.ECS;
     
     
+    [uFrame.Attributes.uFrameIdentifier("59383a7f-bf19-427f-b637-02e21c0957a0")]
     public partial class Health : uFrame.ECS.EcsComponent {
         
         private Subject<Int32> _ValueObservable;
@@ -27,7 +29,7 @@ namespace uFrameECSDemo {
         
         public int ComponentID {
             get {
-                return 5;
+                return 6;
             }
         }
         

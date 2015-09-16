@@ -14,10 +14,11 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
     
     
+    [uFrame.Attributes.uFrameIdentifier("3290a7ec-6da4-40b6-83a8-ce982d299c6d")]
     public partial class InputSystem : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemUpdate {
         
         private IEcsComponentManagerOf<LocalGunner> _LocalGunnerManager;
@@ -44,11 +45,11 @@ namespace uFrameECSDemo {
         }
         
         protected void GunnerInputUpdateFilter() {
-            var LocalGunnerItems = LocalGunnerManager.Components.GetEnumerator();
-            for (
-            ; LocalGunnerItems.MoveNext(); 
+            var LocalGunnerItems = LocalGunnerManager.Components;
+            for (var LocalGunnerIndex = 0
+            ; LocalGunnerIndex < LocalGunnerItems.Count; LocalGunnerIndex++
             ) {
-                this.GunnerInputUpdateHandler(LocalGunnerItems.Current);
+                this.GunnerInputUpdateHandler(LocalGunnerItems[LocalGunnerIndex]);
             }
         }
         

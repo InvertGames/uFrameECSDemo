@@ -13,11 +13,13 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrameECSDemo;
     using UniRx;
+    using uFrame.ECS;
     
     
+    [uFrame.Attributes.uFrameIdentifier("1c477710-809a-4b0c-84bf-939259836de2")]
     public partial class Deadly : uFrame.ECS.EcsComponent {
         
         public int ComponentID {

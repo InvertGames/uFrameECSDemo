@@ -24,6 +24,9 @@ namespace uFrameECSDemo {
         public uFrame.ECS.EcsComponent Beside;
         
         [uFrame.Attributes.In()]
+        public Vector3 Direction;
+        
+        [uFrame.Attributes.In()]
         public Single Speed;
         
         public override void Execute() {

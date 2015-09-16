@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     
     
     public class GunnerInputUpdateHandler {
@@ -64,23 +64,25 @@ namespace uFrameECSDemo {
         public virtual System.Collections.IEnumerator Execute() {
             ActionNode50_key = EnumValueNode1;
             // Visit uFrame.Actions.InputLibrary.IsKeyDown
-            while (this.DebugInfo("34e53f1a-79a2-4a0a-a8e3-d70477e3f946", this) == 1) yield return new WaitForEndOfFrame();
+            while (this.DebugInfo("337222c6-6b88-4526-b806-5e94ecbf9709","34e53f1a-79a2-4a0a-a8e3-d70477e3f946", this) == 1) yield return null;
             ActionNode50_Result = uFrame.Actions.InputLibrary.IsKeyDown(ActionNode50_key, ()=> { System.StartCoroutine(ActionNode50_yes()); }, ()=> { System.StartCoroutine(ActionNode50_no()); });
             ActionNode60_key = EnumValueNode1;
             // Visit uFrame.Actions.InputLibrary.IsKeyUp
-            while (this.DebugInfo("e1e48f41-ede7-4e74-9870-a2fa66b3c4af", this) == 1) yield return new WaitForEndOfFrame();
+            while (this.DebugInfo("04621456-8687-41df-9c99-8d9b925a468b","e1e48f41-ede7-4e74-9870-a2fa66b3c4af", this) == 1) yield return null;
             ActionNode60_Result = uFrame.Actions.InputLibrary.IsKeyUp(ActionNode60_key, ()=> { System.StartCoroutine(ActionNode60_yes()); }, ()=> { System.StartCoroutine(ActionNode60_no()); });
             // HANDLER: GunnerInputUpdate
             yield break;
         }
         
         private System.Collections.IEnumerator LoopCollectionNode5_Next() {
+            while (this.DebugInfo("d765f854-8f4a-4507-a885-a0b610fd1fee","04621456-8687-41df-9c99-8d9b925a468b", this) == 1) yield return null;
             LoopCollectionNode5_Item.State = (uFrameECSDemo.GunState)EnumValueNode10;
             yield break;
         }
         
         private System.Collections.IEnumerator ActionNode50_yes() {
             // Loop Collection
+            while (this.DebugInfo("34e53f1a-79a2-4a0a-a8e3-d70477e3f946","d765f854-8f4a-4507-a885-a0b610fd1fee", this) == 1) yield return null;
             for (var LoopCollectionNode5_ItemIndex = 0
             ; LoopCollectionNode5_ItemIndex < Group.Gunner.Guns.Count; LoopCollectionNode5_ItemIndex++
             ) {
@@ -95,12 +97,14 @@ namespace uFrameECSDemo {
         }
         
         private System.Collections.IEnumerator LoopCollectionNode6_Next() {
+            while (this.DebugInfo("c584d406-a9f3-4fff-b402-3df2d4cb2129","130ab2bc-a8a4-4292-a1e9-67e427002a4a", this) == 1) yield return null;
             LoopCollectionNode6_Item.State = (uFrameECSDemo.GunState)EnumValueNode9;
             yield break;
         }
         
         private System.Collections.IEnumerator ActionNode60_yes() {
             // Loop Collection
+            while (this.DebugInfo("e1e48f41-ede7-4e74-9870-a2fa66b3c4af","c584d406-a9f3-4fff-b402-3df2d4cb2129", this) == 1) yield return null;
             for (var LoopCollectionNode6_ItemIndex = 0
             ; LoopCollectionNode6_ItemIndex < Group.Gunner.Guns.Count; LoopCollectionNode6_ItemIndex++
             ) {

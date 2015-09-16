@@ -13,11 +13,13 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrameECSDemo;
     using UniRx;
+    using uFrame.ECS;
     
     
+    [uFrame.Attributes.uFrameIdentifier("eb461b84-87e2-4630-b721-4705c72ae4d6")]
     public partial class Gun : uFrame.ECS.EcsComponent {
         
         private Subject<Single> _FireRateObservable;
@@ -42,7 +44,7 @@ namespace uFrameECSDemo {
         
         public int ComponentID {
             get {
-                return 12;
+                return 17;
             }
         }
         

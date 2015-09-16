@@ -13,11 +13,13 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrameECSDemo;
     using UniRx;
+    using uFrame.ECS;
     
     
+    [uFrame.Attributes.uFrameIdentifier("092f8558-a85c-4579-b569-09b513eda0b1")]
     public partial class GunnerInput : uFrame.ECS.EcsComponent {
         
         public int ComponentID {

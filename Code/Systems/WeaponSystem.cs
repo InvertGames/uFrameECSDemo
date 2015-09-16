@@ -14,10 +14,11 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
     
     
+    [uFrame.Attributes.uFrameIdentifier("868e3ce9-162f-429b-b89a-4bd6475e7674")]
     public partial class WeaponSystem : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemUpdate {
         
         private IEcsComponentManagerOf<ShootingGuns> _ShootingGunsManager;
@@ -46,11 +47,11 @@ namespace uFrameECSDemo {
         }
         
         protected void WeaponSystemUpdateFilter() {
-            var ShootingGunsItems = ShootingGunsManager.Components.GetEnumerator();
-            for (
-            ; ShootingGunsItems.MoveNext(); 
+            var ShootingGunsItems = ShootingGunsManager.Components;
+            for (var ShootingGunsIndex = 0
+            ; ShootingGunsIndex < ShootingGunsItems.Count; ShootingGunsIndex++
             ) {
-                this.WeaponSystemUpdateHandler(ShootingGunsItems.Current);
+                this.WeaponSystemUpdateHandler(ShootingGunsItems[ShootingGunsIndex]);
             }
         }
         

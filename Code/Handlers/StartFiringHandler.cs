@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     
     
     public class ShootingGunsComponentCreated {
@@ -27,7 +27,7 @@ namespace uFrameECSDemo {
         
         private object ActionNode21_message = default( System.Object );
         
-        private string StringNode22 = "Added";
+        private string StringNode22 = "Success";
         
         public ShootingGuns Event {
             get {
@@ -50,7 +50,7 @@ namespace uFrameECSDemo {
         public virtual System.Collections.IEnumerator Execute() {
             ActionNode21_message = StringNode22;
             // Visit uFrame.Actions.DebugLibrary.LogMessage
-            while (this.DebugInfo("70ad0e1f-f396-4b64-97bc-ce045840c05c", this) == 1) yield return new WaitForEndOfFrame();
+            while (this.DebugInfo("","70ad0e1f-f396-4b64-97bc-ce045840c05c", this) == 1) yield return null;
             uFrame.Actions.DebugLibrary.LogMessage(ActionNode21_message);
             // HANDLER: StartFiring
             yield break;

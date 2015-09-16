@@ -13,16 +13,18 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrameECSDemo;
     using UniRx;
+    using uFrame.ECS;
     
     
+    [uFrame.Attributes.uFrameIdentifier("e3ac4c43-d177-4e87-b063-3967d3b9415d")]
     public partial class Parallax : uFrame.ECS.EcsComponent {
         
         public int ComponentID {
             get {
-                return 11;
+                return 15;
             }
         }
     }

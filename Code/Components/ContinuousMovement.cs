@@ -13,11 +13,13 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrameECSDemo;
     using UniRx;
+    using uFrame.ECS;
     
     
+    [uFrame.Attributes.uFrameIdentifier("1516f0be-809e-4475-81b5-7cf983b2b8e7")]
     public partial class ContinuousMovement : uFrame.ECS.EcsComponent {
         
         private Subject<Single> _SpeedObservable;

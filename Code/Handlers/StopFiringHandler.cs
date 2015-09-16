@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     
     
     public class ShootingGunsComponentDestroyed {
@@ -50,7 +50,7 @@ namespace uFrameECSDemo {
         public virtual System.Collections.IEnumerator Execute() {
             ActionNode19_message = StringNode20;
             // Visit uFrame.Actions.DebugLibrary.LogMessage
-            while (this.DebugInfo("6afadd07-6bc7-460a-a1ec-3e7126715bda", this) == 1) yield return new WaitForEndOfFrame();
+            while (this.DebugInfo("0e52fecd-92b1-4be7-bfb6-9a010273790b","6afadd07-6bc7-460a-a1ec-3e7126715bda", this) == 1) yield return null;
             uFrame.Actions.DebugLibrary.LogMessage(ActionNode19_message);
             // HANDLER: StopFiring
             yield break;

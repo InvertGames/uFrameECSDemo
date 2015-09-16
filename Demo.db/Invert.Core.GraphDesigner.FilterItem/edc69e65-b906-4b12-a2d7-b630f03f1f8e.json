@@ -1,9 +1,9 @@
 {
 	"Identifier":"edc69e65-b906-4b12-a2d7-b630f03f1f8e"	, 
-	"Collapsed":false	, 
+	"Collapsed":true	, 
 	"NodeId":"7e27fe49-9b91-4c3d-96ba-9159914caf85"	, 
 	"FilterId":"43fc3f8b-d54f-4ceb-88d4-c47a7938530f"	, 
 	"Position":	{
-		"x":204		, 
-		"y":108	}
+		"x":276		, 
+		"y":300	}
 }

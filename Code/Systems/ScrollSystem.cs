@@ -14,10 +14,11 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
     
     
+    [uFrame.Attributes.uFrameIdentifier("c39f72a9-03fa-4cc0-990c-f82be2aa6954")]
     public partial class ScrollSystem : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemUpdate {
         
         private IEcsComponentManagerOf<BackgroundScroller> _BackgroundScrollerManager;
@@ -37,6 +38,26 @@ namespace uFrameECSDemo {
             BackgroundScrollerManager.CreatedObservable.Subscribe(BackgroundScrollerComponentCreatedFilter).DisposeWith(this);
         }
         
+        protected void ScrollSystemUpdateHandler(BackgroundScroller group) {
+            var handler = new ScrollSystemUpdateHandler();
+            handler.System = this;
+            handler.Group = group;
+            StartCoroutine(handler.Execute());
+        }
+        
+        protected void ScrollSystemUpdateFilter() {
+            var BackgroundScrollerItems = BackgroundScrollerManager.Components;
+            for (var BackgroundScrollerIndex = 0
+            ; BackgroundScrollerIndex < BackgroundScrollerItems.Count; BackgroundScrollerIndex++
+            ) {
+                this.ScrollSystemUpdateHandler(BackgroundScrollerItems[BackgroundScrollerIndex]);
+            }
+        }
+        
+        public virtual void SystemUpdate() {
+            ScrollSystemUpdateFilter();
+        }
+        
         protected void BackgroundScrollerComponentCreated(BackgroundScroller data, BackgroundScroller group) {
             var handler = new BackgroundScrollerComponentCreated();
             handler.System = this;
@@ -51,26 +72,6 @@ namespace uFrameECSDemo {
                 return;
             }
             this.BackgroundScrollerComponentCreated(data, GroupBackgroundScroller);
-        }
-        
-        protected void ScrollSystemUpdateHandler(BackgroundScroller group) {
-            var handler = new ScrollSystemUpdateHandler();
-            handler.System = this;
-            handler.Group = group;
-            StartCoroutine(handler.Execute());
-        }
-        
-        protected void ScrollSystemUpdateFilter() {
-            var BackgroundScrollerItems = BackgroundScrollerManager.Components.GetEnumerator();
-            for (
-            ; BackgroundScrollerItems.MoveNext(); 
-            ) {
-                this.ScrollSystemUpdateHandler(BackgroundScrollerItems.Current);
-            }
-        }
-        
-        public virtual void SystemUpdate() {
-            ScrollSystemUpdateFilter();
         }
     }
 }

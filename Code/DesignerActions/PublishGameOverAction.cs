@@ -21,11 +21,11 @@ namespace uFrameECSDemo {
     public class PublishGameOverAction : uFrame.Actions.UFAction {
         
         [uFrame.Attributes.In()]
-        public Int32 Properties;
+        public Int32 FinalScore;
         
         public override void Execute() {
             var evt = new GameOver();
-            evt.Properties = Properties;
+            evt.FinalScore = FinalScore;
             System.Publish(evt);
         }
     }

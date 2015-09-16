@@ -13,10 +13,11 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using uFrame.Kernel;
+    using uFrame.ECS;
     
     
+    [uFrame.Attributes.uFrameIdentifier("3290a7ec-6da4-40b6-83a8-ce982d299c6d")]
     public partial class InputSystemLoader : uFrame.Kernel.SystemLoader {
         
         public override void Load() {

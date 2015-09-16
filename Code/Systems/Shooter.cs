@@ -14,10 +14,11 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
     
     
+    [uFrame.Attributes.uFrameIdentifier("a3b30320-253b-43b5-b2c2-0701d6370261")]
     public partial class Shooter : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemFixedUpdate {
         
         private IEcsComponentManagerOf<Movable> _MovableManager;
@@ -44,11 +45,11 @@ namespace uFrameECSDemo {
         }
         
         protected void ShooterFixedUpdateFilter() {
-            var MovableItems = MovableManager.Components.GetEnumerator();
-            for (
-            ; MovableItems.MoveNext(); 
+            var MovableItems = MovableManager.Components;
+            for (var MovableIndex = 0
+            ; MovableIndex < MovableItems.Count; MovableIndex++
             ) {
-                this.ShooterFixedUpdateHandler(MovableItems.Current);
+                this.ShooterFixedUpdateHandler(MovableItems[MovableIndex]);
             }
         }
         

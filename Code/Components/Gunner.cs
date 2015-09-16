@@ -13,11 +13,13 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrameECSDemo;
     using UniRx;
+    using uFrame.ECS;
     
     
+    [uFrame.Attributes.uFrameIdentifier("c1af0ce9-026a-43d8-9e67-7d92e304e7b8")]
     public partial class Gunner : uFrame.ECS.EcsComponent {
         
         [UnityEngine.SerializeField()]
@@ -25,7 +27,7 @@ namespace uFrameECSDemo {
         
         public int ComponentID {
             get {
-                return 10;
+                return 13;
             }
         }
         

@@ -14,10 +14,11 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
     
     
+    [uFrame.Attributes.uFrameIdentifier("09299d49-75f1-4c91-9815-9eaf370d56d0")]
     public partial class ShootingSystem : uFrame.ECS.EcsSystem {
         
         public override void Setup() {

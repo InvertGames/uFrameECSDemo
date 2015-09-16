@@ -13,10 +13,11 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using uFrame.Kernel;
+    using uFrame.ECS;
     
     
+    [uFrame.Attributes.uFrameIdentifier("8fb96b57-8585-4764-a215-ab8efdb10124")]
     public partial class SoundSystemLoader : uFrame.Kernel.SystemLoader {
         
         public override void Load() {

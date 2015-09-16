@@ -13,22 +13,22 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UniRx;
+    using uFrame.ECS;
     
     
     [uFrame.Attributes.uFrameEvent("GameOver")]
     public partial class GameOver : object {
         
         [UnityEngine.SerializeField()]
-        private Int32 _Properties;
+        private Int32 _FinalScore;
         
-        public Int32 Properties {
+        public Int32 FinalScore {
             get {
-                return _Properties;
+                return _FinalScore;
             }
             set {
-                _Properties = value;
+                _FinalScore = value;
             }
         }
     }

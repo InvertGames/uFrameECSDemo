@@ -24,13 +24,13 @@ namespace uFrameECSDemo {
         public uFrame.ECS.EcsComponent Beside;
         
         [uFrame.Attributes.In()]
-        public Vector3 StartPosition;
+        public Single TileSizeZ;
         
         [uFrame.Attributes.In()]
         public Single ScrollSpeed;
         
         [uFrame.Attributes.In()]
-        public Single TileSizeZ;
+        public Vector3 StartPosition;
         
         public override void Execute() {
             Beside.gameObject.AddComponent<BackgroundScroller>();
