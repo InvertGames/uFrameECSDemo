@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
     using uFrame.Kernel;
     
     
@@ -22,6 +22,10 @@ namespace uFrameECSDemo {
     public partial class ScrollSystem : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemUpdate {
         
         private IEcsComponentManagerOf<BackgroundScroller> _BackgroundScrollerManager;
+        
+        private ScrollSystemUpdateHandler ScrollSystemUpdateHandlerInstance = new ScrollSystemUpdateHandler();
+        
+        private BackgroundScrollerComponentCreated BackgroundScrollerComponentCreatedInstance = new BackgroundScrollerComponentCreated();
         
         public IEcsComponentManagerOf<BackgroundScroller> BackgroundScrollerManager {
             get {
@@ -39,10 +43,10 @@ namespace uFrameECSDemo {
         }
         
         protected void ScrollSystemUpdateHandler(BackgroundScroller group) {
-            var handler = new ScrollSystemUpdateHandler();
+            var handler = ScrollSystemUpdateHandlerInstance;;
             handler.System = this;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void ScrollSystemUpdateFilter() {
@@ -59,11 +63,11 @@ namespace uFrameECSDemo {
         }
         
         protected void BackgroundScrollerComponentCreated(BackgroundScroller data, BackgroundScroller group) {
-            var handler = new BackgroundScrollerComponentCreated();
+            var handler = BackgroundScrollerComponentCreatedInstance;;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void BackgroundScrollerComponentCreatedFilter(BackgroundScroller data) {

@@ -1,6 +1,6 @@
 {
 	"FriendlyName":"HazardCount"	, 
-	"RelatedType":""	, 
+	"RelatedType":"System.Int32"	, 
 	"Identifier":"c3d4bcfc-fe3a-4cf8-8331-e458276550a7"	, 
 	"NodeId":"aff8180a-e6ff-465a-8980-7cb6e596e8d3"	, 
 	"Name":"HazardCount"}

@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
     public class PlayGameButtonClickedHandler {
@@ -51,17 +51,15 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             ActionNode12_message = StringNode14;
+            // ActionNode
             // Visit uFrame.Actions.DebugLibrary.LogMessage
-            while (this.DebugInfo("12fae0e0-3723-4d36-9b84-c418fd17e038","945b968d-9e83-4fe5-a773-6422ee7e700f", this) == 1) yield return null;
             uFrame.Actions.DebugLibrary.LogMessage(ActionNode12_message);
             ActionNode13_message = StringNode15;
+            // ActionNode
             // Visit uFrame.Actions.DebugLibrary.LogMessage
-            while (this.DebugInfo("945b968d-9e83-4fe5-a773-6422ee7e700f","cf6d7d04-40d6-4a3f-94d5-dc65ed1719b9", this) == 1) yield return null;
             uFrame.Actions.DebugLibrary.LogMessage(ActionNode13_message);
-            // HANDLER: PlayGameButtonClicked
-            yield break;
         }
     }
 }

@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
     public class SpawnWithRandomXComponentCreated {
@@ -57,20 +57,18 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             ActionNode5_minX = Group.XRange.x;
             ActionNode5_maxX = Group.XRange.y;
             ActionNode5_minY = Group.Y;
             ActionNode5_maxY = Group.Y;
             ActionNode5_minZ = Group.Z;
             ActionNode5_maxZ = Group.Z;
+            // ActionNode
             // Visit uFrame.Actions.CreateRandoms.RandomVector3
-            while (this.DebugInfo("f78d3844-550f-4931-95da-ce9c8a5c5a1d","edbd346b-fcc2-4508-af75-9cb3d831f398", this) == 1) yield return null;
             ActionNode5_Result = uFrame.Actions.CreateRandoms.RandomVector3(ActionNode5_minX, ActionNode5_maxX, ActionNode5_minY, ActionNode5_maxY, ActionNode5_minZ, ActionNode5_maxZ);
-            while (this.DebugInfo("edbd346b-fcc2-4508-af75-9cb3d831f398","0e52fecd-92b1-4be7-bfb6-9a010273790b", this) == 1) yield return null;
+            // SetVariableNode
             Group.Entity.transform.position = (UnityEngine.Vector3)ActionNode5_Result;
-            // HANDLER: SetRandomPosition
-            yield break;
         }
     }
 }

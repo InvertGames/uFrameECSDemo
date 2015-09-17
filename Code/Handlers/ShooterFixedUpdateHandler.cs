@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
     public class ShooterFixedUpdateHandler {
@@ -85,42 +85,41 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
+            // ActionGroupNode
             ActionNode2_axisName = StringNode3;
+            // ActionNode
             // Visit UnityEngine.Input.GetAxis
-            while (this.DebugInfo("6afadd07-6bc7-460a-a1ec-3e7126715bda","8d4dde43-3481-451f-8725-34470dfab500", this) == 1) yield return null;
             ActionNode2_Result = UnityEngine.Input.GetAxis(ActionNode2_axisName);
-            while (this.DebugInfo("8d4dde43-3481-451f-8725-34470dfab500","69cc15b7-aa9f-47ea-9f02-8fdbb97dced7", this) == 1) yield return null;
+            // SetVariableNode
             Group.Horizontal = (System.Single)ActionNode2_Result;
             ActionNode4_axisName = StringNode5;
+            // ActionNode
             // Visit UnityEngine.Input.GetAxis
-            while (this.DebugInfo("69cc15b7-aa9f-47ea-9f02-8fdbb97dced7","73d130d8-a7ae-457e-a9b6-ff156bd38bb3", this) == 1) yield return null;
             ActionNode4_Result = UnityEngine.Input.GetAxis(ActionNode4_axisName);
-            while (this.DebugInfo("73d130d8-a7ae-457e-a9b6-ff156bd38bb3","103be5a2-2e0b-42ad-b23d-d35cb8b68644", this) == 1) yield return null;
+            // SetVariableNode
             Group.Vertical = (System.Single)ActionNode4_Result;
             ActionNode0_go = Group.Entity.gameObject;
+            // ActionNode
             // Visit uFrame.Actions.UnityLibrary.GetRigidbody
-            while (this.DebugInfo("103be5a2-2e0b-42ad-b23d-d35cb8b68644","80244fdb-97b7-44b3-adb0-daea66fa82b0", this) == 1) yield return null;
             ActionNode0_Result = uFrame.Actions.UnityLibrary.GetRigidbody(ActionNode0_go, ActionNode0_component);
             ActionNode0_rigidBody = ActionNode0_Result;
             ActionNode0_x = Group.Horizontal;
             ActionNode0_z = Group.Vertical;
             ActionNode0_speed = Group.Speed;
+            // ActionNode
             // Visit uFrame.Actions.RigidbodyLibrary.SetVelocityWithSpeed
-            while (this.DebugInfo("80244fdb-97b7-44b3-adb0-daea66fa82b0","25afa3ef-ca2d-41f3-b5ce-c4f84ccd23cc", this) == 1) yield return null;
             uFrame.Actions.RigidbodyLibrary.SetVelocityWithSpeed(ActionNode0_rigidBody, ActionNode0_x, ActionNode0_y, ActionNode0_z, ActionNode0_speed);
             ActionNode1_rigidBody = ActionNode0_Result;
             ActionNode8_a = ActionNode0_Result.velocity.x;
             ActionNode8_b = Group.Tilt;
+            // ActionNode
             // Visit Assets.uFrameECS.Framework.Actions.MathLibrary.Multiply
-            while (this.DebugInfo("25afa3ef-ca2d-41f3-b5ce-c4f84ccd23cc","978ce53c-9116-4089-809a-617d10a0d551", this) == 1) yield return null;
             Assets.uFrameECS.Framework.Actions.MathLibrary.Multiply(ActionNode8_a, ActionNode8_b, out ActionNode8_result);
             ActionNode1_z = ActionNode8_result;
+            // ActionNode
             // Visit uFrame.Actions.RigidbodyLibrary.SetRigidbodyRotation
-            while (this.DebugInfo("978ce53c-9116-4089-809a-617d10a0d551","12fae0e0-3723-4d36-9b84-c418fd17e038", this) == 1) yield return null;
             uFrame.Actions.RigidbodyLibrary.SetRigidbodyRotation(ActionNode1_rigidBody, ActionNode1_x, ActionNode1_y, ActionNode1_z);
-            // HANDLER: ShooterFixedUpdate
-            yield break;
         }
     }
 }

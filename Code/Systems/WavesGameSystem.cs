@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
     using uFrame.Kernel;
     
     
@@ -23,7 +23,15 @@ namespace uFrameECSDemo {
         
         private IEcsComponentManagerOf<SpawnAtInterval> _SpawnAtIntervalManager;
         
+        private IEcsComponentManagerOf<SpawnMultipleAtInterval> _SpawnMultipleAtIntervalManager;
+        
         private IEcsComponentManagerOf<PlayGameButton> _PlayGameButtonManager;
+        
+        private SpawnMultipleAtIntervalComponentCreated SpawnMultipleAtIntervalComponentCreatedInstance = new SpawnMultipleAtIntervalComponentCreated();
+        
+        private PlayGameButtonClickedHandler PlayGameButtonClickedHandlerInstance = new PlayGameButtonClickedHandler();
+        
+        private SpawnAtIntervalComponentCreated SpawnAtIntervalComponentCreatedInstance = new SpawnAtIntervalComponentCreated();
         
         public IEcsComponentManagerOf<SpawnAtInterval> SpawnAtIntervalManager {
             get {
@@ -31,6 +39,15 @@ namespace uFrameECSDemo {
             }
             set {
                 _SpawnAtIntervalManager = value;
+            }
+        }
+        
+        public IEcsComponentManagerOf<SpawnMultipleAtInterval> SpawnMultipleAtIntervalManager {
+            get {
+                return _SpawnMultipleAtIntervalManager;
+            }
+            set {
+                _SpawnMultipleAtIntervalManager = value;
             }
         }
         
@@ -46,17 +63,35 @@ namespace uFrameECSDemo {
         public override void Setup() {
             base.Setup();
             SpawnAtIntervalManager = ComponentSystem.RegisterComponent<SpawnAtInterval>();
+            SpawnMultipleAtIntervalManager = ComponentSystem.RegisterComponent<SpawnMultipleAtInterval>();
             PlayGameButtonManager = ComponentSystem.RegisterComponent<PlayGameButton>();
+            SpawnMultipleAtIntervalManager.CreatedObservable.Subscribe(SpawnMultipleAtIntervalComponentCreatedFilter).DisposeWith(this);
             this.OnEvent<uFrame.ECS.PointerClickDispatcher>().Subscribe(_=>{ PlayGameButtonClickedFilter(_); }).DisposeWith(this);
             SpawnAtIntervalManager.CreatedObservable.Subscribe(SpawnAtIntervalComponentCreatedFilter).DisposeWith(this);
         }
         
-        protected void PlayGameButtonClickedHandler(uFrame.ECS.PointerClickDispatcher data, PlayGameButton group) {
-            var handler = new PlayGameButtonClickedHandler();
+        protected void SpawnMultipleAtIntervalComponentCreated(SpawnMultipleAtInterval data, SpawnMultipleAtInterval group) {
+            var handler = SpawnMultipleAtIntervalComponentCreatedInstance;;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
+        }
+        
+        protected void SpawnMultipleAtIntervalComponentCreatedFilter(SpawnMultipleAtInterval data) {
+            var GroupSpawnMultipleAtInterval = SpawnMultipleAtIntervalManager[data.EntityId];
+            if (GroupSpawnMultipleAtInterval == null) {
+                return;
+            }
+            this.SpawnMultipleAtIntervalComponentCreated(data, GroupSpawnMultipleAtInterval);
+        }
+        
+        protected void PlayGameButtonClickedHandler(uFrame.ECS.PointerClickDispatcher data, PlayGameButton group) {
+            var handler = PlayGameButtonClickedHandlerInstance;;
+            handler.System = this;
+            handler.Event = data;
+            handler.Group = group;
+            handler.Execute();
         }
         
         protected void PlayGameButtonClickedFilter(uFrame.ECS.PointerClickDispatcher data) {
@@ -68,11 +103,11 @@ namespace uFrameECSDemo {
         }
         
         protected void SpawnAtIntervalComponentCreated(SpawnAtInterval data, SpawnAtInterval group) {
-            var handler = new SpawnAtIntervalComponentCreated();
+            var handler = SpawnAtIntervalComponentCreatedInstance;;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void SpawnAtIntervalComponentCreatedFilter(SpawnAtInterval data) {

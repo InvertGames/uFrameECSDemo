@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
     using uFrame.Kernel;
     
     
@@ -22,6 +22,8 @@ namespace uFrameECSDemo {
     public partial class Shooter : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemFixedUpdate {
         
         private IEcsComponentManagerOf<Movable> _MovableManager;
+        
+        private ShooterFixedUpdateHandler ShooterFixedUpdateHandlerInstance = new ShooterFixedUpdateHandler();
         
         public IEcsComponentManagerOf<Movable> MovableManager {
             get {
@@ -38,10 +40,10 @@ namespace uFrameECSDemo {
         }
         
         protected void ShooterFixedUpdateHandler(Movable group) {
-            var handler = new ShooterFixedUpdateHandler();
+            var handler = ShooterFixedUpdateHandlerInstance;;
             handler.System = this;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void ShooterFixedUpdateFilter() {

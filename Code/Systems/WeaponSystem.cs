@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
     using uFrame.Kernel;
     
     
@@ -22,6 +22,8 @@ namespace uFrameECSDemo {
     public partial class WeaponSystem : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemUpdate {
         
         private IEcsComponentManagerOf<ShootingGuns> _ShootingGunsManager;
+        
+        private WeaponSystemUpdateHandler WeaponSystemUpdateHandlerInstance = new WeaponSystemUpdateHandler();
         
         public IEcsComponentManagerOf<ShootingGuns> ShootingGunsManager {
             get {
@@ -35,15 +37,13 @@ namespace uFrameECSDemo {
         public override void Setup() {
             base.Setup();
             ShootingGunsManager = ComponentSystem.RegisterGroup<ShootingGunsGroup,ShootingGuns>();
-            ShootingGunsManager.CreatedObservable.Subscribe(ShootingGunsComponentCreatedFilter).DisposeWith(this);
-            ShootingGunsManager.RemovedObservable.Subscribe(_=>ShootingGunsComponentDestroyed(_,_)).DisposeWith(this);
         }
         
         protected void WeaponSystemUpdateHandler(ShootingGuns group) {
-            var handler = new WeaponSystemUpdateHandler();
+            var handler = WeaponSystemUpdateHandlerInstance;;
             handler.System = this;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void WeaponSystemUpdateFilter() {
@@ -57,38 +57,6 @@ namespace uFrameECSDemo {
         
         public virtual void SystemUpdate() {
             WeaponSystemUpdateFilter();
-        }
-        
-        protected void ShootingGunsComponentCreated(ShootingGuns data, ShootingGuns group) {
-            var handler = new ShootingGunsComponentCreated();
-            handler.System = this;
-            handler.Event = data;
-            handler.Group = group;
-            StartCoroutine(handler.Execute());
-        }
-        
-        protected void ShootingGunsComponentCreatedFilter(ShootingGuns data) {
-            var GroupItem = ShootingGunsManager[data.EntityId];
-            if (GroupItem == null) {
-                return;
-            }
-            this.ShootingGunsComponentCreated(data, GroupItem);
-        }
-        
-        protected void ShootingGunsComponentDestroyed(ShootingGuns data, ShootingGuns group) {
-            var handler = new ShootingGunsComponentDestroyed();
-            handler.System = this;
-            handler.Event = data;
-            handler.Group = group;
-            StartCoroutine(handler.Execute());
-        }
-        
-        protected void ShootingGunsComponentDestroyedFilter(ShootingGuns data) {
-            var GroupItem = ShootingGunsManager[data.EntityId];
-            if (GroupItem == null) {
-                return;
-            }
-            this.ShootingGunsComponentDestroyed(data, GroupItem);
         }
     }
 }

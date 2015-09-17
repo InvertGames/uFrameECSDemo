@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Actions;
+    using UnityEngine;
     
     
     [uFrame.Attributes.ActionTitle("Add SpawnAtInterval Component")]
@@ -24,10 +24,10 @@ namespace uFrameECSDemo {
         public uFrame.ECS.EcsComponent Beside;
         
         [uFrame.Attributes.In()]
-        public Single Speed;
+        public float Speed;
         
         [uFrame.Attributes.In()]
-        public GameObject Prefab;
+        public UnityEngine.GameObject Prefab;
         
         [uFrame.Attributes.In()]
         public UnityEngine.Transform Parent;

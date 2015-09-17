@@ -1,6 +1,6 @@
 {
 	"FriendlyName":"SpawnValues"	, 
-	"RelatedType":"Vector3"	, 
+	"RelatedType":"UnityEngine.Vector3"	, 
 	"Identifier":"2e29885c-84b4-4bcb-8c4d-ef0444df5b34"	, 
 	"NodeId":"aff8180a-e6ff-465a-8980-7cb6e596e8d3"	, 
 	"Name":"SpawnValues"}

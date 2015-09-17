@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
+    using UnityEngine;
     using uFrame.ECS;
     
     
@@ -60,28 +60,25 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             ActionNode17_Seconds = Group.Speed;
+            // ActionNode
             // Visit uFrame.Actions.IntervalBySeconds
             ActionNode17.Seconds = ActionNode17_Seconds;
             ActionNode17.System = System;
-            ActionNode17.Tick = ()=> { System.StartCoroutine(ActionNode17_Tick()); };
-            while (this.DebugInfo("70ad0e1f-f396-4b64-97bc-ce045840c05c","cd009a0e-68bd-4265-bb84-e2d2201ad142", this) == 1) yield return null;
+            ActionNode17.Tick = ActionNode17_Tick;
             ActionNode17.Execute();
             ActionNode17_Result = ActionNode17.Result;
-            // HANDLER: BeginIntervalSpawn
-            yield break;
         }
         
-        private System.Collections.IEnumerator ActionNode17_Tick() {
+        private void ActionNode17_Tick() {
             ActionNode17_Result = ActionNode17.Result;
             ActionNode18_gameObject = Group.Prefab;
+            // ActionNode
             // Visit uFrame.Actions.GameObjects.Instantiate
-            while (this.DebugInfo("cd009a0e-68bd-4265-bb84-e2d2201ad142","4494faec-7dc7-42ef-9e77-3058371f5acb", this) == 1) yield return null;
             ActionNode18_Result = uFrame.Actions.GameObjects.Instantiate(ActionNode18_gameObject, ActionNode18_position, ActionNode18_rotation);
-            while (this.DebugInfo("4494faec-7dc7-42ef-9e77-3058371f5acb","d8e16c6c-ac06-4dbc-8454-364f53870ee7", this) == 1) yield return null;
+            // SetVariableNode
             ActionNode18_Result.transform.parent = (UnityEngine.Transform)Group.Parent;
-            yield break;
         }
     }
 }

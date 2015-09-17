@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Actions;
+    using UnityEngine;
     
     
     [uFrame.Attributes.ActionTitle("Add WavesGame Component")]
@@ -24,16 +24,19 @@ namespace uFrameECSDemo {
         public uFrame.ECS.EcsComponent Beside;
         
         [uFrame.Attributes.In()]
-        public Vector3 SpawnValues;
+        public UnityEngine.Vector3 SpawnValues;
         
         [uFrame.Attributes.In()]
-        public String EnemyPoolName;
+        public string EnemyPoolName;
         
         [uFrame.Attributes.In()]
-        public Single SpawnWait;
+        public int Score;
         
         [uFrame.Attributes.In()]
-        public Int32 HazardCount;
+        public float SpawnWait;
+        
+        [uFrame.Attributes.In()]
+        public int HazardCount;
         
         public override void Execute() {
             Beside.gameObject.AddComponent<WavesGame>();

@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
     public class ScrollSystemUpdateHandler {
@@ -71,34 +71,32 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             ActionNode8_a = Vector3Node7;
+            // ActionNode
             // Visit uFrame.Actions.TimeLibrary.GetTime
-            while (this.DebugInfo("cf6d7d04-40d6-4a3f-94d5-dc65ed1719b9","442b12b3-88fd-468a-94f2-43103e3afa99", this) == 1) yield return null;
             ActionNode3_Result = uFrame.Actions.TimeLibrary.GetTime();
             ActionNode5_a = ActionNode3_Result;
             ActionNode5_b = Group.ScrollSpeed;
+            // ActionNode
             // Visit uFrame.Actions.FloatLibrary.Multiply
-            while (this.DebugInfo("442b12b3-88fd-468a-94f2-43103e3afa99","5a59ce30-3e5c-4a65-ba5c-13df2b8c9e81", this) == 1) yield return null;
             ActionNode5_Result = uFrame.Actions.FloatLibrary.Multiply(ActionNode5_a, ActionNode5_b);
             ActionNode4_t = ActionNode5_Result;
             ActionNode4_length = Group.TileSizeZ;
+            // ActionNode
             // Visit UnityEngine.Mathf.Repeat
-            while (this.DebugInfo("5a59ce30-3e5c-4a65-ba5c-13df2b8c9e81","0058be80-3f9e-49ff-b3d0-0bdbe273f127", this) == 1) yield return null;
             ActionNode4_Result = UnityEngine.Mathf.Repeat(ActionNode4_t, ActionNode4_length);
             ActionNode8_b = ActionNode4_Result;
+            // ActionNode
             // Visit uFrame.Actions.Vector3Library.Multiply
-            while (this.DebugInfo("0058be80-3f9e-49ff-b3d0-0bdbe273f127","b1240e5f-6090-4e50-8af5-96964cb26cf9", this) == 1) yield return null;
             ActionNode8_Result = uFrame.Actions.Vector3Library.Multiply(ActionNode8_a, ActionNode8_b);
             ActionNode9_a = ActionNode8_Result;
             ActionNode9_b = Group.StartPosition;
+            // ActionNode
             // Visit uFrame.Actions.Vector3Library.Add
-            while (this.DebugInfo("b1240e5f-6090-4e50-8af5-96964cb26cf9","97921f53-326d-4709-84e2-3cb7c713cd21", this) == 1) yield return null;
             ActionNode9_Result = uFrame.Actions.Vector3Library.Add(ActionNode9_a, ActionNode9_b);
-            while (this.DebugInfo("97921f53-326d-4709-84e2-3cb7c713cd21","337222c6-6b88-4526-b806-5e94ecbf9709", this) == 1) yield return null;
+            // SetVariableNode
             Group.Entity.transform.position = (UnityEngine.Vector3)ActionNode9_Result;
-            // HANDLER: ScrollSystemUpdate
-            yield break;
         }
     }
 }

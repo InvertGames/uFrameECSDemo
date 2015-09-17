@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Actions;
+    using UnityEngine;
     
     
     [uFrame.Attributes.ActionTitle("Add SpawnMultipleAtInterval Component")]
@@ -24,10 +24,10 @@ namespace uFrameECSDemo {
         public uFrame.ECS.EcsComponent Beside;
         
         [uFrame.Attributes.In()]
-        public Int32 SpawnSpeed;
+        public UnityEngine.Transform Parent;
         
         [uFrame.Attributes.In()]
-        public Transform Parent;
+        public float SpawnSpeed;
         
         public override void Execute() {
             Beside.gameObject.AddComponent<SpawnMultipleAtInterval>();

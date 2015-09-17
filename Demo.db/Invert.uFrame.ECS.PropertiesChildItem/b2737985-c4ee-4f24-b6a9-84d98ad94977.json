@@ -1,6 +1,6 @@
 {
 	"FriendlyName":"SpawnWait"	, 
-	"RelatedType":"Single"	, 
+	"RelatedType":"System.Single"	, 
 	"Identifier":"b2737985-c4ee-4f24-b6a9-84d98ad94977"	, 
 	"NodeId":"aff8180a-e6ff-465a-8980-7cb6e596e8d3"	, 
 	"Name":"SpawnWait"}

@@ -1,6 +1,6 @@
 {
 	"FriendlyName":"EnemyPoolName"	, 
-	"RelatedType":"String"	, 
+	"RelatedType":"System.String"	, 
 	"Identifier":"407d7e60-bb23-41b4-8f30-9f3aa084d740"	, 
 	"NodeId":"aff8180a-e6ff-465a-8980-7cb6e596e8d3"	, 
 	"Name":"EnemyPoolName"}

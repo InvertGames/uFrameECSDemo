@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
     public class ProjectileComponentCreated {
@@ -55,20 +55,18 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             ActionNode1_go = Group.Entity.gameObject;
+            // ActionNode
             // Visit uFrame.Actions.UnityLibrary.GetRigidbody
-            while (this.DebugInfo("2cb1c689-05ea-48d4-bb80-f2a049c384b3","b79c1b46-db65-4d07-b68a-edb7a9660a30", this) == 1) yield return null;
             ActionNode1_Result = uFrame.Actions.UnityLibrary.GetRigidbody(ActionNode1_go, ActionNode1_component);
             ActionNode2_a = Group.Direction;
             ActionNode2_b = Group.Speed;
+            // ActionNode
             // Visit uFrame.Actions.Vector3Library.Multiply
-            while (this.DebugInfo("b79c1b46-db65-4d07-b68a-edb7a9660a30","538ddc66-8110-45f1-b450-bc8c12dc63f3", this) == 1) yield return null;
             ActionNode2_Result = uFrame.Actions.Vector3Library.Multiply(ActionNode2_a, ActionNode2_b);
-            while (this.DebugInfo("538ddc66-8110-45f1-b450-bc8c12dc63f3","f78d3844-550f-4931-95da-ce9c8a5c5a1d", this) == 1) yield return null;
+            // SetVariableNode
             ActionNode1_Result.velocity = (UnityEngine.Vector3)ActionNode2_Result;
-            // HANDLER: ProjectileCreated
-            yield break;
         }
     }
 }

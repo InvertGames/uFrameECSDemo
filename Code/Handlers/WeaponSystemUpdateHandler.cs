@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
+    using UnityEngine;
     using uFrame.ECS;
     
     
@@ -76,46 +76,42 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
+            // ActionNode
             // Visit uFrame.Actions.TimeLibrary.GetTime
-            while (this.DebugInfo("130ab2bc-a8a4-4292-a1e9-67e427002a4a","a87839a8-50e9-4ddc-af31-c79cbc5bd2e9", this) == 1) yield return null;
             ActionNode10_Result = uFrame.Actions.TimeLibrary.GetTime();
             ActionNode15_a = ActionNode10_Result;
             ActionNode15_b = Group.Gun.NextFire;
+            // ActionNode
             // Visit uFrame.Actions.Comparisons.GreaterThan
-            while (this.DebugInfo("a87839a8-50e9-4ddc-af31-c79cbc5bd2e9","f3a81b87-3370-47f9-a4b1-bde0b43274f6", this) == 1) yield return null;
-            ActionNode15_Result = uFrame.Actions.Comparisons.GreaterThan(ActionNode15_a, ActionNode15_b, ()=> { System.StartCoroutine(ActionNode15_yes()); }, ()=> { System.StartCoroutine(ActionNode15_no()); });
-            // HANDLER: WeaponSystemUpdate
-            yield break;
+            ActionNode15_Result = uFrame.Actions.Comparisons.GreaterThan(ActionNode15_a, ActionNode15_b, ActionNode15_yes, ActionNode15_no);
         }
         
-        private System.Collections.IEnumerator ActionNode15_yes() {
+        private void ActionNode15_yes() {
             ActionNode13_a = ActionNode10_Result;
             ActionNode13_b = Group.Gun.FireRate;
+            // ActionNode
             // Visit uFrame.Actions.FloatLibrary.Add
-            while (this.DebugInfo("f3a81b87-3370-47f9-a4b1-bde0b43274f6","1d23ddfa-6b42-4aa3-8b95-52ee6a77032f", this) == 1) yield return null;
             ActionNode13_Result = uFrame.Actions.FloatLibrary.Add(ActionNode13_a, ActionNode13_b);
-            while (this.DebugInfo("1d23ddfa-6b42-4aa3-8b95-52ee6a77032f","166b2534-d9a8-4da8-a7ac-82ceb974d8af", this) == 1) yield return null;
+            // SetVariableNode
             Group.Gun.NextFire = (System.Single)ActionNode13_Result;
             ActionNode9_PoolName = Group.Gun.ProjectilePrefab;
             ActionNode9_Position = Group.Entity.transform.position;
+            // ActionNode
             // Visit uFrame.ECS.Spawn
             ActionNode9.PoolName = ActionNode9_PoolName;
             ActionNode9.Position = ActionNode9_Position;
             ActionNode9.System = System;
-            while (this.DebugInfo("166b2534-d9a8-4da8-a7ac-82ceb974d8af","fcb101ff-026c-4aa0-914b-f00ca4a39de0", this) == 1) yield return null;
             ActionNode9.Execute();
             ActionNode9_Result = ActionNode9.Result;
             ActionNode26_gameObject = ActionNode9_Result.gameObject;
             ActionNode26_time = FloatNode27;
+            // ActionNode
             // Visit uFrame.Actions.DestroyLibrary.DestroyGameObject
-            while (this.DebugInfo("fcb101ff-026c-4aa0-914b-f00ca4a39de0","1221df01-fe08-4b24-969b-757ac2504a9e", this) == 1) yield return null;
             uFrame.Actions.DestroyLibrary.DestroyGameObject(ActionNode26_gameObject, ActionNode26_time);
-            yield break;
         }
         
-        private System.Collections.IEnumerator ActionNode15_no() {
-            yield break;
+        private void ActionNode15_no() {
         }
     }
 }

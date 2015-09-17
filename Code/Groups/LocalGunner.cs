@@ -44,7 +44,7 @@ namespace uFrameECSDemo {
         
         public int ComponentID {
             get {
-                return 24;
+                return 28;
             }
         }
     }

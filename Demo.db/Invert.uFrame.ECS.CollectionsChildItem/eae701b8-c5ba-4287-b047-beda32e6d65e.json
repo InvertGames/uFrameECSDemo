@@ -1,5 +1,5 @@
 {
-	"RelatedType":"GameObject"	, 
+	"RelatedType":"UnityEngine.GameObject"	, 
 	"Identifier":"eae701b8-c5ba-4287-b047-beda32e6d65e"	, 
 	"NodeId":"8f20ac10-5695-40e2-8ea5-8c3ec4716133"	, 
 	"Name":"Items"}

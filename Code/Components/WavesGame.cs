@@ -14,77 +14,90 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using uFrameECSDemo;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
     
     
     [uFrame.Attributes.uFrameIdentifier("aff8180a-e6ff-465a-8980-7cb6e596e8d3")]
     public partial class WavesGame : uFrame.ECS.EcsComponent {
         
-        private Subject<Vector3> _SpawnValuesObservable;
+        private Subject<UnityEngine.Vector3> _SpawnValuesObservable;
         
-        private Subject<String> _EnemyPoolNameObservable;
+        private Subject<System.String> _EnemyPoolNameObservable;
         
-        private Subject<Single> _SpawnWaitObservable;
+        private Subject<System.Int32> _ScoreObservable;
         
-        private Subject<Int32> _HazardCountObservable;
+        private Subject<System.Single> _SpawnWaitObservable;
         
-        [UnityEngine.SerializeField()]
-        private Vector3 _SpawnValues;
-        
-        [UnityEngine.SerializeField()]
-        private String _EnemyPoolName;
+        private Subject<System.Int32> _HazardCountObservable;
         
         [UnityEngine.SerializeField()]
-        private Single _SpawnWait;
+        private UnityEngine.Vector3 _SpawnValues;
         
         [UnityEngine.SerializeField()]
-        private Int32 _HazardCount;
+        private string _EnemyPoolName;
+        
+        [UnityEngine.SerializeField()]
+        private int _Score;
+        
+        [UnityEngine.SerializeField()]
+        private float _SpawnWait;
+        
+        [UnityEngine.SerializeField()]
+        private int _HazardCount;
         
         public int ComponentID {
             get {
-                return 11;
+                return 16;
             }
         }
         
-        public IObservable<Vector3> SpawnValuesObservable {
+        public IObservable<UnityEngine.Vector3> SpawnValuesObservable {
             get {
                 if (_SpawnValuesObservable == null) {
-                    _SpawnValuesObservable = new Subject<Vector3>();
+                    _SpawnValuesObservable = new Subject<UnityEngine.Vector3>();
                 }
                 return _SpawnValuesObservable;
             }
         }
         
-        public IObservable<String> EnemyPoolNameObservable {
+        public IObservable<System.String> EnemyPoolNameObservable {
             get {
                 if (_EnemyPoolNameObservable == null) {
-                    _EnemyPoolNameObservable = new Subject<String>();
+                    _EnemyPoolNameObservable = new Subject<System.String>();
                 }
                 return _EnemyPoolNameObservable;
             }
         }
         
-        public IObservable<Single> SpawnWaitObservable {
+        public IObservable<System.Int32> ScoreObservable {
+            get {
+                if (_ScoreObservable == null) {
+                    _ScoreObservable = new Subject<System.Int32>();
+                }
+                return _ScoreObservable;
+            }
+        }
+        
+        public IObservable<System.Single> SpawnWaitObservable {
             get {
                 if (_SpawnWaitObservable == null) {
-                    _SpawnWaitObservable = new Subject<Single>();
+                    _SpawnWaitObservable = new Subject<System.Single>();
                 }
                 return _SpawnWaitObservable;
             }
         }
         
-        public IObservable<Int32> HazardCountObservable {
+        public IObservable<System.Int32> HazardCountObservable {
             get {
                 if (_HazardCountObservable == null) {
-                    _HazardCountObservable = new Subject<Int32>();
+                    _HazardCountObservable = new Subject<System.Int32>();
                 }
                 return _HazardCountObservable;
             }
         }
         
-        public Vector3 SpawnValues {
+        public UnityEngine.Vector3 SpawnValues {
             get {
                 return _SpawnValues;
             }
@@ -96,7 +109,7 @@ namespace uFrameECSDemo {
             }
         }
         
-        public String EnemyPoolName {
+        public string EnemyPoolName {
             get {
                 return _EnemyPoolName;
             }
@@ -108,7 +121,19 @@ namespace uFrameECSDemo {
             }
         }
         
-        public Single SpawnWait {
+        public int Score {
+            get {
+                return _Score;
+            }
+            set {
+                _Score = value;
+                if (_ScoreObservable != null) {
+                    _ScoreObservable.OnNext(value);
+                }
+            }
+        }
+        
+        public float SpawnWait {
             get {
                 return _SpawnWait;
             }
@@ -120,7 +145,7 @@ namespace uFrameECSDemo {
             }
         }
         
-        public Int32 HazardCount {
+        public int HazardCount {
             get {
                 return _HazardCount;
             }

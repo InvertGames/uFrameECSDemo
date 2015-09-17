@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
     using uFrame.Kernel;
     
     
@@ -22,6 +22,8 @@ namespace uFrameECSDemo {
     public partial class InputSystem : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemUpdate {
         
         private IEcsComponentManagerOf<LocalGunner> _LocalGunnerManager;
+        
+        private GunnerInputUpdateHandler GunnerInputUpdateHandlerInstance = new GunnerInputUpdateHandler();
         
         public IEcsComponentManagerOf<LocalGunner> LocalGunnerManager {
             get {
@@ -38,10 +40,10 @@ namespace uFrameECSDemo {
         }
         
         protected void GunnerInputUpdateHandler(LocalGunner group) {
-            var handler = new GunnerInputUpdateHandler();
+            var handler = GunnerInputUpdateHandlerInstance;;
             handler.System = this;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void GunnerInputUpdateFilter() {

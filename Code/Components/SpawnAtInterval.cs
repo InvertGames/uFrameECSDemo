@@ -14,48 +14,47 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using uFrameECSDemo;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
     
     
     [uFrame.Attributes.uFrameIdentifier("f1355431-0026-4903-8a1a-c80b46b0f183")]
     public partial class SpawnAtInterval : uFrame.ECS.EcsComponent {
         
-        private Subject<Single> _SpeedObservable;
+        private Subject<System.Single> _SpeedObservable;
         
-        private Subject<GameObject> _PrefabObservable;
+        private Subject<UnityEngine.GameObject> _PrefabObservable;
         
         private Subject<UnityEngine.Transform> _ParentObservable;
         
         [UnityEngine.SerializeField()]
-        private Single _Speed;
+        private float _Speed;
         
         [UnityEngine.SerializeField()]
-        private GameObject _Prefab;
+        private UnityEngine.GameObject _Prefab;
         
         [UnityEngine.SerializeField()]
         private UnityEngine.Transform _Parent;
         
         public int ComponentID {
             get {
-                return 18;
+                return 23;
             }
         }
         
-        public IObservable<Single> SpeedObservable {
+        public IObservable<System.Single> SpeedObservable {
             get {
                 if (_SpeedObservable == null) {
-                    _SpeedObservable = new Subject<Single>();
+                    _SpeedObservable = new Subject<System.Single>();
                 }
                 return _SpeedObservable;
             }
         }
         
-        public IObservable<GameObject> PrefabObservable {
+        public IObservable<UnityEngine.GameObject> PrefabObservable {
             get {
                 if (_PrefabObservable == null) {
-                    _PrefabObservable = new Subject<GameObject>();
+                    _PrefabObservable = new Subject<UnityEngine.GameObject>();
                 }
                 return _PrefabObservable;
             }
@@ -70,7 +69,7 @@ namespace uFrameECSDemo {
             }
         }
         
-        public Single Speed {
+        public float Speed {
             get {
                 return _Speed;
             }
@@ -82,7 +81,7 @@ namespace uFrameECSDemo {
             }
         }
         
-        public GameObject Prefab {
+        public UnityEngine.GameObject Prefab {
             get {
                 return _Prefab;
             }
