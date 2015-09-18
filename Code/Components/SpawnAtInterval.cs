@@ -14,7 +14,6 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using uFrameECSDemo;
     using uFrame.ECS;
     using UniRx;
     
@@ -26,7 +25,7 @@ namespace uFrameECSDemo {
         
         private Subject<GameObject> _PrefabObservable;
         
-        private Subject<UnityEngine.Transform> _ParentObservable;
+        private Subject<Transform> _ParentObservable;
         
         [UnityEngine.SerializeField()]
         private Single _Speed;
@@ -35,11 +34,11 @@ namespace uFrameECSDemo {
         private GameObject _Prefab;
         
         [UnityEngine.SerializeField()]
-        private UnityEngine.Transform _Parent;
+        private Transform _Parent;
         
         public int ComponentID {
             get {
-                return 23;
+                return 15;
             }
         }
         
@@ -61,10 +60,10 @@ namespace uFrameECSDemo {
             }
         }
         
-        public IObservable<UnityEngine.Transform> ParentObservable {
+        public IObservable<Transform> ParentObservable {
             get {
                 if (_ParentObservable == null) {
-                    _ParentObservable = new Subject<UnityEngine.Transform>();
+                    _ParentObservable = new Subject<Transform>();
                 }
                 return _ParentObservable;
             }
@@ -94,7 +93,7 @@ namespace uFrameECSDemo {
             }
         }
         
-        public UnityEngine.Transform Parent {
+        public Transform Parent {
             get {
                 return _Parent;
             }

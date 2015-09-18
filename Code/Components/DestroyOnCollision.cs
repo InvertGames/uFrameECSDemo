@@ -13,9 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.ECS;
     using UniRx;
+    using UnityEngine;
     
     
     [uFrame.Attributes.uFrameIdentifier("1f363fa1-9272-4208-ac16-ef73e48e1698")]
@@ -23,7 +23,7 @@ namespace uFrameECSDemo {
         
         public int ComponentID {
             get {
-                return 5;
+                return 3;
             }
         }
     }

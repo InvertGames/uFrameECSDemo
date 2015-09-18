@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     using uFrame.ECS;
     
     
@@ -26,35 +26,35 @@ namespace uFrameECSDemo {
         
         private uFrame.ECS.EcsSystem _System;
         
-        private float ActionNode10_Result = default( System.Single );
+        private float ActionNode4_Result = default( System.Single );
         
-        private float ActionNode15_a = default( System.Single );
+        private float ActionNode6_a = default( System.Single );
         
-        private float ActionNode15_b = default( System.Single );
+        private float ActionNode6_b = default( System.Single );
         
-        private bool ActionNode15_Result = default( System.Boolean );
+        private bool ActionNode6_Result = default( System.Boolean );
         
-        private float ActionNode13_a = default( System.Single );
+        private float ActionNode2_a = default( System.Single );
         
-        private float ActionNode13_b = default( System.Single );
+        private float ActionNode2_b = default( System.Single );
         
-        private float ActionNode13_Result = default( System.Single );
+        private float ActionNode2_Result = default( System.Single );
         
-        private string ActionNode9_PoolName = default( System.String );
+        private string ActionNode7_PoolName = default( System.String );
         
-        private string ActionNode9_PrefabName = default( System.String );
+        private string ActionNode7_PrefabName = default( System.String );
         
-        private UnityEngine.Vector3 ActionNode9_Position = default( UnityEngine.Vector3 );
+        private UnityEngine.Vector3 ActionNode7_Position = default( UnityEngine.Vector3 );
         
-        private UnityEngine.Vector3 ActionNode9_Rotation = default( UnityEngine.Vector3 );
+        private UnityEngine.Vector3 ActionNode7_Rotation = default( UnityEngine.Vector3 );
         
-        private uFrame.ECS.Spawn ActionNode9 = new uFrame.ECS.Spawn();
+        private uFrame.ECS.Spawn ActionNode7 = new uFrame.ECS.Spawn();
         
-        private uFrame.ECS.Entity ActionNode9_Result = default( uFrame.ECS.Entity );
+        private uFrame.ECS.Entity ActionNode7_Result = default( uFrame.ECS.Entity );
         
-        private UnityEngine.GameObject ActionNode26_gameObject = default( UnityEngine.GameObject );
+        private UnityEngine.GameObject ActionNode1_gameObject = default( UnityEngine.GameObject );
         
-        private float ActionNode26_time = default( System.Single );
+        private float ActionNode1_time = default( System.Single );
         
         private float FloatNode27 = 3F;
         
@@ -79,39 +79,39 @@ namespace uFrameECSDemo {
         public virtual void Execute() {
             // ActionNode
             // Visit uFrame.Actions.TimeLibrary.GetTime
-            ActionNode10_Result = uFrame.Actions.TimeLibrary.GetTime();
-            ActionNode15_a = ActionNode10_Result;
-            ActionNode15_b = Group.Gun.NextFire;
+            ActionNode4_Result = uFrame.Actions.TimeLibrary.GetTime();
+            ActionNode6_a = ActionNode4_Result;
+            ActionNode6_b = Group.Gun.NextFire;
             // ActionNode
             // Visit uFrame.Actions.Comparisons.GreaterThan
-            ActionNode15_Result = uFrame.Actions.Comparisons.GreaterThan(ActionNode15_a, ActionNode15_b, ActionNode15_yes, ActionNode15_no);
+            ActionNode6_Result = uFrame.Actions.Comparisons.GreaterThan(ActionNode6_a, ActionNode6_b, ActionNode6_yes, ActionNode6_no);
         }
         
-        private void ActionNode15_yes() {
-            ActionNode13_a = ActionNode10_Result;
-            ActionNode13_b = Group.Gun.FireRate;
+        private void ActionNode6_yes() {
+            ActionNode2_a = ActionNode4_Result;
+            ActionNode2_b = Group.Gun.FireRate;
             // ActionNode
             // Visit uFrame.Actions.FloatLibrary.Add
-            ActionNode13_Result = uFrame.Actions.FloatLibrary.Add(ActionNode13_a, ActionNode13_b);
+            ActionNode2_Result = uFrame.Actions.FloatLibrary.Add(ActionNode2_a, ActionNode2_b);
             // SetVariableNode
-            Group.Gun.NextFire = (System.Single)ActionNode13_Result;
-            ActionNode9_PoolName = Group.Gun.ProjectilePrefab;
-            ActionNode9_Position = Group.Entity.transform.position;
+            Group.Gun.NextFire = (System.Single)ActionNode2_Result;
+            ActionNode7_PoolName = Group.Gun.ProjectilePrefab;
+            ActionNode7_Position = Group.Entity.transform.position;
             // ActionNode
             // Visit uFrame.ECS.Spawn
-            ActionNode9.PoolName = ActionNode9_PoolName;
-            ActionNode9.Position = ActionNode9_Position;
-            ActionNode9.System = System;
-            ActionNode9.Execute();
-            ActionNode9_Result = ActionNode9.Result;
-            ActionNode26_gameObject = ActionNode9_Result.gameObject;
-            ActionNode26_time = FloatNode27;
+            ActionNode7.PoolName = ActionNode7_PoolName;
+            ActionNode7.Position = ActionNode7_Position;
+            ActionNode7.System = System;
+            ActionNode7.Execute();
+            ActionNode7_Result = ActionNode7.Result;
+            ActionNode1_gameObject = ActionNode7_Result.gameObject;
+            ActionNode1_time = FloatNode27;
             // ActionNode
             // Visit uFrame.Actions.DestroyLibrary.DestroyGameObject
-            uFrame.Actions.DestroyLibrary.DestroyGameObject(ActionNode26_gameObject, ActionNode26_time);
+            uFrame.Actions.DestroyLibrary.DestroyGameObject(ActionNode1_gameObject, ActionNode1_time);
         }
         
-        private void ActionNode15_no() {
+        private void ActionNode6_no() {
         }
     }
 }

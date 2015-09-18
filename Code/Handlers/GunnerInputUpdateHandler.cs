@@ -13,33 +13,29 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     
     
     public class GunnerInputUpdateHandler {
         
-        public LocalGunner Group;
+        public PlayerGunner Group;
         
         private uFrame.ECS.ISystemUpdate _Event;
         
         private uFrame.ECS.EcsSystem _System;
         
-        private UnityEngine.KeyCode ActionNode50_key = default( UnityEngine.KeyCode );
+        private UnityEngine.KeyCode ActionNode5_key = default( UnityEngine.KeyCode );
         
         private UnityEngine.KeyCode EnumValueNode1 = KeyCode.Space;
         
-        private bool ActionNode50_Result = default( System.Boolean );
+        private bool ActionNode5_Result = default( System.Boolean );
         
-        private uFrameECSDemo.Gun LoopCollectionNode5_Item = default( uFrameECSDemo.Gun );
+        private uFrameECSDemo.Gun LoopCollectionNode11_Item = default( uFrameECSDemo.Gun );
         
         private uFrameECSDemo.GunState EnumValueNode10 = GunState.Shooting;
         
-        private UnityEngine.KeyCode ActionNode60_key = default( UnityEngine.KeyCode );
-        
-        private bool ActionNode60_Result = default( System.Boolean );
-        
-        private uFrameECSDemo.Gun LoopCollectionNode6_Item = default( uFrameECSDemo.Gun );
+        private uFrameECSDemo.Gun LoopCollectionNode10_Item = default( uFrameECSDemo.Gun );
         
         private uFrameECSDemo.GunState EnumValueNode9 = GunState.Idle;
         
@@ -62,50 +58,40 @@ namespace uFrameECSDemo {
         }
         
         public virtual void Execute() {
-            ActionNode50_key = EnumValueNode1;
+            ActionNode5_key = EnumValueNode1;
             // ActionNode
-            // Visit uFrame.Actions.InputLibrary.IsKeyDown
-            ActionNode50_Result = uFrame.Actions.InputLibrary.IsKeyDown(ActionNode50_key, ActionNode50_yes, ActionNode50_no);
-            ActionNode60_key = EnumValueNode1;
-            // ActionNode
-            // Visit uFrame.Actions.InputLibrary.IsKeyUp
-            ActionNode60_Result = uFrame.Actions.InputLibrary.IsKeyUp(ActionNode60_key, ActionNode60_yes, ActionNode60_no);
+            // Visit uFrame.Actions.InputLibrary.IsKey
+            ActionNode5_Result = uFrame.Actions.InputLibrary.IsKey(ActionNode5_key, ActionNode5_yes, ActionNode5_no);
         }
         
-        private void LoopCollectionNode5_Next() {
+        private void LoopCollectionNode11_Next() {
             // SetVariableNode
-            LoopCollectionNode5_Item.State = (uFrameECSDemo.GunState)EnumValueNode10;
+            LoopCollectionNode11_Item.State = (uFrameECSDemo.GunState)EnumValueNode10;
         }
         
-        private void ActionNode50_yes() {
+        private void ActionNode5_yes() {
             // LoopCollectionNode
-            for (var LoopCollectionNode5_ItemIndex = 0
-            ; LoopCollectionNode5_ItemIndex < Group.Gunner.Guns.Count; LoopCollectionNode5_ItemIndex++
+            for (var LoopCollectionNode11_ItemIndex = 0
+            ; LoopCollectionNode11_ItemIndex < Group.Gunner.Guns.Count; LoopCollectionNode11_ItemIndex++
             ) {
-                LoopCollectionNode5_Item = Group.Gunner.Guns[LoopCollectionNode5_ItemIndex];
-                LoopCollectionNode5_Next();
+                LoopCollectionNode11_Item = Group.Gunner.Guns[LoopCollectionNode11_ItemIndex];
+                LoopCollectionNode11_Next();
             }
         }
         
-        private void ActionNode50_no() {
-        }
-        
-        private void LoopCollectionNode6_Next() {
+        private void LoopCollectionNode10_Next() {
             // SetVariableNode
-            LoopCollectionNode6_Item.State = (uFrameECSDemo.GunState)EnumValueNode9;
+            LoopCollectionNode10_Item.State = (uFrameECSDemo.GunState)EnumValueNode9;
         }
         
-        private void ActionNode60_yes() {
+        private void ActionNode5_no() {
             // LoopCollectionNode
-            for (var LoopCollectionNode6_ItemIndex = 0
-            ; LoopCollectionNode6_ItemIndex < Group.Gunner.Guns.Count; LoopCollectionNode6_ItemIndex++
+            for (var LoopCollectionNode10_ItemIndex = 0
+            ; LoopCollectionNode10_ItemIndex < Group.Gunner.Guns.Count; LoopCollectionNode10_ItemIndex++
             ) {
-                LoopCollectionNode6_Item = Group.Gunner.Guns[LoopCollectionNode6_ItemIndex];
-                LoopCollectionNode6_Next();
+                LoopCollectionNode10_Item = Group.Gunner.Guns[LoopCollectionNode10_ItemIndex];
+                LoopCollectionNode10_Next();
             }
-        }
-        
-        private void ActionNode60_no() {
         }
     }
 }

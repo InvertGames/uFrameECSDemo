@@ -1,8 +1,8 @@
 {
 	"MetaType":"uFrame.ECS.ISystemFixedUpdate"	, 
 	"VariableCount":903	, 
-	"VariableName":"HandlerNode0"	, 
+	"VariableName":"HandlerNode13"	, 
 	"Name":"ShooterFixedUpdate"	, 
-	"GraphId":"e00c4d00-41ca-40a8-938a-50598886473a"	, 
+	"GraphId":"ba9f9a37-144e-4c2c-9cc1-e8d56963012f"	, 
 	"Identifier":"1c7ebee0-20b5-44a1-8548-135d51372e19"	, 
 	"Expanded":false}

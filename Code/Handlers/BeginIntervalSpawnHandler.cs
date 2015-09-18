@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     using uFrame.ECS;
     
     
@@ -26,21 +26,21 @@ namespace uFrameECSDemo {
         
         private uFrame.ECS.EcsSystem _System;
         
-        private float ActionNode17_Seconds = default( System.Single );
+        private float ActionNode3_Seconds = default( System.Single );
         
-        private uFrame.ECS.IEcsComponent ActionNode17_DisposeWith = default( uFrame.ECS.IEcsComponent );
+        private uFrame.ECS.IEcsComponent ActionNode3_DisposeWith = default( uFrame.ECS.IEcsComponent );
         
-        private uFrame.Actions.IntervalBySeconds ActionNode17 = new uFrame.Actions.IntervalBySeconds();
+        private uFrame.Actions.IntervalBySeconds ActionNode3 = new uFrame.Actions.IntervalBySeconds();
         
-        private System.IDisposable ActionNode17_Result = default( System.IDisposable );
+        private System.IDisposable ActionNode3_Result = default( System.IDisposable );
         
-        private UnityEngine.GameObject ActionNode18_gameObject = default( UnityEngine.GameObject );
+        private UnityEngine.GameObject ActionNode1_gameObject = default( UnityEngine.GameObject );
         
-        private UnityEngine.Vector3 ActionNode18_position = default( UnityEngine.Vector3 );
+        private UnityEngine.Vector3 ActionNode1_position = default( UnityEngine.Vector3 );
         
-        private UnityEngine.Vector3 ActionNode18_rotation = default( UnityEngine.Vector3 );
+        private UnityEngine.Vector3 ActionNode1_rotation = default( UnityEngine.Vector3 );
         
-        private UnityEngine.GameObject ActionNode18_Result = default( UnityEngine.GameObject );
+        private UnityEngine.GameObject ActionNode1_Result = default( UnityEngine.GameObject );
         
         public SpawnAtInterval Event {
             get {
@@ -61,24 +61,24 @@ namespace uFrameECSDemo {
         }
         
         public virtual void Execute() {
-            ActionNode17_Seconds = Group.Speed;
+            ActionNode3_Seconds = Group.Speed;
             // ActionNode
             // Visit uFrame.Actions.IntervalBySeconds
-            ActionNode17.Seconds = ActionNode17_Seconds;
-            ActionNode17.System = System;
-            ActionNode17.Tick = ActionNode17_Tick;
-            ActionNode17.Execute();
-            ActionNode17_Result = ActionNode17.Result;
+            ActionNode3.Seconds = ActionNode3_Seconds;
+            ActionNode3.System = System;
+            ActionNode3.Tick = ActionNode3_Tick;
+            ActionNode3.Execute();
+            ActionNode3_Result = ActionNode3.Result;
         }
         
-        private void ActionNode17_Tick() {
-            ActionNode17_Result = ActionNode17.Result;
-            ActionNode18_gameObject = Group.Prefab;
+        private void ActionNode3_Tick() {
+            ActionNode3_Result = ActionNode3.Result;
+            ActionNode1_gameObject = Group.Prefab;
             // ActionNode
             // Visit uFrame.Actions.GameObjects.Instantiate
-            ActionNode18_Result = uFrame.Actions.GameObjects.Instantiate(ActionNode18_gameObject, ActionNode18_position, ActionNode18_rotation);
+            ActionNode1_Result = uFrame.Actions.GameObjects.Instantiate(ActionNode1_gameObject, ActionNode1_position, ActionNode1_rotation);
             // SetVariableNode
-            ActionNode18_Result.transform.parent = (UnityEngine.Transform)Group.Parent;
+            ActionNode1_Result.transform.parent = (UnityEngine.Transform)Group.Parent;
         }
     }
 }

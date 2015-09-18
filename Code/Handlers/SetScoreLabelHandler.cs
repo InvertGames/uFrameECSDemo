@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     
     
     public class WavesGameScorePropertyChanged {
@@ -25,9 +25,9 @@ namespace uFrameECSDemo {
         
         private uFrame.ECS.EcsSystem _System;
         
-        private uFrameECSDemo.ScoreText LoopGroupNode7_Item = default( uFrameECSDemo.ScoreText );
+        private uFrameECSDemo.ScoreText LoopGroupNode9_Item = default( uFrameECSDemo.ScoreText );
         
-        private string FormatStringAction9_Result = default( System.String );
+        private string FormatStringAction7_Result = default( System.String );
         
         public WavesGame Event {
             get {
@@ -49,20 +49,20 @@ namespace uFrameECSDemo {
         
         public virtual void Execute() {
             // LoopGroupNode
-            var LoopGroupNode7_GroupComponents = System.ComponentSystem.RegisterComponent<uFrameECSDemo.ScoreText>().Components;
-            for (var LoopGroupNode7_ItemIndex = 0
-            ; LoopGroupNode7_ItemIndex < LoopGroupNode7_GroupComponents.Count; LoopGroupNode7_ItemIndex++
+            var LoopGroupNode9_GroupComponents = System.ComponentSystem.RegisterComponent<uFrameECSDemo.ScoreText>().Components;
+            for (var LoopGroupNode9_ItemIndex = 0
+            ; LoopGroupNode9_ItemIndex < LoopGroupNode9_GroupComponents.Count; LoopGroupNode9_ItemIndex++
             ) {
-                LoopGroupNode7_Item = LoopGroupNode7_GroupComponents[LoopGroupNode7_ItemIndex];
-                LoopGroupNode7_Next();
+                LoopGroupNode9_Item = LoopGroupNode9_GroupComponents[LoopGroupNode9_ItemIndex];
+                LoopGroupNode9_Next();
             }
         }
         
-        private void LoopGroupNode7_Next() {
+        private void LoopGroupNode9_Next() {
             // FormatStringAction
-            FormatStringAction9_Result = string.Format(@"Score: {0}", Group.Score);
+            FormatStringAction7_Result = string.Format(@"Score: {0}", Group.Score);
             // SetVariableNode
-            LoopGroupNode7_Item.Text.text = (System.String)FormatStringAction9_Result;
+            LoopGroupNode9_Item.Text.text = (System.String)FormatStringAction7_Result;
         }
     }
 }

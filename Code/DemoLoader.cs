@@ -13,25 +13,21 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using uFrame.Kernel;
+    using uFrame.ECS;
     
     
     public partial class DemoLoader : uFrame.Kernel.SystemLoader {
         
         public override void Load() {
             EcsSystem system = null;
-            system = this.AddSystem<ShootingSystem>();
-            system = this.AddSystem<InputSystem>();
             system = this.AddSystem<HazardSystem>();
-            system = this.AddSystem<GameSystem>();
+            system = this.AddSystem<PlayerMovementSystem>();
             system = this.AddSystem<WeaponSystem>();
-            system = this.AddSystem<SoundSystem>();
             system = this.AddSystem<WavesGameSystem>();
-            system = this.AddSystem<Shooter>();
+            system = this.AddSystem<WeaponInputSystem>();
             system = this.AddSystem<UISystem>();
             system = this.AddSystem<ScrollSystem>();
-            system = this.AddSystem<FxSystem>();
         }
     }
 }

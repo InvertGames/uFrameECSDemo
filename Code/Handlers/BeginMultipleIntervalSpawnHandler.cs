@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     
     
     public class SpawnMultipleAtIntervalComponentCreated {
@@ -25,15 +25,15 @@ namespace uFrameECSDemo {
         
         private uFrame.ECS.EcsSystem _System;
         
-        private UnityEngine.GameObject GetRandomListItem24_Result = default( UnityEngine.GameObject );
+        private UnityEngine.GameObject GetRandomListItem8_Result = default( UnityEngine.GameObject );
         
-        private UnityEngine.GameObject ActionNode25_gameObject = default( UnityEngine.GameObject );
+        private UnityEngine.GameObject ActionNode2_gameObject = default( UnityEngine.GameObject );
         
-        private UnityEngine.Vector3 ActionNode25_position = default( UnityEngine.Vector3 );
+        private UnityEngine.Vector3 ActionNode2_position = default( UnityEngine.Vector3 );
         
-        private UnityEngine.Vector3 ActionNode25_rotation = default( UnityEngine.Vector3 );
+        private UnityEngine.Vector3 ActionNode2_rotation = default( UnityEngine.Vector3 );
         
-        private UnityEngine.GameObject ActionNode25_Result = default( UnityEngine.GameObject );
+        private UnityEngine.GameObject ActionNode2_Result = default( UnityEngine.GameObject );
         
         public SpawnMultipleAtInterval Event {
             get {
@@ -55,13 +55,13 @@ namespace uFrameECSDemo {
         
         public virtual void Execute() {
             // GetRandomListItem
-            GetRandomListItem24_Result = Group.Items[UnityEngine.Random.Range(0, Group.Items.Count)];
-            ActionNode25_gameObject = GetRandomListItem24_Result;
+            GetRandomListItem8_Result = Group.Items[UnityEngine.Random.Range(0, Group.Items.Count)];
+            ActionNode2_gameObject = GetRandomListItem8_Result;
             // ActionNode
             // Visit uFrame.Actions.GameObjects.Instantiate
-            ActionNode25_Result = uFrame.Actions.GameObjects.Instantiate(ActionNode25_gameObject, ActionNode25_position, ActionNode25_rotation);
+            ActionNode2_Result = uFrame.Actions.GameObjects.Instantiate(ActionNode2_gameObject, ActionNode2_position, ActionNode2_rotation);
             // SetVariableNode
-            ActionNode25_Result.transform.parent = (UnityEngine.Transform)Group.Parent;
+            ActionNode2_Result.transform.parent = (UnityEngine.Transform)Group.Parent;
         }
     }
 }

@@ -14,16 +14,49 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using uFrame.ECS;
-    using UniRx;
     using uFrame.Kernel;
+    using UniRx;
     
     
     [uFrame.Attributes.uFrameIdentifier("b60e9496-5928-483d-b9ee-4e5ae99f0445")]
     public partial class UISystem : uFrame.ECS.EcsSystem {
         
+        private IEcsComponentManagerOf<SpawnAtInterval> _SpawnAtIntervalManager;
+        
+        private IEcsComponentManagerOf<SpawnMultipleAtInterval> _SpawnMultipleAtIntervalManager;
+        
+        private IEcsComponentManagerOf<PointsOnDestroy> _PointsOnDestroyManager;
+        
         private IEcsComponentManagerOf<WavesGame> _WavesGameManager;
         
         private WavesGameScorePropertyChanged WavesGameScorePropertyChangedInstance = new WavesGameScorePropertyChanged();
+        
+        public IEcsComponentManagerOf<SpawnAtInterval> SpawnAtIntervalManager {
+            get {
+                return _SpawnAtIntervalManager;
+            }
+            set {
+                _SpawnAtIntervalManager = value;
+            }
+        }
+        
+        public IEcsComponentManagerOf<SpawnMultipleAtInterval> SpawnMultipleAtIntervalManager {
+            get {
+                return _SpawnMultipleAtIntervalManager;
+            }
+            set {
+                _SpawnMultipleAtIntervalManager = value;
+            }
+        }
+        
+        public IEcsComponentManagerOf<PointsOnDestroy> PointsOnDestroyManager {
+            get {
+                return _PointsOnDestroyManager;
+            }
+            set {
+                _PointsOnDestroyManager = value;
+            }
+        }
         
         public IEcsComponentManagerOf<WavesGame> WavesGameManager {
             get {
@@ -36,6 +69,9 @@ namespace uFrameECSDemo {
         
         public override void Setup() {
             base.Setup();
+            SpawnAtIntervalManager = ComponentSystem.RegisterComponent<SpawnAtInterval>();
+            SpawnMultipleAtIntervalManager = ComponentSystem.RegisterComponent<SpawnMultipleAtInterval>();
+            PointsOnDestroyManager = ComponentSystem.RegisterComponent<PointsOnDestroy>();
             WavesGameManager = ComponentSystem.RegisterComponent<WavesGame>();
             this.PropertyChanged<WavesGame,Int32>(Group=>Group.ScoreObservable, WavesGameScorePropertyChangedFilter);
         }

@@ -14,16 +14,27 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using uFrame.ECS;
-    using UniRx;
     using uFrame.Kernel;
+    using UniRx;
     
     
     [uFrame.Attributes.uFrameIdentifier("868e3ce9-162f-429b-b89a-4bd6475e7674")]
     public partial class WeaponSystem : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemUpdate {
         
+        private IEcsComponentManagerOf<PlayerGunner> _PlayerGunnerManager;
+        
         private IEcsComponentManagerOf<ShootingGuns> _ShootingGunsManager;
         
         private WeaponSystemUpdateHandler WeaponSystemUpdateHandlerInstance = new WeaponSystemUpdateHandler();
+        
+        public IEcsComponentManagerOf<PlayerGunner> PlayerGunnerManager {
+            get {
+                return _PlayerGunnerManager;
+            }
+            set {
+                _PlayerGunnerManager = value;
+            }
+        }
         
         public IEcsComponentManagerOf<ShootingGuns> ShootingGunsManager {
             get {
@@ -36,6 +47,7 @@ namespace uFrameECSDemo {
         
         public override void Setup() {
             base.Setup();
+            PlayerGunnerManager = ComponentSystem.RegisterGroup<PlayerGunnerGroup,PlayerGunner>();
             ShootingGunsManager = ComponentSystem.RegisterGroup<ShootingGunsGroup,ShootingGuns>();
         }
         

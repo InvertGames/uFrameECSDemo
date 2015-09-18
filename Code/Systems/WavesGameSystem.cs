@@ -14,8 +14,8 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using uFrame.ECS;
-    using UniRx;
     using uFrame.Kernel;
+    using UniRx;
     
     
     [uFrame.Attributes.uFrameIdentifier("9784e33b-b2d5-4aeb-ac8b-9273187d7c8b")]
@@ -27,15 +27,11 @@ namespace uFrameECSDemo {
         
         private IEcsComponentManagerOf<PointsOnDestroy> _PointsOnDestroyManager;
         
-        private IEcsComponentManagerOf<PlayGameButton> _PlayGameButtonManager;
+        private IEcsComponentManagerOf<WavesGame> _WavesGameManager;
         
         private SpawnMultipleAtIntervalComponentCreated SpawnMultipleAtIntervalComponentCreatedInstance = new SpawnMultipleAtIntervalComponentCreated();
         
         private PointsOnDestroyComponentDestroyed PointsOnDestroyComponentDestroyedInstance = new PointsOnDestroyComponentDestroyed();
-        
-//        private WavesGameSystemAwesomeEventHandler WavesGameSystemAwesomeEventHandlerInstance = new WavesGameSystemAwesomeEventHandler();
-        
-        private PlayGameButtonClickedHandler PlayGameButtonClickedHandlerInstance = new PlayGameButtonClickedHandler();
         
         private SpawnAtIntervalComponentCreated SpawnAtIntervalComponentCreatedInstance = new SpawnAtIntervalComponentCreated();
         
@@ -66,12 +62,12 @@ namespace uFrameECSDemo {
             }
         }
         
-        public IEcsComponentManagerOf<PlayGameButton> PlayGameButtonManager {
+        public IEcsComponentManagerOf<WavesGame> WavesGameManager {
             get {
-                return _PlayGameButtonManager;
+                return _WavesGameManager;
             }
             set {
-                _PlayGameButtonManager = value;
+                _WavesGameManager = value;
             }
         }
         
@@ -80,11 +76,9 @@ namespace uFrameECSDemo {
             SpawnAtIntervalManager = ComponentSystem.RegisterComponent<SpawnAtInterval>();
             SpawnMultipleAtIntervalManager = ComponentSystem.RegisterComponent<SpawnMultipleAtInterval>();
             PointsOnDestroyManager = ComponentSystem.RegisterComponent<PointsOnDestroy>();
-            PlayGameButtonManager = ComponentSystem.RegisterComponent<PlayGameButton>();
+            WavesGameManager = ComponentSystem.RegisterComponent<WavesGame>();
             SpawnMultipleAtIntervalManager.CreatedObservable.Subscribe(SpawnMultipleAtIntervalComponentCreatedFilter).DisposeWith(this);
             PointsOnDestroyManager.RemovedObservable.Subscribe(_=>PointsOnDestroyComponentDestroyed(_,_)).DisposeWith(this);
-            this.OnEvent<uFrameECSDemo.AwesomeEvent>().Subscribe(_=>{ WavesGameSystemAwesomeEventFilter(_); }).DisposeWith(this);
-            this.OnEvent<uFrame.ECS.PointerClickDispatcher>().Subscribe(_=>{ PlayGameButtonClickedFilter(_); }).DisposeWith(this);
             SpawnAtIntervalManager.CreatedObservable.Subscribe(SpawnAtIntervalComponentCreatedFilter).DisposeWith(this);
         }
         
@@ -118,33 +112,6 @@ namespace uFrameECSDemo {
                 return;
             }
             this.PointsOnDestroyComponentDestroyed(data, GroupPointsOnDestroy);
-        }
-        
-        protected void WavesGameSystemAwesomeEventHandler(uFrameECSDemo.AwesomeEvent data) {
-            //var handler = WavesGameSystemAwesomeEventHandlerInstance;;
-            //handler.System = this;
-            //handler.Event = data;
-            //handler.Execute();
-        } 
-        
-        protected void WavesGameSystemAwesomeEventFilter(uFrameECSDemo.AwesomeEvent data) {
-            this.WavesGameSystemAwesomeEventHandler(data);
-        }
-        
-        protected void PlayGameButtonClickedHandler(uFrame.ECS.PointerClickDispatcher data, PlayGameButton group) {
-            var handler = PlayGameButtonClickedHandlerInstance;;
-            handler.System = this;
-            handler.Event = data;
-            handler.Group = group;
-            handler.Execute();
-        }
-        
-        protected void PlayGameButtonClickedFilter(uFrame.ECS.PointerClickDispatcher data) {
-            var GroupPlayGameButton = PlayGameButtonManager[data.EntityId];
-            if (GroupPlayGameButton == null) {
-                return;
-            }
-            this.PlayGameButtonClickedHandler(data, GroupPlayGameButton);
         }
         
         protected void SpawnAtIntervalComponentCreated(SpawnAtInterval data, SpawnAtInterval group) {

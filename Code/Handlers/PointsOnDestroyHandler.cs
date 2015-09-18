@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     
     
     public class PointsOnDestroyComponentDestroyed {
@@ -25,13 +25,13 @@ namespace uFrameECSDemo {
         
         private uFrame.ECS.EcsSystem _System;
         
-        private uFrameECSDemo.WavesGame LoopGroupNode32_Item = default( uFrameECSDemo.WavesGame );
+        private uFrameECSDemo.WavesGame LoopGroupNode10_Item = default( uFrameECSDemo.WavesGame );
         
-        private int ActionNode33_a = default( System.Int32 );
+        private int ActionNode0_a = default( System.Int32 );
         
-        private int ActionNode33_b = default( System.Int32 );
+        private int ActionNode0_b = default( System.Int32 );
         
-        private int ActionNode33_Result = default( System.Int32 );
+        private int ActionNode0_Result = default( System.Int32 );
         
         public PointsOnDestroy Event {
             get {
@@ -53,23 +53,23 @@ namespace uFrameECSDemo {
         
         public virtual void Execute() {
             // LoopGroupNode
-            var LoopGroupNode32_GroupComponents = System.ComponentSystem.RegisterComponent<uFrameECSDemo.WavesGame>().Components;
-            for (var LoopGroupNode32_ItemIndex = 0
-            ; LoopGroupNode32_ItemIndex < LoopGroupNode32_GroupComponents.Count; LoopGroupNode32_ItemIndex++
+            var LoopGroupNode10_GroupComponents = System.ComponentSystem.RegisterComponent<uFrameECSDemo.WavesGame>().Components;
+            for (var LoopGroupNode10_ItemIndex = 0
+            ; LoopGroupNode10_ItemIndex < LoopGroupNode10_GroupComponents.Count; LoopGroupNode10_ItemIndex++
             ) {
-                LoopGroupNode32_Item = LoopGroupNode32_GroupComponents[LoopGroupNode32_ItemIndex];
-                LoopGroupNode32_Next();
+                LoopGroupNode10_Item = LoopGroupNode10_GroupComponents[LoopGroupNode10_ItemIndex];
+                LoopGroupNode10_Next();
             }
         }
         
-        private void LoopGroupNode32_Next() {
-            ActionNode33_a = LoopGroupNode32_Item.Score;
-            ActionNode33_b = Group.Points;
+        private void LoopGroupNode10_Next() {
+            ActionNode0_a = LoopGroupNode10_Item.Score;
+            ActionNode0_b = Group.Points;
             // ActionNode
             // Visit uFrame.Actions.IntLibrary.Add
-            ActionNode33_Result = uFrame.Actions.IntLibrary.Add(ActionNode33_a, ActionNode33_b);
+            ActionNode0_Result = uFrame.Actions.IntLibrary.Add(ActionNode0_a, ActionNode0_b);
             // SetVariableNode
-            LoopGroupNode32_Item.Score = (System.Int32)ActionNode33_Result;
+            LoopGroupNode10_Item.Score = (System.Int32)ActionNode0_Result;
         }
     }
 }
