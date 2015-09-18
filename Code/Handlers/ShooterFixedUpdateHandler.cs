@@ -41,7 +41,7 @@ namespace uFrameECSDemo {
         
         private UnityEngine.MonoBehaviour ActionNode10_component = default( UnityEngine.MonoBehaviour );
         
-        private UnityEngine.Rigidbody ActionNode0_Result = default( UnityEngine.Rigidbody );
+        private UnityEngine.Rigidbody ActionNode10_Result = default( UnityEngine.Rigidbody );
         
         private UnityEngine.Rigidbody ActionNode8_rigidBody = default( UnityEngine.Rigidbody );
         
@@ -102,16 +102,16 @@ namespace uFrameECSDemo {
             ActionNode10_go = Group.Entity.gameObject;
             // ActionNode
             // Visit uFrame.Actions.UnityLibrary.GetRigidbody
-            ActionNode0_Result = uFrame.Actions.UnityLibrary.GetRigidbody(ActionNode10_go, ActionNode10_component);
-            ActionNode8_rigidBody = ActionNode0_Result;
+            ActionNode10_Result = uFrame.Actions.UnityLibrary.GetRigidbody(ActionNode10_go, ActionNode10_component);
+            ActionNode8_rigidBody = ActionNode10_Result;
             ActionNode8_x = Group.Horizontal;
             ActionNode8_z = Group.Vertical;
             ActionNode8_speed = Group.Speed;
             // ActionNode
             // Visit uFrame.Actions.RigidbodyLibrary.SetVelocityWithSpeed
             uFrame.Actions.RigidbodyLibrary.SetVelocityWithSpeed(ActionNode8_rigidBody, ActionNode8_x, ActionNode8_y, ActionNode8_z, ActionNode8_speed);
-            ActionNode7_rigidBody = ActionNode0_Result;
-            ActionNode11_a = ActionNode0_Result.velocity.x;
+            ActionNode7_rigidBody = ActionNode10_Result;
+            ActionNode11_a = ActionNode10_Result.velocity.x;
             ActionNode11_b = Group.Tilt;
             // ActionNode
             // Visit Assets.uFrameECS.Framework.Actions.MathLibrary.Multiply
