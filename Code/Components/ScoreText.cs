@@ -14,23 +14,23 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine.UI;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrame.ECS;
     using UniRx;
     
     
     [uFrame.Attributes.uFrameIdentifier("884a6ce9-7c4d-409a-a52f-05bf615ac5cc")]
     public partial class ScoreText : uFrame.ECS.EcsComponent {
         
-        private Subject<UnityEngine.UI.Text> _TextObservable;
+        private Subject<Text> _TextObservable;
         
-        private Subject<System.String> _fdsdfObservable;
-        
-        [UnityEngine.SerializeField()]
-        private UnityEngine.UI.Text _Text;
+        private Subject<String> _fdsdfObservable;
         
         [UnityEngine.SerializeField()]
-        private string _fdsdf;
+        private Text _Text;
+        
+        [UnityEngine.SerializeField()]
+        private String _fdsdf;
         
         public int ComponentID {
             get {
@@ -38,25 +38,25 @@ namespace uFrameECSDemo {
             }
         }
         
-        public IObservable<UnityEngine.UI.Text> TextObservable {
+        public IObservable<Text> TextObservable {
             get {
                 if (_TextObservable == null) {
-                    _TextObservable = new Subject<UnityEngine.UI.Text>();
+                    _TextObservable = new Subject<Text>();
                 }
                 return _TextObservable;
             }
         }
         
-        public IObservable<System.String> fdsdfObservable {
+        public IObservable<String> fdsdfObservable {
             get {
                 if (_fdsdfObservable == null) {
-                    _fdsdfObservable = new Subject<System.String>();
+                    _fdsdfObservable = new Subject<String>();
                 }
                 return _fdsdfObservable;
             }
         }
         
-        public UnityEngine.UI.Text Text {
+        public Text Text {
             get {
                 return _Text;
             }
@@ -68,7 +68,7 @@ namespace uFrameECSDemo {
             }
         }
         
-        public string fdsdf {
+        public String fdsdf {
             get {
                 return _fdsdf;
             }

@@ -85,20 +85,20 @@ namespace uFrameECSDemo {
             SpawnWithRandomXManager.CreatedObservable.Subscribe(SpawnWithRandomXComponentCreatedFilter).DisposeWith(this);
         }
         
-        protected void DestroyOnCollisionHandler(uFrame.ECS.OnTriggerEnterDispatcher data, DestroyOnCollision group) {
+        protected void DestroyOnCollisionHandler(uFrame.ECS.OnTriggerEnterDispatcher data, DestroyOnCollision entityid) {
             var handler = DestroyOnCollisionHandlerInstance;;
             handler.System = this;
             handler.Event = data;
-            handler.Group = group;
+            handler.EntityId = entityid;
             handler.Execute();
         }
         
         protected void DestroyOnCollisionFilter(uFrame.ECS.OnTriggerEnterDispatcher data) {
-            var GroupDestroyOnCollision = DestroyOnCollisionManager[data.EntityId];
-            if (GroupDestroyOnCollision == null) {
+            var EntityIdDestroyOnCollision = DestroyOnCollisionManager[data.EntityId];
+            if (EntityIdDestroyOnCollision == null) {
                 return;
             }
-            this.DestroyOnCollisionHandler(data, GroupDestroyOnCollision);
+            this.DestroyOnCollisionHandler(data, EntityIdDestroyOnCollision);
         }
         
         protected void RandomRotationComponentCreated(RandomRotation data, RandomRotation group) {

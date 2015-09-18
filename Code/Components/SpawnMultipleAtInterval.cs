@@ -21,18 +21,18 @@ namespace uFrameECSDemo {
     [uFrame.Attributes.uFrameIdentifier("8f20ac10-5695-40e2-8ea5-8c3ec4716133")]
     public partial class SpawnMultipleAtInterval : uFrame.ECS.EcsComponent {
         
-        private Subject<UnityEngine.Transform> _ParentObservable;
+        private Subject<Transform> _ParentObservable;
         
-        private Subject<System.Single> _SpawnSpeedObservable;
-        
-        [UnityEngine.SerializeField()]
-        private UnityEngine.Transform _Parent;
+        private Subject<Single> _SpawnSpeedObservable;
         
         [UnityEngine.SerializeField()]
-        private float _SpawnSpeed;
+        private Transform _Parent;
         
         [UnityEngine.SerializeField()]
-        private List<UnityEngine.GameObject> _Items;
+        private Single _SpawnSpeed;
+        
+        [UnityEngine.SerializeField()]
+        private List<GameObject> _Items;
         
         public int ComponentID {
             get {
@@ -40,25 +40,25 @@ namespace uFrameECSDemo {
             }
         }
         
-        public IObservable<UnityEngine.Transform> ParentObservable {
+        public IObservable<Transform> ParentObservable {
             get {
                 if (_ParentObservable == null) {
-                    _ParentObservable = new Subject<UnityEngine.Transform>();
+                    _ParentObservable = new Subject<Transform>();
                 }
                 return _ParentObservable;
             }
         }
         
-        public IObservable<System.Single> SpawnSpeedObservable {
+        public IObservable<Single> SpawnSpeedObservable {
             get {
                 if (_SpawnSpeedObservable == null) {
-                    _SpawnSpeedObservable = new Subject<System.Single>();
+                    _SpawnSpeedObservable = new Subject<Single>();
                 }
                 return _SpawnSpeedObservable;
             }
         }
         
-        public UnityEngine.Transform Parent {
+        public Transform Parent {
             get {
                 return _Parent;
             }
@@ -70,7 +70,7 @@ namespace uFrameECSDemo {
             }
         }
         
-        public float SpawnSpeed {
+        public Single SpawnSpeed {
             get {
                 return _SpawnSpeed;
             }
@@ -82,10 +82,10 @@ namespace uFrameECSDemo {
             }
         }
         
-        public List<UnityEngine.GameObject> Items {
+        public List<GameObject> Items {
             get {
                 if (_Items == null) {
-                    _Items = new List<UnityEngine.GameObject>();
+                    _Items = new List<GameObject>();
                 }
                 return _Items;
             }

@@ -27,6 +27,8 @@ namespace uFrameECSDemo {
         
         private uFrameECSDemo.ScoreText LoopGroupNode7_Item = default( uFrameECSDemo.ScoreText );
         
+        private string FormatStringAction9_Result = default( System.String );
+        
         public WavesGame Event {
             get {
                 return _Event;
@@ -57,6 +59,10 @@ namespace uFrameECSDemo {
         }
         
         private void LoopGroupNode7_Next() {
+            // FormatStringAction
+            FormatStringAction9_Result = string.Format(@"Score: {0}", Group.Score);
+            // SetVariableNode
+            LoopGroupNode7_Item.Text.text = (System.String)FormatStringAction9_Result;
         }
     }
 }

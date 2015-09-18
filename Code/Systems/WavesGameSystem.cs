@@ -25,9 +25,15 @@ namespace uFrameECSDemo {
         
         private IEcsComponentManagerOf<SpawnMultipleAtInterval> _SpawnMultipleAtIntervalManager;
         
+        private IEcsComponentManagerOf<PointsOnDestroy> _PointsOnDestroyManager;
+        
         private IEcsComponentManagerOf<PlayGameButton> _PlayGameButtonManager;
         
         private SpawnMultipleAtIntervalComponentCreated SpawnMultipleAtIntervalComponentCreatedInstance = new SpawnMultipleAtIntervalComponentCreated();
+        
+        private PointsOnDestroyComponentDestroyed PointsOnDestroyComponentDestroyedInstance = new PointsOnDestroyComponentDestroyed();
+        
+//        private WavesGameSystemAwesomeEventHandler WavesGameSystemAwesomeEventHandlerInstance = new WavesGameSystemAwesomeEventHandler();
         
         private PlayGameButtonClickedHandler PlayGameButtonClickedHandlerInstance = new PlayGameButtonClickedHandler();
         
@@ -51,6 +57,15 @@ namespace uFrameECSDemo {
             }
         }
         
+        public IEcsComponentManagerOf<PointsOnDestroy> PointsOnDestroyManager {
+            get {
+                return _PointsOnDestroyManager;
+            }
+            set {
+                _PointsOnDestroyManager = value;
+            }
+        }
+        
         public IEcsComponentManagerOf<PlayGameButton> PlayGameButtonManager {
             get {
                 return _PlayGameButtonManager;
@@ -64,8 +79,11 @@ namespace uFrameECSDemo {
             base.Setup();
             SpawnAtIntervalManager = ComponentSystem.RegisterComponent<SpawnAtInterval>();
             SpawnMultipleAtIntervalManager = ComponentSystem.RegisterComponent<SpawnMultipleAtInterval>();
+            PointsOnDestroyManager = ComponentSystem.RegisterComponent<PointsOnDestroy>();
             PlayGameButtonManager = ComponentSystem.RegisterComponent<PlayGameButton>();
             SpawnMultipleAtIntervalManager.CreatedObservable.Subscribe(SpawnMultipleAtIntervalComponentCreatedFilter).DisposeWith(this);
+            PointsOnDestroyManager.RemovedObservable.Subscribe(_=>PointsOnDestroyComponentDestroyed(_,_)).DisposeWith(this);
+            this.OnEvent<uFrameECSDemo.AwesomeEvent>().Subscribe(_=>{ WavesGameSystemAwesomeEventFilter(_); }).DisposeWith(this);
             this.OnEvent<uFrame.ECS.PointerClickDispatcher>().Subscribe(_=>{ PlayGameButtonClickedFilter(_); }).DisposeWith(this);
             SpawnAtIntervalManager.CreatedObservable.Subscribe(SpawnAtIntervalComponentCreatedFilter).DisposeWith(this);
         }
@@ -84,6 +102,33 @@ namespace uFrameECSDemo {
                 return;
             }
             this.SpawnMultipleAtIntervalComponentCreated(data, GroupSpawnMultipleAtInterval);
+        }
+        
+        protected void PointsOnDestroyComponentDestroyed(PointsOnDestroy data, PointsOnDestroy group) {
+            var handler = PointsOnDestroyComponentDestroyedInstance;;
+            handler.System = this;
+            handler.Event = data;
+            handler.Group = group;
+            handler.Execute();
+        }
+        
+        protected void PointsOnDestroyComponentDestroyedFilter(PointsOnDestroy data) {
+            var GroupPointsOnDestroy = PointsOnDestroyManager[data.EntityId];
+            if (GroupPointsOnDestroy == null) {
+                return;
+            }
+            this.PointsOnDestroyComponentDestroyed(data, GroupPointsOnDestroy);
+        }
+        
+        protected void WavesGameSystemAwesomeEventHandler(uFrameECSDemo.AwesomeEvent data) {
+            //var handler = WavesGameSystemAwesomeEventHandlerInstance;;
+            //handler.System = this;
+            //handler.Event = data;
+            //handler.Execute();
+        } 
+        
+        protected void WavesGameSystemAwesomeEventFilter(uFrameECSDemo.AwesomeEvent data) {
+            this.WavesGameSystemAwesomeEventHandler(data);
         }
         
         protected void PlayGameButtonClickedHandler(uFrame.ECS.PointerClickDispatcher data, PlayGameButton group) {

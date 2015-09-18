@@ -19,7 +19,7 @@ namespace uFrameECSDemo {
     
     public class DestroyOnCollisionHandler {
         
-        public DestroyOnCollision Group;
+        public DestroyOnCollision EntityId;
         
         private uFrame.ECS.OnTriggerEnterDispatcher _Event;
         
@@ -48,7 +48,7 @@ namespace uFrameECSDemo {
         }
         
         public virtual void Execute() {
-            ActionNode17_entityId = Group.EntityId;
+            ActionNode17_entityId = EntityId.EntityId;
             // ActionNode
             // Visit uFrame.Actions.DestroyLibrary.DestroyEntity
             uFrame.Actions.DestroyLibrary.DestroyEntity(ActionNode17_entityId, ActionNode17_time);

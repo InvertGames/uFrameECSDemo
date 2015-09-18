@@ -37,10 +37,10 @@ namespace uFrameECSDemo {
         public override void Setup() {
             base.Setup();
             WavesGameManager = ComponentSystem.RegisterComponent<WavesGame>();
-            this.PropertyChanged<WavesGame,System.Int32>(Group=>Group.ScoreObservable, WavesGameScorePropertyChangedFilter);
+            this.PropertyChanged<WavesGame,Int32>(Group=>Group.ScoreObservable, WavesGameScorePropertyChangedFilter);
         }
         
-        protected void WavesGameScorePropertyChanged(WavesGame data, WavesGame group, int value) {
+        protected void WavesGameScorePropertyChanged(WavesGame data, WavesGame group, Int32 value) {
             var handler = WavesGameScorePropertyChangedInstance;;
             handler.System = this;
             handler.Event = data;
@@ -48,7 +48,7 @@ namespace uFrameECSDemo {
             handler.Execute();
         }
         
-        protected void WavesGameScorePropertyChangedFilter(WavesGame data, int value) {
+        protected void WavesGameScorePropertyChangedFilter(WavesGame data, Int32 value) {
             var GroupWavesGame = WavesGameManager[data.EntityId];
             if (GroupWavesGame == null) {
                 return;

@@ -13,17 +13,43 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrame.ECS;
     using UniRx;
     
     
     [uFrame.Attributes.uFrameIdentifier("2a307e59-d342-4b51-98dc-3fe3c252eabc")]
     public partial class PointsOnDestroy : uFrame.ECS.EcsComponent {
         
+        private Subject<Int32> _PointsObservable;
+        
+        [UnityEngine.SerializeField()]
+        private Int32 _Points;
+        
         public int ComponentID {
             get {
                 return 6;
+            }
+        }
+        
+        public IObservable<Int32> PointsObservable {
+            get {
+                if (_PointsObservable == null) {
+                    _PointsObservable = new Subject<Int32>();
+                }
+                return _PointsObservable;
+            }
+        }
+        
+        public Int32 Points {
+            get {
+                return _Points;
+            }
+            set {
+                _Points = value;
+                if (_PointsObservable != null) {
+                    _PointsObservable.OnNext(value);
+                }
             }
         }
     }

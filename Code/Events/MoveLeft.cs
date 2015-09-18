@@ -13,11 +13,10 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
     
     
-    [uFrame.Attributes.uFrameEvent("MoveLeft")]
     public partial class MoveLeft : object {
     }
 }
