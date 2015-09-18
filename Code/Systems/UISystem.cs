@@ -13,9 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using uFrame.Kernel;
     using UniRx;
+    using uFrame.ECS;
     
     
     [uFrame.Attributes.uFrameIdentifier("b60e9496-5928-483d-b9ee-4e5ae99f0445")]
@@ -23,11 +23,11 @@ namespace uFrameECSDemo {
         
         private IEcsComponentManagerOf<SpawnAtInterval> _SpawnAtIntervalManager;
         
+        private IEcsComponentManagerOf<WavesGame> _WavesGameManager;
+        
         private IEcsComponentManagerOf<SpawnMultipleAtInterval> _SpawnMultipleAtIntervalManager;
         
         private IEcsComponentManagerOf<PointsOnDestroy> _PointsOnDestroyManager;
-        
-        private IEcsComponentManagerOf<WavesGame> _WavesGameManager;
         
         private WavesGameScorePropertyChanged WavesGameScorePropertyChangedInstance = new WavesGameScorePropertyChanged();
         
@@ -37,6 +37,15 @@ namespace uFrameECSDemo {
             }
             set {
                 _SpawnAtIntervalManager = value;
+            }
+        }
+        
+        public IEcsComponentManagerOf<WavesGame> WavesGameManager {
+            get {
+                return _WavesGameManager;
+            }
+            set {
+                _WavesGameManager = value;
             }
         }
         
@@ -58,21 +67,12 @@ namespace uFrameECSDemo {
             }
         }
         
-        public IEcsComponentManagerOf<WavesGame> WavesGameManager {
-            get {
-                return _WavesGameManager;
-            }
-            set {
-                _WavesGameManager = value;
-            }
-        }
-        
         public override void Setup() {
             base.Setup();
             SpawnAtIntervalManager = ComponentSystem.RegisterComponent<SpawnAtInterval>();
+            WavesGameManager = ComponentSystem.RegisterComponent<WavesGame>();
             SpawnMultipleAtIntervalManager = ComponentSystem.RegisterComponent<SpawnMultipleAtInterval>();
             PointsOnDestroyManager = ComponentSystem.RegisterComponent<PointsOnDestroy>();
-            WavesGameManager = ComponentSystem.RegisterComponent<WavesGame>();
             this.PropertyChanged<WavesGame,Int32>(Group=>Group.ScoreObservable, WavesGameScorePropertyChangedFilter);
         }
         
@@ -81,7 +81,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void WavesGameScorePropertyChangedFilter(WavesGame data, Int32 value) {

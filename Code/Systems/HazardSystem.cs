@@ -13,9 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using uFrame.Kernel;
     using UniRx;
+    using uFrame.ECS;
     
     
     [uFrame.Attributes.uFrameIdentifier("3a1a8f1b-60bd-42a5-953c-9a3a75b184d5")]
@@ -90,7 +90,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.EntityId = entityid;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void DestroyOnCollisionFilter(uFrame.ECS.OnTriggerEnterDispatcher data) {
@@ -106,7 +106,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void RandomRotationComponentCreatedFilter(RandomRotation data) {
@@ -122,7 +122,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void ProjectileComponentCreatedFilter(Projectile data) {
@@ -138,7 +138,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void SpawnWithRandomXComponentCreatedFilter(SpawnWithRandomX data) {

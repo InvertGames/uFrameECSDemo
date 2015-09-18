@@ -53,15 +53,19 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual void Execute() {
+        public virtual System.Collections.IEnumerator Execute() {
             // GetRandomListItem
+            while (this.DebugInfo("7acc43ed-c009-4cf2-9b24-6035e784d2b8","d7539db4-c189-4b19-b1e7-1fe76bf2b20f", this) == 1) yield return null;
             GetRandomListItem8_Result = Group.Items[UnityEngine.Random.Range(0, Group.Items.Count)];
             ActionNode2_gameObject = GetRandomListItem8_Result;
             // ActionNode
+            while (this.DebugInfo("d7539db4-c189-4b19-b1e7-1fe76bf2b20f","bb15b38a-b946-4b9a-b438-390cd2d9194c", this) == 1) yield return null;
             // Visit uFrame.Actions.GameObjects.Instantiate
             ActionNode2_Result = uFrame.Actions.GameObjects.Instantiate(ActionNode2_gameObject, ActionNode2_position, ActionNode2_rotation);
             // SetVariableNode
+            while (this.DebugInfo("bb15b38a-b946-4b9a-b438-390cd2d9194c","42976861-8c91-41e7-9188-a0de2f8a460d", this) == 1) yield return null;
             ActionNode2_Result.transform.parent = (UnityEngine.Transform)Group.Parent;
+            yield break;
         }
     }
 }

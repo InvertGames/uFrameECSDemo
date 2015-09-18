@@ -15,8 +15,8 @@ namespace uFrameECSDemo {
     using System.Linq;
     using UnityEngine.UI;
     using uFrame.ECS;
-    using UniRx;
     using UnityEngine;
+    using UniRx;
     
     
     [uFrame.Attributes.uFrameIdentifier("884a6ce9-7c4d-409a-a52f-05bf615ac5cc")]
@@ -24,17 +24,12 @@ namespace uFrameECSDemo {
         
         private Subject<Text> _TextObservable;
         
-        private Subject<String> _fdsdfObservable;
-        
         [UnityEngine.SerializeField()]
         private Text _Text;
         
-        [UnityEngine.SerializeField()]
-        private String _fdsdf;
-        
         public int ComponentID {
             get {
-                return 7;
+                return 3;
             }
         }
         
@@ -47,15 +42,6 @@ namespace uFrameECSDemo {
             }
         }
         
-        public IObservable<String> fdsdfObservable {
-            get {
-                if (_fdsdfObservable == null) {
-                    _fdsdfObservable = new Subject<String>();
-                }
-                return _fdsdfObservable;
-            }
-        }
-        
         public Text Text {
             get {
                 return _Text;
@@ -64,18 +50,6 @@ namespace uFrameECSDemo {
                 _Text = value;
                 if (_TextObservable != null) {
                     _TextObservable.OnNext(value);
-                }
-            }
-        }
-        
-        public String fdsdf {
-            get {
-                return _fdsdf;
-            }
-            set {
-                _fdsdf = value;
-                if (_fdsdfObservable != null) {
-                    _fdsdfObservable.OnNext(value);
                 }
             }
         }

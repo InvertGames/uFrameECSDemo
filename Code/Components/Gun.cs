@@ -14,8 +14,8 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using uFrameECSDemo;
-    using uFrame.ECS;
     using UniRx;
+    using uFrame.ECS;
     using UnityEngine;
     
     
