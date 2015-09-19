@@ -14,8 +14,8 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
     
     
     [uFrame.Attributes.uFrameIdentifier("c33125c8-912c-4fa4-921b-3b89581f3b04")]
@@ -102,25 +102,25 @@ namespace uFrameECSDemo {
             this.PlayerGunnerComponentDestroyed(data, GroupItem);
         }
         
-        protected void PlayerSystemOnCollisionEnterHandler(uFrame.ECS.OnTriggerEnterDispatcher data, Hazard colliderid, PlayerGunner entityid) {
+        protected void PlayerSystemOnCollisionEnterHandler(uFrame.ECS.OnTriggerEnterDispatcher data, Hazard collider, PlayerGunner source) {
             var handler = PlayerSystemOnCollisionEnterHandlerInstance;;
             handler.System = this;
             handler.Event = data;
-            handler.ColliderId = colliderid;
-            handler.EntityId = entityid;
+            handler.Collider = collider;
+            handler.Source = source;
             StartCoroutine(handler.Execute());
         }
         
         protected void PlayerSystemOnCollisionEnterFilter(uFrame.ECS.OnTriggerEnterDispatcher data) {
-            var ColliderIdHazard = HazardManager[data.ColliderId];
-            if (ColliderIdHazard == null) {
+            var ColliderHazard = HazardManager[data.ColliderId];
+            if (ColliderHazard == null) {
                 return;
             }
-            var EntityIdItem = PlayerGunnerManager[data.EntityId];
-            if (EntityIdItem == null) {
+            var SourceItem = PlayerGunnerManager[data.EntityId];
+            if (SourceItem == null) {
                 return;
             }
-            this.PlayerSystemOnCollisionEnterHandler(data, ColliderIdHazard, EntityIdItem);
+            this.PlayerSystemOnCollisionEnterHandler(data, ColliderHazard, SourceItem);
         }
     }
 }

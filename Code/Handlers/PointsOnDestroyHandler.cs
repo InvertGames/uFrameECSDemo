@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     
     
     public class PointsOnDestroyComponentDestroyed {
@@ -53,7 +53,7 @@ namespace uFrameECSDemo {
         
         public virtual System.Collections.IEnumerator Execute() {
             // LoopGroupNode
-            while (this.DebugInfo("0e52fecd-92b1-4be7-bfb6-9a010273790b","7a0295f2-d6fd-4fdf-8694-67691506652b", this) == 1) yield return null;
+            while (this.DebugInfo("fd87d60b-7ed8-4917-af15-d43272ae48ed","7a0295f2-d6fd-4fdf-8694-67691506652b", this) == 1) yield return null;
             var LoopGroupNode10_GroupComponents = System.ComponentSystem.RegisterComponent<uFrameECSDemo.WavesGame>().Components;
             for (var LoopGroupNode10_ItemIndex = 0
             ; LoopGroupNode10_ItemIndex < LoopGroupNode10_GroupComponents.Count; LoopGroupNode10_ItemIndex++

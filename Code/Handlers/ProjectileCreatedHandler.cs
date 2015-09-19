@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     
     
     public class ProjectileCreatedComponentCreated {
@@ -58,7 +58,7 @@ namespace uFrameECSDemo {
         public virtual System.Collections.IEnumerator Execute() {
             ActionNode3_go = Group.Entity.gameObject;
             // ActionNode
-            while (this.DebugInfo("fd87d60b-7ed8-4917-af15-d43272ae48ed","b79c1b46-db65-4d07-b68a-edb7a9660a30", this) == 1) yield return null;
+            while (this.DebugInfo("2cb1c689-05ea-48d4-bb80-f2a049c384b3","b79c1b46-db65-4d07-b68a-edb7a9660a30", this) == 1) yield return null;
             // Visit uFrame.Actions.UnityLibrary.GetRigidbody
             ActionNode3_Result = uFrame.Actions.UnityLibrary.GetRigidbody(ActionNode3_go, ActionNode3_component);
             ActionNode1_a = Group.Direction;

@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     using uFrame.ECS;
     
     
@@ -63,7 +63,7 @@ namespace uFrameECSDemo {
         public virtual System.Collections.IEnumerator Execute() {
             ActionNode3_Seconds = Group.Speed;
             // ActionNode
-            while (this.DebugInfo("4b51f9c4-2bcd-4a95-b50d-65d0889fdff6","cd009a0e-68bd-4265-bb84-e2d2201ad142", this) == 1) yield return null;
+            while (this.DebugInfo("2bcd91d8-c24c-43df-8642-01a955e20a81","cd009a0e-68bd-4265-bb84-e2d2201ad142", this) == 1) yield return null;
             // Visit uFrame.Actions.IntervalBySeconds
             ActionNode3.Seconds = ActionNode3_Seconds;
             ActionNode3.System = System;

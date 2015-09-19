@@ -14,8 +14,8 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
     
     
     [uFrame.Attributes.uFrameIdentifier("b60e9496-5928-483d-b9ee-4e5ae99f0445")]
@@ -91,7 +91,7 @@ namespace uFrameECSDemo {
             SpawnMultipleAtIntervalManager = ComponentSystem.RegisterComponent<SpawnMultipleAtInterval>();
             PointsOnDestroyManager = ComponentSystem.RegisterComponent<PointsOnDestroy>();
             PlayGameButtonManager = ComponentSystem.RegisterComponent<PlayGameButton>();
-            this.PropertyChanged<WavesGame,Int32>(Group=>Group.ScoreObservable, WavesGameScorePropertyChangedFilter);
+            this.PropertyChanged<WavesGame,Int32>(Group=>Group.ScoreObservable, WavesGameScorePropertyChangedFilter, Group=>Group.Score);
             WavesGameManager.RemovedObservable.Subscribe(_=>WavesGameComponentDestroyed(_,_)).DisposeWith(this);
             this.OnEvent<uFrame.ECS.PointerClickDispatcher>().Subscribe(_=>{ UISystemPointerClickDispatcherFilter(_); }).DisposeWith(this);
             WavesGameManager.CreatedObservable.Subscribe(DisableUIComponentCreatedFilter).DisposeWith(this);
@@ -129,20 +129,20 @@ namespace uFrameECSDemo {
             this.WavesGameComponentDestroyed(data, GroupWavesGame);
         }
         
-        protected void UISystemPointerClickDispatcherHandler(uFrame.ECS.PointerClickDispatcher data, PlayGameButton entityid) {
+        protected void UISystemPointerClickDispatcherHandler(uFrame.ECS.PointerClickDispatcher data, PlayGameButton source) {
             var handler = UISystemPointerClickDispatcherHandlerInstance;;
             handler.System = this;
             handler.Event = data;
-            handler.EntityId = entityid;
+            handler.Source = source;
             StartCoroutine(handler.Execute());
         }
         
         protected void UISystemPointerClickDispatcherFilter(uFrame.ECS.PointerClickDispatcher data) {
-            var EntityIdPlayGameButton = PlayGameButtonManager[data.EntityId];
-            if (EntityIdPlayGameButton == null) {
+            var SourcePlayGameButton = PlayGameButtonManager[data.EntityId];
+            if (SourcePlayGameButton == null) {
                 return;
             }
-            this.UISystemPointerClickDispatcherHandler(data, EntityIdPlayGameButton);
+            this.UISystemPointerClickDispatcherHandler(data, SourcePlayGameButton);
         }
         
         protected void DisableUIComponentCreated(WavesGame data, WavesGame group) {

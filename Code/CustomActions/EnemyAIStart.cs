@@ -19,9 +19,14 @@ namespace uFrameECSDemo {
  
         IEnumerator Evade()
         {
+      
             yield return new WaitForSeconds(UnityEngine.Random.Range(EnemyAI.StartWait.x, EnemyAI.StartWait.y));
             while (true)
             {
+                if (EnemyAI == null || Object.ReferenceEquals(EnemyAI, null))
+                {
+                    yield break;
+                }
                 EnemyAI.TargetManeuver = UnityEngine.Random.Range(1, EnemyAI.Dodge) * -Mathf.Sign(EnemyAI.transform.position.x);
                 yield return new WaitForSeconds(UnityEngine.Random.Range(EnemyAI.ManeuverTime.x, EnemyAI.ManeuverTime.y));
                 EnemyAI.TargetManeuver = 0;

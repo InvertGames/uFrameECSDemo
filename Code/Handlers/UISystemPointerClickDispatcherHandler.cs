@@ -13,13 +13,13 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     
     
     public class UISystemPointerClickDispatcherHandler {
         
-        public PlayGameButton EntityId;
+        public PlayGameButton Source;
         
         private uFrame.ECS.PointerClickDispatcher _Event;
         
@@ -57,9 +57,9 @@ namespace uFrameECSDemo {
             // LoopCollectionNode
             while (this.DebugInfo("d86d476a-60a8-46bf-b1e1-90583786c467","d2e5988d-36b5-4350-82ad-93d52f3e3817", this) == 1) yield return null;
             for (var LoopCollectionNode25_ItemIndex = 0
-            ; LoopCollectionNode25_ItemIndex < EntityId.InstantiateItems.Count; LoopCollectionNode25_ItemIndex++
+            ; LoopCollectionNode25_ItemIndex < Source.InstantiateItems.Count; LoopCollectionNode25_ItemIndex++
             ) {
-                LoopCollectionNode25_Item = EntityId.InstantiateItems[LoopCollectionNode25_ItemIndex];
+                LoopCollectionNode25_Item = Source.InstantiateItems[LoopCollectionNode25_ItemIndex];
                 System.StartCoroutine(LoopCollectionNode25_Next());
             }
             yield break;

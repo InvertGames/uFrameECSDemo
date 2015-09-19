@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     
     
     public class PlayerGunnerComponentDestroyed {
@@ -47,7 +47,7 @@ namespace uFrameECSDemo {
         
         public virtual System.Collections.IEnumerator Execute() {
             // PublishEventNode
-            while (this.DebugInfo("115892cd-156e-4117-8ccc-264b5a8ed3d4","3f32177f-f20b-4ec8-834a-be40e1c82207", this) == 1) yield return null;
+            while (this.DebugInfo("5ab1ad6f-a0f5-4cdb-9b19-dd9f26edcb86","3f32177f-f20b-4ec8-834a-be40e1c82207", this) == 1) yield return null;
             var PublishEventNode19_Event = new GameOver();
             System.Publish(PublishEventNode19_Event);
             PublishEventNode19_Event = PublishEventNode19_Result;

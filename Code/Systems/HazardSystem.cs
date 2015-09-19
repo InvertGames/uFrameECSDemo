@@ -14,8 +14,8 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
     
     
     [uFrame.Attributes.uFrameIdentifier("3a1a8f1b-60bd-42a5-953c-9a3a75b184d5")]
@@ -100,20 +100,20 @@ namespace uFrameECSDemo {
             this.OnEvent<uFrame.ECS.OnCollisionEnterDispatcher>().Subscribe(_=>{ HazardSystemOnCollisionEnterDispatcherFilter(_); }).DisposeWith(this);
         }
         
-        protected void DestroyOnCollisionHandler(uFrame.ECS.OnTriggerEnterDispatcher data, DestroyOnCollision entityid) {
+        protected void DestroyOnCollisionHandler(uFrame.ECS.OnTriggerEnterDispatcher data, DestroyOnCollision source) {
             var handler = DestroyOnCollisionHandlerInstance;;
             handler.System = this;
             handler.Event = data;
-            handler.EntityId = entityid;
+            handler.Source = source;
             StartCoroutine(handler.Execute());
         }
         
         protected void DestroyOnCollisionFilter(uFrame.ECS.OnTriggerEnterDispatcher data) {
-            var EntityIdDestroyOnCollision = DestroyOnCollisionManager[data.EntityId];
-            if (EntityIdDestroyOnCollision == null) {
+            var SourceDestroyOnCollision = DestroyOnCollisionManager[data.EntityId];
+            if (SourceDestroyOnCollision == null) {
                 return;
             }
-            this.DestroyOnCollisionHandler(data, EntityIdDestroyOnCollision);
+            this.DestroyOnCollisionHandler(data, SourceDestroyOnCollision);
         }
         
         protected void BeginRandomRotationComponentCreated(RandomRotation data, RandomRotation group) {
@@ -164,20 +164,20 @@ namespace uFrameECSDemo {
             this.SetRandomPositionComponentCreated(data, GroupSpawnWithRandomX);
         }
         
-        protected void HazardSystemOnCollisionEnterDispatcherHandler(uFrame.ECS.OnCollisionEnterDispatcher data, DestroyOnCollision entityid) {
+        protected void HazardSystemOnCollisionEnterDispatcherHandler(uFrame.ECS.OnCollisionEnterDispatcher data, DestroyOnCollision source) {
             var handler = HazardSystemOnCollisionEnterDispatcherHandlerInstance;;
             handler.System = this;
             handler.Event = data;
-            handler.EntityId = entityid;
+            handler.Source = source;
             StartCoroutine(handler.Execute());
         }
         
         protected void HazardSystemOnCollisionEnterDispatcherFilter(uFrame.ECS.OnCollisionEnterDispatcher data) {
-            var EntityIdDestroyOnCollision = DestroyOnCollisionManager[data.EntityId];
-            if (EntityIdDestroyOnCollision == null) {
+            var SourceDestroyOnCollision = DestroyOnCollisionManager[data.EntityId];
+            if (SourceDestroyOnCollision == null) {
                 return;
             }
-            this.HazardSystemOnCollisionEnterDispatcherHandler(data, EntityIdDestroyOnCollision);
+            this.HazardSystemOnCollisionEnterDispatcherHandler(data, SourceDestroyOnCollision);
         }
     }
 }

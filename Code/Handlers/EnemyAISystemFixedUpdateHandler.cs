@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     using uFrameECSDemo;
     
     
@@ -51,7 +51,7 @@ namespace uFrameECSDemo {
         public virtual System.Collections.IEnumerator Execute() {
             ActionNode18_EnemyAI = Group;
             // ActionNode
-            while (this.DebugInfo("03db7d7e-7273-499f-b530-127999b3f37c","1cb0d40e-31a3-4596-a7de-190c9ccf1b55", this) == 1) yield return null;
+            while (this.DebugInfo("0e52fecd-92b1-4be7-bfb6-9a010273790b","1cb0d40e-31a3-4596-a7de-190c9ccf1b55", this) == 1) yield return null;
             // Visit uFrameECSDemo.EnemyAIFixedUpdate
             ActionNode18.EnemyAI = ActionNode18_EnemyAI;
             ActionNode18.System = System;

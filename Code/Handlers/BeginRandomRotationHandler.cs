@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     
     
     public class BeginRandomRotationComponentCreated {
@@ -60,7 +60,7 @@ namespace uFrameECSDemo {
         public virtual System.Collections.IEnumerator Execute() {
             ActionNode4_go = Group.Entity.gameObject;
             // ActionNode
-            while (this.DebugInfo("5ab1ad6f-a0f5-4cdb-9b19-dd9f26edcb86","d10f965c-838c-4db4-80f0-a1bb93be8617", this) == 1) yield return null;
+            while (this.DebugInfo("4b51f9c4-2bcd-4a95-b50d-65d0889fdff6","d10f965c-838c-4db4-80f0-a1bb93be8617", this) == 1) yield return null;
             // Visit uFrame.Actions.UnityLibrary.GetRigidbody
             ActionNode4_Result = uFrame.Actions.UnityLibrary.GetRigidbody(ActionNode4_go, ActionNode4_component);
             // ActionNode

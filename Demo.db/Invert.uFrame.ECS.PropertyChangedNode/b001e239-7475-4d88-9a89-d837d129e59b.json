@@ -1,9 +1,10 @@
 {
-	"Immediate":false	, 
+	"Immediate":true	, 
 	"PropertyInId":"ac0bfc25-9697-4a7c-9b2b-5942a87f5a6d"	, 
 	"VariableCount":0	, 
 	"VariableName":"PropertyChangedNode11"	, 
 	"Name":"SetScoreLabel"	, 
+	"Comments":"True"	, 
 	"GraphId":"43b15702-714e-43ea-bfc1-4b73152ceef3"	, 
 	"Identifier":"b001e239-7475-4d88-9a89-d837d129e59b"	, 
 	"Expanded":false}

@@ -13,13 +13,13 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UnityEngine;
+    using uFrame.Kernel;
     
     
     public class DestroyOnCollisionHandler {
         
-        public DestroyOnCollision EntityId;
+        public DestroyOnCollision Source;
         
         private uFrame.ECS.OnTriggerEnterDispatcher _Event;
         
@@ -48,9 +48,9 @@ namespace uFrameECSDemo {
         }
         
         public virtual System.Collections.IEnumerator Execute() {
-            ActionNode2_entityId = EntityId.EntityId;
+            ActionNode2_entityId = Source.EntityId;
             // ActionNode
-            while (this.DebugInfo("12fae0e0-3723-4d36-9b84-c418fd17e038","89a77718-1334-464d-85ee-efbc32047645", this) == 1) yield return null;
+            while (this.DebugInfo("1cb0d40e-31a3-4596-a7de-190c9ccf1b55","89a77718-1334-464d-85ee-efbc32047645", this) == 1) yield return null;
             // Visit uFrame.Actions.DestroyLibrary.DestroyEntity
             uFrame.Actions.DestroyLibrary.DestroyEntity(ActionNode2_entityId, ActionNode2_time);
             yield break;
