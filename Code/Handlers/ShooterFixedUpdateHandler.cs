@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
     public class ShooterFixedUpdateHandler {
@@ -87,7 +87,7 @@ namespace uFrameECSDemo {
         
         public virtual System.Collections.IEnumerator Execute() {
             // ActionGroupNode
-            while (this.DebugInfo("28b81b2d-3039-4b03-9424-6fb8bb4421d6","b5041687-1242-4f98-b1b9-71346fff5feb", this) == 1) yield return null;
+            while (this.DebugInfo("1cb0d40e-31a3-4596-a7de-190c9ccf1b55","b5041687-1242-4f98-b1b9-71346fff5feb", this) == 1) yield return null;
             ActionNode9_axisName = StringNode2;
             // ActionNode
             while (this.DebugInfo("b5041687-1242-4f98-b1b9-71346fff5feb","5ae4ff7c-86a8-4b73-827f-78f82ed0ef8d", this) == 1) yield return null;

@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UniRx;
+    using uFrame.Kernel;
     using uFrame.ECS;
     
     
@@ -29,13 +29,17 @@ namespace uFrameECSDemo {
         
         private IEcsComponentManagerOf<PointsOnDestroy> _PointsOnDestroyManager;
         
-        private SpawnMultipleAtIntervalComponentCreated SpawnMultipleAtIntervalComponentCreatedInstance = new SpawnMultipleAtIntervalComponentCreated();
+        private IEcsComponentManagerOf<PlayGameButton> _PlayGameButtonManager;
         
-        private WavesGameComponentCreated WavesGameComponentCreatedInstance = new WavesGameComponentCreated();
+        private BeginMultipleIntervalSpawnComponentCreated BeginMultipleIntervalSpawnComponentCreatedInstance = new BeginMultipleIntervalSpawnComponentCreated();
+        
+        private WavesGameCreatedComponentCreated WavesGameCreatedComponentCreatedInstance = new WavesGameCreatedComponentCreated();
         
         private PointsOnDestroyComponentDestroyed PointsOnDestroyComponentDestroyedInstance = new PointsOnDestroyComponentDestroyed();
         
-        private SpawnAtIntervalComponentCreated SpawnAtIntervalComponentCreatedInstance = new SpawnAtIntervalComponentCreated();
+        private WavesGameSystemGameOverHandler WavesGameSystemGameOverHandlerInstance = new WavesGameSystemGameOverHandler();
+        
+        private BeginIntervalSpawnComponentCreated BeginIntervalSpawnComponentCreatedInstance = new BeginIntervalSpawnComponentCreated();
         
         public IEcsComponentManagerOf<SpawnAtInterval> SpawnAtIntervalManager {
             get {
@@ -73,48 +77,59 @@ namespace uFrameECSDemo {
             }
         }
         
+        public IEcsComponentManagerOf<PlayGameButton> PlayGameButtonManager {
+            get {
+                return _PlayGameButtonManager;
+            }
+            set {
+                _PlayGameButtonManager = value;
+            }
+        }
+        
         public override void Setup() {
             base.Setup();
             SpawnAtIntervalManager = ComponentSystem.RegisterComponent<SpawnAtInterval>();
             WavesGameManager = ComponentSystem.RegisterComponent<WavesGame>();
             SpawnMultipleAtIntervalManager = ComponentSystem.RegisterComponent<SpawnMultipleAtInterval>();
             PointsOnDestroyManager = ComponentSystem.RegisterComponent<PointsOnDestroy>();
-            SpawnMultipleAtIntervalManager.CreatedObservable.Subscribe(SpawnMultipleAtIntervalComponentCreatedFilter).DisposeWith(this);
-            WavesGameManager.CreatedObservable.Subscribe(WavesGameComponentCreatedFilter).DisposeWith(this);
+            PlayGameButtonManager = ComponentSystem.RegisterComponent<PlayGameButton>();
+            SpawnMultipleAtIntervalManager.CreatedObservable.Subscribe(BeginMultipleIntervalSpawnComponentCreatedFilter).DisposeWith(this);
+            WavesGameManager.CreatedObservable.Subscribe(WavesGameCreatedComponentCreatedFilter).DisposeWith(this);
             PointsOnDestroyManager.RemovedObservable.Subscribe(_=>PointsOnDestroyComponentDestroyed(_,_)).DisposeWith(this);
-            SpawnAtIntervalManager.CreatedObservable.Subscribe(SpawnAtIntervalComponentCreatedFilter).DisposeWith(this);
+            this.OnEvent<uFrameECSDemo.GameOver>().Subscribe(_=>{ WavesGameSystemGameOverFilter(_); }).DisposeWith(this);
+            SpawnAtIntervalManager.CreatedObservable.Subscribe(BeginIntervalSpawnComponentCreatedFilter).DisposeWith(this);
         }
         
-        protected void SpawnMultipleAtIntervalComponentCreated(SpawnMultipleAtInterval data, SpawnMultipleAtInterval group) {
-            var handler = SpawnMultipleAtIntervalComponentCreatedInstance;;
+        protected void BeginMultipleIntervalSpawnComponentCreated(SpawnMultipleAtInterval data, SpawnMultipleAtInterval group) {
+            var handler = BeginMultipleIntervalSpawnComponentCreatedInstance;;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
             StartCoroutine(handler.Execute());
         }
         
-        protected void SpawnMultipleAtIntervalComponentCreatedFilter(SpawnMultipleAtInterval data) {
+        protected void BeginMultipleIntervalSpawnComponentCreatedFilter(SpawnMultipleAtInterval data) {
             var GroupSpawnMultipleAtInterval = SpawnMultipleAtIntervalManager[data.EntityId];
             if (GroupSpawnMultipleAtInterval == null) {
                 return;
             }
-            this.SpawnMultipleAtIntervalComponentCreated(data, GroupSpawnMultipleAtInterval);
+            this.BeginMultipleIntervalSpawnComponentCreated(data, GroupSpawnMultipleAtInterval);
         }
         
-        protected void WavesGameComponentCreated(WavesGame data, WavesGame group) {
-            var handler = WavesGameComponentCreatedInstance;;
+        protected void WavesGameCreatedComponentCreated(WavesGame data, WavesGame group) {
+            var handler = WavesGameCreatedComponentCreatedInstance;;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
             StartCoroutine(handler.Execute());
         }
         
-        protected void WavesGameComponentCreatedFilter(WavesGame data) {
+        protected void WavesGameCreatedComponentCreatedFilter(WavesGame data) {
             var GroupWavesGame = WavesGameManager[data.EntityId];
             if (GroupWavesGame == null) {
                 return;
             }
-            this.WavesGameComponentCreated(data, GroupWavesGame);
+            this.WavesGameCreatedComponentCreated(data, GroupWavesGame);
         }
         
         protected void PointsOnDestroyComponentDestroyed(PointsOnDestroy data, PointsOnDestroy group) {
@@ -133,20 +148,37 @@ namespace uFrameECSDemo {
             this.PointsOnDestroyComponentDestroyed(data, GroupPointsOnDestroy);
         }
         
-        protected void SpawnAtIntervalComponentCreated(SpawnAtInterval data, SpawnAtInterval group) {
-            var handler = SpawnAtIntervalComponentCreatedInstance;;
+        protected void WavesGameSystemGameOverHandler(uFrameECSDemo.GameOver data, WavesGame group) {
+            var handler = WavesGameSystemGameOverHandlerInstance;;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
             StartCoroutine(handler.Execute());
         }
         
-        protected void SpawnAtIntervalComponentCreatedFilter(SpawnAtInterval data) {
+        protected void WavesGameSystemGameOverFilter(uFrameECSDemo.GameOver data) {
+            var WavesGameItems = WavesGameManager.Components;
+            for (var WavesGameIndex = 0
+            ; WavesGameIndex < WavesGameItems.Count; WavesGameIndex++
+            ) {
+                this.WavesGameSystemGameOverHandler(data, WavesGameItems[WavesGameIndex]);
+            }
+        }
+        
+        protected void BeginIntervalSpawnComponentCreated(SpawnAtInterval data, SpawnAtInterval group) {
+            var handler = BeginIntervalSpawnComponentCreatedInstance;;
+            handler.System = this;
+            handler.Event = data;
+            handler.Group = group;
+            StartCoroutine(handler.Execute());
+        }
+        
+        protected void BeginIntervalSpawnComponentCreatedFilter(SpawnAtInterval data) {
             var GroupSpawnAtInterval = SpawnAtIntervalManager[data.EntityId];
             if (GroupSpawnAtInterval == null) {
                 return;
             }
-            this.SpawnAtIntervalComponentCreated(data, GroupSpawnAtInterval);
+            this.BeginIntervalSpawnComponentCreated(data, GroupSpawnAtInterval);
         }
     }
 }

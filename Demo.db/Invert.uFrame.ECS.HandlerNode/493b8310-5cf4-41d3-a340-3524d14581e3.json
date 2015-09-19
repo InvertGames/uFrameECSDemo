@@ -1,0 +1,8 @@
+{
+	"MetaType":"uFrame.ECS.OnTriggerEnterDispatcher"	, 
+	"VariableCount":0	, 
+	"VariableName":"HandlerNode16"	, 
+	"Name":"PlayerSystemOnCollisionEnter"	, 
+	"GraphId":"ba9f9a37-144e-4c2c-9cc1-e8d56963012f"	, 
+	"Identifier":"493b8310-5cf4-41d3-a340-3524d14581e3"	, 
+	"Expanded":false}

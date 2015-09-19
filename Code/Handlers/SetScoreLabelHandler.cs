@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
     public class WavesGameScorePropertyChanged {
@@ -49,7 +49,7 @@ namespace uFrameECSDemo {
         
         public virtual System.Collections.IEnumerator Execute() {
             // LoopGroupNode
-            while (this.DebugInfo("28b81b2d-3039-4b03-9424-6fb8bb4421d6","0d153b2b-6036-4c90-95fa-0deca9275c63", this) == 1) yield return null;
+            while (this.DebugInfo("1221df01-fe08-4b24-969b-757ac2504a9e","0d153b2b-6036-4c90-95fa-0deca9275c63", this) == 1) yield return null;
             var LoopGroupNode9_GroupComponents = System.ComponentSystem.RegisterComponent<uFrameECSDemo.ScoreText>().Components;
             for (var LoopGroupNode9_ItemIndex = 0
             ; LoopGroupNode9_ItemIndex < LoopGroupNode9_GroupComponents.Count; LoopGroupNode9_ItemIndex++

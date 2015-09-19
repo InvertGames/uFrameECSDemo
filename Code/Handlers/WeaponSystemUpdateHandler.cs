@@ -13,9 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
-    using uFrame.ECS;
+    using UnityEngine;
     
     
     public class WeaponSystemUpdateHandler {
@@ -40,17 +39,13 @@ namespace uFrameECSDemo {
         
         private float ActionNode2_Result = default( System.Single );
         
-        private string ActionNode7_PoolName = default( System.String );
+        private UnityEngine.GameObject ActionNode15_gameObject = default( UnityEngine.GameObject );
         
-        private string ActionNode7_PrefabName = default( System.String );
+        private UnityEngine.Vector3 ActionNode15_position = default( UnityEngine.Vector3 );
         
-        private UnityEngine.Vector3 ActionNode7_Position = default( UnityEngine.Vector3 );
+        private UnityEngine.Vector3 ActionNode15_rotation = default( UnityEngine.Vector3 );
         
-        private UnityEngine.Vector3 ActionNode7_Rotation = default( UnityEngine.Vector3 );
-        
-        private uFrame.ECS.Spawn ActionNode7 = new uFrame.ECS.Spawn();
-        
-        private uFrame.ECS.Entity ActionNode7_Result = default( uFrame.ECS.Entity );
+        private UnityEngine.GameObject ActionNode15_Result = default( UnityEngine.GameObject );
         
         private UnityEngine.GameObject ActionNode1_gameObject = default( UnityEngine.GameObject );
         
@@ -78,7 +73,7 @@ namespace uFrameECSDemo {
         
         public virtual System.Collections.IEnumerator Execute() {
             // ActionNode
-            while (this.DebugInfo("130ab2bc-a8a4-4292-a1e9-67e427002a4a","a87839a8-50e9-4ddc-af31-c79cbc5bd2e9", this) == 1) yield return null;
+            while (this.DebugInfo("1599be78-af9c-4b2f-8109-6914c0ad665e","a87839a8-50e9-4ddc-af31-c79cbc5bd2e9", this) == 1) yield return null;
             // Visit uFrame.Actions.TimeLibrary.GetTime
             ActionNode4_Result = uFrame.Actions.TimeLibrary.GetTime();
             ActionNode6_a = ActionNode4_Result;
@@ -100,20 +95,16 @@ namespace uFrameECSDemo {
             // SetVariableNode
             while (this.DebugInfo("1d23ddfa-6b42-4aa3-8b95-52ee6a77032f","166b2534-d9a8-4da8-a7ac-82ceb974d8af", this) == 1) yield return null;
             Group.Gun.NextFire = (System.Single)ActionNode2_Result;
-            ActionNode7_PoolName = Group.Gun.ProjectilePrefab;
-            ActionNode7_Position = Group.Entity.transform.position;
+            ActionNode15_gameObject = Group.Gun.ProjectilePrefab;
+            ActionNode15_position = Group.Entity.transform.position;
             // ActionNode
-            while (this.DebugInfo("166b2534-d9a8-4da8-a7ac-82ceb974d8af","fcb101ff-026c-4aa0-914b-f00ca4a39de0", this) == 1) yield return null;
-            // Visit uFrame.ECS.Spawn
-            ActionNode7.PoolName = ActionNode7_PoolName;
-            ActionNode7.Position = ActionNode7_Position;
-            ActionNode7.System = System;
-            ActionNode7.Execute();
-            ActionNode7_Result = ActionNode7.Result;
-            ActionNode1_gameObject = ActionNode7_Result.gameObject;
+            while (this.DebugInfo("166b2534-d9a8-4da8-a7ac-82ceb974d8af","a7d7f4d0-e6e2-443d-bc47-4244290065cc", this) == 1) yield return null;
+            // Visit uFrame.Actions.GameObjects.Instantiate
+            ActionNode15_Result = uFrame.Actions.GameObjects.Instantiate(ActionNode15_gameObject, ActionNode15_position, ActionNode15_rotation);
+            ActionNode1_gameObject = ActionNode15_Result.gameObject;
             ActionNode1_time = FloatNode27;
             // ActionNode
-            while (this.DebugInfo("fcb101ff-026c-4aa0-914b-f00ca4a39de0","1221df01-fe08-4b24-969b-757ac2504a9e", this) == 1) yield return null;
+            while (this.DebugInfo("a7d7f4d0-e6e2-443d-bc47-4244290065cc","1221df01-fe08-4b24-969b-757ac2504a9e", this) == 1) yield return null;
             // Visit uFrame.Actions.DestroyLibrary.DestroyGameObject
             uFrame.Actions.DestroyLibrary.DestroyGameObject(ActionNode1_gameObject, ActionNode1_time);
             yield break;

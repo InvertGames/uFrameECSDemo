@@ -13,11 +13,11 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
-    public class SpawnWithRandomXComponentCreated {
+    public class SetRandomPositionComponentCreated {
         
         public SpawnWithRandomX Group;
         

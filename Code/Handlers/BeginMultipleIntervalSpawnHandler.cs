@@ -13,17 +13,26 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
+    using UnityEngine;
+    using uFrame.ECS;
     
     
-    public class SpawnMultipleAtIntervalComponentCreated {
+    public class BeginMultipleIntervalSpawnComponentCreated {
         
         public SpawnMultipleAtInterval Group;
         
         private SpawnMultipleAtInterval _Event;
         
         private uFrame.ECS.EcsSystem _System;
+        
+        private float ActionNode22_Seconds = default( System.Single );
+        
+        private uFrame.ECS.IEcsComponent ActionNode22_DisposeWith = default( uFrame.ECS.IEcsComponent );
+        
+        private uFrame.Actions.IntervalBySeconds ActionNode22 = new uFrame.Actions.IntervalBySeconds();
+        
+        private System.IDisposable ActionNode22_Result = default( System.IDisposable );
         
         private UnityEngine.GameObject GetRandomListItem8_Result = default( UnityEngine.GameObject );
         
@@ -54,8 +63,24 @@ namespace uFrameECSDemo {
         }
         
         public virtual System.Collections.IEnumerator Execute() {
+            ActionNode22_Seconds = Group.SpawnSpeed;
+            ActionNode22_DisposeWith = Group;
+            // ActionNode
+            while (this.DebugInfo("7acc43ed-c009-4cf2-9b24-6035e784d2b8","bfcf80a6-3eed-4be7-bb0b-4c6430ceae1d", this) == 1) yield return null;
+            // Visit uFrame.Actions.IntervalBySeconds
+            ActionNode22.Seconds = ActionNode22_Seconds;
+            ActionNode22.DisposeWith = ActionNode22_DisposeWith;
+            ActionNode22.System = System;
+            ActionNode22.Tick = ()=> { System.StartCoroutine(ActionNode22_Tick()); };
+            ActionNode22.Execute();
+            ActionNode22_Result = ActionNode22.Result;
+            yield break;
+        }
+        
+        private System.Collections.IEnumerator ActionNode22_Tick() {
+            ActionNode22_Result = ActionNode22.Result;
             // GetRandomListItem
-            while (this.DebugInfo("7acc43ed-c009-4cf2-9b24-6035e784d2b8","d7539db4-c189-4b19-b1e7-1fe76bf2b20f", this) == 1) yield return null;
+            while (this.DebugInfo("bfcf80a6-3eed-4be7-bb0b-4c6430ceae1d","d7539db4-c189-4b19-b1e7-1fe76bf2b20f", this) == 1) yield return null;
             GetRandomListItem8_Result = Group.Items[UnityEngine.Random.Range(0, Group.Items.Count)];
             ActionNode2_gameObject = GetRandomListItem8_Result;
             // ActionNode

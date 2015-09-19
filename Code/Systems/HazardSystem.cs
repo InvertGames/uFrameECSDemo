@@ -13,13 +13,15 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UniRx;
+    using uFrame.Kernel;
     using uFrame.ECS;
     
     
     [uFrame.Attributes.uFrameIdentifier("3a1a8f1b-60bd-42a5-953c-9a3a75b184d5")]
     public partial class HazardSystem : uFrame.ECS.EcsSystem {
+        
+        private IEcsComponentManagerOf<EnemyAI> _EnemyAIManager;
         
         private IEcsComponentManagerOf<RandomRotation> _RandomRotationManager;
         
@@ -31,11 +33,22 @@ namespace uFrameECSDemo {
         
         private DestroyOnCollisionHandler DestroyOnCollisionHandlerInstance = new DestroyOnCollisionHandler();
         
-        private RandomRotationComponentCreated RandomRotationComponentCreatedInstance = new RandomRotationComponentCreated();
+        private BeginRandomRotationComponentCreated BeginRandomRotationComponentCreatedInstance = new BeginRandomRotationComponentCreated();
         
-        private ProjectileComponentCreated ProjectileComponentCreatedInstance = new ProjectileComponentCreated();
+        private ProjectileCreatedComponentCreated ProjectileCreatedComponentCreatedInstance = new ProjectileCreatedComponentCreated();
         
-        private SpawnWithRandomXComponentCreated SpawnWithRandomXComponentCreatedInstance = new SpawnWithRandomXComponentCreated();
+        private SetRandomPositionComponentCreated SetRandomPositionComponentCreatedInstance = new SetRandomPositionComponentCreated();
+        
+        private HazardSystemOnCollisionEnterDispatcherHandler HazardSystemOnCollisionEnterDispatcherHandlerInstance = new HazardSystemOnCollisionEnterDispatcherHandler();
+        
+        public IEcsComponentManagerOf<EnemyAI> EnemyAIManager {
+            get {
+                return _EnemyAIManager;
+            }
+            set {
+                _EnemyAIManager = value;
+            }
+        }
         
         public IEcsComponentManagerOf<RandomRotation> RandomRotationManager {
             get {
@@ -75,14 +88,16 @@ namespace uFrameECSDemo {
         
         public override void Setup() {
             base.Setup();
+            EnemyAIManager = ComponentSystem.RegisterComponent<EnemyAI>();
             RandomRotationManager = ComponentSystem.RegisterComponent<RandomRotation>();
             ProjectileManager = ComponentSystem.RegisterComponent<Projectile>();
             SpawnWithRandomXManager = ComponentSystem.RegisterComponent<SpawnWithRandomX>();
             DestroyOnCollisionManager = ComponentSystem.RegisterComponent<DestroyOnCollision>();
             this.OnEvent<uFrame.ECS.OnTriggerEnterDispatcher>().Subscribe(_=>{ DestroyOnCollisionFilter(_); }).DisposeWith(this);
-            RandomRotationManager.CreatedObservable.Subscribe(RandomRotationComponentCreatedFilter).DisposeWith(this);
-            ProjectileManager.CreatedObservable.Subscribe(ProjectileComponentCreatedFilter).DisposeWith(this);
-            SpawnWithRandomXManager.CreatedObservable.Subscribe(SpawnWithRandomXComponentCreatedFilter).DisposeWith(this);
+            RandomRotationManager.CreatedObservable.Subscribe(BeginRandomRotationComponentCreatedFilter).DisposeWith(this);
+            ProjectileManager.CreatedObservable.Subscribe(ProjectileCreatedComponentCreatedFilter).DisposeWith(this);
+            SpawnWithRandomXManager.CreatedObservable.Subscribe(SetRandomPositionComponentCreatedFilter).DisposeWith(this);
+            this.OnEvent<uFrame.ECS.OnCollisionEnterDispatcher>().Subscribe(_=>{ HazardSystemOnCollisionEnterDispatcherFilter(_); }).DisposeWith(this);
         }
         
         protected void DestroyOnCollisionHandler(uFrame.ECS.OnTriggerEnterDispatcher data, DestroyOnCollision entityid) {
@@ -101,52 +116,68 @@ namespace uFrameECSDemo {
             this.DestroyOnCollisionHandler(data, EntityIdDestroyOnCollision);
         }
         
-        protected void RandomRotationComponentCreated(RandomRotation data, RandomRotation group) {
-            var handler = RandomRotationComponentCreatedInstance;;
+        protected void BeginRandomRotationComponentCreated(RandomRotation data, RandomRotation group) {
+            var handler = BeginRandomRotationComponentCreatedInstance;;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
             StartCoroutine(handler.Execute());
         }
         
-        protected void RandomRotationComponentCreatedFilter(RandomRotation data) {
+        protected void BeginRandomRotationComponentCreatedFilter(RandomRotation data) {
             var GroupRandomRotation = RandomRotationManager[data.EntityId];
             if (GroupRandomRotation == null) {
                 return;
             }
-            this.RandomRotationComponentCreated(data, GroupRandomRotation);
+            this.BeginRandomRotationComponentCreated(data, GroupRandomRotation);
         }
         
-        protected void ProjectileComponentCreated(Projectile data, Projectile group) {
-            var handler = ProjectileComponentCreatedInstance;;
+        protected void ProjectileCreatedComponentCreated(Projectile data, Projectile group) {
+            var handler = ProjectileCreatedComponentCreatedInstance;;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
             StartCoroutine(handler.Execute());
         }
         
-        protected void ProjectileComponentCreatedFilter(Projectile data) {
+        protected void ProjectileCreatedComponentCreatedFilter(Projectile data) {
             var GroupProjectile = ProjectileManager[data.EntityId];
             if (GroupProjectile == null) {
                 return;
             }
-            this.ProjectileComponentCreated(data, GroupProjectile);
+            this.ProjectileCreatedComponentCreated(data, GroupProjectile);
         }
         
-        protected void SpawnWithRandomXComponentCreated(SpawnWithRandomX data, SpawnWithRandomX group) {
-            var handler = SpawnWithRandomXComponentCreatedInstance;;
+        protected void SetRandomPositionComponentCreated(SpawnWithRandomX data, SpawnWithRandomX group) {
+            var handler = SetRandomPositionComponentCreatedInstance;;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
             StartCoroutine(handler.Execute());
         }
         
-        protected void SpawnWithRandomXComponentCreatedFilter(SpawnWithRandomX data) {
+        protected void SetRandomPositionComponentCreatedFilter(SpawnWithRandomX data) {
             var GroupSpawnWithRandomX = SpawnWithRandomXManager[data.EntityId];
             if (GroupSpawnWithRandomX == null) {
                 return;
             }
-            this.SpawnWithRandomXComponentCreated(data, GroupSpawnWithRandomX);
+            this.SetRandomPositionComponentCreated(data, GroupSpawnWithRandomX);
+        }
+        
+        protected void HazardSystemOnCollisionEnterDispatcherHandler(uFrame.ECS.OnCollisionEnterDispatcher data, DestroyOnCollision entityid) {
+            var handler = HazardSystemOnCollisionEnterDispatcherHandlerInstance;;
+            handler.System = this;
+            handler.Event = data;
+            handler.EntityId = entityid;
+            StartCoroutine(handler.Execute());
+        }
+        
+        protected void HazardSystemOnCollisionEnterDispatcherFilter(uFrame.ECS.OnCollisionEnterDispatcher data) {
+            var EntityIdDestroyOnCollision = DestroyOnCollisionManager[data.EntityId];
+            if (EntityIdDestroyOnCollision == null) {
+                return;
+            }
+            this.HazardSystemOnCollisionEnterDispatcherHandler(data, EntityIdDestroyOnCollision);
         }
     }
 }

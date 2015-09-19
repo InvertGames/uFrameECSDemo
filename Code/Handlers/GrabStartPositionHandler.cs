@@ -13,11 +13,11 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
-    public class BackgroundScrollerComponentCreated {
+    public class GrabStartPositionComponentCreated {
         
         public BackgroundScroller Group;
         
@@ -45,7 +45,7 @@ namespace uFrameECSDemo {
         
         public virtual System.Collections.IEnumerator Execute() {
             // SetVariableNode
-            while (this.DebugInfo("5d9e6255-926d-40e7-b316-d63686ca222f","b1e4431f-e657-45d8-8679-5b5dd0f12a26", this) == 1) yield return null;
+            while (this.DebugInfo("d8e16c6c-ac06-4dbc-8454-364f53870ee7","b1e4431f-e657-45d8-8679-5b5dd0f12a26", this) == 1) yield return null;
             Group.StartPosition = (UnityEngine.Vector3)Group.Entity.transform.position;
             yield break;
         }

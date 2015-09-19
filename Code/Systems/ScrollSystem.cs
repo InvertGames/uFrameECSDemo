@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
     using UniRx;
+    using uFrame.Kernel;
     using uFrame.ECS;
     
     
@@ -25,7 +25,7 @@ namespace uFrameECSDemo {
         
         private ScrollSystemUpdateHandler ScrollSystemUpdateHandlerInstance = new ScrollSystemUpdateHandler();
         
-        private BackgroundScrollerComponentCreated BackgroundScrollerComponentCreatedInstance = new BackgroundScrollerComponentCreated();
+        private GrabStartPositionComponentCreated GrabStartPositionComponentCreatedInstance = new GrabStartPositionComponentCreated();
         
         public IEcsComponentManagerOf<BackgroundScroller> BackgroundScrollerManager {
             get {
@@ -39,7 +39,7 @@ namespace uFrameECSDemo {
         public override void Setup() {
             base.Setup();
             BackgroundScrollerManager = ComponentSystem.RegisterComponent<BackgroundScroller>();
-            BackgroundScrollerManager.CreatedObservable.Subscribe(BackgroundScrollerComponentCreatedFilter).DisposeWith(this);
+            BackgroundScrollerManager.CreatedObservable.Subscribe(GrabStartPositionComponentCreatedFilter).DisposeWith(this);
         }
         
         protected void ScrollSystemUpdateHandler(BackgroundScroller group) {
@@ -62,20 +62,20 @@ namespace uFrameECSDemo {
             ScrollSystemUpdateFilter();
         }
         
-        protected void BackgroundScrollerComponentCreated(BackgroundScroller data, BackgroundScroller group) {
-            var handler = BackgroundScrollerComponentCreatedInstance;;
+        protected void GrabStartPositionComponentCreated(BackgroundScroller data, BackgroundScroller group) {
+            var handler = GrabStartPositionComponentCreatedInstance;;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
             StartCoroutine(handler.Execute());
         }
         
-        protected void BackgroundScrollerComponentCreatedFilter(BackgroundScroller data) {
+        protected void GrabStartPositionComponentCreatedFilter(BackgroundScroller data) {
             var GroupBackgroundScroller = BackgroundScrollerManager[data.EntityId];
             if (GroupBackgroundScroller == null) {
                 return;
             }
-            this.BackgroundScrollerComponentCreated(data, GroupBackgroundScroller);
+            this.GrabStartPositionComponentCreated(data, GroupBackgroundScroller);
         }
     }
 }

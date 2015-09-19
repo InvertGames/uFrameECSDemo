@@ -13,10 +13,10 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using UnityEngine;
     using uFrameECSDemo;
     using UniRx;
     using uFrame.ECS;
-    using UnityEngine;
     
     
     [uFrame.Attributes.uFrameIdentifier("eb461b84-87e2-4630-b721-4705c72ae4d6")]
@@ -26,7 +26,7 @@ namespace uFrameECSDemo {
         
         private Subject<Single> _NextFireObservable;
         
-        private Subject<String> _ProjectilePrefabObservable;
+        private Subject<GameObject> _ProjectilePrefabObservable;
         
         private Subject<GunState> _StateObservable;
         
@@ -37,14 +37,14 @@ namespace uFrameECSDemo {
         private Single _NextFire;
         
         [UnityEngine.SerializeField()]
-        private String _ProjectilePrefab;
+        private GameObject _ProjectilePrefab;
         
         [UnityEngine.SerializeField()]
         private GunState _State;
         
         public int ComponentID {
             get {
-                return 14;
+                return 19;
             }
         }
         
@@ -66,10 +66,10 @@ namespace uFrameECSDemo {
             }
         }
         
-        public IObservable<String> ProjectilePrefabObservable {
+        public IObservable<GameObject> ProjectilePrefabObservable {
             get {
                 if (_ProjectilePrefabObservable == null) {
-                    _ProjectilePrefabObservable = new Subject<String>();
+                    _ProjectilePrefabObservable = new Subject<GameObject>();
                 }
                 return _ProjectilePrefabObservable;
             }
@@ -108,7 +108,7 @@ namespace uFrameECSDemo {
             }
         }
         
-        public String ProjectilePrefab {
+        public GameObject ProjectilePrefab {
             get {
                 return _ProjectilePrefab;
             }

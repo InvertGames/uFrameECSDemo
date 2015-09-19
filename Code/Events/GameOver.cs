@@ -18,17 +18,5 @@ namespace uFrameECSDemo {
     
     
     public partial class GameOver : object {
-        
-        [UnityEngine.SerializeField()]
-        private Int32 _FinalScore;
-        
-        public Int32 FinalScore {
-            get {
-                return _FinalScore;
-            }
-            set {
-                _FinalScore = value;
-            }
-        }
     }
 }

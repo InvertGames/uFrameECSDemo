@@ -13,9 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UniRx;
-    using uFrame.ECS;
     using uFrame.Kernel;
+    using uFrame.ECS;
+    using UniRx;
     
     
     public partial class PlayerGunnerGroup : ReactiveGroup<PlayerGunner> {
