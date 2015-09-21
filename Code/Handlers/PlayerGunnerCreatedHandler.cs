@@ -50,7 +50,7 @@ namespace uFrameECSDemo {
         public virtual System.Collections.IEnumerator Execute() {
             ActionNode21_message = StringNode22;
             // ActionNode
-            while (this.DebugInfo("89a77718-1334-464d-85ee-efbc32047645","5ab1ad6f-a0f5-4cdb-9b19-dd9f26edcb86", this) == 1) yield return null;
+            while (this.DebugInfo("b1e4431f-e657-45d8-8679-5b5dd0f12a26","5ab1ad6f-a0f5-4cdb-9b19-dd9f26edcb86", this) == 1) yield return null;
             // Visit uFrame.Actions.DebugLibrary.LogMessage
             uFrame.Actions.DebugLibrary.LogMessage(ActionNode21_message);
             yield break;

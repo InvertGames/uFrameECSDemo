@@ -60,7 +60,7 @@ namespace uFrameECSDemo {
         public virtual System.Collections.IEnumerator Execute() {
             ActionNode5_key = EnumValueNode1;
             // ActionNode
-            while (this.DebugInfo("5d9e6255-926d-40e7-b316-d63686ca222f","af60a807-6e45-45a5-8c44-a87fa744364a", this) == 1) yield return null;
+            while (this.DebugInfo("337222c6-6b88-4526-b806-5e94ecbf9709","af60a807-6e45-45a5-8c44-a87fa744364a", this) == 1) yield return null;
             // Visit uFrame.Actions.InputLibrary.IsKey
             ActionNode5_Result = uFrame.Actions.InputLibrary.IsKey(ActionNode5_key, ()=> { System.StartCoroutine(ActionNode5_yes()); }, ()=> { System.StartCoroutine(ActionNode5_no()); });
             yield break;

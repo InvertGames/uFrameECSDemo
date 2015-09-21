@@ -52,7 +52,7 @@ namespace uFrameECSDemo {
         public virtual System.Collections.IEnumerator Execute() {
             ActionNode17_gameObject = Collider.Entity.gameObject;
             // ActionNode
-            while (this.DebugInfo("12fae0e0-3723-4d36-9b84-c418fd17e038","2bcd91d8-c24c-43df-8642-01a955e20a81", this) == 1) yield return null;
+            while (this.DebugInfo("89a77718-1334-464d-85ee-efbc32047645","2bcd91d8-c24c-43df-8642-01a955e20a81", this) == 1) yield return null;
             // Visit uFrame.Actions.DestroyLibrary.DestroyGameObject
             uFrame.Actions.DestroyLibrary.DestroyGameObject(ActionNode17_gameObject, ActionNode17_time);
             yield break;

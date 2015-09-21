@@ -56,7 +56,7 @@ namespace uFrameECSDemo {
         public virtual System.Collections.IEnumerator Execute() {
             ActionNode5_value = Group.IsQuiting;
             // ActionNode
-            while (this.DebugInfo("5d9e6255-926d-40e7-b316-d63686ca222f","769f512b-3bbf-40d3-9e31-e3ef5572cefe", this) == 1) yield return null;
+            while (this.DebugInfo("28b81b2d-3039-4b03-9424-6fb8bb4421d6","769f512b-3bbf-40d3-9e31-e3ef5572cefe", this) == 1) yield return null;
             // Visit uFrame.Actions.Comparisons.IsTrue
             uFrame.Actions.Comparisons.IsTrue(ActionNode5_value, ()=> { System.StartCoroutine(ActionNode5_yes()); }, ()=> { System.StartCoroutine(ActionNode5_no()); });
             yield break;

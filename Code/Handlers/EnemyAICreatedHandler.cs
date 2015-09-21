@@ -51,7 +51,7 @@ namespace uFrameECSDemo {
         public virtual System.Collections.IEnumerator Execute() {
             ActionNode17_EnemyAI = Group;
             // ActionNode
-            while (this.DebugInfo("1221df01-fe08-4b24-969b-757ac2504a9e","4b51f9c4-2bcd-4a95-b50d-65d0889fdff6", this) == 1) yield return null;
+            while (this.DebugInfo("5d9e6255-926d-40e7-b316-d63686ca222f","4b51f9c4-2bcd-4a95-b50d-65d0889fdff6", this) == 1) yield return null;
             // Visit uFrameECSDemo.EnemyAIStart
             ActionNode17.EnemyAI = ActionNode17_EnemyAI;
             ActionNode17.System = System;

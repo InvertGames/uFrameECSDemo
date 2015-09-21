@@ -14,8 +14,8 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
     
     
     public partial class PlayerGunner : uFrame.ECS.GroupItem {
@@ -44,7 +44,7 @@ namespace uFrameECSDemo {
         
         public int ComponentID {
             get {
-                return 20;
+                return 28;
             }
         }
     }

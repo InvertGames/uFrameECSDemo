@@ -73,7 +73,7 @@ namespace uFrameECSDemo {
         
         public virtual System.Collections.IEnumerator Execute() {
             // ActionNode
-            while (this.DebugInfo("130ab2bc-a8a4-4292-a1e9-67e427002a4a","a87839a8-50e9-4ddc-af31-c79cbc5bd2e9", this) == 1) yield return null;
+            while (this.DebugInfo("1599be78-af9c-4b2f-8109-6914c0ad665e","a87839a8-50e9-4ddc-af31-c79cbc5bd2e9", this) == 1) yield return null;
             // Visit uFrame.Actions.TimeLibrary.GetTime
             ActionNode4_Result = uFrame.Actions.TimeLibrary.GetTime();
             ActionNode6_a = ActionNode4_Result;

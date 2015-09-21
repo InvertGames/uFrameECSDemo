@@ -47,7 +47,7 @@ namespace uFrameECSDemo {
         
         public virtual System.Collections.IEnumerator Execute() {
             // SetVariableNode
-            while (this.DebugInfo("d8e16c6c-ac06-4dbc-8454-364f53870ee7","7acc43ed-c009-4cf2-9b24-6035e784d2b8", this) == 1) yield return null;
+            while (this.DebugInfo("2cb1c689-05ea-48d4-bb80-f2a049c384b3","7acc43ed-c009-4cf2-9b24-6035e784d2b8", this) == 1) yield return null;
             Group.Score = (System.Int32)IntNode18;
             yield break;
         }
