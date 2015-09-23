@@ -13,8 +13,8 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using uFrame.Kernel;
+    using uFrame.ECS;
     
     
     [uFrame.Attributes.uFrameIdentifier("55bd0141-748d-490e-9c53-d5c9ec95b58d")]

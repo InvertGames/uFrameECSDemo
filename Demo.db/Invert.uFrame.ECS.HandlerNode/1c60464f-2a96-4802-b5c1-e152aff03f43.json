@@ -1,4 +1,5 @@
 {
+	"CodeHandler":true	, 
 	"MetaType":"uFrame.ECS.ISystemFixedUpdate"	, 
 	"VariableCount":0	, 
 	"VariableName":"HandlerNode15"	, 

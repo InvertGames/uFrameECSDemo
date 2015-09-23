@@ -13,24 +13,19 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
-    using uFrameECSDemo;
+    using UnityEngine;
     
     
-    public class EnemyAICreatedComponentCreated {
+    public partial class EnemyAISystemFixedUpdateHandler {
         
         public EnemyAI Group;
         
-        private EnemyAI _Event;
+        private uFrame.ECS.ISystemFixedUpdate _Event;
         
         private uFrame.ECS.EcsSystem _System;
         
-        private uFrameECSDemo.EnemyAI ActionNode17_EnemyAI = default( uFrameECSDemo.EnemyAI );
-        
-        private uFrameECSDemo.EnemyAIStart ActionNode17 = new uFrameECSDemo.EnemyAIStart();
-        
-        public EnemyAI Event {
+        public uFrame.ECS.ISystemFixedUpdate Event {
             get {
                 return _Event;
             }
@@ -46,17 +41,6 @@ namespace uFrameECSDemo {
             set {
                 _System = value;
             }
-        }
-        
-        public virtual System.Collections.IEnumerator Execute() {
-            ActionNode17_EnemyAI = Group;
-            // ActionNode
-            while (this.DebugInfo("5d9e6255-926d-40e7-b316-d63686ca222f","4b51f9c4-2bcd-4a95-b50d-65d0889fdff6", this) == 1) yield return null;
-            // Visit uFrameECSDemo.EnemyAIStart
-            ActionNode17.EnemyAI = ActionNode17_EnemyAI;
-            ActionNode17.System = System;
-            ActionNode17.Execute();
-            yield break;
         }
     }
 }
