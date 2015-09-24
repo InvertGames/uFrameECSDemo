@@ -94,7 +94,7 @@ namespace uFrameECSDemo {
             var handler = EnemyAISystemFixedUpdateHandlerInstance;;
             handler.System = this;
             handler.Group = group;
-            handler.Execute();
+            //StartCoroutine(handler.Execute());
         }
         
         protected void EnemyAISystemFixedUpdateFilter() {
@@ -115,7 +115,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+//            StartCoroutine(handler.Execute());
         }
         
         protected void EnemyAICreatedComponentCreatedFilter(EnemyAI data) {

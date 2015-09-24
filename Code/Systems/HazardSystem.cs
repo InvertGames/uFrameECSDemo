@@ -105,7 +105,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Source = source;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void DestroyOnCollisionFilter(uFrame.ECS.OnTriggerEnterDispatcher data) {
@@ -121,7 +121,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void BeginRandomRotationComponentCreatedFilter(RandomRotation data) {
@@ -137,7 +137,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void ProjectileCreatedComponentCreatedFilter(Projectile data) {
@@ -153,7 +153,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void SetRandomPositionComponentCreatedFilter(SpawnWithRandomX data) {
@@ -169,7 +169,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Source = source;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void HazardSystemOnCollisionEnterDispatcherFilter(uFrame.ECS.OnCollisionEnterDispatcher data) {

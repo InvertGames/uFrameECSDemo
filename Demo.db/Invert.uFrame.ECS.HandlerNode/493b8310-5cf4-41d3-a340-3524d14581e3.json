@@ -1,4 +1,5 @@
 {
+	"CodeHandler":false	, 
 	"MetaType":"uFrame.ECS.OnTriggerEnterDispatcher"	, 
 	"VariableCount":0	, 
 	"VariableName":"HandlerNode16"	, 
