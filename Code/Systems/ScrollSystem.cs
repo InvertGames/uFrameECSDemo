@@ -13,8 +13,10 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UniRx;
+    using uFrameECSDemo;
+    using UnityEngine;
+    using uFrame.ECS;
     using uFrame.Kernel;
     
     
@@ -43,10 +45,10 @@ namespace uFrameECSDemo {
         }
         
         protected void ScrollSystemUpdateHandler(BackgroundScroller group) {
-            var handler = ScrollSystemUpdateHandlerInstance;;
+            var handler = ScrollSystemUpdateHandlerInstance;
             handler.System = this;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void ScrollSystemUpdateFilter() {
@@ -63,11 +65,11 @@ namespace uFrameECSDemo {
         }
         
         protected void GrabStartPositionComponentCreated(BackgroundScroller data, BackgroundScroller group) {
-            var handler = GrabStartPositionComponentCreatedInstance;;
+            var handler = GrabStartPositionComponentCreatedInstance;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void GrabStartPositionComponentCreatedFilter(BackgroundScroller data) {

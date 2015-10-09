@@ -1,8 +1,10 @@
 {
+	"CodeHandler":false	, 
 	"MetaType":"uFrame.ECS.OnCollisionEnterDispatcher"	, 
 	"VariableCount":0	, 
 	"VariableName":"HandlerNode14"	, 
 	"Name":"HazardSystemOnCollisionEnterDispatcher"	, 
+	"Order":0	, 
 	"GraphId":"b5a7704e-8245-4c65-b94f-9272b3f59f6c"	, 
 	"Identifier":"f8ac9d18-0a09-494d-be4b-8e8dca5990d8"	, 
 	"Expanded":false}

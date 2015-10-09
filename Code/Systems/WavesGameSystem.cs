@@ -13,8 +13,10 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UniRx;
+    using uFrameECSDemo;
+    using UnityEngine;
+    using uFrame.ECS;
     using uFrame.Kernel;
     
     
@@ -31,15 +33,11 @@ namespace uFrameECSDemo {
         
         private IEcsComponentManagerOf<PlayGameButton> _PlayGameButtonManager;
         
-        private BeginMultipleIntervalSpawnComponentCreated BeginMultipleIntervalSpawnComponentCreatedInstance = new BeginMultipleIntervalSpawnComponentCreated();
-        
         private WavesGameCreatedComponentCreated WavesGameCreatedComponentCreatedInstance = new WavesGameCreatedComponentCreated();
         
         private PointsOnDestroyComponentDestroyed PointsOnDestroyComponentDestroyedInstance = new PointsOnDestroyComponentDestroyed();
         
         private WavesGameSystemGameOverHandler WavesGameSystemGameOverHandlerInstance = new WavesGameSystemGameOverHandler();
-        
-        private BeginIntervalSpawnComponentCreated BeginIntervalSpawnComponentCreatedInstance = new BeginIntervalSpawnComponentCreated();
         
         public IEcsComponentManagerOf<SpawnAtInterval> SpawnAtIntervalManager {
             get {
@@ -101,11 +99,11 @@ namespace uFrameECSDemo {
         }
         
         protected void BeginMultipleIntervalSpawnComponentCreated(SpawnMultipleAtInterval data, SpawnMultipleAtInterval group) {
-            var handler = BeginMultipleIntervalSpawnComponentCreatedInstance;;
+            var handler = new BeginMultipleIntervalSpawnComponentCreated();
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void BeginMultipleIntervalSpawnComponentCreatedFilter(SpawnMultipleAtInterval data) {
@@ -117,11 +115,11 @@ namespace uFrameECSDemo {
         }
         
         protected void WavesGameCreatedComponentCreated(WavesGame data, WavesGame group) {
-            var handler = WavesGameCreatedComponentCreatedInstance;;
+            var handler = WavesGameCreatedComponentCreatedInstance;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void WavesGameCreatedComponentCreatedFilter(WavesGame data) {
@@ -133,11 +131,11 @@ namespace uFrameECSDemo {
         }
         
         protected void PointsOnDestroyComponentDestroyed(PointsOnDestroy data, PointsOnDestroy group) {
-            var handler = PointsOnDestroyComponentDestroyedInstance;;
+            var handler = PointsOnDestroyComponentDestroyedInstance;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void PointsOnDestroyComponentDestroyedFilter(PointsOnDestroy data) {
@@ -149,11 +147,11 @@ namespace uFrameECSDemo {
         }
         
         protected void WavesGameSystemGameOverHandler(uFrameECSDemo.GameOver data, WavesGame group) {
-            var handler = WavesGameSystemGameOverHandlerInstance;;
+            var handler = WavesGameSystemGameOverHandlerInstance;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void WavesGameSystemGameOverFilter(uFrameECSDemo.GameOver data) {
@@ -166,11 +164,11 @@ namespace uFrameECSDemo {
         }
         
         protected void BeginIntervalSpawnComponentCreated(SpawnAtInterval data, SpawnAtInterval group) {
-            var handler = BeginIntervalSpawnComponentCreatedInstance;;
+            var handler = new BeginIntervalSpawnComponentCreated();
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void BeginIntervalSpawnComponentCreatedFilter(SpawnAtInterval data) {

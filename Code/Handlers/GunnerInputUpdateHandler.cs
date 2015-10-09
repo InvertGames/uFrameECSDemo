@@ -57,51 +57,41 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             ActionNode5_key = EnumValueNode1;
             // ActionNode
-            while (this.DebugInfo("337222c6-6b88-4526-b806-5e94ecbf9709","af60a807-6e45-45a5-8c44-a87fa744364a", this) == 1) yield return null;
             // Visit uFrame.Actions.InputLibrary.IsKey
-            ActionNode5_Result = uFrame.Actions.InputLibrary.IsKey(ActionNode5_key, ()=> { System.StartCoroutine(ActionNode5_yes()); }, ()=> { System.StartCoroutine(ActionNode5_no()); });
-            yield break;
+            ActionNode5_Result = uFrame.Actions.InputLibrary.IsKey(ActionNode5_key, ActionNode5_yes, ActionNode5_no);
         }
         
-        private System.Collections.IEnumerator LoopCollectionNode11_Next() {
+        private void LoopCollectionNode11_Next() {
             // SetVariableNode
-            while (this.DebugInfo("d765f854-8f4a-4507-a885-a0b610fd1fee","04621456-8687-41df-9c99-8d9b925a468b", this) == 1) yield return null;
             LoopCollectionNode11_Item.State = (uFrameECSDemo.GunState)EnumValueNode10;
-            yield break;
         }
         
-        private System.Collections.IEnumerator ActionNode5_yes() {
+        private void ActionNode5_yes() {
             // LoopCollectionNode
-            while (this.DebugInfo("af60a807-6e45-45a5-8c44-a87fa744364a","d765f854-8f4a-4507-a885-a0b610fd1fee", this) == 1) yield return null;
             for (var LoopCollectionNode11_ItemIndex = 0
             ; LoopCollectionNode11_ItemIndex < Group.Gunner.Guns.Count; LoopCollectionNode11_ItemIndex++
             ) {
                 LoopCollectionNode11_Item = Group.Gunner.Guns[LoopCollectionNode11_ItemIndex];
-                System.StartCoroutine(LoopCollectionNode11_Next());
+                LoopCollectionNode11_Next();
             }
-            yield break;
         }
         
-        private System.Collections.IEnumerator LoopCollectionNode10_Next() {
+        private void LoopCollectionNode10_Next() {
             // SetVariableNode
-            while (this.DebugInfo("c584d406-a9f3-4fff-b402-3df2d4cb2129","130ab2bc-a8a4-4292-a1e9-67e427002a4a", this) == 1) yield return null;
             LoopCollectionNode10_Item.State = (uFrameECSDemo.GunState)EnumValueNode9;
-            yield break;
         }
         
-        private System.Collections.IEnumerator ActionNode5_no() {
+        private void ActionNode5_no() {
             // LoopCollectionNode
-            while (this.DebugInfo("04621456-8687-41df-9c99-8d9b925a468b","c584d406-a9f3-4fff-b402-3df2d4cb2129", this) == 1) yield return null;
             for (var LoopCollectionNode10_ItemIndex = 0
             ; LoopCollectionNode10_ItemIndex < Group.Gunner.Guns.Count; LoopCollectionNode10_ItemIndex++
             ) {
                 LoopCollectionNode10_Item = Group.Gunner.Guns[LoopCollectionNode10_ItemIndex];
-                System.StartCoroutine(LoopCollectionNode10_Next());
+                LoopCollectionNode10_Next();
             }
-            yield break;
         }
     }
 }

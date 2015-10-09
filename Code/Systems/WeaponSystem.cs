@@ -13,8 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UniRx;
+    using uFrameECSDemo;
+    using uFrame.ECS;
     using uFrame.Kernel;
     
     
@@ -58,10 +59,10 @@ namespace uFrameECSDemo {
         }
         
         protected void WeaponSystemUpdateHandler(ShootingGuns group) {
-            var handler = WeaponSystemUpdateHandlerInstance;;
+            var handler = WeaponSystemUpdateHandlerInstance;
             handler.System = this;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void WeaponSystemUpdateFilter() {
@@ -78,11 +79,11 @@ namespace uFrameECSDemo {
         }
         
         protected void BeginShootingComponentCreated(ShootingGuns data, ShootingGuns group) {
-            var handler = BeginShootingComponentCreatedInstance;;
+            var handler = BeginShootingComponentCreatedInstance;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void BeginShootingComponentCreatedFilter(ShootingGuns data) {
@@ -94,11 +95,11 @@ namespace uFrameECSDemo {
         }
         
         protected void ShootingGunsComponentDestroyed(ShootingGuns data, ShootingGuns group) {
-            var handler = ShootingGunsComponentDestroyedInstance;;
+            var handler = ShootingGunsComponentDestroyedInstance;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void ShootingGunsComponentDestroyedFilter(ShootingGuns data) {

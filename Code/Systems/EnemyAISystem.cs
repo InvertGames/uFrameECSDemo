@@ -13,8 +13,10 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UniRx;
+    using uFrameECSDemo;
+    using UnityEngine;
+    using uFrame.ECS;
     using uFrame.Kernel;
     
     
@@ -91,10 +93,10 @@ namespace uFrameECSDemo {
         }
         
         protected void EnemyAISystemFixedUpdateHandler(EnemyAI group) {
-            var handler = EnemyAISystemFixedUpdateHandlerInstance;;
+            var handler = EnemyAISystemFixedUpdateHandlerInstance;
             handler.System = this;
             handler.Group = group;
-            //StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void EnemyAISystemFixedUpdateFilter() {
@@ -111,11 +113,11 @@ namespace uFrameECSDemo {
         }
         
         protected void EnemyAICreatedComponentCreated(EnemyAI data, EnemyAI group) {
-            var handler = EnemyAICreatedComponentCreatedInstance;;
+            var handler = EnemyAICreatedComponentCreatedInstance;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-//            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void EnemyAICreatedComponentCreatedFilter(EnemyAI data) {

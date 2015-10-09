@@ -32,11 +32,13 @@ namespace uFrameECSDemo {
         private Single _SpawnSpeed;
         
         [UnityEngine.SerializeField()]
-        private List<GameObject> _Items;
+        private GameObject[] _Items;
+        
+        private ReactiveCollection<GameObject> _ItemsReactive;
         
         public int ComponentID {
             get {
-                return 12;
+                return 4;
             }
         }
         
@@ -82,15 +84,12 @@ namespace uFrameECSDemo {
             }
         }
         
-        public List<GameObject> Items {
+        public ReactiveCollection<GameObject> Items {
             get {
-                if (_Items == null) {
-                    _Items = new List<GameObject>();
+                if (_ItemsReactive == null) {
+                    _ItemsReactive = new ReactiveCollection<GameObject>(_Items);
                 }
-                return _Items;
-            }
-            set {
-                _Items = value;
+                return _ItemsReactive;
             }
         }
     }

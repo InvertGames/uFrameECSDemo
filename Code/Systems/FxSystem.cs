@@ -13,8 +13,10 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UniRx;
+    using uFrameECSDemo;
+    using UnityEngine;
+    using uFrame.ECS;
     using uFrame.Kernel;
     
     
@@ -41,11 +43,11 @@ namespace uFrameECSDemo {
         }
         
         protected void EffectOnDestroyComponentDestroyed(EffectOnDestroy data, EffectOnDestroy group) {
-            var handler = EffectOnDestroyComponentDestroyedInstance;;
+            var handler = EffectOnDestroyComponentDestroyedInstance;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void EffectOnDestroyComponentDestroyedFilter(EffectOnDestroy data) {

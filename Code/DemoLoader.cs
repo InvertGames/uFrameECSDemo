@@ -25,7 +25,6 @@ namespace uFrameECSDemo {
             system = this.AddSystem<HazardSystem>();
             system = this.AddSystem<PlayerMovementSystem>();
             system = this.AddSystem<EnemyAISystem>();
-            system = this.AddSystem<MenuSystem>();
             system = this.AddSystem<WeaponSystem>();
             system = this.AddSystem<WavesGameSystem>();
             system = this.AddSystem<WeaponInputSystem>();

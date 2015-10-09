@@ -22,23 +22,22 @@ namespace uFrameECSDemo {
     public partial class Gunner : uFrame.ECS.EcsComponent {
         
         [UnityEngine.SerializeField()]
-        private List<Gun> _Guns;
+        private Gun[] _Guns;
+        
+        private ReactiveCollection<Gun> _GunsReactive;
         
         public int ComponentID {
             get {
-                return 19;
+                return 11;
             }
         }
         
-        public List<Gun> Guns {
+        public ReactiveCollection<Gun> Guns {
             get {
-                if (_Guns == null) {
-                    _Guns = new List<Gun>();
+                if (_GunsReactive == null) {
+                    _GunsReactive = new ReactiveCollection<Gun>(_Guns);
                 }
-                return _Guns;
-            }
-            set {
-                _Guns = value;
+                return _GunsReactive;
             }
         }
     }

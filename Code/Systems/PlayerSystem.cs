@@ -13,8 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UniRx;
+    using uFrameECSDemo;
+    using uFrame.ECS;
     using uFrame.Kernel;
     
     
@@ -71,11 +72,11 @@ namespace uFrameECSDemo {
         }
         
         protected void PlayerGunnerCreatedComponentCreated(PlayerGunner data, PlayerGunner group) {
-            var handler = PlayerGunnerCreatedComponentCreatedInstance;;
+            var handler = PlayerGunnerCreatedComponentCreatedInstance;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void PlayerGunnerCreatedComponentCreatedFilter(PlayerGunner data) {
@@ -87,11 +88,11 @@ namespace uFrameECSDemo {
         }
         
         protected void PlayerGunnerComponentDestroyed(PlayerGunner data, PlayerGunner group) {
-            var handler = PlayerGunnerComponentDestroyedInstance;;
+            var handler = PlayerGunnerComponentDestroyedInstance;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void PlayerGunnerComponentDestroyedFilter(PlayerGunner data) {
@@ -103,12 +104,12 @@ namespace uFrameECSDemo {
         }
         
         protected void PlayerSystemOnCollisionEnterHandler(uFrame.ECS.OnTriggerEnterDispatcher data, Hazard collider, PlayerGunner source) {
-            var handler = PlayerSystemOnCollisionEnterHandlerInstance;;
+            var handler = PlayerSystemOnCollisionEnterHandlerInstance;
             handler.System = this;
             handler.Event = data;
             handler.Collider = collider;
             handler.Source = source;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void PlayerSystemOnCollisionEnterFilter(uFrame.ECS.OnTriggerEnterDispatcher data) {

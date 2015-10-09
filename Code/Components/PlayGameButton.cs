@@ -22,23 +22,22 @@ namespace uFrameECSDemo {
     public partial class PlayGameButton : uFrame.ECS.EcsComponent {
         
         [UnityEngine.SerializeField()]
-        private List<GameObject> _InstantiateItems;
+        private GameObject[] _InstantiateItems;
+        
+        private ReactiveCollection<GameObject> _InstantiateItemsReactive;
         
         public int ComponentID {
             get {
-                return 18;
+                return 6;
             }
         }
         
-        public List<GameObject> InstantiateItems {
+        public ReactiveCollection<GameObject> InstantiateItems {
             get {
-                if (_InstantiateItems == null) {
-                    _InstantiateItems = new List<GameObject>();
+                if (_InstantiateItemsReactive == null) {
+                    _InstantiateItemsReactive = new ReactiveCollection<GameObject>(_InstantiateItems);
                 }
-                return _InstantiateItems;
-            }
-            set {
-                _InstantiateItems = value;
+                return _InstantiateItemsReactive;
             }
         }
     }
