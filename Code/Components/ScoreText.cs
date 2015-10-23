@@ -14,31 +14,30 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine.UI;
-    using uFrame.ECS;
     using UniRx;
+    using uFrame.ECS;
     using UnityEngine;
     
     
     [uFrame.Attributes.uFrameIdentifier("884a6ce9-7c4d-409a-a52f-05bf615ac5cc")]
     public partial class ScoreText : uFrame.ECS.EcsComponent {
         
-        private Subject<Text> _TextObservable;
-        
         [UnityEngine.SerializeField()]
         private Text _Text;
         
+        private Subject<PropertyChangedEvent<Text>> _TextObservable;
+        
+        private PropertyChangedEvent<Text> _TextEvent;
+        
         public int ComponentID {
             get {
-                return 3;
+                return 9;
             }
         }
         
-        public IObservable<Text> TextObservable {
+        public IObservable<PropertyChangedEvent<Text>> TextObservable {
             get {
-                if (_TextObservable == null) {
-                    _TextObservable = new Subject<Text>();
-                }
-                return _TextObservable;
+                return _TextObservable ?? (_TextObservable = new Subject<PropertyChangedEvent<Text>>());
             }
         }
         
@@ -47,11 +46,12 @@ namespace uFrameECSDemo {
                 return _Text;
             }
             set {
-                _Text = value;
-                if (_TextObservable != null) {
-                    _TextObservable.OnNext(value);
-                }
+                SetText(value);
             }
+        }
+        
+        public virtual void SetText(Text value) {
+            SetProperty(ref _Text, value, ref _TextEvent, _TextObservable);
         }
     }
 }

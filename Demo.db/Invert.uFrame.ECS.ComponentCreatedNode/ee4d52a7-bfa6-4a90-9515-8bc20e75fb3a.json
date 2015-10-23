@@ -1,8 +1,10 @@
 {
 	"CodeHandler":false	, 
 	"VariableCount":0	, 
+	"StartActionId":"b79c1b46-db65-4d07-b68a-edb7a9660a30"	, 
 	"VariableName":"ComponentCreatedNode8"	, 
 	"Name":"ProjectileCreated"	, 
+	"Order":0	, 
 	"GraphId":"b5a7704e-8245-4c65-b94f-9272b3f59f6c"	, 
 	"Identifier":"ee4d52a7-bfa6-4a90-9515-8bc20e75fb3a"	, 
-	"Expanded":false}
+	"Expanded":true}

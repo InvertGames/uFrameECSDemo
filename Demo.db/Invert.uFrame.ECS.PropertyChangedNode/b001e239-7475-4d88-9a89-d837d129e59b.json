@@ -1,10 +1,14 @@
 {
-	"Immediate":true	, 
 	"PropertyInId":"ac0bfc25-9697-4a7c-9b2b-5942a87f5a6d"	, 
+	"OnlyWhenChanged":false	, 
+	"Immediate":true	, 
+	"CodeHandler":false	, 
 	"VariableCount":0	, 
+	"StartActionId":"0d153b2b-6036-4c90-95fa-0deca9275c63"	, 
 	"VariableName":"PropertyChangedNode11"	, 
 	"Name":"SetScoreLabel"	, 
+	"Order":0	, 
 	"Comments":"\n"	, 
 	"GraphId":"43b15702-714e-43ea-bfc1-4b73152ceef3"	, 
 	"Identifier":"b001e239-7475-4d88-9a89-d837d129e59b"	, 
-	"Expanded":false}
+	"Expanded":true}

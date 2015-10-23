@@ -2,6 +2,7 @@
 	"MetaType":"uFrame.Actions.Vector3Library.Multiply"	, 
 	"VariableName":"ActionNode4"	, 
 	"Name":"NewActionNode"	, 
+	"Order":0	, 
 	"GraphId":"ff17e19d-e0e7-4e8f-a69b-0044a6a3c6c5"	, 
 	"Identifier":"b1240e5f-6090-4e50-8af5-96964cb26cf9"	, 
 	"Expanded":false}

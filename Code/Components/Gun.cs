@@ -15,20 +15,12 @@ namespace uFrameECSDemo {
     using System.Linq;
     using UnityEngine;
     using uFrameECSDemo;
-    using uFrame.ECS;
     using UniRx;
+    using uFrame.ECS;
     
     
     [uFrame.Attributes.uFrameIdentifier("eb461b84-87e2-4630-b721-4705c72ae4d6")]
     public partial class Gun : uFrame.ECS.EcsComponent {
-        
-        private Subject<Single> _FireRateObservable;
-        
-        private Subject<Single> _NextFireObservable;
-        
-        private Subject<GameObject> _ProjectilePrefabObservable;
-        
-        private Subject<GunState> _StateObservable;
         
         [UnityEngine.SerializeField()]
         private Single _FireRate;
@@ -42,45 +34,49 @@ namespace uFrameECSDemo {
         [UnityEngine.SerializeField()]
         private GunState _State;
         
+        private Subject<PropertyChangedEvent<Single>> _FireRateObservable;
+        
+        private PropertyChangedEvent<Single> _FireRateEvent;
+        
+        private Subject<PropertyChangedEvent<Single>> _NextFireObservable;
+        
+        private PropertyChangedEvent<Single> _NextFireEvent;
+        
+        private Subject<PropertyChangedEvent<GameObject>> _ProjectilePrefabObservable;
+        
+        private PropertyChangedEvent<GameObject> _ProjectilePrefabEvent;
+        
+        private Subject<PropertyChangedEvent<GunState>> _StateObservable;
+        
+        private PropertyChangedEvent<GunState> _StateEvent;
+        
         public int ComponentID {
             get {
-                return 12;
+                return 25;
             }
         }
         
-        public IObservable<Single> FireRateObservable {
+        public IObservable<PropertyChangedEvent<Single>> FireRateObservable {
             get {
-                if (_FireRateObservable == null) {
-                    _FireRateObservable = new Subject<Single>();
-                }
-                return _FireRateObservable;
+                return _FireRateObservable ?? (_FireRateObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
-        public IObservable<Single> NextFireObservable {
+        public IObservable<PropertyChangedEvent<Single>> NextFireObservable {
             get {
-                if (_NextFireObservable == null) {
-                    _NextFireObservable = new Subject<Single>();
-                }
-                return _NextFireObservable;
+                return _NextFireObservable ?? (_NextFireObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
-        public IObservable<GameObject> ProjectilePrefabObservable {
+        public IObservable<PropertyChangedEvent<GameObject>> ProjectilePrefabObservable {
             get {
-                if (_ProjectilePrefabObservable == null) {
-                    _ProjectilePrefabObservable = new Subject<GameObject>();
-                }
-                return _ProjectilePrefabObservable;
+                return _ProjectilePrefabObservable ?? (_ProjectilePrefabObservable = new Subject<PropertyChangedEvent<GameObject>>());
             }
         }
         
-        public IObservable<GunState> StateObservable {
+        public IObservable<PropertyChangedEvent<GunState>> StateObservable {
             get {
-                if (_StateObservable == null) {
-                    _StateObservable = new Subject<GunState>();
-                }
-                return _StateObservable;
+                return _StateObservable ?? (_StateObservable = new Subject<PropertyChangedEvent<GunState>>());
             }
         }
         
@@ -89,10 +85,7 @@ namespace uFrameECSDemo {
                 return _FireRate;
             }
             set {
-                _FireRate = value;
-                if (_FireRateObservable != null) {
-                    _FireRateObservable.OnNext(value);
-                }
+                SetFireRate(value);
             }
         }
         
@@ -101,10 +94,7 @@ namespace uFrameECSDemo {
                 return _NextFire;
             }
             set {
-                _NextFire = value;
-                if (_NextFireObservable != null) {
-                    _NextFireObservable.OnNext(value);
-                }
+                SetNextFire(value);
             }
         }
         
@@ -113,10 +103,7 @@ namespace uFrameECSDemo {
                 return _ProjectilePrefab;
             }
             set {
-                _ProjectilePrefab = value;
-                if (_ProjectilePrefabObservable != null) {
-                    _ProjectilePrefabObservable.OnNext(value);
-                }
+                SetProjectilePrefab(value);
             }
         }
         
@@ -125,11 +112,24 @@ namespace uFrameECSDemo {
                 return _State;
             }
             set {
-                _State = value;
-                if (_StateObservable != null) {
-                    _StateObservable.OnNext(value);
-                }
+                SetState(value);
             }
+        }
+        
+        public virtual void SetFireRate(Single value) {
+            SetProperty(ref _FireRate, value, ref _FireRateEvent, _FireRateObservable);
+        }
+        
+        public virtual void SetNextFire(Single value) {
+            SetProperty(ref _NextFire, value, ref _NextFireEvent, _NextFireObservable);
+        }
+        
+        public virtual void SetProjectilePrefab(GameObject value) {
+            SetProperty(ref _ProjectilePrefab, value, ref _ProjectilePrefabEvent, _ProjectilePrefabObservable);
+        }
+        
+        public virtual void SetState(GunState value) {
+            SetProperty(ref _State, value, ref _StateEvent, _StateObservable);
         }
     }
 }

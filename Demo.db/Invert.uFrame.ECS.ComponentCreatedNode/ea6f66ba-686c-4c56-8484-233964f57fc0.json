@@ -1,7 +1,10 @@
 {
+	"CodeHandler":false	, 
 	"VariableCount":0	, 
+	"StartActionId":"7bfcb8c0-5cdc-4130-a288-0916d2a551ac"	, 
 	"VariableName":"ComponentCreatedNode30"	, 
 	"Name":"DisableUI"	, 
+	"Order":0	, 
 	"GraphId":"43b15702-714e-43ea-bfc1-4b73152ceef3"	, 
 	"Identifier":"ea6f66ba-686c-4c56-8484-233964f57fc0"	, 
-	"Expanded":false}
+	"Expanded":true}

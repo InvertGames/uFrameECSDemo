@@ -1,0 +1,10 @@
+{
+	"CodeHandler":true	, 
+	"MetaType":"uFrame.ECS.OnCollisionEnterDispatcher"	, 
+	"VariableCount":0	, 
+	"VariableName":"HandlerNode27"	, 
+	"Name":"EnemyAISystemOnCollisionEnter"	, 
+	"Order":0	, 
+	"GraphId":"b5a7704e-8245-4c65-b94f-9272b3f59f6c"	, 
+	"Identifier":"5ca55a4c-54a3-460b-a07d-d1dad3afec7c"	, 
+	"Expanded":false}

@@ -14,10 +14,10 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrameECSDemo;
-    using UnityEngine;
     using uFrame.ECS;
     using uFrame.Kernel;
+    using uFrameECSDemo;
+    using UnityEngine;
     
     
     [uFrame.Attributes.uFrameIdentifier("b60e9496-5928-483d-b9ee-4e5ae99f0445")]
@@ -33,7 +33,13 @@ namespace uFrameECSDemo {
         
         private IEcsComponentManagerOf<PlayGameButton> _PlayGameButtonManager;
         
-        private ScorePropertyChanged ScorePropertyChangedInstance = new ScorePropertyChanged();
+        private IEcsComponentManagerOf<GameOverOnCollision> _GameOverOnCollisionManager;
+        
+        private IEcsComponentManagerOf<ScoreText> _ScoreTextManager;
+        
+        private IEcsComponentManagerOf<MenuUI> _MenuUIManager;
+        
+        private SetScoreLabel SetScoreLabelInstance = new SetScoreLabel();
         
         private WavesGameComponentDestroyed WavesGameComponentDestroyedInstance = new WavesGameComponentDestroyed();
         
@@ -86,6 +92,33 @@ namespace uFrameECSDemo {
             }
         }
         
+        public IEcsComponentManagerOf<GameOverOnCollision> GameOverOnCollisionManager {
+            get {
+                return _GameOverOnCollisionManager;
+            }
+            set {
+                _GameOverOnCollisionManager = value;
+            }
+        }
+        
+        public IEcsComponentManagerOf<ScoreText> ScoreTextManager {
+            get {
+                return _ScoreTextManager;
+            }
+            set {
+                _ScoreTextManager = value;
+            }
+        }
+        
+        public IEcsComponentManagerOf<MenuUI> MenuUIManager {
+            get {
+                return _MenuUIManager;
+            }
+            set {
+                _MenuUIManager = value;
+            }
+        }
+        
         public override void Setup() {
             base.Setup();
             SpawnAtIntervalManager = ComponentSystem.RegisterComponent<SpawnAtInterval>();
@@ -93,26 +126,34 @@ namespace uFrameECSDemo {
             SpawnMultipleAtIntervalManager = ComponentSystem.RegisterComponent<SpawnMultipleAtInterval>();
             PointsOnDestroyManager = ComponentSystem.RegisterComponent<PointsOnDestroy>();
             PlayGameButtonManager = ComponentSystem.RegisterComponent<PlayGameButton>();
-            this.PropertyChanged<WavesGame,System.Int32>(Group=>Group.ScoreObservable, ScorePropertyChangedFilter, Group=>Group.Score, false);
+            GameOverOnCollisionManager = ComponentSystem.RegisterComponent<GameOverOnCollision>();
+            ScoreTextManager = ComponentSystem.RegisterComponent<ScoreText>();
+            MenuUIManager = ComponentSystem.RegisterComponent<MenuUI>();
+            this.PropertyChangedEvent<WavesGame,System.Int32>(Group=>Group.ScoreObservable, SetScoreLabelFilter, Group=>Group.Score, false);
             WavesGameManager.RemovedObservable.Subscribe(_=>WavesGameComponentDestroyed(_,_)).DisposeWith(this);
             this.OnEvent<uFrame.ECS.PointerClickDispatcher>().Subscribe(_=>{ UISystemPointerClickDispatcherFilter(_); }).DisposeWith(this);
             WavesGameManager.CreatedObservable.Subscribe(DisableUIComponentCreatedFilter).DisposeWith(this);
         }
         
-        protected void ScorePropertyChanged(WavesGame data, WavesGame group, int value) {
-            var handler = ScorePropertyChangedInstance;
+        protected void SetScoreLabel(WavesGame data, WavesGame group, PropertyChangedEvent<System.Int32> value) {
+            var handler = SetScoreLabelInstance;
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            handler.OldValue = value.PreviousValue;
+            handler.NewValue = value.CurrentValue;
+            StartCoroutine(handler.Execute());
         }
         
-        protected void ScorePropertyChangedFilter(WavesGame data, int value) {
+        protected void SetScoreLabelFilter(WavesGame data, PropertyChangedEvent<System.Int32> value) {
             var GroupWavesGame = WavesGameManager[data.EntityId];
             if (GroupWavesGame == null) {
                 return;
             }
-            this.ScorePropertyChanged(data, GroupWavesGame, value);
+            if (!GroupWavesGame.Enabled) {
+                return;
+            }
+            this.SetScoreLabel(data, GroupWavesGame, value);
         }
         
         protected void WavesGameComponentDestroyed(WavesGame data, WavesGame group) {
@@ -120,12 +161,15 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void WavesGameComponentDestroyedFilter(WavesGame data) {
             var GroupWavesGame = WavesGameManager[data.EntityId];
             if (GroupWavesGame == null) {
+                return;
+            }
+            if (!GroupWavesGame.Enabled) {
                 return;
             }
             this.WavesGameComponentDestroyed(data, GroupWavesGame);
@@ -136,12 +180,15 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Source = source;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void UISystemPointerClickDispatcherFilter(uFrame.ECS.PointerClickDispatcher data) {
             var SourcePlayGameButton = PlayGameButtonManager[data.EntityId];
             if (SourcePlayGameButton == null) {
+                return;
+            }
+            if (!SourcePlayGameButton.Enabled) {
                 return;
             }
             this.UISystemPointerClickDispatcherHandler(data, SourcePlayGameButton);
@@ -152,12 +199,15 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void DisableUIComponentCreatedFilter(WavesGame data) {
             var GroupWavesGame = WavesGameManager[data.EntityId];
             if (GroupWavesGame == null) {
+                return;
+            }
+            if (!GroupWavesGame.Enabled) {
                 return;
             }
             this.DisableUIComponentCreated(data, GroupWavesGame);

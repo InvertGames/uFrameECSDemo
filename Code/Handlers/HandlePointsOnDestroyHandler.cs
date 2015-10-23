@@ -51,25 +51,30 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual void Execute() {
+        public virtual System.Collections.IEnumerator Execute() {
             // LoopGroupNode
+            while (this.DebugInfo("0e52fecd-92b1-4be7-bfb6-9a010273790b","7a0295f2-d6fd-4fdf-8694-67691506652b", this) == 1) yield return null;
             var LoopGroupNode10_GroupComponents = System.ComponentSystem.RegisterComponent<uFrameECSDemo.WavesGame>().Components;
             for (var LoopGroupNode10_ItemIndex = 0
             ; LoopGroupNode10_ItemIndex < LoopGroupNode10_GroupComponents.Count; LoopGroupNode10_ItemIndex++
             ) {
                 LoopGroupNode10_Item = LoopGroupNode10_GroupComponents[LoopGroupNode10_ItemIndex];
-                LoopGroupNode10_Next();
+                System.StartCoroutine(LoopGroupNode10_Next());
             }
+            yield break;
         }
         
-        private void LoopGroupNode10_Next() {
+        private System.Collections.IEnumerator LoopGroupNode10_Next() {
             ActionNode0_a = LoopGroupNode10_Item.Score;
             ActionNode0_b = Group.Points;
             // ActionNode
+            while (this.DebugInfo("7a0295f2-d6fd-4fdf-8694-67691506652b","3badd76a-ede2-4bf8-98bd-6242bf285142", this) == 1) yield return null;
             // Visit uFrame.Actions.IntLibrary.Add
             ActionNode0_Result = uFrame.Actions.IntLibrary.Add(ActionNode0_a, ActionNode0_b);
             // SetVariableNode
+            while (this.DebugInfo("3badd76a-ede2-4bf8-98bd-6242bf285142","28b81b2d-3039-4b03-9424-6fb8bb4421d6", this) == 1) yield return null;
             LoopGroupNode10_Item.Score = (System.Int32)ActionNode0_Result;
+            yield break;
         }
     }
 }

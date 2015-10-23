@@ -2,6 +2,7 @@
 	"MetaType":"UnityEngine.Mathf.Repeat"	, 
 	"VariableName":"ActionNode0"	, 
 	"Name":"NewActionNode"	, 
+	"Order":0	, 
 	"GraphId":"ff17e19d-e0e7-4e8f-a69b-0044a6a3c6c5"	, 
 	"Identifier":"0058be80-3f9e-49ff-b3d0-0bdbe273f127"	, 
 	"Expanded":false}

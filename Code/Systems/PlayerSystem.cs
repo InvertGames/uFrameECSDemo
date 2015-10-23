@@ -14,9 +14,9 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrameECSDemo;
     using uFrame.ECS;
     using uFrame.Kernel;
+    using uFrameECSDemo;
     
     
     [uFrame.Attributes.uFrameIdentifier("c33125c8-912c-4fa4-921b-3b89581f3b04")]
@@ -76,12 +76,15 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void PlayerGunnerCreatedComponentCreatedFilter(PlayerGunner data) {
             var GroupItem = PlayerGunnerManager[data.EntityId];
             if (GroupItem == null) {
+                return;
+            }
+            if (!GroupItem.Enabled) {
                 return;
             }
             this.PlayerGunnerCreatedComponentCreated(data, GroupItem);
@@ -92,12 +95,15 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void PlayerGunnerComponentDestroyedFilter(PlayerGunner data) {
             var GroupItem = PlayerGunnerManager[data.EntityId];
             if (GroupItem == null) {
+                return;
+            }
+            if (!GroupItem.Enabled) {
                 return;
             }
             this.PlayerGunnerComponentDestroyed(data, GroupItem);
@@ -109,7 +115,7 @@ namespace uFrameECSDemo {
             handler.Event = data;
             handler.Collider = collider;
             handler.Source = source;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void PlayerSystemOnCollisionEnterFilter(uFrame.ECS.OnTriggerEnterDispatcher data) {
@@ -117,8 +123,14 @@ namespace uFrameECSDemo {
             if (ColliderHazard == null) {
                 return;
             }
+            if (!ColliderHazard.Enabled) {
+                return;
+            }
             var SourceItem = PlayerGunnerManager[data.EntityId];
             if (SourceItem == null) {
+                return;
+            }
+            if (!SourceItem.Enabled) {
                 return;
             }
             this.PlayerSystemOnCollisionEnterHandler(data, ColliderHazard, SourceItem);

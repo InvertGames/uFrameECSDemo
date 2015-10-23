@@ -14,30 +14,29 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using uFrame.ECS;
     using UniRx;
+    using uFrame.ECS;
     
     
     [uFrame.Attributes.uFrameIdentifier("b8b7185d-e28c-4185-a5e7-cddac0b0d7f4")]
     public partial class EffectOnDestroy : uFrame.ECS.EcsComponent {
         
-        private Subject<GameObject> _PrefabObservable;
-        
         [UnityEngine.SerializeField()]
         private GameObject _Prefab;
         
+        private Subject<PropertyChangedEvent<GameObject>> _PrefabObservable;
+        
+        private PropertyChangedEvent<GameObject> _PrefabEvent;
+        
         public int ComponentID {
             get {
-                return 9;
+                return 13;
             }
         }
         
-        public IObservable<GameObject> PrefabObservable {
+        public IObservable<PropertyChangedEvent<GameObject>> PrefabObservable {
             get {
-                if (_PrefabObservable == null) {
-                    _PrefabObservable = new Subject<GameObject>();
-                }
-                return _PrefabObservable;
+                return _PrefabObservable ?? (_PrefabObservable = new Subject<PropertyChangedEvent<GameObject>>());
             }
         }
         
@@ -46,11 +45,12 @@ namespace uFrameECSDemo {
                 return _Prefab;
             }
             set {
-                _Prefab = value;
-                if (_PrefabObservable != null) {
-                    _PrefabObservable.OnNext(value);
-                }
+                SetPrefab(value);
             }
+        }
+        
+        public virtual void SetPrefab(GameObject value) {
+            SetProperty(ref _Prefab, value, ref _PrefabEvent, _PrefabObservable);
         }
     }
 }

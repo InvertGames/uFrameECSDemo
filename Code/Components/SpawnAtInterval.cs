@@ -14,18 +14,12 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using uFrame.ECS;
     using UniRx;
+    using uFrame.ECS;
     
     
     [uFrame.Attributes.uFrameIdentifier("f1355431-0026-4903-8a1a-c80b46b0f183")]
     public partial class SpawnAtInterval : uFrame.ECS.EcsComponent {
-        
-        private Subject<Single> _SpeedObservable;
-        
-        private Subject<GameObject> _PrefabObservable;
-        
-        private Subject<Transform> _ParentObservable;
         
         [UnityEngine.SerializeField()]
         private Single _Speed;
@@ -36,36 +30,39 @@ namespace uFrameECSDemo {
         [UnityEngine.SerializeField()]
         private Transform _Parent;
         
+        private Subject<PropertyChangedEvent<Single>> _SpeedObservable;
+        
+        private PropertyChangedEvent<Single> _SpeedEvent;
+        
+        private Subject<PropertyChangedEvent<GameObject>> _PrefabObservable;
+        
+        private PropertyChangedEvent<GameObject> _PrefabEvent;
+        
+        private Subject<PropertyChangedEvent<Transform>> _ParentObservable;
+        
+        private PropertyChangedEvent<Transform> _ParentEvent;
+        
         public int ComponentID {
             get {
-                return 8;
+                return 20;
             }
         }
         
-        public IObservable<Single> SpeedObservable {
+        public IObservable<PropertyChangedEvent<Single>> SpeedObservable {
             get {
-                if (_SpeedObservable == null) {
-                    _SpeedObservable = new Subject<Single>();
-                }
-                return _SpeedObservable;
+                return _SpeedObservable ?? (_SpeedObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
-        public IObservable<GameObject> PrefabObservable {
+        public IObservable<PropertyChangedEvent<GameObject>> PrefabObservable {
             get {
-                if (_PrefabObservable == null) {
-                    _PrefabObservable = new Subject<GameObject>();
-                }
-                return _PrefabObservable;
+                return _PrefabObservable ?? (_PrefabObservable = new Subject<PropertyChangedEvent<GameObject>>());
             }
         }
         
-        public IObservable<Transform> ParentObservable {
+        public IObservable<PropertyChangedEvent<Transform>> ParentObservable {
             get {
-                if (_ParentObservable == null) {
-                    _ParentObservable = new Subject<Transform>();
-                }
-                return _ParentObservable;
+                return _ParentObservable ?? (_ParentObservable = new Subject<PropertyChangedEvent<Transform>>());
             }
         }
         
@@ -74,10 +71,7 @@ namespace uFrameECSDemo {
                 return _Speed;
             }
             set {
-                _Speed = value;
-                if (_SpeedObservable != null) {
-                    _SpeedObservable.OnNext(value);
-                }
+                SetSpeed(value);
             }
         }
         
@@ -86,10 +80,7 @@ namespace uFrameECSDemo {
                 return _Prefab;
             }
             set {
-                _Prefab = value;
-                if (_PrefabObservable != null) {
-                    _PrefabObservable.OnNext(value);
-                }
+                SetPrefab(value);
             }
         }
         
@@ -98,11 +89,20 @@ namespace uFrameECSDemo {
                 return _Parent;
             }
             set {
-                _Parent = value;
-                if (_ParentObservable != null) {
-                    _ParentObservable.OnNext(value);
-                }
+                SetParent(value);
             }
+        }
+        
+        public virtual void SetSpeed(Single value) {
+            SetProperty(ref _Speed, value, ref _SpeedEvent, _SpeedObservable);
+        }
+        
+        public virtual void SetPrefab(GameObject value) {
+            SetProperty(ref _Prefab, value, ref _PrefabEvent, _PrefabObservable);
+        }
+        
+        public virtual void SetParent(Transform value) {
+            SetProperty(ref _Parent, value, ref _ParentEvent, _ParentObservable);
         }
     }
 }

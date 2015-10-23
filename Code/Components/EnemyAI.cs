@@ -14,28 +14,12 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using uFrame.ECS;
     using UniRx;
+    using uFrame.ECS;
     
     
     [uFrame.Attributes.uFrameIdentifier("462fb967-cd5a-4f3e-b352-a0a155131f91")]
     public partial class EnemyAI : uFrame.ECS.EcsComponent {
-        
-        private Subject<Single> _SmoothingObservable;
-        
-        private Subject<Vector2> _ManeuverWaitObservable;
-        
-        private Subject<Vector2> _StartWaitObservable;
-        
-        private Subject<Vector2> _ManeuverTimeObservable;
-        
-        private Subject<Single> _DodgeObservable;
-        
-        private Subject<Single> _CurrentSpeedObservable;
-        
-        private Subject<Single> _TiltObservable;
-        
-        private Subject<Single> _TargetManeuverObservable;
         
         [UnityEngine.SerializeField()]
         private Single _Smoothing;
@@ -61,81 +45,89 @@ namespace uFrameECSDemo {
         [UnityEngine.SerializeField()]
         private Single _TargetManeuver;
         
+        private Subject<PropertyChangedEvent<Single>> _SmoothingObservable;
+        
+        private PropertyChangedEvent<Single> _SmoothingEvent;
+        
+        private Subject<PropertyChangedEvent<Vector2>> _ManeuverWaitObservable;
+        
+        private PropertyChangedEvent<Vector2> _ManeuverWaitEvent;
+        
+        private Subject<PropertyChangedEvent<Vector2>> _StartWaitObservable;
+        
+        private PropertyChangedEvent<Vector2> _StartWaitEvent;
+        
+        private Subject<PropertyChangedEvent<Vector2>> _ManeuverTimeObservable;
+        
+        private PropertyChangedEvent<Vector2> _ManeuverTimeEvent;
+        
+        private Subject<PropertyChangedEvent<Single>> _DodgeObservable;
+        
+        private PropertyChangedEvent<Single> _DodgeEvent;
+        
+        private Subject<PropertyChangedEvent<Single>> _CurrentSpeedObservable;
+        
+        private PropertyChangedEvent<Single> _CurrentSpeedEvent;
+        
+        private Subject<PropertyChangedEvent<Single>> _TiltObservable;
+        
+        private PropertyChangedEvent<Single> _TiltEvent;
+        
+        private Subject<PropertyChangedEvent<Single>> _TargetManeuverObservable;
+        
+        private PropertyChangedEvent<Single> _TargetManeuverEvent;
+        
         public int ComponentID {
             get {
-                return 16;
+                return 6;
             }
         }
         
-        public IObservable<Single> SmoothingObservable {
+        public IObservable<PropertyChangedEvent<Single>> SmoothingObservable {
             get {
-                if (_SmoothingObservable == null) {
-                    _SmoothingObservable = new Subject<Single>();
-                }
-                return _SmoothingObservable;
+                return _SmoothingObservable ?? (_SmoothingObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
-        public IObservable<Vector2> ManeuverWaitObservable {
+        public IObservable<PropertyChangedEvent<Vector2>> ManeuverWaitObservable {
             get {
-                if (_ManeuverWaitObservable == null) {
-                    _ManeuverWaitObservable = new Subject<Vector2>();
-                }
-                return _ManeuverWaitObservable;
+                return _ManeuverWaitObservable ?? (_ManeuverWaitObservable = new Subject<PropertyChangedEvent<Vector2>>());
             }
         }
         
-        public IObservable<Vector2> StartWaitObservable {
+        public IObservable<PropertyChangedEvent<Vector2>> StartWaitObservable {
             get {
-                if (_StartWaitObservable == null) {
-                    _StartWaitObservable = new Subject<Vector2>();
-                }
-                return _StartWaitObservable;
+                return _StartWaitObservable ?? (_StartWaitObservable = new Subject<PropertyChangedEvent<Vector2>>());
             }
         }
         
-        public IObservable<Vector2> ManeuverTimeObservable {
+        public IObservable<PropertyChangedEvent<Vector2>> ManeuverTimeObservable {
             get {
-                if (_ManeuverTimeObservable == null) {
-                    _ManeuverTimeObservable = new Subject<Vector2>();
-                }
-                return _ManeuverTimeObservable;
+                return _ManeuverTimeObservable ?? (_ManeuverTimeObservable = new Subject<PropertyChangedEvent<Vector2>>());
             }
         }
         
-        public IObservable<Single> DodgeObservable {
+        public IObservable<PropertyChangedEvent<Single>> DodgeObservable {
             get {
-                if (_DodgeObservable == null) {
-                    _DodgeObservable = new Subject<Single>();
-                }
-                return _DodgeObservable;
+                return _DodgeObservable ?? (_DodgeObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
-        public IObservable<Single> CurrentSpeedObservable {
+        public IObservable<PropertyChangedEvent<Single>> CurrentSpeedObservable {
             get {
-                if (_CurrentSpeedObservable == null) {
-                    _CurrentSpeedObservable = new Subject<Single>();
-                }
-                return _CurrentSpeedObservable;
+                return _CurrentSpeedObservable ?? (_CurrentSpeedObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
-        public IObservable<Single> TiltObservable {
+        public IObservable<PropertyChangedEvent<Single>> TiltObservable {
             get {
-                if (_TiltObservable == null) {
-                    _TiltObservable = new Subject<Single>();
-                }
-                return _TiltObservable;
+                return _TiltObservable ?? (_TiltObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
-        public IObservable<Single> TargetManeuverObservable {
+        public IObservable<PropertyChangedEvent<Single>> TargetManeuverObservable {
             get {
-                if (_TargetManeuverObservable == null) {
-                    _TargetManeuverObservable = new Subject<Single>();
-                }
-                return _TargetManeuverObservable;
+                return _TargetManeuverObservable ?? (_TargetManeuverObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
@@ -144,10 +136,7 @@ namespace uFrameECSDemo {
                 return _Smoothing;
             }
             set {
-                _Smoothing = value;
-                if (_SmoothingObservable != null) {
-                    _SmoothingObservable.OnNext(value);
-                }
+                SetSmoothing(value);
             }
         }
         
@@ -156,10 +145,7 @@ namespace uFrameECSDemo {
                 return _ManeuverWait;
             }
             set {
-                _ManeuverWait = value;
-                if (_ManeuverWaitObservable != null) {
-                    _ManeuverWaitObservable.OnNext(value);
-                }
+                SetManeuverWait(value);
             }
         }
         
@@ -168,10 +154,7 @@ namespace uFrameECSDemo {
                 return _StartWait;
             }
             set {
-                _StartWait = value;
-                if (_StartWaitObservable != null) {
-                    _StartWaitObservable.OnNext(value);
-                }
+                SetStartWait(value);
             }
         }
         
@@ -180,10 +163,7 @@ namespace uFrameECSDemo {
                 return _ManeuverTime;
             }
             set {
-                _ManeuverTime = value;
-                if (_ManeuverTimeObservable != null) {
-                    _ManeuverTimeObservable.OnNext(value);
-                }
+                SetManeuverTime(value);
             }
         }
         
@@ -192,10 +172,7 @@ namespace uFrameECSDemo {
                 return _Dodge;
             }
             set {
-                _Dodge = value;
-                if (_DodgeObservable != null) {
-                    _DodgeObservable.OnNext(value);
-                }
+                SetDodge(value);
             }
         }
         
@@ -204,10 +181,7 @@ namespace uFrameECSDemo {
                 return _CurrentSpeed;
             }
             set {
-                _CurrentSpeed = value;
-                if (_CurrentSpeedObservable != null) {
-                    _CurrentSpeedObservable.OnNext(value);
-                }
+                SetCurrentSpeed(value);
             }
         }
         
@@ -216,10 +190,7 @@ namespace uFrameECSDemo {
                 return _Tilt;
             }
             set {
-                _Tilt = value;
-                if (_TiltObservable != null) {
-                    _TiltObservable.OnNext(value);
-                }
+                SetTilt(value);
             }
         }
         
@@ -228,11 +199,40 @@ namespace uFrameECSDemo {
                 return _TargetManeuver;
             }
             set {
-                _TargetManeuver = value;
-                if (_TargetManeuverObservable != null) {
-                    _TargetManeuverObservable.OnNext(value);
-                }
+                SetTargetManeuver(value);
             }
+        }
+        
+        public virtual void SetSmoothing(Single value) {
+            SetProperty(ref _Smoothing, value, ref _SmoothingEvent, _SmoothingObservable);
+        }
+        
+        public virtual void SetManeuverWait(Vector2 value) {
+            SetProperty(ref _ManeuverWait, value, ref _ManeuverWaitEvent, _ManeuverWaitObservable);
+        }
+        
+        public virtual void SetStartWait(Vector2 value) {
+            SetProperty(ref _StartWait, value, ref _StartWaitEvent, _StartWaitObservable);
+        }
+        
+        public virtual void SetManeuverTime(Vector2 value) {
+            SetProperty(ref _ManeuverTime, value, ref _ManeuverTimeEvent, _ManeuverTimeObservable);
+        }
+        
+        public virtual void SetDodge(Single value) {
+            SetProperty(ref _Dodge, value, ref _DodgeEvent, _DodgeObservable);
+        }
+        
+        public virtual void SetCurrentSpeed(Single value) {
+            SetProperty(ref _CurrentSpeed, value, ref _CurrentSpeedEvent, _CurrentSpeedObservable);
+        }
+        
+        public virtual void SetTilt(Single value) {
+            SetProperty(ref _Tilt, value, ref _TiltEvent, _TiltObservable);
+        }
+        
+        public virtual void SetTargetManeuver(Single value) {
+            SetProperty(ref _TargetManeuver, value, ref _TargetManeuverEvent, _TargetManeuverObservable);
         }
     }
 }

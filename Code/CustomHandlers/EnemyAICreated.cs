@@ -1,4 +1,4 @@
-namespace uFrameECSDemo {
+﻿namespace uFrameECSDemo {
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -18,7 +18,6 @@ namespace uFrameECSDemo {
 
         IEnumerator Evade()
         {
-
             yield return new WaitForSeconds(UnityEngine.Random.Range(Group.StartWait.x, Group.StartWait.y));
             while (true)
             {

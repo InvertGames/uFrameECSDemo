@@ -1,7 +1,10 @@
 {
+	"CodeHandler":false	, 
 	"VariableCount":0	, 
+	"StartActionId":"5ab1ad6f-a0f5-4cdb-9b19-dd9f26edcb86"	, 
 	"VariableName":"ComponentCreatedNode20"	, 
 	"Name":"PlayerGunnerCreated"	, 
+	"Order":0	, 
 	"GraphId":"ba9f9a37-144e-4c2c-9cc1-e8d56963012f"	, 
 	"Identifier":"8a1ecc98-aa70-476c-b30a-df03de2c29f4"	, 
-	"Expanded":false}
+	"Expanded":true}

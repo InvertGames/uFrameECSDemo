@@ -1,8 +1,10 @@
 {
 	"CodeHandler":false	, 
 	"VariableCount":0	, 
+	"StartActionId":"03af6a3c-d94d-486c-a864-57bef185c5ae"	, 
 	"VariableName":"ComponentCreatedNode16"	, 
 	"Name":"BeginShooting"	, 
+	"Order":0	, 
 	"GraphId":"8b8d2791-4622-4ab0-bc4c-00f23b6da2d5"	, 
 	"Identifier":"1b65fad1-8a3b-4604-9588-a1158d87e522"	, 
 	"Expanded":false}

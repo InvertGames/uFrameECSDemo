@@ -1,6 +1,7 @@
 {
 	"VariableCount":0	, 
 	"Name":"FxSystem"	, 
+	"Order":0	, 
 	"GraphId":"877568c9-79d4-42d2-a46d-24c513652d5f"	, 
 	"Identifier":"0c9342b9-daed-4b80-8db6-1e9fc00ea971"	, 
-	"Expanded":false}
+	"Expanded":true}

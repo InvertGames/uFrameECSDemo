@@ -1,7 +1,10 @@
 {
+	"CodeHandler":false	, 
 	"VariableCount":0	, 
+	"StartActionId":"edbd346b-fcc2-4508-af75-9cb3d831f398"	, 
 	"VariableName":"ComponentCreatedNode9"	, 
 	"Name":"SetRandomPosition"	, 
+	"Order":0	, 
 	"GraphId":"b5a7704e-8245-4c65-b94f-9272b3f59f6c"	, 
 	"Identifier":"f0944a11-7765-4352-9bb4-69bc3bbeff93"	, 
-	"Expanded":false}
+	"Expanded":true}

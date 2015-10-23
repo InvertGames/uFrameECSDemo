@@ -14,18 +14,12 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using uFrame.ECS;
     using UniRx;
+    using uFrame.ECS;
     
     
     [uFrame.Attributes.uFrameIdentifier("542b1cb0-35cb-469d-ba53-6a430a33c2f6")]
     public partial class BackgroundScroller : uFrame.ECS.EcsComponent {
-        
-        private Subject<Single> _TileSizeZObservable;
-        
-        private Subject<Single> _ScrollSpeedObservable;
-        
-        private Subject<Vector3> _StartPositionObservable;
         
         [UnityEngine.SerializeField()]
         private Single _TileSizeZ;
@@ -36,36 +30,39 @@ namespace uFrameECSDemo {
         [UnityEngine.SerializeField()]
         private Vector3 _StartPosition;
         
+        private Subject<PropertyChangedEvent<Single>> _TileSizeZObservable;
+        
+        private PropertyChangedEvent<Single> _TileSizeZEvent;
+        
+        private Subject<PropertyChangedEvent<Single>> _ScrollSpeedObservable;
+        
+        private PropertyChangedEvent<Single> _ScrollSpeedEvent;
+        
+        private Subject<PropertyChangedEvent<Vector3>> _StartPositionObservable;
+        
+        private PropertyChangedEvent<Vector3> _StartPositionEvent;
+        
         public int ComponentID {
             get {
-                return 22;
+                return 7;
             }
         }
         
-        public IObservable<Single> TileSizeZObservable {
+        public IObservable<PropertyChangedEvent<Single>> TileSizeZObservable {
             get {
-                if (_TileSizeZObservable == null) {
-                    _TileSizeZObservable = new Subject<Single>();
-                }
-                return _TileSizeZObservable;
+                return _TileSizeZObservable ?? (_TileSizeZObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
-        public IObservable<Single> ScrollSpeedObservable {
+        public IObservable<PropertyChangedEvent<Single>> ScrollSpeedObservable {
             get {
-                if (_ScrollSpeedObservable == null) {
-                    _ScrollSpeedObservable = new Subject<Single>();
-                }
-                return _ScrollSpeedObservable;
+                return _ScrollSpeedObservable ?? (_ScrollSpeedObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
-        public IObservable<Vector3> StartPositionObservable {
+        public IObservable<PropertyChangedEvent<Vector3>> StartPositionObservable {
             get {
-                if (_StartPositionObservable == null) {
-                    _StartPositionObservable = new Subject<Vector3>();
-                }
-                return _StartPositionObservable;
+                return _StartPositionObservable ?? (_StartPositionObservable = new Subject<PropertyChangedEvent<Vector3>>());
             }
         }
         
@@ -74,10 +71,7 @@ namespace uFrameECSDemo {
                 return _TileSizeZ;
             }
             set {
-                _TileSizeZ = value;
-                if (_TileSizeZObservable != null) {
-                    _TileSizeZObservable.OnNext(value);
-                }
+                SetTileSizeZ(value);
             }
         }
         
@@ -86,10 +80,7 @@ namespace uFrameECSDemo {
                 return _ScrollSpeed;
             }
             set {
-                _ScrollSpeed = value;
-                if (_ScrollSpeedObservable != null) {
-                    _ScrollSpeedObservable.OnNext(value);
-                }
+                SetScrollSpeed(value);
             }
         }
         
@@ -98,11 +89,20 @@ namespace uFrameECSDemo {
                 return _StartPosition;
             }
             set {
-                _StartPosition = value;
-                if (_StartPositionObservable != null) {
-                    _StartPositionObservable.OnNext(value);
-                }
+                SetStartPosition(value);
             }
+        }
+        
+        public virtual void SetTileSizeZ(Single value) {
+            SetProperty(ref _TileSizeZ, value, ref _TileSizeZEvent, _TileSizeZObservable);
+        }
+        
+        public virtual void SetScrollSpeed(Single value) {
+            SetProperty(ref _ScrollSpeed, value, ref _ScrollSpeedEvent, _ScrollSpeedObservable);
+        }
+        
+        public virtual void SetStartPosition(Vector3 value) {
+            SetProperty(ref _StartPosition, value, ref _StartPositionEvent, _StartPositionObservable);
         }
     }
 }

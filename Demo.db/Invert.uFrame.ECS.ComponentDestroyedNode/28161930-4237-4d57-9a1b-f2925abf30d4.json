@@ -1,9 +1,10 @@
 {
 	"CodeHandler":false	, 
 	"VariableCount":0	, 
+	"StartActionId":"7a0295f2-d6fd-4fdf-8694-67691506652b"	, 
 	"VariableName":"ComponentDestroyedNode6"	, 
 	"Name":"HandlePointsOnDestroy"	, 
 	"Order":0	, 
 	"GraphId":"43b15702-714e-43ea-bfc1-4b73152ceef3"	, 
 	"Identifier":"28161930-4237-4d57-9a1b-f2925abf30d4"	, 
-	"Expanded":false}
+	"Expanded":true}

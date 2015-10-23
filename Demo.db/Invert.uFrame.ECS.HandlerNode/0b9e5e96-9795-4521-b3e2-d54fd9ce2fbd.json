@@ -1,9 +1,12 @@
 {
+	"CodeHandler":false	, 
 	"MetaType":"uFrame.ECS.PointerClickDispatcher"	, 
 	"VariableCount":0	, 
+	"StartActionId":"d2e5988d-36b5-4350-82ad-93d52f3e3817"	, 
 	"VariableName":"HandlerNode23"	, 
 	"Name":"UISystemPointerClickDispatcher"	, 
+	"Order":0	, 
 	"Comments":"HandlerNode232"	, 
 	"GraphId":"43b15702-714e-43ea-bfc1-4b73152ceef3"	, 
 	"Identifier":"0b9e5e96-9795-4521-b3e2-d54fd9ce2fbd"	, 
-	"Expanded":false}
+	"Expanded":true}

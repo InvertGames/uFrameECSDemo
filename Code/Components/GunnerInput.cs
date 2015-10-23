@@ -13,18 +13,45 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
+    using UnityEngine.UI;
     using UniRx;
+    using uFrame.ECS;
     using UnityEngine;
     
     
     [uFrame.Attributes.uFrameIdentifier("092f8558-a85c-4579-b569-09b513eda0b1")]
     public partial class GunnerInput : uFrame.ECS.EcsComponent {
         
+        [UnityEngine.SerializeField()]
+        private Button _MyButton;
+        
+        private Subject<PropertyChangedEvent<Button>> _MyButtonObservable;
+        
+        private PropertyChangedEvent<Button> _MyButtonEvent;
+        
         public int ComponentID {
             get {
-                return 10;
+                return 23;
             }
+        }
+        
+        public IObservable<PropertyChangedEvent<Button>> MyButtonObservable {
+            get {
+                return _MyButtonObservable ?? (_MyButtonObservable = new Subject<PropertyChangedEvent<Button>>());
+            }
+        }
+        
+        public Button MyButton {
+            get {
+                return _MyButton;
+            }
+            set {
+                SetMyButton(value);
+            }
+        }
+        
+        public virtual void SetMyButton(Button value) {
+            SetProperty(ref _MyButton, value, ref _MyButtonEvent, _MyButtonObservable);
         }
     }
 }

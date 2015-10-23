@@ -36,7 +36,7 @@ namespace uFrameECSDemo {
         }
         
         public override System.Collections.Generic.IEnumerable<UniRx.IObservable<int>> Install(uFrame.ECS.IComponentSystem componentSystem) {
-            componentSystem.PropertyChanged<Gun, GunState>(_ => _.StateObservable, (c, v) => { UpdateItem(c.EntityId); });
+            componentSystem.PropertyChangedEvent<Gun, GunState>(_ => _.StateObservable, (c, v) => { UpdateItem(c.EntityId); });
             GunManager = componentSystem.RegisterComponent<Gun>();
             yield return GunManager.CreatedObservable.Select(_=>_.EntityId);;
             yield return GunManager.RemovedObservable.Select(_=>_.EntityId);;

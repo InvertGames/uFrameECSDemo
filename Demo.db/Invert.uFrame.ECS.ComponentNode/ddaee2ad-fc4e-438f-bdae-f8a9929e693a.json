@@ -1,5 +1,6 @@
 {
 	"Name":"SpawnWithRandomX"	, 
+	"Order":0	, 
 	"GraphId":"b5a7704e-8245-4c65-b94f-9272b3f59f6c"	, 
 	"Identifier":"ddaee2ad-fc4e-438f-bdae-f8a9929e693a"	, 
 	"Expanded":false}

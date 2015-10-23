@@ -43,7 +43,8 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual void Execute() {
+        public virtual System.Collections.IEnumerator Execute() {
+            yield break;
         }
     }
 }

@@ -2,6 +2,7 @@
 	"MetaType":"uFrame.Actions.InputLibrary.IsKeyDown"	, 
 	"VariableName":"ActionNode3"	, 
 	"Name":"NewActionNode"	, 
+	"Order":0	, 
 	"GraphId":"8b8d2791-4622-4ab0-bc4c-00f23b6da2d5"	, 
 	"Identifier":"34e53f1a-79a2-4a0a-a8e3-d70477e3f946"	, 
 	"Expanded":false}

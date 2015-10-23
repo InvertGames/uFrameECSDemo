@@ -2,8 +2,10 @@
 	"CodeHandler":false	, 
 	"MetaType":"uFrame.ECS.ISystemUpdate"	, 
 	"VariableCount":0	, 
+	"StartActionId":"f3a81b87-3370-47f9-a4b1-bde0b43274f6"	, 
 	"VariableName":"HandlerNode9"	, 
 	"Name":"WeaponSystemUpdate"	, 
+	"Order":0	, 
 	"GraphId":"8b8d2791-4622-4ab0-bc4c-00f23b6da2d5"	, 
 	"Identifier":"64951079-e761-4a0b-914c-c2eda77bae75"	, 
-	"Expanded":false}
+	"Expanded":true}

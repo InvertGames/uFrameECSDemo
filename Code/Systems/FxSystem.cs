@@ -14,10 +14,10 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrameECSDemo;
-    using UnityEngine;
     using uFrame.ECS;
     using uFrame.Kernel;
+    using uFrameECSDemo;
+    using UnityEngine;
     
     
     [uFrame.Attributes.uFrameIdentifier("0c9342b9-daed-4b80-8db6-1e9fc00ea971")]
@@ -47,12 +47,15 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void EffectOnDestroyComponentDestroyedFilter(EffectOnDestroy data) {
             var GroupEffectOnDestroy = EffectOnDestroyManager[data.EntityId];
             if (GroupEffectOnDestroy == null) {
+                return;
+            }
+            if (!GroupEffectOnDestroy.Enabled) {
                 return;
             }
             this.EffectOnDestroyComponentDestroyed(data, GroupEffectOnDestroy);

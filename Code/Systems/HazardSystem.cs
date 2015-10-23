@@ -14,10 +14,10 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrameECSDemo;
-    using UnityEngine;
     using uFrame.ECS;
     using uFrame.Kernel;
+    using uFrameECSDemo;
+    using UnityEngine;
     
     
     [uFrame.Attributes.uFrameIdentifier("3a1a8f1b-60bd-42a5-953c-9a3a75b184d5")]
@@ -32,6 +32,8 @@ namespace uFrameECSDemo {
         private IEcsComponentManagerOf<SpawnWithRandomX> _SpawnWithRandomXManager;
         
         private IEcsComponentManagerOf<DestroyOnCollision> _DestroyOnCollisionManager;
+        
+        private IEcsComponentManagerOf<Hazard> _HazardManager;
         
         private HandleDestroyOnCollisionHandler HandleDestroyOnCollisionHandlerInstance = new HandleDestroyOnCollisionHandler();
         
@@ -88,6 +90,15 @@ namespace uFrameECSDemo {
             }
         }
         
+        public IEcsComponentManagerOf<Hazard> HazardManager {
+            get {
+                return _HazardManager;
+            }
+            set {
+                _HazardManager = value;
+            }
+        }
+        
         public override void Setup() {
             base.Setup();
             EnemyAIManager = ComponentSystem.RegisterComponent<EnemyAI>();
@@ -95,6 +106,7 @@ namespace uFrameECSDemo {
             ProjectileManager = ComponentSystem.RegisterComponent<Projectile>();
             SpawnWithRandomXManager = ComponentSystem.RegisterComponent<SpawnWithRandomX>();
             DestroyOnCollisionManager = ComponentSystem.RegisterComponent<DestroyOnCollision>();
+            HazardManager = ComponentSystem.RegisterComponent<Hazard>();
             this.OnEvent<uFrame.ECS.OnTriggerEnterDispatcher>().Subscribe(_=>{ HandleDestroyOnCollisionFilter(_); }).DisposeWith(this);
             RandomRotationManager.CreatedObservable.Subscribe(BeginRandomRotationComponentCreatedFilter).DisposeWith(this);
             ProjectileManager.CreatedObservable.Subscribe(ProjectileCreatedComponentCreatedFilter).DisposeWith(this);
@@ -107,12 +119,15 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Source = source;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void HandleDestroyOnCollisionFilter(uFrame.ECS.OnTriggerEnterDispatcher data) {
             var SourceDestroyOnCollision = DestroyOnCollisionManager[data.EntityId];
             if (SourceDestroyOnCollision == null) {
+                return;
+            }
+            if (!SourceDestroyOnCollision.Enabled) {
                 return;
             }
             this.HandleDestroyOnCollisionHandler(data, SourceDestroyOnCollision);
@@ -123,12 +138,15 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void BeginRandomRotationComponentCreatedFilter(RandomRotation data) {
             var GroupRandomRotation = RandomRotationManager[data.EntityId];
             if (GroupRandomRotation == null) {
+                return;
+            }
+            if (!GroupRandomRotation.Enabled) {
                 return;
             }
             this.BeginRandomRotationComponentCreated(data, GroupRandomRotation);
@@ -139,12 +157,15 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void ProjectileCreatedComponentCreatedFilter(Projectile data) {
             var GroupProjectile = ProjectileManager[data.EntityId];
             if (GroupProjectile == null) {
+                return;
+            }
+            if (!GroupProjectile.Enabled) {
                 return;
             }
             this.ProjectileCreatedComponentCreated(data, GroupProjectile);
@@ -155,12 +176,15 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void SetRandomPositionComponentCreatedFilter(SpawnWithRandomX data) {
             var GroupSpawnWithRandomX = SpawnWithRandomXManager[data.EntityId];
             if (GroupSpawnWithRandomX == null) {
+                return;
+            }
+            if (!GroupSpawnWithRandomX.Enabled) {
                 return;
             }
             this.SetRandomPositionComponentCreated(data, GroupSpawnWithRandomX);
@@ -171,12 +195,15 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Source = source;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void HazardSystemOnCollisionEnterDispatcherFilter(uFrame.ECS.OnCollisionEnterDispatcher data) {
             var SourceDestroyOnCollision = DestroyOnCollisionManager[data.EntityId];
             if (SourceDestroyOnCollision == null) {
+                return;
+            }
+            if (!SourceDestroyOnCollision.Enabled) {
                 return;
             }
             this.HazardSystemOnCollisionEnterDispatcherHandler(data, SourceDestroyOnCollision);

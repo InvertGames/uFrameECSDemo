@@ -14,18 +14,12 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using uFrame.ECS;
     using UniRx;
+    using uFrame.ECS;
     
     
     [uFrame.Attributes.uFrameIdentifier("ddaee2ad-fc4e-438f-bdae-f8a9929e693a")]
     public partial class SpawnWithRandomX : uFrame.ECS.EcsComponent {
-        
-        private Subject<Single> _ZObservable;
-        
-        private Subject<Single> _YObservable;
-        
-        private Subject<Vector2> _XRangeObservable;
         
         [UnityEngine.SerializeField()]
         private Single _Z;
@@ -36,36 +30,39 @@ namespace uFrameECSDemo {
         [UnityEngine.SerializeField()]
         private Vector2 _XRange;
         
+        private Subject<PropertyChangedEvent<Single>> _ZObservable;
+        
+        private PropertyChangedEvent<Single> _ZEvent;
+        
+        private Subject<PropertyChangedEvent<Single>> _YObservable;
+        
+        private PropertyChangedEvent<Single> _YEvent;
+        
+        private Subject<PropertyChangedEvent<Vector2>> _XRangeObservable;
+        
+        private PropertyChangedEvent<Vector2> _XRangeEvent;
+        
         public int ComponentID {
             get {
-                return 19;
+                return 18;
             }
         }
         
-        public IObservable<Single> ZObservable {
+        public IObservable<PropertyChangedEvent<Single>> ZObservable {
             get {
-                if (_ZObservable == null) {
-                    _ZObservable = new Subject<Single>();
-                }
-                return _ZObservable;
+                return _ZObservable ?? (_ZObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
-        public IObservable<Single> YObservable {
+        public IObservable<PropertyChangedEvent<Single>> YObservable {
             get {
-                if (_YObservable == null) {
-                    _YObservable = new Subject<Single>();
-                }
-                return _YObservable;
+                return _YObservable ?? (_YObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
-        public IObservable<Vector2> XRangeObservable {
+        public IObservable<PropertyChangedEvent<Vector2>> XRangeObservable {
             get {
-                if (_XRangeObservable == null) {
-                    _XRangeObservable = new Subject<Vector2>();
-                }
-                return _XRangeObservable;
+                return _XRangeObservable ?? (_XRangeObservable = new Subject<PropertyChangedEvent<Vector2>>());
             }
         }
         
@@ -74,10 +71,7 @@ namespace uFrameECSDemo {
                 return _Z;
             }
             set {
-                _Z = value;
-                if (_ZObservable != null) {
-                    _ZObservable.OnNext(value);
-                }
+                SetZ(value);
             }
         }
         
@@ -86,10 +80,7 @@ namespace uFrameECSDemo {
                 return _Y;
             }
             set {
-                _Y = value;
-                if (_YObservable != null) {
-                    _YObservable.OnNext(value);
-                }
+                SetY(value);
             }
         }
         
@@ -98,11 +89,20 @@ namespace uFrameECSDemo {
                 return _XRange;
             }
             set {
-                _XRange = value;
-                if (_XRangeObservable != null) {
-                    _XRangeObservable.OnNext(value);
-                }
+                SetXRange(value);
             }
+        }
+        
+        public virtual void SetZ(Single value) {
+            SetProperty(ref _Z, value, ref _ZEvent, _ZObservable);
+        }
+        
+        public virtual void SetY(Single value) {
+            SetProperty(ref _Y, value, ref _YEvent, _YObservable);
+        }
+        
+        public virtual void SetXRange(Vector2 value) {
+            SetProperty(ref _XRange, value, ref _XRangeEvent, _XRangeObservable);
         }
     }
 }

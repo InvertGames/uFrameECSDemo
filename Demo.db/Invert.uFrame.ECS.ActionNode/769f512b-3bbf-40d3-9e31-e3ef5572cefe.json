@@ -1,6 +1,9 @@
 {
 	"MetaType":"uFrame.Actions.Comparisons.IsTrue"	, 
+	"SecondTitle":"Are we Quitting?"	, 
 	"VariableName":"ActionNode5"	, 
+	"Order":0	, 
+	"Comments":""	, 
 	"GraphId":"877568c9-79d4-42d2-a46d-24c513652d5f"	, 
 	"Identifier":"769f512b-3bbf-40d3-9e31-e3ef5572cefe"	, 
 	"Expanded":false}

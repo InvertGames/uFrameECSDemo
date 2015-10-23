@@ -14,10 +14,10 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrameECSDemo;
-    using UnityEngine;
     using uFrame.ECS;
     using uFrame.Kernel;
+    using uFrameECSDemo;
+    using UnityEngine;
     
     
     [uFrame.Attributes.uFrameIdentifier("55bd0141-748d-490e-9c53-d5c9ec95b58d")]
@@ -33,9 +33,13 @@ namespace uFrameECSDemo {
         
         private IEcsComponentManagerOf<DestroyOnCollision> _DestroyOnCollisionManager;
         
+        private IEcsComponentManagerOf<Hazard> _HazardManager;
+        
         private EnemyAISystemFixedUpdateHandler EnemyAISystemFixedUpdateHandlerInstance = new EnemyAISystemFixedUpdateHandler();
         
         private EnemyAICreatedComponentCreated EnemyAICreatedComponentCreatedInstance = new EnemyAICreatedComponentCreated();
+        
+        private EnemyAISystemOnCollisionEnterHandler EnemyAISystemOnCollisionEnterHandlerInstance = new EnemyAISystemOnCollisionEnterHandler();
         
         public IEcsComponentManagerOf<EnemyAI> EnemyAIManager {
             get {
@@ -82,6 +86,15 @@ namespace uFrameECSDemo {
             }
         }
         
+        public IEcsComponentManagerOf<Hazard> HazardManager {
+            get {
+                return _HazardManager;
+            }
+            set {
+                _HazardManager = value;
+            }
+        }
+        
         public override void Setup() {
             base.Setup();
             EnemyAIManager = ComponentSystem.RegisterComponent<EnemyAI>();
@@ -89,7 +102,9 @@ namespace uFrameECSDemo {
             ProjectileManager = ComponentSystem.RegisterComponent<Projectile>();
             SpawnWithRandomXManager = ComponentSystem.RegisterComponent<SpawnWithRandomX>();
             DestroyOnCollisionManager = ComponentSystem.RegisterComponent<DestroyOnCollision>();
+            HazardManager = ComponentSystem.RegisterComponent<Hazard>();
             EnemyAIManager.CreatedObservable.Subscribe(EnemyAICreatedComponentCreatedFilter).DisposeWith(this);
+            this.OnEvent<uFrame.ECS.OnCollisionEnterDispatcher>().Subscribe(_=>{ EnemyAISystemOnCollisionEnterFilter(_); }).DisposeWith(this);
         }
         
         protected void EnemyAISystemFixedUpdateHandler(EnemyAI group) {
@@ -104,6 +119,9 @@ namespace uFrameECSDemo {
             for (var EnemyAIIndex = 0
             ; EnemyAIIndex < EnemyAIItems.Count; EnemyAIIndex++
             ) {
+                if (!EnemyAIItems[EnemyAIIndex].Enabled) {
+                    continue;
+                }
                 this.EnemyAISystemFixedUpdateHandler(EnemyAIItems[EnemyAIIndex]);
             }
         }
@@ -125,7 +143,21 @@ namespace uFrameECSDemo {
             if (GroupEnemyAI == null) {
                 return;
             }
+            if (!GroupEnemyAI.Enabled) {
+                return;
+            }
             this.EnemyAICreatedComponentCreated(data, GroupEnemyAI);
+        }
+        
+        protected void EnemyAISystemOnCollisionEnterHandler(uFrame.ECS.OnCollisionEnterDispatcher data) {
+            var handler = EnemyAISystemOnCollisionEnterHandlerInstance;
+            handler.System = this;
+            handler.Event = data;
+            handler.Execute();
+        }
+        
+        protected void EnemyAISystemOnCollisionEnterFilter(uFrame.ECS.OnCollisionEnterDispatcher data) {
+            this.EnemyAISystemOnCollisionEnterHandler(data);
         }
     }
 }

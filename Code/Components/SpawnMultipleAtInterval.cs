@@ -14,16 +14,12 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using uFrame.ECS;
     using UniRx;
+    using uFrame.ECS;
     
     
     [uFrame.Attributes.uFrameIdentifier("8f20ac10-5695-40e2-8ea5-8c3ec4716133")]
     public partial class SpawnMultipleAtInterval : uFrame.ECS.EcsComponent {
-        
-        private Subject<Transform> _ParentObservable;
-        
-        private Subject<Single> _SpawnSpeedObservable;
         
         [UnityEngine.SerializeField()]
         private Transform _Parent;
@@ -36,27 +32,29 @@ namespace uFrameECSDemo {
         
         private ReactiveCollection<GameObject> _ItemsReactive;
         
+        private Subject<PropertyChangedEvent<Transform>> _ParentObservable;
+        
+        private PropertyChangedEvent<Transform> _ParentEvent;
+        
+        private Subject<PropertyChangedEvent<Single>> _SpawnSpeedObservable;
+        
+        private PropertyChangedEvent<Single> _SpawnSpeedEvent;
+        
         public int ComponentID {
             get {
-                return 4;
+                return 10;
             }
         }
         
-        public IObservable<Transform> ParentObservable {
+        public IObservable<PropertyChangedEvent<Transform>> ParentObservable {
             get {
-                if (_ParentObservable == null) {
-                    _ParentObservable = new Subject<Transform>();
-                }
-                return _ParentObservable;
+                return _ParentObservable ?? (_ParentObservable = new Subject<PropertyChangedEvent<Transform>>());
             }
         }
         
-        public IObservable<Single> SpawnSpeedObservable {
+        public IObservable<PropertyChangedEvent<Single>> SpawnSpeedObservable {
             get {
-                if (_SpawnSpeedObservable == null) {
-                    _SpawnSpeedObservable = new Subject<Single>();
-                }
-                return _SpawnSpeedObservable;
+                return _SpawnSpeedObservable ?? (_SpawnSpeedObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
@@ -65,10 +63,7 @@ namespace uFrameECSDemo {
                 return _Parent;
             }
             set {
-                _Parent = value;
-                if (_ParentObservable != null) {
-                    _ParentObservable.OnNext(value);
-                }
+                SetParent(value);
             }
         }
         
@@ -77,10 +72,7 @@ namespace uFrameECSDemo {
                 return _SpawnSpeed;
             }
             set {
-                _SpawnSpeed = value;
-                if (_SpawnSpeedObservable != null) {
-                    _SpawnSpeedObservable.OnNext(value);
-                }
+                SetSpawnSpeed(value);
             }
         }
         
@@ -91,6 +83,14 @@ namespace uFrameECSDemo {
                 }
                 return _ItemsReactive;
             }
+        }
+        
+        public virtual void SetParent(Transform value) {
+            SetProperty(ref _Parent, value, ref _ParentEvent, _ParentObservable);
+        }
+        
+        public virtual void SetSpawnSpeed(Single value) {
+            SetProperty(ref _SpawnSpeed, value, ref _SpawnSpeedEvent, _SpawnSpeedObservable);
         }
     }
 }

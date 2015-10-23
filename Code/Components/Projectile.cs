@@ -14,16 +14,12 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using uFrame.ECS;
     using UniRx;
+    using uFrame.ECS;
     
     
     [uFrame.Attributes.uFrameIdentifier("94f65036-c558-4329-9688-353472d6bba9")]
     public partial class Projectile : uFrame.ECS.EcsComponent {
-        
-        private Subject<Vector3> _DirectionObservable;
-        
-        private Subject<Single> _SpeedObservable;
         
         [UnityEngine.SerializeField()]
         private Vector3 _Direction;
@@ -31,27 +27,29 @@ namespace uFrameECSDemo {
         [UnityEngine.SerializeField()]
         private Single _Speed;
         
+        private Subject<PropertyChangedEvent<Vector3>> _DirectionObservable;
+        
+        private PropertyChangedEvent<Vector3> _DirectionEvent;
+        
+        private Subject<PropertyChangedEvent<Single>> _SpeedObservable;
+        
+        private PropertyChangedEvent<Single> _SpeedEvent;
+        
         public int ComponentID {
             get {
-                return 17;
+                return 11;
             }
         }
         
-        public IObservable<Vector3> DirectionObservable {
+        public IObservable<PropertyChangedEvent<Vector3>> DirectionObservable {
             get {
-                if (_DirectionObservable == null) {
-                    _DirectionObservable = new Subject<Vector3>();
-                }
-                return _DirectionObservable;
+                return _DirectionObservable ?? (_DirectionObservable = new Subject<PropertyChangedEvent<Vector3>>());
             }
         }
         
-        public IObservable<Single> SpeedObservable {
+        public IObservable<PropertyChangedEvent<Single>> SpeedObservable {
             get {
-                if (_SpeedObservable == null) {
-                    _SpeedObservable = new Subject<Single>();
-                }
-                return _SpeedObservable;
+                return _SpeedObservable ?? (_SpeedObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
@@ -60,10 +58,7 @@ namespace uFrameECSDemo {
                 return _Direction;
             }
             set {
-                _Direction = value;
-                if (_DirectionObservable != null) {
-                    _DirectionObservable.OnNext(value);
-                }
+                SetDirection(value);
             }
         }
         
@@ -72,11 +67,16 @@ namespace uFrameECSDemo {
                 return _Speed;
             }
             set {
-                _Speed = value;
-                if (_SpeedObservable != null) {
-                    _SpeedObservable.OnNext(value);
-                }
+                SetSpeed(value);
             }
+        }
+        
+        public virtual void SetDirection(Vector3 value) {
+            SetProperty(ref _Direction, value, ref _DirectionEvent, _DirectionObservable);
+        }
+        
+        public virtual void SetSpeed(Single value) {
+            SetProperty(ref _Speed, value, ref _SpeedEvent, _SpeedObservable);
         }
     }
 }

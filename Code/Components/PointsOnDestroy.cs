@@ -13,31 +13,30 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UniRx;
+    using uFrame.ECS;
     using UnityEngine;
     
     
     [uFrame.Attributes.uFrameIdentifier("2a307e59-d342-4b51-98dc-3fe3c252eabc")]
     public partial class PointsOnDestroy : uFrame.ECS.EcsComponent {
         
-        private Subject<Int32> _PointsObservable;
-        
         [UnityEngine.SerializeField()]
         private Int32 _Points;
         
+        private Subject<PropertyChangedEvent<Int32>> _PointsObservable;
+        
+        private PropertyChangedEvent<Int32> _PointsEvent;
+        
         public int ComponentID {
             get {
-                return 2;
+                return 5;
             }
         }
         
-        public IObservable<Int32> PointsObservable {
+        public IObservable<PropertyChangedEvent<Int32>> PointsObservable {
             get {
-                if (_PointsObservable == null) {
-                    _PointsObservable = new Subject<Int32>();
-                }
-                return _PointsObservable;
+                return _PointsObservable ?? (_PointsObservable = new Subject<PropertyChangedEvent<Int32>>());
             }
         }
         
@@ -46,11 +45,12 @@ namespace uFrameECSDemo {
                 return _Points;
             }
             set {
-                _Points = value;
-                if (_PointsObservable != null) {
-                    _PointsObservable.OnNext(value);
-                }
+                SetPoints(value);
             }
+        }
+        
+        public virtual void SetPoints(Int32 value) {
+            SetProperty(ref _Points, value, ref _PointsEvent, _PointsObservable);
         }
     }
 }

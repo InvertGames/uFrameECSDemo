@@ -45,11 +45,13 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual void Execute() {
+        public virtual System.Collections.IEnumerator Execute() {
             // PublishEventNode
+            while (this.DebugInfo("115892cd-156e-4117-8ccc-264b5a8ed3d4","3f32177f-f20b-4ec8-834a-be40e1c82207", this) == 1) yield return null;
             var PublishEventNode19_Event = new GameOver();
             System.Publish(PublishEventNode19_Event);
             PublishEventNode19_Event = PublishEventNode19_Result;
+            yield break;
         }
     }
 }

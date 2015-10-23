@@ -13,21 +13,13 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UniRx;
+    using uFrame.ECS;
     using UnityEngine;
     
     
     [uFrame.Attributes.uFrameIdentifier("5be3719a-5806-47ba-83d8-4e43f44ec0c5")]
     public partial class Movable : uFrame.ECS.EcsComponent {
-        
-        private Subject<Single> _VerticalObservable;
-        
-        private Subject<Single> _HorizontalObservable;
-        
-        private Subject<Single> _TiltObservable;
-        
-        private Subject<Single> _SpeedObservable;
         
         [UnityEngine.SerializeField()]
         private Single _Vertical;
@@ -41,45 +33,49 @@ namespace uFrameECSDemo {
         [UnityEngine.SerializeField()]
         private Single _Speed;
         
+        private Subject<PropertyChangedEvent<Single>> _VerticalObservable;
+        
+        private PropertyChangedEvent<Single> _VerticalEvent;
+        
+        private Subject<PropertyChangedEvent<Single>> _HorizontalObservable;
+        
+        private PropertyChangedEvent<Single> _HorizontalEvent;
+        
+        private Subject<PropertyChangedEvent<Single>> _TiltObservable;
+        
+        private PropertyChangedEvent<Single> _TiltEvent;
+        
+        private Subject<PropertyChangedEvent<Single>> _SpeedObservable;
+        
+        private PropertyChangedEvent<Single> _SpeedEvent;
+        
         public int ComponentID {
             get {
-                return 20;
+                return 8;
             }
         }
         
-        public IObservable<Single> VerticalObservable {
+        public IObservable<PropertyChangedEvent<Single>> VerticalObservable {
             get {
-                if (_VerticalObservable == null) {
-                    _VerticalObservable = new Subject<Single>();
-                }
-                return _VerticalObservable;
+                return _VerticalObservable ?? (_VerticalObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
-        public IObservable<Single> HorizontalObservable {
+        public IObservable<PropertyChangedEvent<Single>> HorizontalObservable {
             get {
-                if (_HorizontalObservable == null) {
-                    _HorizontalObservable = new Subject<Single>();
-                }
-                return _HorizontalObservable;
+                return _HorizontalObservable ?? (_HorizontalObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
-        public IObservable<Single> TiltObservable {
+        public IObservable<PropertyChangedEvent<Single>> TiltObservable {
             get {
-                if (_TiltObservable == null) {
-                    _TiltObservable = new Subject<Single>();
-                }
-                return _TiltObservable;
+                return _TiltObservable ?? (_TiltObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
-        public IObservable<Single> SpeedObservable {
+        public IObservable<PropertyChangedEvent<Single>> SpeedObservable {
             get {
-                if (_SpeedObservable == null) {
-                    _SpeedObservable = new Subject<Single>();
-                }
-                return _SpeedObservable;
+                return _SpeedObservable ?? (_SpeedObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
@@ -88,10 +84,7 @@ namespace uFrameECSDemo {
                 return _Vertical;
             }
             set {
-                _Vertical = value;
-                if (_VerticalObservable != null) {
-                    _VerticalObservable.OnNext(value);
-                }
+                SetVertical(value);
             }
         }
         
@@ -100,10 +93,7 @@ namespace uFrameECSDemo {
                 return _Horizontal;
             }
             set {
-                _Horizontal = value;
-                if (_HorizontalObservable != null) {
-                    _HorizontalObservable.OnNext(value);
-                }
+                SetHorizontal(value);
             }
         }
         
@@ -112,10 +102,7 @@ namespace uFrameECSDemo {
                 return _Tilt;
             }
             set {
-                _Tilt = value;
-                if (_TiltObservable != null) {
-                    _TiltObservable.OnNext(value);
-                }
+                SetTilt(value);
             }
         }
         
@@ -124,11 +111,24 @@ namespace uFrameECSDemo {
                 return _Speed;
             }
             set {
-                _Speed = value;
-                if (_SpeedObservable != null) {
-                    _SpeedObservable.OnNext(value);
-                }
+                SetSpeed(value);
             }
+        }
+        
+        public virtual void SetVertical(Single value) {
+            SetProperty(ref _Vertical, value, ref _VerticalEvent, _VerticalObservable);
+        }
+        
+        public virtual void SetHorizontal(Single value) {
+            SetProperty(ref _Horizontal, value, ref _HorizontalEvent, _HorizontalObservable);
+        }
+        
+        public virtual void SetTilt(Single value) {
+            SetProperty(ref _Tilt, value, ref _TiltEvent, _TiltObservable);
+        }
+        
+        public virtual void SetSpeed(Single value) {
+            SetProperty(ref _Speed, value, ref _SpeedEvent, _SpeedObservable);
         }
     }
 }

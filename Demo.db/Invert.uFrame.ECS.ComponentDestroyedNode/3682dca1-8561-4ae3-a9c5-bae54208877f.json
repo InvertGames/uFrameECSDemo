@@ -1,7 +1,10 @@
 {
+	"CodeHandler":false	, 
 	"VariableCount":0	, 
+	"StartActionId":"769f512b-3bbf-40d3-9e31-e3ef5572cefe"	, 
 	"VariableName":"ComponentDestroyedNode7"	, 
 	"Name":"InstantiateEffectOnDestroy"	, 
+	"Order":0	, 
 	"GraphId":"877568c9-79d4-42d2-a46d-24c513652d5f"	, 
 	"Identifier":"3682dca1-8561-4ae3-a9c5-bae54208877f"	, 
-	"Expanded":false}
+	"Expanded":true}

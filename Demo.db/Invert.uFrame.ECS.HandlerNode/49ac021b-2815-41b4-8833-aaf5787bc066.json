@@ -1,8 +1,11 @@
 {
+	"CodeHandler":false	, 
 	"MetaType":"uFrame.ECS.ISystemUpdate"	, 
 	"VariableCount":0	, 
+	"StartActionId":"337222c6-6b88-4526-b806-5e94ecbf9709"	, 
 	"VariableName":"HandlerNode6"	, 
 	"Name":"ScrollSystemUpdate"	, 
+	"Order":0	, 
 	"GraphId":"ff17e19d-e0e7-4e8f-a69b-0044a6a3c6c5"	, 
 	"Identifier":"49ac021b-2815-41b4-8833-aaf5787bc066"	, 
-	"Expanded":false}
+	"Expanded":true}

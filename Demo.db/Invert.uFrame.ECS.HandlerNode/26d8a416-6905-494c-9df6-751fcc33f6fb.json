@@ -2,9 +2,10 @@
 	"CodeHandler":false	, 
 	"MetaType":"uFrame.ECS.OnTriggerEnterDispatcher"	, 
 	"VariableCount":0	, 
+	"StartActionId":"89a77718-1334-464d-85ee-efbc32047645"	, 
 	"VariableName":"HandlerNode10"	, 
 	"Name":"HandleDestroyOnCollision"	, 
 	"Order":0	, 
 	"GraphId":"b5a7704e-8245-4c65-b94f-9272b3f59f6c"	, 
 	"Identifier":"26d8a416-6905-494c-9df6-751fcc33f6fb"	, 
-	"Expanded":false}
+	"Expanded":true}

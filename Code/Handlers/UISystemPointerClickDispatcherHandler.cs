@@ -53,21 +53,25 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual void Execute() {
+        public virtual System.Collections.IEnumerator Execute() {
             // LoopCollectionNode
+            while (this.DebugInfo("d86d476a-60a8-46bf-b1e1-90583786c467","d2e5988d-36b5-4350-82ad-93d52f3e3817", this) == 1) yield return null;
             for (var LoopCollectionNode25_ItemIndex = 0
             ; LoopCollectionNode25_ItemIndex < Source.InstantiateItems.Count; LoopCollectionNode25_ItemIndex++
             ) {
                 LoopCollectionNode25_Item = Source.InstantiateItems[LoopCollectionNode25_ItemIndex];
-                LoopCollectionNode25_Next();
+                System.StartCoroutine(LoopCollectionNode25_Next());
             }
+            yield break;
         }
         
-        private void LoopCollectionNode25_Next() {
+        private System.Collections.IEnumerator LoopCollectionNode25_Next() {
             ActionNode26_gameObject = LoopCollectionNode25_Item;
             // ActionNode
+            while (this.DebugInfo("d2e5988d-36b5-4350-82ad-93d52f3e3817","03db7d7e-7273-499f-b530-127999b3f37c", this) == 1) yield return null;
             // Visit uFrame.Actions.GameObjects.Instantiate
             ActionNode26_Result = uFrame.Actions.GameObjects.Instantiate(ActionNode26_gameObject, ActionNode26_position, ActionNode26_rotation);
+            yield break;
         }
     }
 }

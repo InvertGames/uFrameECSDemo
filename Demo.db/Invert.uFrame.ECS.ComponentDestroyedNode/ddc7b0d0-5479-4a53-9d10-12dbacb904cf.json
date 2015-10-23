@@ -1,7 +1,10 @@
 {
+	"CodeHandler":false	, 
 	"VariableCount":0	, 
+	"StartActionId":"43bc328b-e53e-4807-84ab-5665716468c7"	, 
 	"VariableName":"ComponentDestroyedNode31"	, 
 	"Name":"EnableUI"	, 
+	"Order":0	, 
 	"GraphId":"43b15702-714e-43ea-bfc1-4b73152ceef3"	, 
 	"Identifier":"ddc7b0d0-5479-4a53-9d10-12dbacb904cf"	, 
-	"Expanded":false}
+	"Expanded":true}

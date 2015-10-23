@@ -1,5 +1,6 @@
 {
 	"Name":"EnemyAI"	, 
+	"Order":0	, 
 	"GraphId":"b5a7704e-8245-4c65-b94f-9272b3f59f6c"	, 
 	"Identifier":"462fb967-cd5a-4f3e-b352-a0a155131f91"	, 
 	"Expanded":false}

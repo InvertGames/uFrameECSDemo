@@ -1,8 +1,11 @@
 {
+	"CodeHandler":false	, 
 	"MetaType":"b0f3dbf7-7436-402b-938b-d02eeed6a858"	, 
 	"VariableCount":0	, 
+	"StartActionId":"1599be78-af9c-4b2f-8109-6914c0ad665e"	, 
 	"VariableName":"HandlerNode19"	, 
 	"Name":"WavesGameSystemGameOver"	, 
+	"Order":0	, 
 	"GraphId":"43b15702-714e-43ea-bfc1-4b73152ceef3"	, 
 	"Identifier":"56a70469-436d-4c54-9253-10e150773aaf"	, 
-	"Expanded":false}
+	"Expanded":true}

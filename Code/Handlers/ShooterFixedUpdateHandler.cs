@@ -85,22 +85,28 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual void Execute() {
+        public virtual System.Collections.IEnumerator Execute() {
             // ActionGroupNode
+            while (this.DebugInfo("03db7d7e-7273-499f-b530-127999b3f37c","b5041687-1242-4f98-b1b9-71346fff5feb", this) == 1) yield return null;
             ActionNode9_axisName = StringNode2;
             // ActionNode
+            while (this.DebugInfo("b5041687-1242-4f98-b1b9-71346fff5feb","5ae4ff7c-86a8-4b73-827f-78f82ed0ef8d", this) == 1) yield return null;
             // Visit UnityEngine.Input.GetAxis
             ActionNode9_Result = UnityEngine.Input.GetAxis(ActionNode9_axisName);
             // SetVariableNode
+            while (this.DebugInfo("5ae4ff7c-86a8-4b73-827f-78f82ed0ef8d","a2aa66fe-2ee7-4cb7-b1eb-d5ec2f1f8189", this) == 1) yield return null;
             Group.Horizontal = (System.Single)ActionNode9_Result;
             ActionNode12_axisName = StringNode3;
             // ActionNode
+            while (this.DebugInfo("a2aa66fe-2ee7-4cb7-b1eb-d5ec2f1f8189","c8539af7-39e9-467c-a6af-df96292a678b", this) == 1) yield return null;
             // Visit UnityEngine.Input.GetAxis
             ActionNode12_Result = UnityEngine.Input.GetAxis(ActionNode12_axisName);
             // SetVariableNode
+            while (this.DebugInfo("c8539af7-39e9-467c-a6af-df96292a678b","37291e74-5c57-447f-a174-63eb7966f8fb", this) == 1) yield return null;
             Group.Vertical = (System.Single)ActionNode12_Result;
             ActionNode10_go = Group.Entity.gameObject;
             // ActionNode
+            while (this.DebugInfo("37291e74-5c57-447f-a174-63eb7966f8fb","80244fdb-97b7-44b3-adb0-daea66fa82b0", this) == 1) yield return null;
             // Visit uFrame.Actions.UnityLibrary.GetRigidbody
             ActionNode10_Result = uFrame.Actions.UnityLibrary.GetRigidbody(ActionNode10_go, ActionNode10_component);
             ActionNode8_rigidBody = ActionNode10_Result;
@@ -108,18 +114,22 @@ namespace uFrameECSDemo {
             ActionNode8_z = Group.Vertical;
             ActionNode8_speed = Group.Speed;
             // ActionNode
+            while (this.DebugInfo("80244fdb-97b7-44b3-adb0-daea66fa82b0","25afa3ef-ca2d-41f3-b5ce-c4f84ccd23cc", this) == 1) yield return null;
             // Visit uFrame.Actions.RigidbodyLibrary.SetVelocityWithSpeed
             uFrame.Actions.RigidbodyLibrary.SetVelocityWithSpeed(ActionNode8_rigidBody, ActionNode8_x, ActionNode8_y, ActionNode8_z, ActionNode8_speed);
             ActionNode7_rigidBody = ActionNode10_Result;
             ActionNode11_a = ActionNode10_Result.velocity.x;
             ActionNode11_b = Group.Tilt;
             // ActionNode
+            while (this.DebugInfo("25afa3ef-ca2d-41f3-b5ce-c4f84ccd23cc","978ce53c-9116-4089-809a-617d10a0d551", this) == 1) yield return null;
             // Visit Assets.uFrameECS.Framework.Actions.MathLibrary.Multiply
             Assets.uFrameECS.Framework.Actions.MathLibrary.Multiply(ActionNode11_a, ActionNode11_b, out ActionNode11_result);
             ActionNode7_z = ActionNode11_result;
             // ActionNode
+            while (this.DebugInfo("978ce53c-9116-4089-809a-617d10a0d551","12fae0e0-3723-4d36-9b84-c418fd17e038", this) == 1) yield return null;
             // Visit uFrame.Actions.RigidbodyLibrary.SetRigidbodyRotation
             uFrame.Actions.RigidbodyLibrary.SetRigidbodyRotation(ActionNode7_rigidBody, ActionNode7_x, ActionNode7_y, ActionNode7_z);
+            yield break;
         }
     }
 }

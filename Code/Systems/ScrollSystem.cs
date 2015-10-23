@@ -14,10 +14,10 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrameECSDemo;
-    using UnityEngine;
     using uFrame.ECS;
     using uFrame.Kernel;
+    using uFrameECSDemo;
+    using UnityEngine;
     
     
     [uFrame.Attributes.uFrameIdentifier("c39f72a9-03fa-4cc0-990c-f82be2aa6954")]
@@ -48,7 +48,7 @@ namespace uFrameECSDemo {
             var handler = ScrollSystemUpdateHandlerInstance;
             handler.System = this;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void ScrollSystemUpdateFilter() {
@@ -56,6 +56,9 @@ namespace uFrameECSDemo {
             for (var BackgroundScrollerIndex = 0
             ; BackgroundScrollerIndex < BackgroundScrollerItems.Count; BackgroundScrollerIndex++
             ) {
+                if (!BackgroundScrollerItems[BackgroundScrollerIndex].Enabled) {
+                    continue;
+                }
                 this.ScrollSystemUpdateHandler(BackgroundScrollerItems[BackgroundScrollerIndex]);
             }
         }
@@ -69,12 +72,15 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void GrabStartPositionComponentCreatedFilter(BackgroundScroller data) {
             var GroupBackgroundScroller = BackgroundScrollerManager[data.EntityId];
             if (GroupBackgroundScroller == null) {
+                return;
+            }
+            if (!GroupBackgroundScroller.Enabled) {
                 return;
             }
             this.GrabStartPositionComponentCreated(data, GroupBackgroundScroller);

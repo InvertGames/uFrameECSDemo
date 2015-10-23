@@ -13,31 +13,30 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using UniRx;
+    using uFrame.ECS;
     using UnityEngine;
     
     
     [uFrame.Attributes.uFrameIdentifier("bab9f7b3-b229-4610-a916-dcd5eaf7eeb0")]
     public partial class RandomRotation : uFrame.ECS.EcsComponent {
         
-        private Subject<Single> _TumbleObservable;
-        
         [UnityEngine.SerializeField()]
         private Single _Tumble;
         
+        private Subject<PropertyChangedEvent<Single>> _TumbleObservable;
+        
+        private PropertyChangedEvent<Single> _TumbleEvent;
+        
         public int ComponentID {
             get {
-                return 18;
+                return 14;
             }
         }
         
-        public IObservable<Single> TumbleObservable {
+        public IObservable<PropertyChangedEvent<Single>> TumbleObservable {
             get {
-                if (_TumbleObservable == null) {
-                    _TumbleObservable = new Subject<Single>();
-                }
-                return _TumbleObservable;
+                return _TumbleObservable ?? (_TumbleObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
@@ -46,11 +45,12 @@ namespace uFrameECSDemo {
                 return _Tumble;
             }
             set {
-                _Tumble = value;
-                if (_TumbleObservable != null) {
-                    _TumbleObservable.OnNext(value);
-                }
+                SetTumble(value);
             }
+        }
+        
+        public virtual void SetTumble(Single value) {
+            SetProperty(ref _Tumble, value, ref _TumbleEvent, _TumbleObservable);
         }
     }
 }

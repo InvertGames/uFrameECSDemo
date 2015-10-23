@@ -14,9 +14,9 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UniRx;
-    using uFrameECSDemo;
     using uFrame.ECS;
     using uFrame.Kernel;
+    using uFrameECSDemo;
     
     
     [uFrame.Attributes.uFrameIdentifier("539cad18-5a60-40ba-b2c3-51f2d670f0e5")]
@@ -68,7 +68,7 @@ namespace uFrameECSDemo {
             var handler = ShooterFixedUpdateHandlerInstance;
             handler.System = this;
             handler.Group = group;
-            handler.Execute();
+            StartCoroutine(handler.Execute());
         }
         
         protected void ShooterFixedUpdateFilter() {
@@ -76,6 +76,9 @@ namespace uFrameECSDemo {
             for (var MovableIndex = 0
             ; MovableIndex < MovableItems.Count; MovableIndex++
             ) {
+                if (!MovableItems[MovableIndex].Enabled) {
+                    continue;
+                }
                 this.ShooterFixedUpdateHandler(MovableItems[MovableIndex]);
             }
         }

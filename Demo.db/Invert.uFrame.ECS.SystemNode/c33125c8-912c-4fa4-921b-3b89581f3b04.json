@@ -1,6 +1,7 @@
 {
 	"VariableCount":0	, 
 	"Name":"PlayerSystem"	, 
+	"Order":0	, 
 	"GraphId":"ba9f9a37-144e-4c2c-9cc1-e8d56963012f"	, 
 	"Identifier":"c33125c8-912c-4fa4-921b-3b89581f3b04"	, 
-	"Expanded":false}
+	"Expanded":true}

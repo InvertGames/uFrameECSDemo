@@ -14,22 +14,12 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using uFrame.ECS;
     using UniRx;
+    using uFrame.ECS;
     
     
     [uFrame.Attributes.uFrameIdentifier("aff8180a-e6ff-465a-8980-7cb6e596e8d3")]
     public partial class WavesGame : uFrame.ECS.EcsComponent {
-        
-        private Subject<Vector3> _SpawnValuesObservable;
-        
-        private Subject<String> _EnemyPoolNameObservable;
-        
-        private Subject<Int32> _ScoreObservable;
-        
-        private Subject<Single> _SpawnWaitObservable;
-        
-        private Subject<Int32> _HazardCountObservable;
         
         [UnityEngine.SerializeField()]
         private Vector3 _SpawnValues;
@@ -46,54 +36,59 @@ namespace uFrameECSDemo {
         [UnityEngine.SerializeField()]
         private Int32 _HazardCount;
         
+        private Subject<PropertyChangedEvent<Vector3>> _SpawnValuesObservable;
+        
+        private PropertyChangedEvent<Vector3> _SpawnValuesEvent;
+        
+        private Subject<PropertyChangedEvent<String>> _EnemyPoolNameObservable;
+        
+        private PropertyChangedEvent<String> _EnemyPoolNameEvent;
+        
+        private Subject<PropertyChangedEvent<Int32>> _ScoreObservable;
+        
+        private PropertyChangedEvent<Int32> _ScoreEvent;
+        
+        private Subject<PropertyChangedEvent<Single>> _SpawnWaitObservable;
+        
+        private PropertyChangedEvent<Single> _SpawnWaitEvent;
+        
+        private Subject<PropertyChangedEvent<Int32>> _HazardCountObservable;
+        
+        private PropertyChangedEvent<Int32> _HazardCountEvent;
+        
         public int ComponentID {
             get {
-                return 5;
+                return 12;
             }
         }
         
-        public IObservable<Vector3> SpawnValuesObservable {
+        public IObservable<PropertyChangedEvent<Vector3>> SpawnValuesObservable {
             get {
-                if (_SpawnValuesObservable == null) {
-                    _SpawnValuesObservable = new Subject<Vector3>();
-                }
-                return _SpawnValuesObservable;
+                return _SpawnValuesObservable ?? (_SpawnValuesObservable = new Subject<PropertyChangedEvent<Vector3>>());
             }
         }
         
-        public IObservable<String> EnemyPoolNameObservable {
+        public IObservable<PropertyChangedEvent<String>> EnemyPoolNameObservable {
             get {
-                if (_EnemyPoolNameObservable == null) {
-                    _EnemyPoolNameObservable = new Subject<String>();
-                }
-                return _EnemyPoolNameObservable;
+                return _EnemyPoolNameObservable ?? (_EnemyPoolNameObservable = new Subject<PropertyChangedEvent<String>>());
             }
         }
         
-        public IObservable<Int32> ScoreObservable {
+        public IObservable<PropertyChangedEvent<Int32>> ScoreObservable {
             get {
-                if (_ScoreObservable == null) {
-                    _ScoreObservable = new Subject<Int32>();
-                }
-                return _ScoreObservable;
+                return _ScoreObservable ?? (_ScoreObservable = new Subject<PropertyChangedEvent<Int32>>());
             }
         }
         
-        public IObservable<Single> SpawnWaitObservable {
+        public IObservable<PropertyChangedEvent<Single>> SpawnWaitObservable {
             get {
-                if (_SpawnWaitObservable == null) {
-                    _SpawnWaitObservable = new Subject<Single>();
-                }
-                return _SpawnWaitObservable;
+                return _SpawnWaitObservable ?? (_SpawnWaitObservable = new Subject<PropertyChangedEvent<Single>>());
             }
         }
         
-        public IObservable<Int32> HazardCountObservable {
+        public IObservable<PropertyChangedEvent<Int32>> HazardCountObservable {
             get {
-                if (_HazardCountObservable == null) {
-                    _HazardCountObservable = new Subject<Int32>();
-                }
-                return _HazardCountObservable;
+                return _HazardCountObservable ?? (_HazardCountObservable = new Subject<PropertyChangedEvent<Int32>>());
             }
         }
         
@@ -102,10 +97,7 @@ namespace uFrameECSDemo {
                 return _SpawnValues;
             }
             set {
-                _SpawnValues = value;
-                if (_SpawnValuesObservable != null) {
-                    _SpawnValuesObservable.OnNext(value);
-                }
+                SetSpawnValues(value);
             }
         }
         
@@ -114,10 +106,7 @@ namespace uFrameECSDemo {
                 return _EnemyPoolName;
             }
             set {
-                _EnemyPoolName = value;
-                if (_EnemyPoolNameObservable != null) {
-                    _EnemyPoolNameObservable.OnNext(value);
-                }
+                SetEnemyPoolName(value);
             }
         }
         
@@ -126,10 +115,7 @@ namespace uFrameECSDemo {
                 return _Score;
             }
             set {
-                _Score = value;
-                if (_ScoreObservable != null) {
-                    _ScoreObservable.OnNext(value);
-                }
+                SetScore(value);
             }
         }
         
@@ -138,10 +124,7 @@ namespace uFrameECSDemo {
                 return _SpawnWait;
             }
             set {
-                _SpawnWait = value;
-                if (_SpawnWaitObservable != null) {
-                    _SpawnWaitObservable.OnNext(value);
-                }
+                SetSpawnWait(value);
             }
         }
         
@@ -150,11 +133,28 @@ namespace uFrameECSDemo {
                 return _HazardCount;
             }
             set {
-                _HazardCount = value;
-                if (_HazardCountObservable != null) {
-                    _HazardCountObservable.OnNext(value);
-                }
+                SetHazardCount(value);
             }
+        }
+        
+        public virtual void SetSpawnValues(Vector3 value) {
+            SetProperty(ref _SpawnValues, value, ref _SpawnValuesEvent, _SpawnValuesObservable);
+        }
+        
+        public virtual void SetEnemyPoolName(String value) {
+            SetProperty(ref _EnemyPoolName, value, ref _EnemyPoolNameEvent, _EnemyPoolNameObservable);
+        }
+        
+        public virtual void SetScore(Int32 value) {
+            SetProperty(ref _Score, value, ref _ScoreEvent, _ScoreObservable);
+        }
+        
+        public virtual void SetSpawnWait(Single value) {
+            SetProperty(ref _SpawnWait, value, ref _SpawnWaitEvent, _SpawnWaitObservable);
+        }
+        
+        public virtual void SetHazardCount(Int32 value) {
+            SetProperty(ref _HazardCount, value, ref _HazardCountEvent, _HazardCountObservable);
         }
     }
 }

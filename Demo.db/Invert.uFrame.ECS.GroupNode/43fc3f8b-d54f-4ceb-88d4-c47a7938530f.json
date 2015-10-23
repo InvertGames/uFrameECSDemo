@@ -1,6 +1,7 @@
 {
 	"VariableCount":2	, 
 	"Name":"ShootingGuns"	, 
+	"Order":0	, 
 	"GraphId":"8b8d2791-4622-4ab0-bc4c-00f23b6da2d5"	, 
 	"Identifier":"43fc3f8b-d54f-4ceb-88d4-c47a7938530f"	, 
 	"Expanded":false}

@@ -1,8 +1,11 @@
 {
+	"CodeHandler":false	, 
 	"MetaType":"uFrame.ECS.ISystemUpdate"	, 
 	"VariableCount":5	, 
+	"StartActionId":"34e53f1a-79a2-4a0a-a8e3-d70477e3f946"	, 
 	"VariableName":"HandlerNode8"	, 
 	"Name":"GunnerInputUpdate"	, 
+	"Order":0	, 
 	"GraphId":"8b8d2791-4622-4ab0-bc4c-00f23b6da2d5"	, 
 	"Identifier":"517058e5-7829-49d0-b78d-9f1ae8bddd6d"	, 
-	"Expanded":false}
+	"Expanded":true}
