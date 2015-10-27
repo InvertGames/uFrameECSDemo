@@ -53,27 +53,22 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             ActionNode5_value = Group.IsQuiting;
             // ActionNode
-            while (this.DebugInfo("28b81b2d-3039-4b03-9424-6fb8bb4421d6","769f512b-3bbf-40d3-9e31-e3ef5572cefe", this) == 1) yield return null;
             // Visit uFrame.Actions.Comparisons.IsTrue
-            uFrame.Actions.Comparisons.IsTrue(ActionNode5_value, ()=> { System.StartCoroutine(ActionNode5_yes()); }, ()=> { System.StartCoroutine(ActionNode5_no()); });
-            yield break;
+            uFrame.Actions.Comparisons.IsTrue(ActionNode5_value, ActionNode5_yes, ActionNode5_no);
         }
         
-        private System.Collections.IEnumerator ActionNode5_yes() {
-            yield break;
+        private void ActionNode5_yes() {
         }
         
-        private System.Collections.IEnumerator ActionNode5_no() {
+        private void ActionNode5_no() {
             ActionNode6_gameObject = Group.Prefab;
             ActionNode6_position = Group.transform.position;
             // ActionNode
-            while (this.DebugInfo("769f512b-3bbf-40d3-9e31-e3ef5572cefe","115892cd-156e-4117-8ccc-264b5a8ed3d4", this) == 1) yield return null;
             // Visit uFrame.Actions.GameObjects.Instantiate
             ActionNode6_Result = uFrame.Actions.GameObjects.Instantiate(ActionNode6_gameObject, ActionNode6_position, ActionNode6_rotation);
-            yield break;
         }
     }
 }

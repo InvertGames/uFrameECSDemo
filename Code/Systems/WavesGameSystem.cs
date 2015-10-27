@@ -13,11 +13,11 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UniRx;
-    using uFrame.ECS;
-    using uFrame.Kernel;
     using uFrameECSDemo;
     using UnityEngine;
+    using uFrame.ECS;
+    using uFrame.Kernel;
+    using UniRx;
     
     
     [uFrame.Attributes.uFrameIdentifier("9784e33b-b2d5-4aeb-ac8b-9273187d7c8b")]
@@ -139,7 +139,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void BeginMultipleIntervalSpawnComponentCreatedFilter(SpawnMultipleAtInterval data) {
@@ -158,7 +158,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void WavesGameCreatedComponentCreatedFilter(WavesGame data) {
@@ -177,7 +177,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void PointsOnDestroyComponentDestroyedFilter(PointsOnDestroy data) {
@@ -196,7 +196,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void WavesGameSystemGameOverFilter(uFrameECSDemo.GameOver data) {
@@ -216,7 +216,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void BeginIntervalSpawnComponentCreatedFilter(SpawnAtInterval data) {

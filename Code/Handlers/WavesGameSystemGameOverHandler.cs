@@ -47,13 +47,11 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             ActionNode27_gameObject = Group.Entity.gameObject;
             // ActionNode
-            while (this.DebugInfo("130ab2bc-a8a4-4292-a1e9-67e427002a4a","1599be78-af9c-4b2f-8109-6914c0ad665e", this) == 1) yield return null;
             // Visit uFrame.Actions.DestroyLibrary.DestroyGameObject
             uFrame.Actions.DestroyLibrary.DestroyGameObject(ActionNode27_gameObject, ActionNode27_time);
-            yield break;
         }
     }
 }

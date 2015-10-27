@@ -13,10 +13,10 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UniRx;
+    using uFrameECSDemo;
     using uFrame.ECS;
     using uFrame.Kernel;
-    using uFrameECSDemo;
+    using UniRx;
     
     
     [uFrame.Attributes.uFrameIdentifier("c33125c8-912c-4fa4-921b-3b89581f3b04")]
@@ -76,7 +76,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void PlayerGunnerCreatedComponentCreatedFilter(PlayerGunner data) {
@@ -95,7 +95,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void PlayerGunnerComponentDestroyedFilter(PlayerGunner data) {
@@ -115,7 +115,7 @@ namespace uFrameECSDemo {
             handler.Event = data;
             handler.Collider = collider;
             handler.Source = source;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void PlayerSystemOnCollisionEnterFilter(uFrame.ECS.OnTriggerEnterDispatcher data) {

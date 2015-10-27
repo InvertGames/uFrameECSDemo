@@ -13,11 +13,11 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UniRx;
-    using uFrame.ECS;
-    using uFrame.Kernel;
     using uFrameECSDemo;
     using UnityEngine;
+    using uFrame.ECS;
+    using uFrame.Kernel;
+    using UniRx;
     
     
     [uFrame.Attributes.uFrameIdentifier("0c9342b9-daed-4b80-8db6-1e9fc00ea971")]
@@ -47,7 +47,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void EffectOnDestroyComponentDestroyedFilter(EffectOnDestroy data) {

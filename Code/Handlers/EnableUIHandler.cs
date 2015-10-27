@@ -49,26 +49,22 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             // LoopGroupNode
-            while (this.DebugInfo("3f32177f-f20b-4ec8-834a-be40e1c82207","43bc328b-e53e-4807-84ab-5665716468c7", this) == 1) yield return null;
             var LoopGroupNode35_GroupComponents = System.ComponentSystem.RegisterComponent<uFrameECSDemo.MenuUI>().Components;
             for (var LoopGroupNode35_ItemIndex = 0
             ; LoopGroupNode35_ItemIndex < LoopGroupNode35_GroupComponents.Count; LoopGroupNode35_ItemIndex++
             ) {
                 LoopGroupNode35_Item = LoopGroupNode35_GroupComponents[LoopGroupNode35_ItemIndex];
-                System.StartCoroutine(LoopGroupNode35_Next());
+                LoopGroupNode35_Next();
             }
-            yield break;
         }
         
-        private System.Collections.IEnumerator LoopGroupNode35_Next() {
+        private void LoopGroupNode35_Next() {
             ActionNode36_gameObject = LoopGroupNode35_Item.gameObject;
             // ActionNode
-            while (this.DebugInfo("43bc328b-e53e-4807-84ab-5665716468c7","d86d476a-60a8-46bf-b1e1-90583786c467", this) == 1) yield return null;
             // Visit uFrame.Actions.GameObjects.ActivateGameObject
             uFrame.Actions.GameObjects.ActivateGameObject(ActionNode36_gameObject, ActionNode36_behaviour);
-            yield break;
         }
     }
 }

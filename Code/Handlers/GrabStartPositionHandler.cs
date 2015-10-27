@@ -43,11 +43,9 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             // SetVariableNode
-            while (this.DebugInfo("d8e16c6c-ac06-4dbc-8454-364f53870ee7","b1e4431f-e657-45d8-8679-5b5dd0f12a26", this) == 1) yield return null;
             Group.StartPosition = (UnityEngine.Vector3)Group.Entity.transform.position;
-            yield break;
         }
     }
 }

@@ -13,10 +13,10 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UniRx;
+    using uFrameECSDemo;
     using uFrame.ECS;
     using uFrame.Kernel;
-    using uFrameECSDemo;
+    using UniRx;
     
     
     [uFrame.Attributes.uFrameIdentifier("539cad18-5a60-40ba-b2c3-51f2d670f0e5")]
@@ -68,7 +68,7 @@ namespace uFrameECSDemo {
             var handler = ShooterFixedUpdateHandlerInstance;
             handler.System = this;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void ShooterFixedUpdateFilter() {

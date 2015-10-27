@@ -13,11 +13,11 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UniRx;
-    using uFrame.ECS;
-    using uFrame.Kernel;
     using uFrameECSDemo;
     using UnityEngine;
+    using uFrame.ECS;
+    using uFrame.Kernel;
+    using UniRx;
     
     
     [uFrame.Attributes.uFrameIdentifier("3a1a8f1b-60bd-42a5-953c-9a3a75b184d5")]
@@ -119,7 +119,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Source = source;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void HandleDestroyOnCollisionFilter(uFrame.ECS.OnTriggerEnterDispatcher data) {
@@ -138,7 +138,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void BeginRandomRotationComponentCreatedFilter(RandomRotation data) {
@@ -157,7 +157,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void ProjectileCreatedComponentCreatedFilter(Projectile data) {
@@ -176,7 +176,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void SetRandomPositionComponentCreatedFilter(SpawnWithRandomX data) {
@@ -195,7 +195,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Source = source;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void HazardSystemOnCollisionEnterDispatcherFilter(uFrame.ECS.OnCollisionEnterDispatcher data) {

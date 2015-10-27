@@ -71,47 +71,38 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             // ActionNode
-            while (this.DebugInfo("130ab2bc-a8a4-4292-a1e9-67e427002a4a","a87839a8-50e9-4ddc-af31-c79cbc5bd2e9", this) == 1) yield return null;
             // Visit uFrame.Actions.TimeLibrary.GetTime
             ActionNode4_Result = uFrame.Actions.TimeLibrary.GetTime();
             ActionNode6_a = ActionNode4_Result;
             ActionNode6_b = Group.Gun.NextFire;
             // ActionNode
-            while (this.DebugInfo("a87839a8-50e9-4ddc-af31-c79cbc5bd2e9","f3a81b87-3370-47f9-a4b1-bde0b43274f6", this) == 1) yield return null;
             // Visit uFrame.Actions.Comparisons.GreaterThan
-            ActionNode6_Result = uFrame.Actions.Comparisons.GreaterThan(ActionNode6_a, ActionNode6_b, ()=> { System.StartCoroutine(ActionNode6_yes()); }, ()=> { System.StartCoroutine(ActionNode6_no()); });
-            yield break;
+            ActionNode6_Result = uFrame.Actions.Comparisons.GreaterThan(ActionNode6_a, ActionNode6_b, ActionNode6_yes, ActionNode6_no);
         }
         
-        private System.Collections.IEnumerator ActionNode6_yes() {
+        private void ActionNode6_yes() {
             ActionNode2_a = ActionNode4_Result;
             ActionNode2_b = Group.Gun.FireRate;
             // ActionNode
-            while (this.DebugInfo("f3a81b87-3370-47f9-a4b1-bde0b43274f6","1d23ddfa-6b42-4aa3-8b95-52ee6a77032f", this) == 1) yield return null;
             // Visit uFrame.Actions.FloatLibrary.Add
             ActionNode2_Result = uFrame.Actions.FloatLibrary.Add(ActionNode2_a, ActionNode2_b);
             // SetVariableNode
-            while (this.DebugInfo("1d23ddfa-6b42-4aa3-8b95-52ee6a77032f","166b2534-d9a8-4da8-a7ac-82ceb974d8af", this) == 1) yield return null;
             Group.Gun.NextFire = (System.Single)ActionNode2_Result;
             ActionNode15_gameObject = Group.Gun.ProjectilePrefab;
             ActionNode15_position = Group.Entity.transform.position;
             // ActionNode
-            while (this.DebugInfo("166b2534-d9a8-4da8-a7ac-82ceb974d8af","a7d7f4d0-e6e2-443d-bc47-4244290065cc", this) == 1) yield return null;
             // Visit uFrame.Actions.GameObjects.Instantiate
             ActionNode15_Result = uFrame.Actions.GameObjects.Instantiate(ActionNode15_gameObject, ActionNode15_position, ActionNode15_rotation);
             ActionNode1_gameObject = ActionNode15_Result.gameObject;
             ActionNode1_time = FloatNode27;
             // ActionNode
-            while (this.DebugInfo("a7d7f4d0-e6e2-443d-bc47-4244290065cc","1221df01-fe08-4b24-969b-757ac2504a9e", this) == 1) yield return null;
             // Visit uFrame.Actions.DestroyLibrary.DestroyGameObject
             uFrame.Actions.DestroyLibrary.DestroyGameObject(ActionNode1_gameObject, ActionNode1_time);
-            yield break;
         }
         
-        private System.Collections.IEnumerator ActionNode6_no() {
-            yield break;
+        private void ActionNode6_no() {
         }
     }
 }

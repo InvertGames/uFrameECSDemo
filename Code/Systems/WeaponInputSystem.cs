@@ -13,10 +13,10 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UniRx;
+    using uFrameECSDemo;
     using uFrame.ECS;
     using uFrame.Kernel;
-    using uFrameECSDemo;
+    using UniRx;
     
     
     [uFrame.Attributes.uFrameIdentifier("a97bf658-eb09-4340-8a9c-be005f8be076")]
@@ -92,7 +92,7 @@ namespace uFrameECSDemo {
             var handler = GunnerInputUpdateHandlerInstance;
             handler.System = this;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void GunnerInputUpdateFilter() {
