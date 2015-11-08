@@ -14,10 +14,12 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
+    using Invert.Json;
     
     
+    [uFrame.Attributes.ComponentId(9)]
     [uFrame.Attributes.uFrameIdentifier("f1355431-0026-4903-8a1a-c80b46b0f183")]
     public partial class SpawnAtInterval : uFrame.ECS.EcsComponent {
         
@@ -42,9 +44,9 @@ namespace uFrameECSDemo {
         
         private PropertyChangedEvent<Transform> _ParentEvent;
         
-        public int ComponentID {
+        public override int ComponentId {
             get {
-                return 8;
+                return 9;
             }
         }
         

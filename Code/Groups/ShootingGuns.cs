@@ -13,11 +13,12 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using uFrame.Kernel;
     using UniRx;
     using uFrame.ECS;
-    using uFrame.Kernel;
     
     
+    [uFrame.Attributes.ComponentId(4)]
     public partial class ShootingGuns : uFrame.ECS.GroupItem {
         
         private Gun _Gun;
@@ -31,9 +32,9 @@ namespace uFrameECSDemo {
             }
         }
         
-        public int ComponentID {
+        public override int ComponentId {
             get {
-                return 13;
+                return 4;
             }
         }
     }

@@ -14,10 +14,12 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
+    using Invert.Json;
     
     
+    [uFrame.Attributes.ComponentId(5)]
     [uFrame.Attributes.uFrameIdentifier("542b1cb0-35cb-469d-ba53-6a430a33c2f6")]
     public partial class BackgroundScroller : uFrame.ECS.EcsComponent {
         
@@ -42,9 +44,9 @@ namespace uFrameECSDemo {
         
         private PropertyChangedEvent<Vector3> _StartPositionEvent;
         
-        public int ComponentID {
+        public override int ComponentId {
             get {
-                return 22;
+                return 5;
             }
         }
         

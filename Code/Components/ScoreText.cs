@@ -14,11 +14,13 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine.UI;
-    using UnityEngine;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
+    using Invert.Json;
+    using UnityEngine;
     
     
+    [uFrame.Attributes.ComponentId(7)]
     [uFrame.Attributes.uFrameIdentifier("884a6ce9-7c4d-409a-a52f-05bf615ac5cc")]
     public partial class ScoreText : uFrame.ECS.EcsComponent {
         
@@ -29,9 +31,9 @@ namespace uFrameECSDemo {
         
         private PropertyChangedEvent<Text> _TextEvent;
         
-        public int ComponentID {
+        public override int ComponentId {
             get {
-                return 3;
+                return 7;
             }
         }
         

@@ -1,5 +1,7 @@
 {
+	"ComponentId":8	, 
 	"Name":"WavesGame"	, 
+	"Order":0	, 
 	"GraphId":"43b15702-714e-43ea-bfc1-4b73152ceef3"	, 
 	"Identifier":"aff8180a-e6ff-465a-8980-7cb6e596e8d3"	, 
 	"Expanded":false}

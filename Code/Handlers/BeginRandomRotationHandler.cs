@@ -13,8 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
+    using uFrame.ECS;
+    using UnityEngine;
     
     
     public class BeginRandomRotationComponentCreated {

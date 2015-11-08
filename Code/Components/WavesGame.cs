@@ -14,10 +14,12 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
+    using Invert.Json;
     
     
+    [uFrame.Attributes.ComponentId(8)]
     [uFrame.Attributes.uFrameIdentifier("aff8180a-e6ff-465a-8980-7cb6e596e8d3")]
     public partial class WavesGame : uFrame.ECS.EcsComponent {
         
@@ -56,9 +58,9 @@ namespace uFrameECSDemo {
         
         private PropertyChangedEvent<Int32> _HazardCountEvent;
         
-        public int ComponentID {
+        public override int ComponentId {
             get {
-                return 5;
+                return 8;
             }
         }
         

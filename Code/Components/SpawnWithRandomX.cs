@@ -14,10 +14,12 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
+    using Invert.Json;
     
     
+    [uFrame.Attributes.ComponentId(86)]
     [uFrame.Attributes.uFrameIdentifier("ddaee2ad-fc4e-438f-bdae-f8a9929e693a")]
     public partial class SpawnWithRandomX : uFrame.ECS.EcsComponent {
         
@@ -42,9 +44,9 @@ namespace uFrameECSDemo {
         
         private PropertyChangedEvent<Vector2> _XRangeEvent;
         
-        public int ComponentID {
+        public override int ComponentId {
             get {
-                return 19;
+                return 86;
             }
         }
         

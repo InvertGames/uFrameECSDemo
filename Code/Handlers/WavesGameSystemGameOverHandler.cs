@@ -13,8 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.Kernel;
+    using uFrame.ECS;
+    using UnityEngine;
     
     
     public class WavesGameSystemGameOverHandler {
@@ -26,6 +27,12 @@ namespace uFrameECSDemo {
         private uFrame.ECS.EcsSystem _System;
         
         private UnityEngine.GameObject ActionNode27_gameObject = default( UnityEngine.GameObject );
+        
+        private int ActionNode42_in = default( System.Int32 );
+        
+        private int IntNode41 = 1;
+        
+        private float ActionNode42_Result = default( System.Single );
         
         private float ActionNode27_time = default( System.Single );
         
@@ -49,6 +56,11 @@ namespace uFrameECSDemo {
         
         public virtual void Execute() {
             ActionNode27_gameObject = Group.Entity.gameObject;
+            ActionNode42_in = IntNode41;
+            // ActionNode
+            // Visit uFrame.Actions.Converter.IntToFloat
+            ActionNode42_Result = uFrame.Actions.Converter.IntToFloat(ActionNode42_in);
+            ActionNode27_time = ActionNode42_Result;
             // ActionNode
             // Visit uFrame.Actions.DestroyLibrary.DestroyGameObject
             uFrame.Actions.DestroyLibrary.DestroyGameObject(ActionNode27_gameObject, ActionNode27_time);

@@ -1,6 +1,7 @@
 {
 	"MetaType":"uFrame.Actions.DestroyLibrary.DestroyGameObject"	, 
 	"VariableName":"ActionNode27"	, 
+	"Order":0	, 
 	"GraphId":"43b15702-714e-43ea-bfc1-4b73152ceef3"	, 
 	"Identifier":"1599be78-af9c-4b2f-8109-6914c0ad665e"	, 
 	"Expanded":false}

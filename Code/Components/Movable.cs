@@ -13,11 +13,13 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
+    using Invert.Json;
+    using UnityEngine;
     
     
+    [uFrame.Attributes.ComponentId(25)]
     [uFrame.Attributes.uFrameIdentifier("5be3719a-5806-47ba-83d8-4e43f44ec0c5")]
     public partial class Movable : uFrame.ECS.EcsComponent {
         
@@ -49,9 +51,9 @@ namespace uFrameECSDemo {
         
         private PropertyChangedEvent<Single> _SpeedEvent;
         
-        public int ComponentID {
+        public override int ComponentId {
             get {
-                return 20;
+                return 25;
             }
         }
         

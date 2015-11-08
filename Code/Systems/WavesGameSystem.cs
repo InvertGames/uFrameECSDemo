@@ -23,6 +23,8 @@ namespace uFrameECSDemo {
     [uFrame.Attributes.uFrameIdentifier("9784e33b-b2d5-4aeb-ac8b-9273187d7c8b")]
     public partial class WavesGameSystem : uFrame.ECS.EcsSystem {
         
+        private static WavesGameSystem _Instance;
+        
         private IEcsComponentManagerOf<SpawnAtInterval> _SpawnAtIntervalManager;
         
         private IEcsComponentManagerOf<WavesGame> _WavesGameManager;
@@ -39,11 +41,14 @@ namespace uFrameECSDemo {
         
         private IEcsComponentManagerOf<MenuUI> _MenuUIManager;
         
-        private WavesGameCreatedComponentCreated WavesGameCreatedComponentCreatedInstance = new WavesGameCreatedComponentCreated();
-        
-        private PointsOnDestroyComponentDestroyed PointsOnDestroyComponentDestroyedInstance = new PointsOnDestroyComponentDestroyed();
-        
-        private WavesGameSystemGameOverHandler WavesGameSystemGameOverHandlerInstance = new WavesGameSystemGameOverHandler();
+        public static WavesGameSystem Instance {
+            get {
+                return _Instance;
+            }
+            set {
+                _Instance = value;
+            }
+        }
         
         public IEcsComponentManagerOf<SpawnAtInterval> SpawnAtIntervalManager {
             get {
@@ -118,15 +123,16 @@ namespace uFrameECSDemo {
         }
         
         public override void Setup() {
+            Instance = this;
             base.Setup();
-            SpawnAtIntervalManager = ComponentSystem.RegisterComponent<SpawnAtInterval>();
-            WavesGameManager = ComponentSystem.RegisterComponent<WavesGame>();
-            SpawnMultipleAtIntervalManager = ComponentSystem.RegisterComponent<SpawnMultipleAtInterval>();
-            PointsOnDestroyManager = ComponentSystem.RegisterComponent<PointsOnDestroy>();
-            PlayGameButtonManager = ComponentSystem.RegisterComponent<PlayGameButton>();
-            GameOverOnCollisionManager = ComponentSystem.RegisterComponent<GameOverOnCollision>();
-            ScoreTextManager = ComponentSystem.RegisterComponent<ScoreText>();
-            MenuUIManager = ComponentSystem.RegisterComponent<MenuUI>();
+            SpawnAtIntervalManager = ComponentSystem.RegisterComponent<SpawnAtInterval>(9);
+            WavesGameManager = ComponentSystem.RegisterComponent<WavesGame>(8);
+            SpawnMultipleAtIntervalManager = ComponentSystem.RegisterComponent<SpawnMultipleAtInterval>(10);
+            PointsOnDestroyManager = ComponentSystem.RegisterComponent<PointsOnDestroy>(12);
+            PlayGameButtonManager = ComponentSystem.RegisterComponent<PlayGameButton>(13);
+            GameOverOnCollisionManager = ComponentSystem.RegisterComponent<GameOverOnCollision>(11);
+            ScoreTextManager = ComponentSystem.RegisterComponent<ScoreText>(7);
+            MenuUIManager = ComponentSystem.RegisterComponent<MenuUI>(14);
             SpawnMultipleAtIntervalManager.CreatedObservable.Subscribe(BeginMultipleIntervalSpawnComponentCreatedFilter).DisposeWith(this);
             WavesGameManager.CreatedObservable.Subscribe(WavesGameCreatedComponentCreatedFilter).DisposeWith(this);
             PointsOnDestroyManager.RemovedObservable.Subscribe(_=>PointsOnDestroyComponentDestroyed(_,_)).DisposeWith(this);
@@ -154,7 +160,7 @@ namespace uFrameECSDemo {
         }
         
         protected void WavesGameCreatedComponentCreated(WavesGame data, WavesGame group) {
-            var handler = WavesGameCreatedComponentCreatedInstance;
+            var handler = new WavesGameCreatedComponentCreated();
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
@@ -173,7 +179,7 @@ namespace uFrameECSDemo {
         }
         
         protected void PointsOnDestroyComponentDestroyed(PointsOnDestroy data, PointsOnDestroy group) {
-            var handler = PointsOnDestroyComponentDestroyedInstance;
+            var handler = new PointsOnDestroyComponentDestroyed();
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
@@ -192,7 +198,7 @@ namespace uFrameECSDemo {
         }
         
         protected void WavesGameSystemGameOverHandler(uFrameECSDemo.GameOver data, WavesGame group) {
-            var handler = WavesGameSystemGameOverHandlerInstance;
+            var handler = new WavesGameSystemGameOverHandler();
             handler.System = this;
             handler.Event = data;
             handler.Group = group;

@@ -2,6 +2,7 @@
 	"MetaType":"uFrame.Actions.RigidbodyLibrary.SetRigidbodyRotation"	, 
 	"VariableName":"ActionNode7"	, 
 	"Name":"NewActionNode"	, 
+	"Order":0	, 
 	"GraphId":"ba9f9a37-144e-4c2c-9cc1-e8d56963012f"	, 
 	"Identifier":"12fae0e0-3723-4d36-9b84-c418fd17e038"	, 
 	"Expanded":false}

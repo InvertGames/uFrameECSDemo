@@ -13,11 +13,13 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
+    using Invert.Json;
+    using UnityEngine;
     
     
+    [uFrame.Attributes.ComponentId(12)]
     [uFrame.Attributes.uFrameIdentifier("2a307e59-d342-4b51-98dc-3fe3c252eabc")]
     public partial class PointsOnDestroy : uFrame.ECS.EcsComponent {
         
@@ -28,9 +30,9 @@ namespace uFrameECSDemo {
         
         private PropertyChangedEvent<Int32> _PointsEvent;
         
-        public int ComponentID {
+        public override int ComponentId {
             get {
-                return 2;
+                return 12;
             }
         }
         

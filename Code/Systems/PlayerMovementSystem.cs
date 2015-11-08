@@ -14,6 +14,7 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using uFrameECSDemo;
+    using UnityEngine;
     using uFrame.ECS;
     using uFrame.Kernel;
     using UniRx;
@@ -22,13 +23,35 @@ namespace uFrameECSDemo {
     [uFrame.Attributes.uFrameIdentifier("539cad18-5a60-40ba-b2c3-51f2d670f0e5")]
     public partial class PlayerMovementSystem : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemFixedUpdate {
         
+        private static PlayerMovementSystem _Instance;
+        
+        private IEcsComponentManagerOf<PlayerGunner> _PlayerGunnerManager;
+        
         private IEcsComponentManagerOf<Movable> _MovableManager;
         
         private IEcsComponentManagerOf<Hazard> _HazardManager;
         
-        private IEcsComponentManagerOf<PlayerGunner> _PlayerGunnerManager;
+        private IEcsComponentManagerOf<WavesGame> _WavesGameManager;
         
-        private ShooterFixedUpdateHandler ShooterFixedUpdateHandlerInstance = new ShooterFixedUpdateHandler();
+        private IEcsComponentManagerOf<Player> _PlayerManager;
+        
+        public static PlayerMovementSystem Instance {
+            get {
+                return _Instance;
+            }
+            set {
+                _Instance = value;
+            }
+        }
+        
+        public IEcsComponentManagerOf<PlayerGunner> PlayerGunnerManager {
+            get {
+                return _PlayerGunnerManager;
+            }
+            set {
+                _PlayerGunnerManager = value;
+            }
+        }
         
         public IEcsComponentManagerOf<Movable> MovableManager {
             get {
@@ -48,24 +71,36 @@ namespace uFrameECSDemo {
             }
         }
         
-        public IEcsComponentManagerOf<PlayerGunner> PlayerGunnerManager {
+        public IEcsComponentManagerOf<WavesGame> WavesGameManager {
             get {
-                return _PlayerGunnerManager;
+                return _WavesGameManager;
             }
             set {
-                _PlayerGunnerManager = value;
+                _WavesGameManager = value;
+            }
+        }
+        
+        public IEcsComponentManagerOf<Player> PlayerManager {
+            get {
+                return _PlayerManager;
+            }
+            set {
+                _PlayerManager = value;
             }
         }
         
         public override void Setup() {
+            Instance = this;
             base.Setup();
             PlayerGunnerManager = ComponentSystem.RegisterGroup<PlayerGunnerGroup,PlayerGunner>();
-            MovableManager = ComponentSystem.RegisterComponent<Movable>();
-            HazardManager = ComponentSystem.RegisterComponent<Hazard>();
+            MovableManager = ComponentSystem.RegisterComponent<Movable>(25);
+            HazardManager = ComponentSystem.RegisterComponent<Hazard>(81);
+            WavesGameManager = ComponentSystem.RegisterComponent<WavesGame>(8);
+            PlayerManager = ComponentSystem.RegisterComponent<Player>(23);
         }
         
         protected void ShooterFixedUpdateHandler(Movable group) {
-            var handler = ShooterFixedUpdateHandlerInstance;
+            var handler = new ShooterFixedUpdateHandler();
             handler.System = this;
             handler.Group = group;
             handler.Execute();

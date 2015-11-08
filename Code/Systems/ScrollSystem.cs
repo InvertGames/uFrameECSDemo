@@ -23,11 +23,18 @@ namespace uFrameECSDemo {
     [uFrame.Attributes.uFrameIdentifier("c39f72a9-03fa-4cc0-990c-f82be2aa6954")]
     public partial class ScrollSystem : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemUpdate {
         
+        private static ScrollSystem _Instance;
+        
         private IEcsComponentManagerOf<BackgroundScroller> _BackgroundScrollerManager;
         
-        private ScrollSystemUpdateHandler ScrollSystemUpdateHandlerInstance = new ScrollSystemUpdateHandler();
-        
-        private GrabStartPositionComponentCreated GrabStartPositionComponentCreatedInstance = new GrabStartPositionComponentCreated();
+        public static ScrollSystem Instance {
+            get {
+                return _Instance;
+            }
+            set {
+                _Instance = value;
+            }
+        }
         
         public IEcsComponentManagerOf<BackgroundScroller> BackgroundScrollerManager {
             get {
@@ -39,13 +46,14 @@ namespace uFrameECSDemo {
         }
         
         public override void Setup() {
+            Instance = this;
             base.Setup();
-            BackgroundScrollerManager = ComponentSystem.RegisterComponent<BackgroundScroller>();
+            BackgroundScrollerManager = ComponentSystem.RegisterComponent<BackgroundScroller>(5);
             BackgroundScrollerManager.CreatedObservable.Subscribe(GrabStartPositionComponentCreatedFilter).DisposeWith(this);
         }
         
         protected void ScrollSystemUpdateHandler(BackgroundScroller group) {
-            var handler = ScrollSystemUpdateHandlerInstance;
+            var handler = new ScrollSystemUpdateHandler();
             handler.System = this;
             handler.Group = group;
             handler.Execute();
@@ -68,7 +76,7 @@ namespace uFrameECSDemo {
         }
         
         protected void GrabStartPositionComponentCreated(BackgroundScroller data, BackgroundScroller group) {
-            var handler = GrabStartPositionComponentCreatedInstance;
+            var handler = new GrabStartPositionComponentCreated();
             handler.System = this;
             handler.Event = data;
             handler.Group = group;

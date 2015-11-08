@@ -13,11 +13,13 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using uFrame.ECS;
     using UnityEngine;
     using UniRx;
-    using uFrame.ECS;
+    using Invert.Json;
     
     
+    [uFrame.Attributes.ComponentId(13)]
     [uFrame.Attributes.uFrameIdentifier("bf206805-1753-4312-b96a-cd6dba9d62e5")]
     public partial class PlayGameButton : uFrame.ECS.EcsComponent {
         
@@ -26,9 +28,9 @@ namespace uFrameECSDemo {
         
         private ReactiveCollection<GameObject> _InstantiateItemsReactive;
         
-        public int ComponentID {
+        public override int ComponentId {
             get {
-                return 6;
+                return 13;
             }
         }
         

@@ -14,11 +14,13 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine.UI;
-    using UnityEngine;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
+    using Invert.Json;
+    using UnityEngine;
     
     
+    [uFrame.Attributes.ComponentId(1)]
     [uFrame.Attributes.uFrameIdentifier("092f8558-a85c-4579-b569-09b513eda0b1")]
     public partial class GunnerInput : uFrame.ECS.EcsComponent {
         
@@ -29,9 +31,9 @@ namespace uFrameECSDemo {
         
         private PropertyChangedEvent<Button> _MyButtonEvent;
         
-        public int ComponentID {
+        public override int ComponentId {
             get {
-                return 10;
+                return 1;
             }
         }
         

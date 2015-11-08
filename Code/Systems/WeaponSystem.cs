@@ -22,21 +22,44 @@ namespace uFrameECSDemo {
     [uFrame.Attributes.uFrameIdentifier("868e3ce9-162f-429b-b89a-4bd6475e7674")]
     public partial class WeaponSystem : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemUpdate {
         
+        private static WeaponSystem _Instance;
+        
+        private IEcsComponentManagerOf<ShootingGuns> _ShootingGunsManager;
+        
+        private IEcsComponentManagerOf<PlayerGunner> _PlayerGunnerManager;
+        
         private IEcsComponentManagerOf<GunnerInput> _GunnerInputManager;
         
         private IEcsComponentManagerOf<Gunner> _GunnerManager;
         
         private IEcsComponentManagerOf<Gun> _GunManager;
         
-        private IEcsComponentManagerOf<ShootingGuns> _ShootingGunsManager;
+        public static WeaponSystem Instance {
+            get {
+                return _Instance;
+            }
+            set {
+                _Instance = value;
+            }
+        }
         
-        private IEcsComponentManagerOf<PlayerGunner> _PlayerGunnerManager;
+        public IEcsComponentManagerOf<ShootingGuns> ShootingGunsManager {
+            get {
+                return _ShootingGunsManager;
+            }
+            set {
+                _ShootingGunsManager = value;
+            }
+        }
         
-        private WeaponSystemUpdateHandler WeaponSystemUpdateHandlerInstance = new WeaponSystemUpdateHandler();
-        
-        private BeginShootingComponentCreated BeginShootingComponentCreatedInstance = new BeginShootingComponentCreated();
-        
-        private ShootingGunsComponentDestroyed ShootingGunsComponentDestroyedInstance = new ShootingGunsComponentDestroyed();
+        public IEcsComponentManagerOf<PlayerGunner> PlayerGunnerManager {
+            get {
+                return _PlayerGunnerManager;
+            }
+            set {
+                _PlayerGunnerManager = value;
+            }
+        }
         
         public IEcsComponentManagerOf<GunnerInput> GunnerInputManager {
             get {
@@ -65,37 +88,20 @@ namespace uFrameECSDemo {
             }
         }
         
-        public IEcsComponentManagerOf<ShootingGuns> ShootingGunsManager {
-            get {
-                return _ShootingGunsManager;
-            }
-            set {
-                _ShootingGunsManager = value;
-            }
-        }
-        
-        public IEcsComponentManagerOf<PlayerGunner> PlayerGunnerManager {
-            get {
-                return _PlayerGunnerManager;
-            }
-            set {
-                _PlayerGunnerManager = value;
-            }
-        }
-        
         public override void Setup() {
+            Instance = this;
             base.Setup();
             ShootingGunsManager = ComponentSystem.RegisterGroup<ShootingGunsGroup,ShootingGuns>();
             PlayerGunnerManager = ComponentSystem.RegisterGroup<PlayerGunnerGroup,PlayerGunner>();
-            GunnerInputManager = ComponentSystem.RegisterComponent<GunnerInput>();
-            GunnerManager = ComponentSystem.RegisterComponent<Gunner>();
-            GunManager = ComponentSystem.RegisterComponent<Gun>();
+            GunnerInputManager = ComponentSystem.RegisterComponent<GunnerInput>(1);
+            GunnerManager = ComponentSystem.RegisterComponent<Gunner>(3);
+            GunManager = ComponentSystem.RegisterComponent<Gun>(2);
             ShootingGunsManager.CreatedObservable.Subscribe(BeginShootingComponentCreatedFilter).DisposeWith(this);
             ShootingGunsManager.RemovedObservable.Subscribe(_=>ShootingGunsComponentDestroyed(_,_)).DisposeWith(this);
         }
         
         protected void WeaponSystemUpdateHandler(ShootingGuns group) {
-            var handler = WeaponSystemUpdateHandlerInstance;
+            var handler = new WeaponSystemUpdateHandler();
             handler.System = this;
             handler.Group = group;
             handler.Execute();
@@ -118,7 +124,7 @@ namespace uFrameECSDemo {
         }
         
         protected void BeginShootingComponentCreated(ShootingGuns data, ShootingGuns group) {
-            var handler = BeginShootingComponentCreatedInstance;
+            var handler = new BeginShootingComponentCreated();
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
@@ -137,7 +143,7 @@ namespace uFrameECSDemo {
         }
         
         protected void ShootingGunsComponentDestroyed(ShootingGuns data, ShootingGuns group) {
-            var handler = ShootingGunsComponentDestroyedInstance;
+            var handler = new ShootingGunsComponentDestroyed();
             handler.System = this;
             handler.Event = data;
             handler.Group = group;

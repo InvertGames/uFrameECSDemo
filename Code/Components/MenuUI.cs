@@ -13,17 +13,19 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
+    using Invert.Json;
+    using UnityEngine;
     
     
+    [uFrame.Attributes.ComponentId(14)]
     [uFrame.Attributes.uFrameIdentifier("d6f18649-d32b-49f5-916e-6cd743dab2a3")]
     public partial class MenuUI : uFrame.ECS.EcsComponent {
         
-        public int ComponentID {
+        public override int ComponentId {
             get {
-                return 7;
+                return 14;
             }
         }
     }

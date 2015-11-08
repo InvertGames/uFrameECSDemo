@@ -14,6 +14,7 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using uFrameECSDemo;
+    using UnityEngine;
     using uFrame.ECS;
     using uFrame.Kernel;
     using UniRx;
@@ -22,17 +23,35 @@ namespace uFrameECSDemo {
     [uFrame.Attributes.uFrameIdentifier("c33125c8-912c-4fa4-921b-3b89581f3b04")]
     public partial class PlayerSystem : uFrame.ECS.EcsSystem {
         
+        private static PlayerSystem _Instance;
+        
+        private IEcsComponentManagerOf<PlayerGunner> _PlayerGunnerManager;
+        
         private IEcsComponentManagerOf<Movable> _MovableManager;
         
         private IEcsComponentManagerOf<Hazard> _HazardManager;
         
-        private IEcsComponentManagerOf<PlayerGunner> _PlayerGunnerManager;
+        private IEcsComponentManagerOf<WavesGame> _WavesGameManager;
         
-        private PlayerGunnerCreatedComponentCreated PlayerGunnerCreatedComponentCreatedInstance = new PlayerGunnerCreatedComponentCreated();
+        private IEcsComponentManagerOf<Player> _PlayerManager;
         
-        private PlayerGunnerComponentDestroyed PlayerGunnerComponentDestroyedInstance = new PlayerGunnerComponentDestroyed();
+        public static PlayerSystem Instance {
+            get {
+                return _Instance;
+            }
+            set {
+                _Instance = value;
+            }
+        }
         
-        private PlayerSystemOnCollisionEnterHandler PlayerSystemOnCollisionEnterHandlerInstance = new PlayerSystemOnCollisionEnterHandler();
+        public IEcsComponentManagerOf<PlayerGunner> PlayerGunnerManager {
+            get {
+                return _PlayerGunnerManager;
+            }
+            set {
+                _PlayerGunnerManager = value;
+            }
+        }
         
         public IEcsComponentManagerOf<Movable> MovableManager {
             get {
@@ -52,27 +71,40 @@ namespace uFrameECSDemo {
             }
         }
         
-        public IEcsComponentManagerOf<PlayerGunner> PlayerGunnerManager {
+        public IEcsComponentManagerOf<WavesGame> WavesGameManager {
             get {
-                return _PlayerGunnerManager;
+                return _WavesGameManager;
             }
             set {
-                _PlayerGunnerManager = value;
+                _WavesGameManager = value;
+            }
+        }
+        
+        public IEcsComponentManagerOf<Player> PlayerManager {
+            get {
+                return _PlayerManager;
+            }
+            set {
+                _PlayerManager = value;
             }
         }
         
         public override void Setup() {
+            Instance = this;
             base.Setup();
             PlayerGunnerManager = ComponentSystem.RegisterGroup<PlayerGunnerGroup,PlayerGunner>();
-            MovableManager = ComponentSystem.RegisterComponent<Movable>();
-            HazardManager = ComponentSystem.RegisterComponent<Hazard>();
+            MovableManager = ComponentSystem.RegisterComponent<Movable>(25);
+            HazardManager = ComponentSystem.RegisterComponent<Hazard>(81);
+            WavesGameManager = ComponentSystem.RegisterComponent<WavesGame>(8);
+            PlayerManager = ComponentSystem.RegisterComponent<Player>(23);
             PlayerGunnerManager.CreatedObservable.Subscribe(PlayerGunnerCreatedComponentCreatedFilter).DisposeWith(this);
+            this.OnEvent<uFrameECSDemo.GameOver>().Subscribe(_=>{ PlayerSystemGameOverFilter(_); }).DisposeWith(this);
             PlayerGunnerManager.RemovedObservable.Subscribe(_=>PlayerGunnerComponentDestroyed(_,_)).DisposeWith(this);
             this.OnEvent<uFrame.ECS.OnTriggerEnterDispatcher>().Subscribe(_=>{ PlayerSystemOnCollisionEnterFilter(_); }).DisposeWith(this);
         }
         
         protected void PlayerGunnerCreatedComponentCreated(PlayerGunner data, PlayerGunner group) {
-            var handler = PlayerGunnerCreatedComponentCreatedInstance;
+            var handler = new PlayerGunnerCreatedComponentCreated();
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
@@ -90,8 +122,28 @@ namespace uFrameECSDemo {
             this.PlayerGunnerCreatedComponentCreated(data, GroupItem);
         }
         
+        protected void PlayerSystemGameOverHandler(uFrameECSDemo.GameOver data, WavesGame group) {
+            var handler = new PlayerSystemGameOverHandler();
+            handler.System = this;
+            handler.Event = data;
+            handler.Group = group;
+            handler.Execute();
+        }
+        
+        protected void PlayerSystemGameOverFilter(uFrameECSDemo.GameOver data) {
+            var WavesGameItems = WavesGameManager.Components;
+            for (var WavesGameIndex = 0
+            ; WavesGameIndex < WavesGameItems.Count; WavesGameIndex++
+            ) {
+                if (!WavesGameItems[WavesGameIndex].Enabled) {
+                    continue;
+                }
+                this.PlayerSystemGameOverHandler(data, WavesGameItems[WavesGameIndex]);
+            }
+        }
+        
         protected void PlayerGunnerComponentDestroyed(PlayerGunner data, PlayerGunner group) {
-            var handler = PlayerGunnerComponentDestroyedInstance;
+            var handler = new PlayerGunnerComponentDestroyed();
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
@@ -110,7 +162,7 @@ namespace uFrameECSDemo {
         }
         
         protected void PlayerSystemOnCollisionEnterHandler(uFrame.ECS.OnTriggerEnterDispatcher data, Hazard collider, PlayerGunner source) {
-            var handler = PlayerSystemOnCollisionEnterHandlerInstance;
+            var handler = new PlayerSystemOnCollisionEnterHandler();
             handler.System = this;
             handler.Event = data;
             handler.Collider = collider;

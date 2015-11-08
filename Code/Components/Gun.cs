@@ -15,10 +15,12 @@ namespace uFrameECSDemo {
     using System.Linq;
     using UnityEngine;
     using uFrameECSDemo;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
+    using Invert.Json;
     
     
+    [uFrame.Attributes.ComponentId(2)]
     [uFrame.Attributes.uFrameIdentifier("eb461b84-87e2-4630-b721-4705c72ae4d6")]
     public partial class Gun : uFrame.ECS.EcsComponent {
         
@@ -50,9 +52,9 @@ namespace uFrameECSDemo {
         
         private PropertyChangedEvent<GunState> _StateEvent;
         
-        public int ComponentID {
+        public override int ComponentId {
             get {
-                return 12;
+                return 2;
             }
         }
         

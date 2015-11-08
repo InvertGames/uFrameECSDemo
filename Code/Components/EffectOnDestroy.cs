@@ -14,10 +14,12 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
+    using Invert.Json;
     
     
+    [uFrame.Attributes.ComponentId(6)]
     [uFrame.Attributes.uFrameIdentifier("b8b7185d-e28c-4185-a5e7-cddac0b0d7f4")]
     public partial class EffectOnDestroy : uFrame.ECS.EcsComponent {
         
@@ -28,9 +30,9 @@ namespace uFrameECSDemo {
         
         private PropertyChangedEvent<GameObject> _PrefabEvent;
         
-        public int ComponentID {
+        public override int ComponentId {
             get {
-                return 9;
+                return 6;
             }
         }
         

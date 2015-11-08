@@ -14,10 +14,12 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
+    using Invert.Json;
     
     
+    [uFrame.Attributes.ComponentId(83)]
     [uFrame.Attributes.uFrameIdentifier("462fb967-cd5a-4f3e-b352-a0a155131f91")]
     public partial class EnemyAI : uFrame.ECS.EcsComponent {
         
@@ -77,9 +79,9 @@ namespace uFrameECSDemo {
         
         private PropertyChangedEvent<Single> _TargetManeuverEvent;
         
-        public int ComponentID {
+        public override int ComponentId {
             get {
-                return 16;
+                return 83;
             }
         }
         

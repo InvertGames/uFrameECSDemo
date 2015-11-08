@@ -2,6 +2,7 @@
 	"MetaType":"uFrame.Actions.UnityLibrary.GetRigidbody"	, 
 	"VariableName":"ActionNode10"	, 
 	"Name":"RenameMe"	, 
+	"Order":0	, 
 	"Comments":"ActionNode50"	, 
 	"GraphId":"ba9f9a37-144e-4c2c-9cc1-e8d56963012f"	, 
 	"Identifier":"80244fdb-97b7-44b3-adb0-daea66fa82b0"	, 

@@ -23,9 +23,18 @@ namespace uFrameECSDemo {
     [uFrame.Attributes.uFrameIdentifier("0c9342b9-daed-4b80-8db6-1e9fc00ea971")]
     public partial class FxSystem : uFrame.ECS.EcsSystem {
         
+        private static FxSystem _Instance;
+        
         private IEcsComponentManagerOf<EffectOnDestroy> _EffectOnDestroyManager;
         
-        private EffectOnDestroyComponentDestroyed EffectOnDestroyComponentDestroyedInstance = new EffectOnDestroyComponentDestroyed();
+        public static FxSystem Instance {
+            get {
+                return _Instance;
+            }
+            set {
+                _Instance = value;
+            }
+        }
         
         public IEcsComponentManagerOf<EffectOnDestroy> EffectOnDestroyManager {
             get {
@@ -37,13 +46,14 @@ namespace uFrameECSDemo {
         }
         
         public override void Setup() {
+            Instance = this;
             base.Setup();
-            EffectOnDestroyManager = ComponentSystem.RegisterComponent<EffectOnDestroy>();
+            EffectOnDestroyManager = ComponentSystem.RegisterComponent<EffectOnDestroy>(6);
             EffectOnDestroyManager.RemovedObservable.Subscribe(_=>EffectOnDestroyComponentDestroyed(_,_)).DisposeWith(this);
         }
         
         protected void EffectOnDestroyComponentDestroyed(EffectOnDestroy data, EffectOnDestroy group) {
-            var handler = EffectOnDestroyComponentDestroyedInstance;
+            var handler = new EffectOnDestroyComponentDestroyed();
             handler.System = this;
             handler.Event = data;
             handler.Group = group;

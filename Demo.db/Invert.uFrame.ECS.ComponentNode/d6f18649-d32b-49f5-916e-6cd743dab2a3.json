@@ -1,5 +1,7 @@
 {
+	"ComponentId":14	, 
 	"Name":"MenuUI"	, 
+	"Order":0	, 
 	"GraphId":"43b15702-714e-43ea-bfc1-4b73152ceef3"	, 
 	"Identifier":"d6f18649-d32b-49f5-916e-6cd743dab2a3"	, 
 	"Expanded":false}

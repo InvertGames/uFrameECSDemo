@@ -14,10 +14,12 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
+    using Invert.Json;
     
     
+    [uFrame.Attributes.ComponentId(84)]
     [uFrame.Attributes.uFrameIdentifier("94f65036-c558-4329-9688-353472d6bba9")]
     public partial class Projectile : uFrame.ECS.EcsComponent {
         
@@ -35,9 +37,9 @@ namespace uFrameECSDemo {
         
         private PropertyChangedEvent<Single> _SpeedEvent;
         
-        public int ComponentID {
+        public override int ComponentId {
             get {
-                return 17;
+                return 84;
             }
         }
         

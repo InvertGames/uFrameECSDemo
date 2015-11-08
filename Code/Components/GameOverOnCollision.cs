@@ -13,17 +13,19 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
-    using UniRx;
     using uFrame.ECS;
+    using UniRx;
+    using Invert.Json;
+    using UnityEngine;
     
     
+    [uFrame.Attributes.ComponentId(11)]
     [uFrame.Attributes.uFrameIdentifier("0905b2df-22a8-4221-8111-7d1ab8872b9a")]
     public partial class GameOverOnCollision : uFrame.ECS.EcsComponent {
         
-        public int ComponentID {
+        public override int ComponentId {
             get {
-                return 1;
+                return 11;
             }
         }
     }

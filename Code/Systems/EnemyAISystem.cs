@@ -23,6 +23,8 @@ namespace uFrameECSDemo {
     [uFrame.Attributes.uFrameIdentifier("55bd0141-748d-490e-9c53-d5c9ec95b58d")]
     public partial class EnemyAISystem : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemFixedUpdate {
         
+        private static EnemyAISystem _Instance;
+        
         private IEcsComponentManagerOf<EnemyAI> _EnemyAIManager;
         
         private IEcsComponentManagerOf<RandomRotation> _RandomRotationManager;
@@ -35,11 +37,14 @@ namespace uFrameECSDemo {
         
         private IEcsComponentManagerOf<Hazard> _HazardManager;
         
-        private EnemyAISystemFixedUpdateHandler EnemyAISystemFixedUpdateHandlerInstance = new EnemyAISystemFixedUpdateHandler();
-        
-        private EnemyAICreatedComponentCreated EnemyAICreatedComponentCreatedInstance = new EnemyAICreatedComponentCreated();
-        
-        private EnemyAISystemOnCollisionEnterHandler EnemyAISystemOnCollisionEnterHandlerInstance = new EnemyAISystemOnCollisionEnterHandler();
+        public static EnemyAISystem Instance {
+            get {
+                return _Instance;
+            }
+            set {
+                _Instance = value;
+            }
+        }
         
         public IEcsComponentManagerOf<EnemyAI> EnemyAIManager {
             get {
@@ -96,19 +101,20 @@ namespace uFrameECSDemo {
         }
         
         public override void Setup() {
+            Instance = this;
             base.Setup();
-            EnemyAIManager = ComponentSystem.RegisterComponent<EnemyAI>();
-            RandomRotationManager = ComponentSystem.RegisterComponent<RandomRotation>();
-            ProjectileManager = ComponentSystem.RegisterComponent<Projectile>();
-            SpawnWithRandomXManager = ComponentSystem.RegisterComponent<SpawnWithRandomX>();
-            DestroyOnCollisionManager = ComponentSystem.RegisterComponent<DestroyOnCollision>();
-            HazardManager = ComponentSystem.RegisterComponent<Hazard>();
+            EnemyAIManager = ComponentSystem.RegisterComponent<EnemyAI>(83);
+            RandomRotationManager = ComponentSystem.RegisterComponent<RandomRotation>(85);
+            ProjectileManager = ComponentSystem.RegisterComponent<Projectile>(84);
+            SpawnWithRandomXManager = ComponentSystem.RegisterComponent<SpawnWithRandomX>(86);
+            DestroyOnCollisionManager = ComponentSystem.RegisterComponent<DestroyOnCollision>(82);
+            HazardManager = ComponentSystem.RegisterComponent<Hazard>(81);
             EnemyAIManager.CreatedObservable.Subscribe(EnemyAICreatedComponentCreatedFilter).DisposeWith(this);
             this.OnEvent<uFrame.ECS.OnCollisionEnterDispatcher>().Subscribe(_=>{ EnemyAISystemOnCollisionEnterFilter(_); }).DisposeWith(this);
         }
         
         protected void EnemyAISystemFixedUpdateHandler(EnemyAI group) {
-            var handler = EnemyAISystemFixedUpdateHandlerInstance;
+            var handler = new EnemyAISystemFixedUpdateHandler();
             handler.System = this;
             handler.Group = group;
             handler.Execute();
@@ -131,7 +137,7 @@ namespace uFrameECSDemo {
         }
         
         protected void EnemyAICreatedComponentCreated(EnemyAI data, EnemyAI group) {
-            var handler = EnemyAICreatedComponentCreatedInstance;
+            var handler = new EnemyAICreatedComponentCreated();
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
@@ -150,7 +156,7 @@ namespace uFrameECSDemo {
         }
         
         protected void EnemyAISystemOnCollisionEnterHandler(uFrame.ECS.OnCollisionEnterDispatcher data) {
-            var handler = EnemyAISystemOnCollisionEnterHandlerInstance;
+            var handler = new EnemyAISystemOnCollisionEnterHandler();
             handler.System = this;
             handler.Event = data;
             handler.Execute();

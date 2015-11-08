@@ -22,17 +22,44 @@ namespace uFrameECSDemo {
     [uFrame.Attributes.uFrameIdentifier("a97bf658-eb09-4340-8a9c-be005f8be076")]
     public partial class WeaponInputSystem : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemUpdate {
         
+        private static WeaponInputSystem _Instance;
+        
+        private IEcsComponentManagerOf<ShootingGuns> _ShootingGunsManager;
+        
+        private IEcsComponentManagerOf<PlayerGunner> _PlayerGunnerManager;
+        
         private IEcsComponentManagerOf<GunnerInput> _GunnerInputManager;
         
         private IEcsComponentManagerOf<Gunner> _GunnerManager;
         
         private IEcsComponentManagerOf<Gun> _GunManager;
         
-        private IEcsComponentManagerOf<ShootingGuns> _ShootingGunsManager;
+        public static WeaponInputSystem Instance {
+            get {
+                return _Instance;
+            }
+            set {
+                _Instance = value;
+            }
+        }
         
-        private IEcsComponentManagerOf<PlayerGunner> _PlayerGunnerManager;
+        public IEcsComponentManagerOf<ShootingGuns> ShootingGunsManager {
+            get {
+                return _ShootingGunsManager;
+            }
+            set {
+                _ShootingGunsManager = value;
+            }
+        }
         
-        private GunnerInputUpdateHandler GunnerInputUpdateHandlerInstance = new GunnerInputUpdateHandler();
+        public IEcsComponentManagerOf<PlayerGunner> PlayerGunnerManager {
+            get {
+                return _PlayerGunnerManager;
+            }
+            set {
+                _PlayerGunnerManager = value;
+            }
+        }
         
         public IEcsComponentManagerOf<GunnerInput> GunnerInputManager {
             get {
@@ -61,35 +88,18 @@ namespace uFrameECSDemo {
             }
         }
         
-        public IEcsComponentManagerOf<ShootingGuns> ShootingGunsManager {
-            get {
-                return _ShootingGunsManager;
-            }
-            set {
-                _ShootingGunsManager = value;
-            }
-        }
-        
-        public IEcsComponentManagerOf<PlayerGunner> PlayerGunnerManager {
-            get {
-                return _PlayerGunnerManager;
-            }
-            set {
-                _PlayerGunnerManager = value;
-            }
-        }
-        
         public override void Setup() {
+            Instance = this;
             base.Setup();
             ShootingGunsManager = ComponentSystem.RegisterGroup<ShootingGunsGroup,ShootingGuns>();
             PlayerGunnerManager = ComponentSystem.RegisterGroup<PlayerGunnerGroup,PlayerGunner>();
-            GunnerInputManager = ComponentSystem.RegisterComponent<GunnerInput>();
-            GunnerManager = ComponentSystem.RegisterComponent<Gunner>();
-            GunManager = ComponentSystem.RegisterComponent<Gun>();
+            GunnerInputManager = ComponentSystem.RegisterComponent<GunnerInput>(1);
+            GunnerManager = ComponentSystem.RegisterComponent<Gunner>(3);
+            GunManager = ComponentSystem.RegisterComponent<Gun>(2);
         }
         
         protected void GunnerInputUpdateHandler(PlayerGunner group) {
-            var handler = GunnerInputUpdateHandlerInstance;
+            var handler = new GunnerInputUpdateHandler();
             handler.System = this;
             handler.Group = group;
             handler.Execute();

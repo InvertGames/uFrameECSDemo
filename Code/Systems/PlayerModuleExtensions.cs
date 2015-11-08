@@ -13,13 +13,20 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.ECS;
     using uFrame.Kernel;
+    using uFrame.ECS;
     
     
     #region 
 static
     public class PlayerModuleExtensions {
+        
+        #region 
+static
+        public uFrame.ECS.IEcsComponentManagerOf<Player> PlayerManager(this uFrame.ECS.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<Player>();
+        }
+        #endregion
         
         #region 
 static
@@ -32,6 +39,13 @@ static
 static
         public uFrame.ECS.IEcsComponentManagerOf<PlayerGunner> PlayerGunnerManager(this uFrame.ECS.IEcsSystem system) {
             return system.ComponentSystem.RegisterComponent<PlayerGunner>();
+        }
+        #endregion
+        
+        #region 
+static
+        public List<Player> PlayerComponents(this uFrame.ECS.IEcsSystem system) {
+            return system.ComponentSystem.RegisterComponent<Player>().Components;
         }
         #endregion
         
