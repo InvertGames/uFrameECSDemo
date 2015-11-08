@@ -19,7 +19,7 @@ namespace uFrameECSDemo {
     using Invert.Json;
     
     
-    [uFrame.Attributes.ComponentId(86)]
+    [uFrame.Attributes.ComponentId(92)]
     [uFrame.Attributes.uFrameIdentifier("ddaee2ad-fc4e-438f-bdae-f8a9929e693a")]
     public partial class SpawnWithRandomX : uFrame.ECS.EcsComponent {
         
@@ -46,7 +46,7 @@ namespace uFrameECSDemo {
         
         public override int ComponentId {
             get {
-                return 86;
+                return 92;
             }
         }
         

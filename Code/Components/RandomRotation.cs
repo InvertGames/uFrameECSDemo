@@ -14,12 +14,12 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using uFrame.ECS;
+    using UnityEngine;
     using UniRx;
     using Invert.Json;
-    using UnityEngine;
     
     
-    [uFrame.Attributes.ComponentId(85)]
+    [uFrame.Attributes.ComponentId(91)]
     [uFrame.Attributes.uFrameIdentifier("bab9f7b3-b229-4610-a916-dcd5eaf7eeb0")]
     public partial class RandomRotation : uFrame.ECS.EcsComponent {
         
@@ -32,7 +32,7 @@ namespace uFrameECSDemo {
         
         public override int ComponentId {
             get {
-                return 85;
+                return 91;
             }
         }
         

@@ -13,9 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrame.ECS;
+    using uFrame.Kernel;
     
     
     public class HandleDestroyOnCollisionHandler {
@@ -48,11 +48,13 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual void Execute() {
+        public virtual System.Collections.IEnumerator Execute() {
             ActionNode2_entityId = Source.EntityId;
             // ActionNode
+            while (this.DebugInfo("0e52fecd-92b1-4be7-bfb6-9a010273790b","89a77718-1334-464d-85ee-efbc32047645", this) == 1) yield return null;
             // Visit uFrame.Actions.DestroyLibrary.DestroyEntity
             uFrame.Actions.DestroyLibrary.DestroyEntity(ActionNode2_entityId, ActionNode2_time);
+            yield break;
         }
     }
 }

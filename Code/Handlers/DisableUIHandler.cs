@@ -13,12 +13,12 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrame.ECS;
+    using uFrame.Kernel;
     
     
-    public class DisableUIComponentCreated {
+    public class DisableUI {
         
         public WavesGame Group;
         
@@ -50,22 +50,26 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual void Execute() {
+        public virtual System.Collections.IEnumerator Execute() {
             // LoopGroupNode
+            while (this.DebugInfo("42976861-8c91-41e7-9188-a0de2f8a460d","7bfcb8c0-5cdc-4130-a288-0916d2a551ac", this) == 1) yield return null;
             var LoopGroupNode32_GroupComponents = System.ComponentSystem.RegisterComponent<uFrameECSDemo.MenuUI>().Components;
             for (var LoopGroupNode32_ItemIndex = 0
             ; LoopGroupNode32_ItemIndex < LoopGroupNode32_GroupComponents.Count; LoopGroupNode32_ItemIndex++
             ) {
                 LoopGroupNode32_Item = LoopGroupNode32_GroupComponents[LoopGroupNode32_ItemIndex];
-                LoopGroupNode32_Next();
+                System.StartCoroutine(LoopGroupNode32_Next());
             }
+            yield break;
         }
         
-        private void LoopGroupNode32_Next() {
+        private System.Collections.IEnumerator LoopGroupNode32_Next() {
             ActionNode33_gameObject = LoopGroupNode32_Item.gameObject;
             // ActionNode
+            while (this.DebugInfo("7bfcb8c0-5cdc-4130-a288-0916d2a551ac","fd87d60b-7ed8-4917-af15-d43272ae48ed", this) == 1) yield return null;
             // Visit uFrame.Actions.GameObjects.DeactiateGameObject
             uFrame.Actions.GameObjects.DeactiateGameObject(ActionNode33_gameObject, ActionNode33_behaviour);
+            yield break;
         }
     }
 }

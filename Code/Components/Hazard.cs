@@ -14,18 +14,18 @@ namespace uFrameECSDemo {
     using System.Collections.Generic;
     using System.Linq;
     using uFrame.ECS;
+    using UnityEngine;
     using UniRx;
     using Invert.Json;
-    using UnityEngine;
     
     
-    [uFrame.Attributes.ComponentId(81)]
+    [uFrame.Attributes.ComponentId(87)]
     [uFrame.Attributes.uFrameIdentifier("18a4cb9a-ad9d-416e-916a-fe9592c4cadd")]
     public partial class Hazard : uFrame.ECS.EcsComponent {
         
         public override int ComponentId {
             get {
-                return 81;
+                return 87;
             }
         }
     }

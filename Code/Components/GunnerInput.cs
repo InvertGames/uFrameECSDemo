@@ -15,9 +15,9 @@ namespace uFrameECSDemo {
     using System.Linq;
     using UnityEngine.UI;
     using uFrame.ECS;
+    using UnityEngine;
     using UniRx;
     using Invert.Json;
-    using UnityEngine;
     
     
     [uFrame.Attributes.ComponentId(1)]

@@ -13,9 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrame.ECS;
+    using uFrame.Kernel;
     
     
     public class WavesGameComponentDestroyed {
@@ -50,22 +50,26 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual void Execute() {
+        public virtual System.Collections.IEnumerator Execute() {
             // LoopGroupNode
+            while (this.DebugInfo("28b81b2d-3039-4b03-9424-6fb8bb4421d6","43bc328b-e53e-4807-84ab-5665716468c7", this) == 1) yield return null;
             var LoopGroupNode35_GroupComponents = System.ComponentSystem.RegisterComponent<uFrameECSDemo.MenuUI>().Components;
             for (var LoopGroupNode35_ItemIndex = 0
             ; LoopGroupNode35_ItemIndex < LoopGroupNode35_GroupComponents.Count; LoopGroupNode35_ItemIndex++
             ) {
                 LoopGroupNode35_Item = LoopGroupNode35_GroupComponents[LoopGroupNode35_ItemIndex];
-                LoopGroupNode35_Next();
+                System.StartCoroutine(LoopGroupNode35_Next());
             }
+            yield break;
         }
         
-        private void LoopGroupNode35_Next() {
+        private System.Collections.IEnumerator LoopGroupNode35_Next() {
             ActionNode36_gameObject = LoopGroupNode35_Item.gameObject;
             // ActionNode
+            while (this.DebugInfo("43bc328b-e53e-4807-84ab-5665716468c7","d86d476a-60a8-46bf-b1e1-90583786c467", this) == 1) yield return null;
             // Visit uFrame.Actions.GameObjects.ActivateGameObject
             uFrame.Actions.GameObjects.ActivateGameObject(ActionNode36_gameObject, ActionNode36_behaviour);
+            yield break;
         }
     }
 }

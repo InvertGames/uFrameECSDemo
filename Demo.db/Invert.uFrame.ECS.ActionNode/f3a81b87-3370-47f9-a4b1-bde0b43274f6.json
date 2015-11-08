@@ -2,6 +2,7 @@
 	"MetaType":"uFrame.Actions.Comparisons.GreaterThan"	, 
 	"VariableName":"ActionNode6"	, 
 	"Name":"NewActionNode"	, 
+	"Order":0	, 
 	"GraphId":"8b8d2791-4622-4ab0-bc4c-00f23b6da2d5"	, 
 	"Identifier":"f3a81b87-3370-47f9-a4b1-bde0b43274f6"	, 
 	"Expanded":false}

@@ -19,7 +19,7 @@ namespace uFrameECSDemo {
     using Invert.Json;
     
     
-    [uFrame.Attributes.ComponentId(84)]
+    [uFrame.Attributes.ComponentId(90)]
     [uFrame.Attributes.uFrameIdentifier("94f65036-c558-4329-9688-353472d6bba9")]
     public partial class Projectile : uFrame.ECS.EcsComponent {
         
@@ -39,7 +39,7 @@ namespace uFrameECSDemo {
         
         public override int ComponentId {
             get {
-                return 84;
+                return 90;
             }
         }
         

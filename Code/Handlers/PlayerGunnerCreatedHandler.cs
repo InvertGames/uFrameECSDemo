@@ -13,12 +13,12 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrame.ECS;
+    using uFrame.Kernel;
     
     
-    public class PlayerGunnerCreatedComponentCreated {
+    public class PlayerGunnerCreated {
         
         public PlayerGunner Group;
         
@@ -48,11 +48,13 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual void Execute() {
+        public virtual System.Collections.IEnumerator Execute() {
             ActionNode21_message = StringNode22;
             // ActionNode
+            while (this.DebugInfo("89a77718-1334-464d-85ee-efbc32047645","5ab1ad6f-a0f5-4cdb-9b19-dd9f26edcb86", this) == 1) yield return null;
             // Visit uFrame.Actions.DebugLibrary.LogMessage
             uFrame.Actions.DebugLibrary.LogMessage(ActionNode21_message);
+            yield break;
         }
     }
 }

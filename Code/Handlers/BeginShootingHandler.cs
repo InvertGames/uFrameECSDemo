@@ -13,12 +13,12 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrame.ECS;
+    using uFrame.Kernel;
     
     
-    public class BeginShootingComponentCreated {
+    public class BeginShooting {
         
         public ShootingGuns Group;
         
@@ -44,7 +44,8 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual void Execute() {
+        public virtual System.Collections.IEnumerator Execute() {
+            yield break;
         }
     }
 }

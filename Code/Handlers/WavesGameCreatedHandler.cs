@@ -13,12 +13,12 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrame.Kernel;
-    using uFrame.ECS;
     using UnityEngine;
+    using uFrame.ECS;
+    using uFrame.Kernel;
     
     
-    public class WavesGameCreatedComponentCreated {
+    public class WavesGameCreated {
         
         public WavesGame Group;
         
@@ -46,9 +46,11 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual void Execute() {
+        public virtual System.Collections.IEnumerator Execute() {
             // SetVariableNode
+            while (this.DebugInfo("d8e16c6c-ac06-4dbc-8454-364f53870ee7","7acc43ed-c009-4cf2-9b24-6035e784d2b8", this) == 1) yield return null;
             Group.Score = (System.Int32)IntNode18;
+            yield break;
         }
     }
 }

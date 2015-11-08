@@ -17,7 +17,7 @@ namespace uFrameECSDemo {
     using UnityEngine;
     
     
-    public partial class EnemyAICreatedComponentCreated {
+    public partial class EnemyAICreated {
         
         public EnemyAI Group;
         

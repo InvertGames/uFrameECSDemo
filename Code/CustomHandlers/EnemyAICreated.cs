@@ -7,7 +7,7 @@
     using UnityEngine;
     
     
-    public partial class EnemyAICreatedComponentCreated {
+    public partial class EnemyAICreated {
 
         public void Execute()
         {

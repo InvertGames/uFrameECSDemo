@@ -19,7 +19,7 @@ namespace uFrameECSDemo {
     using Invert.Json;
     
     
-    [uFrame.Attributes.ComponentId(83)]
+    [uFrame.Attributes.ComponentId(89)]
     [uFrame.Attributes.uFrameIdentifier("462fb967-cd5a-4f3e-b352-a0a155131f91")]
     public partial class EnemyAI : uFrame.ECS.EcsComponent {
         
@@ -81,7 +81,7 @@ namespace uFrameECSDemo {
         
         public override int ComponentId {
             get {
-                return 83;
+                return 89;
             }
         }
         

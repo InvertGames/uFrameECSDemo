@@ -1,5 +1,6 @@
 {
 	"CodeHandler":true	, 
+	"Custom":false	, 
 	"MetaType":"uFrame.ECS.OnCollisionEnterDispatcher"	, 
 	"VariableCount":0	, 
 	"VariableName":"HandlerNode27"	, 
