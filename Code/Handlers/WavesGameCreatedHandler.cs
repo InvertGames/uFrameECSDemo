@@ -13,9 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.ECS;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
     public class WavesGameCreated {
@@ -46,11 +46,9 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             // SetVariableNode
-            while (this.DebugInfo("d8e16c6c-ac06-4dbc-8454-364f53870ee7","7acc43ed-c009-4cf2-9b24-6035e784d2b8", this) == 1) yield return null;
             Group.Score = (System.Int32)IntNode18;
-            yield break;
         }
     }
 }

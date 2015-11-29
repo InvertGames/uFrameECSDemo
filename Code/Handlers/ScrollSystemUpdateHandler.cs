@@ -13,9 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.ECS;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
     public class ScrollSystemUpdateHandler {
@@ -72,39 +72,32 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             ActionNode4_a = Vector3Node7;
             // ActionNode
-            while (this.DebugInfo("b1e4431f-e657-45d8-8679-5b5dd0f12a26","442b12b3-88fd-468a-94f2-43103e3afa99", this) == 1) yield return null;
             // Visit uFrame.Actions.TimeLibrary.GetTime
             ActionNode1_Result = uFrame.Actions.TimeLibrary.GetTime();
             ActionNode2_a = ActionNode1_Result;
             ActionNode2_b = Group.ScrollSpeed;
             // ActionNode
-            while (this.DebugInfo("442b12b3-88fd-468a-94f2-43103e3afa99","5a59ce30-3e5c-4a65-ba5c-13df2b8c9e81", this) == 1) yield return null;
             // Visit uFrame.Actions.FloatLibrary.Multiply
             ActionNode2_Result = uFrame.Actions.FloatLibrary.Multiply(ActionNode2_a, ActionNode2_b);
             ActionNode0_t = ActionNode2_Result;
             ActionNode0_length = Group.TileSizeZ;
             // ActionNode
-            while (this.DebugInfo("5a59ce30-3e5c-4a65-ba5c-13df2b8c9e81","0058be80-3f9e-49ff-b3d0-0bdbe273f127", this) == 1) yield return null;
             // Visit UnityEngine.Mathf.Repeat
             ActionNode0_Result = UnityEngine.Mathf.Repeat(ActionNode0_t, ActionNode0_length);
             ActionNode4_b = ActionNode0_Result;
             // ActionNode
-            while (this.DebugInfo("0058be80-3f9e-49ff-b3d0-0bdbe273f127","b1240e5f-6090-4e50-8af5-96964cb26cf9", this) == 1) yield return null;
             // Visit uFrame.Actions.Vector3Library.Multiply
             ActionNode4_Result = uFrame.Actions.Vector3Library.Multiply(ActionNode4_a, ActionNode4_b);
             ActionNode3_a = ActionNode4_Result;
             ActionNode3_b = Group.StartPosition;
             // ActionNode
-            while (this.DebugInfo("b1240e5f-6090-4e50-8af5-96964cb26cf9","97921f53-326d-4709-84e2-3cb7c713cd21", this) == 1) yield return null;
             // Visit uFrame.Actions.Vector3Library.Add
             ActionNode3_Result = uFrame.Actions.Vector3Library.Add(ActionNode3_a, ActionNode3_b);
             // SetVariableNode
-            while (this.DebugInfo("97921f53-326d-4709-84e2-3cb7c713cd21","337222c6-6b88-4526-b806-5e94ecbf9709", this) == 1) yield return null;
             Group.Entity.transform.position = (UnityEngine.Vector3)ActionNode3_Result;
-            yield break;
         }
     }
 }

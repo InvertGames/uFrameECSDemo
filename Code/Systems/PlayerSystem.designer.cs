@@ -13,11 +13,11 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrameECSDemo;
-    using UnityEngine;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
+    using uFrameECSDemo;
     using UniRx;
+    using UnityEngine;
     
     
     public partial class PlayerSystemBase : uFrame.ECS.EcsSystem {
@@ -81,7 +81,7 @@ namespace uFrameECSDemo {
             base.Setup();
             PlayerGunnerManager = ComponentSystem.RegisterGroup<PlayerGunnerGroup,PlayerGunner>();
             MovableManager = ComponentSystem.RegisterComponent<Movable>(25);
-            HazardManager = ComponentSystem.RegisterComponent<Hazard>(87);
+            HazardManager = ComponentSystem.RegisterComponent<Hazard>(215);
             WavesGameManager = ComponentSystem.RegisterComponent<WavesGame>(8);
             PlayerManager = ComponentSystem.RegisterComponent<Player>(23);
             PlayerGunnerManager.CreatedObservable.Subscribe(PlayerGunnerCreatedFilter).DisposeWith(this);
@@ -95,7 +95,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void PlayerGunnerCreatedFilter(PlayerGunner data) {
@@ -114,7 +114,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void PlayerSystemGameOverFilter(uFrameECSDemo.GameOver data) {
@@ -134,7 +134,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void PlayerGunnerComponentDestroyedFilter(PlayerGunner data) {
@@ -154,7 +154,7 @@ namespace uFrameECSDemo {
             handler.Event = data;
             handler.Collider = collider;
             handler.Source = source;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void PlayerSystemOnCollisionEnterFilter(uFrame.ECS.OnTriggerEnterDispatcher data) {

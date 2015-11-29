@@ -7,6 +7,7 @@
 	"VariableName":"HandlerNode9"	, 
 	"Name":"WeaponSystemUpdate"	, 
 	"Order":0	, 
+	"Comments":""	, 
 	"GraphId":"8b8d2791-4622-4ab0-bc4c-00f23b6da2d5"	, 
 	"Identifier":"64951079-e761-4a0b-914c-c2eda77bae75"	, 
-	"Expanded":false}
+	"Expanded":true}

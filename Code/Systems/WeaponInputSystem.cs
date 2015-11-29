@@ -3,13 +3,21 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrameECSDemo;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
+    using uFrameECSDemo;
     using UniRx;
+    using UnityEngine;
     
     
-    public partial class WeaponInputSystem : WeaponInputSystemBase, uFrame.ECS.ISystemUpdate {
+    public partial class WeaponInputSystem : uFrame.ECS.ISystemUpdate {
+        
+        protected override void GunnerInputUpdateHandler(PlayerGunner group) {
+            var handler = new GunnerInputUpdateHandler();
+            handler.System = this;
+            handler.Group = group;
+            handler.Execute();
+        }
         
         public virtual void SystemUpdate() {
             GunnerInputUpdateFilter();

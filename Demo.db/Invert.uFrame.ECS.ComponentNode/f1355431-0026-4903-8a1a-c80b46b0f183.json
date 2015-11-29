@@ -1,4 +1,5 @@
 {
+	"BlackBoard":false	, 
 	"ComponentId":9	, 
 	"Name":"SpawnAtInterval"	, 
 	"Order":0	, 

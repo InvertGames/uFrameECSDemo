@@ -13,11 +13,11 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrameECSDemo;
-    using UnityEngine;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
+    using uFrameECSDemo;
     using UniRx;
+    using UnityEngine;
     
     
     public partial class PlayerMovementSystemBase : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemFixedUpdate {
@@ -81,7 +81,7 @@ namespace uFrameECSDemo {
             base.Setup();
             PlayerGunnerManager = ComponentSystem.RegisterGroup<PlayerGunnerGroup,PlayerGunner>();
             MovableManager = ComponentSystem.RegisterComponent<Movable>(25);
-            HazardManager = ComponentSystem.RegisterComponent<Hazard>(87);
+            HazardManager = ComponentSystem.RegisterComponent<Hazard>(215);
             WavesGameManager = ComponentSystem.RegisterComponent<WavesGame>(8);
             PlayerManager = ComponentSystem.RegisterComponent<Player>(23);
         }
@@ -90,7 +90,7 @@ namespace uFrameECSDemo {
             var handler = new ShooterFixedUpdateHandler();
             handler.System = this;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void ShooterFixedUpdateFilter() {

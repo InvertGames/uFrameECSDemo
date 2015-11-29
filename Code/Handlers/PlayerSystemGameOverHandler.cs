@@ -13,9 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.ECS;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
     public class PlayerSystemGameOverHandler {
@@ -48,29 +48,24 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             // LoopGroupNode
-            while (this.DebugInfo("2bcd91d8-c24c-43df-8642-01a955e20a81","0ea2f7b4-633f-4f24-9576-359df5009fe8", this) == 1) yield return null;
             var LoopGroupNode24_GroupComponents = System.ComponentSystem.RegisterComponent<uFrameECSDemo.Player>().Components;
             for (var LoopGroupNode24_ItemIndex = 0
             ; LoopGroupNode24_ItemIndex < LoopGroupNode24_GroupComponents.Count; LoopGroupNode24_ItemIndex++
             ) {
                 LoopGroupNode24_Item = LoopGroupNode24_GroupComponents[LoopGroupNode24_ItemIndex];
-                System.StartCoroutine(LoopGroupNode24_Next());
+                LoopGroupNode24_Next();
             }
-            yield break;
         }
         
-        private System.Collections.IEnumerator LoopGroupNode24_Next() {
+        private void LoopGroupNode24_Next() {
             // SetVariableNode
-            while (this.DebugInfo("0ea2f7b4-633f-4f24-9576-359df5009fe8","a109c6be-b09c-4acb-978f-9056a4eb1792", this) == 1) yield return null;
             LoopGroupNode24_Item.BestScore = (System.Int32)Group.Score;
             // PublishEventNode
-            while (this.DebugInfo("a109c6be-b09c-4acb-978f-9056a4eb1792","05e35c80-2017-4041-9947-42cebdc7b7b3", this) == 1) yield return null;
             var PublishEventNode26_Event = new SavePlayerData();
             System.Publish(PublishEventNode26_Event);
             PublishEventNode26_Result = PublishEventNode26_Event;
-            yield break;
         }
     }
 }

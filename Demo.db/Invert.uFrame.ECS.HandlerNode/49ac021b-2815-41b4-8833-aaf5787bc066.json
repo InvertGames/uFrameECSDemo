@@ -1,5 +1,6 @@
 {
 	"CodeHandler":false	, 
+	"Custom":false	, 
 	"MetaType":"uFrame.ECS.ISystemUpdate"	, 
 	"VariableCount":0	, 
 	"StartActionId":"337222c6-6b88-4526-b806-5e94ecbf9709"	, 

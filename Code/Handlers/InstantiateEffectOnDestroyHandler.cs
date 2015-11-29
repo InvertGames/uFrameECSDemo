@@ -13,9 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.ECS;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
     public class EffectOnDestroyComponentDestroyed {
@@ -54,27 +54,22 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             ActionNode5_value = Group.IsQuiting;
             // ActionNode
-            while (this.DebugInfo("5d9e6255-926d-40e7-b316-d63686ca222f","769f512b-3bbf-40d3-9e31-e3ef5572cefe", this) == 1) yield return null;
             // Visit uFrame.Actions.Comparisons.IsTrue
-            uFrame.Actions.Comparisons.IsTrue(ActionNode5_value, ()=> { System.StartCoroutine(ActionNode5_yes()); }, ()=> { System.StartCoroutine(ActionNode5_no()); });
-            yield break;
+            uFrame.Actions.Comparisons.IsTrue(ActionNode5_value, ActionNode5_yes, ActionNode5_no);
         }
         
-        private System.Collections.IEnumerator ActionNode5_yes() {
-            yield break;
+        private void ActionNode5_yes() {
         }
         
-        private System.Collections.IEnumerator ActionNode5_no() {
+        private void ActionNode5_no() {
             ActionNode6_gameObject = Group.Prefab;
             ActionNode6_position = Group.transform.position;
             // ActionNode
-            while (this.DebugInfo("769f512b-3bbf-40d3-9e31-e3ef5572cefe","115892cd-156e-4117-8ccc-264b5a8ed3d4", this) == 1) yield return null;
             // Visit uFrame.Actions.GameObjects.Instantiate
             ActionNode6_Result = uFrame.Actions.GameObjects.Instantiate(ActionNode6_gameObject, ActionNode6_position, ActionNode6_rotation);
-            yield break;
         }
     }
 }

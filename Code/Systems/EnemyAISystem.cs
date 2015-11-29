@@ -3,17 +3,15 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrameECSDemo;
-    using UnityEngine;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
+    using uFrameECSDemo;
     using UniRx;
+    using UnityEngine;
     
     
-    public partial class EnemyAISystem : EnemyAISystemBase, uFrame.ECS.ISystemFixedUpdate {
+    public partial class EnemyAISystem : uFrame.ECS.ISystemFixedUpdate {
         
-        public virtual void SystemFixedUpdate() {
-            EnemyAISystemFixedUpdateFilter();
-        }
+
     }
 }

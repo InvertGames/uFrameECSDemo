@@ -13,9 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.ECS;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
     public class GrabStartPosition {
@@ -44,11 +44,9 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             // SetVariableNode
-            while (this.DebugInfo("05e35c80-2017-4041-9947-42cebdc7b7b3","b1e4431f-e657-45d8-8679-5b5dd0f12a26", this) == 1) yield return null;
             Group.StartPosition = (UnityEngine.Vector3)Group.Entity.transform.position;
-            yield break;
         }
     }
 }

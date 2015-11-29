@@ -13,11 +13,11 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrameECSDemo;
-    using UnityEngine;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
+    using uFrameECSDemo;
     using UniRx;
+    using UnityEngine;
     
     
     public partial class EnemyAISystemBase : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemFixedUpdate {
@@ -90,21 +90,17 @@ namespace uFrameECSDemo {
         
         public override void Setup() {
             base.Setup();
-            EnemyAIManager = ComponentSystem.RegisterComponent<EnemyAI>(89);
-            RandomRotationManager = ComponentSystem.RegisterComponent<RandomRotation>(91);
-            ProjectileManager = ComponentSystem.RegisterComponent<Projectile>(90);
-            SpawnWithRandomXManager = ComponentSystem.RegisterComponent<SpawnWithRandomX>(92);
-            DestroyOnCollisionManager = ComponentSystem.RegisterComponent<DestroyOnCollision>(88);
-            HazardManager = ComponentSystem.RegisterComponent<Hazard>(87);
+            EnemyAIManager = ComponentSystem.RegisterComponent<EnemyAI>(217);
+            RandomRotationManager = ComponentSystem.RegisterComponent<RandomRotation>(219);
+            ProjectileManager = ComponentSystem.RegisterComponent<Projectile>(218);
+            SpawnWithRandomXManager = ComponentSystem.RegisterComponent<SpawnWithRandomX>(220);
+            DestroyOnCollisionManager = ComponentSystem.RegisterComponent<DestroyOnCollision>(216);
+            HazardManager = ComponentSystem.RegisterComponent<Hazard>(215);
             EnemyAIManager.CreatedObservable.Subscribe(EnemyAICreatedFilter).DisposeWith(this);
             this.OnEvent<uFrame.ECS.OnCollisionEnterDispatcher>().Subscribe(_=>{ EnemyAISystemOnCollisionEnterFilter(_); }).DisposeWith(this);
         }
         
         protected virtual void EnemyAISystemFixedUpdateHandler(EnemyAI group) {
-            var handler = new EnemyAISystemFixedUpdateHandler();
-            handler.System = this;
-            handler.Group = group;
-            handler.Execute();
         }
         
         protected void EnemyAISystemFixedUpdateFilter() {
@@ -124,11 +120,6 @@ namespace uFrameECSDemo {
         }
         
         protected virtual void EnemyAICreated(EnemyAI data, EnemyAI group) {
-            var handler = new EnemyAICreated();
-            handler.System = this;
-            handler.Event = data;
-            handler.Group = group;
-            handler.Execute();
         }
         
         protected void EnemyAICreatedFilter(EnemyAI data) {
@@ -143,10 +134,6 @@ namespace uFrameECSDemo {
         }
         
         protected virtual void EnemyAISystemOnCollisionEnterHandler(uFrame.ECS.OnCollisionEnterDispatcher data) {
-            var handler = new EnemyAISystemOnCollisionEnterHandler();
-            handler.System = this;
-            handler.Event = data;
-            handler.Execute();
         }
         
         protected void EnemyAISystemOnCollisionEnterFilter(uFrame.ECS.OnCollisionEnterDispatcher data) {

@@ -9,17 +9,17 @@
 // ------------------------------------------------------------------------------
 
 namespace uFrameECSDemo {
+    using Invert.Json;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.ECS;
     using UniRx;
-    using Invert.Json;
+    using UnityEngine;
     
     
-    [uFrame.Attributes.ComponentId(92)]
+    [uFrame.Attributes.ComponentId(220)]
     [uFrame.Attributes.uFrameIdentifier("ddaee2ad-fc4e-438f-bdae-f8a9929e693a")]
     public partial class SpawnWithRandomX : uFrame.ECS.EcsComponent {
         
@@ -46,7 +46,7 @@ namespace uFrameECSDemo {
         
         public override int ComponentId {
             get {
-                return 92;
+                return 220;
             }
         }
         

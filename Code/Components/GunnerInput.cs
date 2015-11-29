@@ -9,15 +9,15 @@
 // ------------------------------------------------------------------------------
 
 namespace uFrameECSDemo {
+    using Invert.Json;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine.UI;
     using uFrame.ECS;
-    using UnityEngine;
     using UniRx;
-    using Invert.Json;
+    using UnityEngine;
+    using UnityEngine.UI;
     
     
     [uFrame.Attributes.ComponentId(1)]

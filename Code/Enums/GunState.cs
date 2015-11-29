@@ -17,8 +17,8 @@ namespace uFrameECSDemo {
     
     public enum GunState {
         
-        Shooting,
-        
         Idle,
+        
+        Shooting,
     }
 }

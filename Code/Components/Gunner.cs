@@ -9,14 +9,14 @@
 // ------------------------------------------------------------------------------
 
 namespace uFrameECSDemo {
+    using Invert.Json;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using uFrame.ECS;
-    using UnityEngine;
     using UniRx;
-    using Invert.Json;
+    using UnityEngine;
     
     
     [uFrame.Attributes.ComponentId(3)]
@@ -37,7 +37,7 @@ namespace uFrameECSDemo {
         public ReactiveCollection<Gun> Guns {
             get {
                 if (_GunsReactive == null) {
-                    _GunsReactive = new ReactiveCollection<Gun>(_Guns);
+                    _GunsReactive = new ReactiveCollection<Gun>(_Guns ?? new Gun[] { });
                 }
                 return _GunsReactive;
             }

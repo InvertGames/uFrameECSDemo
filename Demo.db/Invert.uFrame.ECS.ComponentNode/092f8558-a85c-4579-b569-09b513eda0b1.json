@@ -1,4 +1,5 @@
 {
+	"BlackBoard":false	, 
 	"ComponentId":1	, 
 	"Name":"GunnerInput"	, 
 	"Order":0	, 

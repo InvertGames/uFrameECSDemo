@@ -1,5 +1,6 @@
 {
 	"CodeHandler":false	, 
+	"Custom":false	, 
 	"VariableCount":0	, 
 	"StartActionId":"7a0295f2-d6fd-4fdf-8694-67691506652b"	, 
 	"VariableName":"ComponentDestroyedNode6"	, 

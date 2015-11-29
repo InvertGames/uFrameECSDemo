@@ -13,11 +13,11 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrameECSDemo;
-    using UnityEngine;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
+    using uFrameECSDemo;
     using UniRx;
+    using UnityEngine;
     
     
     public partial class HazardSystemBase : uFrame.ECS.EcsSystem {
@@ -90,12 +90,12 @@ namespace uFrameECSDemo {
         
         public override void Setup() {
             base.Setup();
-            EnemyAIManager = ComponentSystem.RegisterComponent<EnemyAI>(89);
-            RandomRotationManager = ComponentSystem.RegisterComponent<RandomRotation>(91);
-            ProjectileManager = ComponentSystem.RegisterComponent<Projectile>(90);
-            SpawnWithRandomXManager = ComponentSystem.RegisterComponent<SpawnWithRandomX>(92);
-            DestroyOnCollisionManager = ComponentSystem.RegisterComponent<DestroyOnCollision>(88);
-            HazardManager = ComponentSystem.RegisterComponent<Hazard>(87);
+            EnemyAIManager = ComponentSystem.RegisterComponent<EnemyAI>(217);
+            RandomRotationManager = ComponentSystem.RegisterComponent<RandomRotation>(219);
+            ProjectileManager = ComponentSystem.RegisterComponent<Projectile>(218);
+            SpawnWithRandomXManager = ComponentSystem.RegisterComponent<SpawnWithRandomX>(220);
+            DestroyOnCollisionManager = ComponentSystem.RegisterComponent<DestroyOnCollision>(216);
+            HazardManager = ComponentSystem.RegisterComponent<Hazard>(215);
             this.OnEvent<uFrame.ECS.OnTriggerEnterDispatcher>().Subscribe(_=>{ HandleDestroyOnCollisionFilter(_); }).DisposeWith(this);
             RandomRotationManager.CreatedObservable.Subscribe(BeginRandomRotationFilter).DisposeWith(this);
             ProjectileManager.CreatedObservable.Subscribe(ProjectileCreatedFilter).DisposeWith(this);
@@ -108,7 +108,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Source = source;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void HandleDestroyOnCollisionFilter(uFrame.ECS.OnTriggerEnterDispatcher data) {
@@ -127,7 +127,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void BeginRandomRotationFilter(RandomRotation data) {
@@ -146,7 +146,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void ProjectileCreatedFilter(Projectile data) {
@@ -165,7 +165,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void SetRandomPositionFilter(SpawnWithRandomX data) {
@@ -180,11 +180,6 @@ namespace uFrameECSDemo {
         }
         
         protected virtual void HazardSystemOnCollisionEnterDispatcherHandler(uFrame.ECS.OnCollisionEnterDispatcher data, DestroyOnCollision source) {
-            var handler = new HazardSystemOnCollisionEnterDispatcherHandler();
-            handler.System = this;
-            handler.Event = data;
-            handler.Source = source;
-            StartCoroutine(handler.Execute());
         }
         
         protected void HazardSystemOnCollisionEnterDispatcherFilter(uFrame.ECS.OnCollisionEnterDispatcher data) {

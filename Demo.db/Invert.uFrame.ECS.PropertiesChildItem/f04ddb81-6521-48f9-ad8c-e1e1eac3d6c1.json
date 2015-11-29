@@ -1,6 +1,8 @@
 {
 	"FriendlyName":"ProjectilePrefab"	, 
 	"RelatedType":"UnityEngine.GameObject"	, 
+	"Description":""	, 
 	"Identifier":"f04ddb81-6521-48f9-ad8c-e1e1eac3d6c1"	, 
 	"NodeId":"eb461b84-87e2-4630-b721-4705c72ae4d6"	, 
+	"Order":0	, 
 	"Name":"ProjectilePrefab"}

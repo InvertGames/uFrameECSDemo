@@ -13,9 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.ECS;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
     public class BeginRandomRotation {
@@ -58,26 +58,21 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             ActionNode4_go = Group.Entity.gameObject;
             // ActionNode
-            while (this.DebugInfo("1221df01-fe08-4b24-969b-757ac2504a9e","d10f965c-838c-4db4-80f0-a1bb93be8617", this) == 1) yield return null;
             // Visit uFrame.Actions.UnityLibrary.GetRigidbody
             ActionNode4_Result = uFrame.Actions.UnityLibrary.GetRigidbody(ActionNode4_go, ActionNode4_component);
             // ActionNode
-            while (this.DebugInfo("d10f965c-838c-4db4-80f0-a1bb93be8617","4a39023b-ffca-44b7-be0c-a2aff7e62f51", this) == 1) yield return null;
             // Visit uFrame.Actions.CreateRandoms.GetInsideSphere
             ActionNode0_Result = uFrame.Actions.CreateRandoms.GetInsideSphere();
             ActionNode6_a = ActionNode0_Result;
             ActionNode6_b = Group.Tumble;
             // ActionNode
-            while (this.DebugInfo("4a39023b-ffca-44b7-be0c-a2aff7e62f51","f8756661-d8ca-4745-9575-a1d546e7f049", this) == 1) yield return null;
             // Visit uFrame.Actions.Vector3Library.Multiply
             ActionNode6_Result = uFrame.Actions.Vector3Library.Multiply(ActionNode6_a, ActionNode6_b);
             // SetVariableNode
-            while (this.DebugInfo("f8756661-d8ca-4745-9575-a1d546e7f049","2cb1c689-05ea-48d4-bb80-f2a049c384b3", this) == 1) yield return null;
             ActionNode4_Result.angularVelocity = (UnityEngine.Vector3)ActionNode6_Result;
-            yield break;
         }
     }
 }

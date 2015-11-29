@@ -13,9 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.ECS;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
     public class BeginIntervalSpawn {
@@ -60,30 +60,25 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             ActionNode3_Seconds = Group.Speed;
             // ActionNode
-            while (this.DebugInfo("337222c6-6b88-4526-b806-5e94ecbf9709","cd009a0e-68bd-4265-bb84-e2d2201ad142", this) == 1) yield return null;
             // Visit uFrame.Actions.IntervalBySeconds
             ActionNode3.Seconds = ActionNode3_Seconds;
             ActionNode3.System = System;
-            ActionNode3.Tick = ()=> { System.StartCoroutine(ActionNode3_Tick()); };
+            ActionNode3.Tick = ActionNode3_Tick;
             ActionNode3.Execute();
             ActionNode3_Result = ActionNode3.Result;
-            yield break;
         }
         
-        private System.Collections.IEnumerator ActionNode3_Tick() {
+        private void ActionNode3_Tick() {
             ActionNode3_Result = ActionNode3.Result;
             ActionNode1_gameObject = Group.Prefab;
             // ActionNode
-            while (this.DebugInfo("cd009a0e-68bd-4265-bb84-e2d2201ad142","4494faec-7dc7-42ef-9e77-3058371f5acb", this) == 1) yield return null;
             // Visit uFrame.Actions.GameObjects.Instantiate
             ActionNode1_Result = uFrame.Actions.GameObjects.Instantiate(ActionNode1_gameObject, ActionNode1_position, ActionNode1_rotation);
             // SetVariableNode
-            while (this.DebugInfo("4494faec-7dc7-42ef-9e77-3058371f5acb","d8e16c6c-ac06-4dbc-8454-364f53870ee7", this) == 1) yield return null;
             ActionNode1_Result.transform.parent = (UnityEngine.Transform)Group.Parent;
-            yield break;
         }
     }
 }

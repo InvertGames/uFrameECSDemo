@@ -13,10 +13,11 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrameECSDemo;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
+    using uFrameECSDemo;
     using UniRx;
+    using UnityEngine;
     
     
     public partial class WeaponInputSystemBase : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemUpdate {
@@ -89,7 +90,7 @@ namespace uFrameECSDemo {
             var handler = new GunnerInputUpdateHandler();
             handler.System = this;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void GunnerInputUpdateFilter() {

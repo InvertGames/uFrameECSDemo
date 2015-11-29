@@ -13,11 +13,11 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrameECSDemo;
-    using UnityEngine;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
+    using uFrameECSDemo;
     using UniRx;
+    using UnityEngine;
     
     
     public partial class UISystemBase : uFrame.ECS.EcsSystem {
@@ -133,7 +133,7 @@ namespace uFrameECSDemo {
             handler.Group = group;
             handler.OldValue = value.PreviousValue;
             handler.NewValue = value.CurrentValue;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void SetScoreLabelFilter(WavesGame data, PropertyChangedEvent<System.Int32> value) {
@@ -152,7 +152,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void WavesGameComponentDestroyedFilter(WavesGame data) {
@@ -171,7 +171,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Source = source;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void UISystemPointerClickDispatcherFilter(uFrame.ECS.PointerClickDispatcher data) {
@@ -190,7 +190,7 @@ namespace uFrameECSDemo {
             handler.System = this;
             handler.Event = data;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void DisableUIFilter(WavesGame data) {

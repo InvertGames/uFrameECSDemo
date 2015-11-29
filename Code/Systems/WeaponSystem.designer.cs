@@ -13,10 +13,11 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using uFrameECSDemo;
-    using uFrame.Kernel;
     using uFrame.ECS;
+    using uFrame.Kernel;
+    using uFrameECSDemo;
     using UniRx;
+    using UnityEngine;
     
     
     public partial class WeaponSystemBase : uFrame.ECS.EcsSystem, uFrame.ECS.ISystemUpdate {
@@ -91,7 +92,7 @@ namespace uFrameECSDemo {
             var handler = new WeaponSystemUpdateHandler();
             handler.System = this;
             handler.Group = group;
-            StartCoroutine(handler.Execute());
+            handler.Execute();
         }
         
         protected void WeaponSystemUpdateFilter() {
@@ -111,11 +112,6 @@ namespace uFrameECSDemo {
         }
         
         protected virtual void BeginShooting(ShootingGuns data, ShootingGuns group) {
-            var handler = new BeginShooting();
-            handler.System = this;
-            handler.Event = data;
-            handler.Group = group;
-            StartCoroutine(handler.Execute());
         }
         
         protected void BeginShootingFilter(ShootingGuns data) {
@@ -130,11 +126,6 @@ namespace uFrameECSDemo {
         }
         
         protected virtual void ShootingGunsComponentDestroyed(ShootingGuns data, ShootingGuns group) {
-            var handler = new ShootingGunsComponentDestroyed();
-            handler.System = this;
-            handler.Event = data;
-            handler.Group = group;
-            StartCoroutine(handler.Execute());
         }
         
         protected void ShootingGunsComponentDestroyedFilter(ShootingGuns data) {

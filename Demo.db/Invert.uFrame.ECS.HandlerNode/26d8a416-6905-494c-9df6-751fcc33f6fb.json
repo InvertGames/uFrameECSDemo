@@ -1,5 +1,6 @@
 {
 	"CodeHandler":false	, 
+	"Custom":false	, 
 	"MetaType":"uFrame.ECS.OnTriggerEnterDispatcher"	, 
 	"VariableCount":0	, 
 	"StartActionId":"89a77718-1334-464d-85ee-efbc32047645"	, 

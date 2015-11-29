@@ -13,9 +13,9 @@ namespace uFrameECSDemo {
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
     using uFrame.ECS;
     using uFrame.Kernel;
+    using UnityEngine;
     
     
     public class WavesGameSystemGameOverHandler {
@@ -54,19 +54,16 @@ namespace uFrameECSDemo {
             }
         }
         
-        public virtual System.Collections.IEnumerator Execute() {
+        public virtual void Execute() {
             ActionNode27_gameObject = Group.Entity.gameObject;
             ActionNode42_in = IntNode41;
             // ActionNode
-            while (this.DebugInfo("03db7d7e-7273-499f-b530-127999b3f37c","9accc4ba-d200-4790-81c5-aa44704c2055", this) == 1) yield return null;
             // Visit uFrame.Actions.Converter.IntToFloat
             ActionNode42_Result = uFrame.Actions.Converter.IntToFloat(ActionNode42_in);
             ActionNode27_time = ActionNode42_Result;
             // ActionNode
-            while (this.DebugInfo("9accc4ba-d200-4790-81c5-aa44704c2055","1599be78-af9c-4b2f-8109-6914c0ad665e", this) == 1) yield return null;
             // Visit uFrame.Actions.DestroyLibrary.DestroyGameObject
             uFrame.Actions.DestroyLibrary.DestroyGameObject(ActionNode27_gameObject, ActionNode27_time);
-            yield break;
         }
     }
 }

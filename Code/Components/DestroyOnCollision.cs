@@ -9,23 +9,23 @@
 // ------------------------------------------------------------------------------
 
 namespace uFrameECSDemo {
+    using Invert.Json;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using uFrame.ECS;
-    using UnityEngine;
     using UniRx;
-    using Invert.Json;
+    using UnityEngine;
     
     
-    [uFrame.Attributes.ComponentId(88)]
+    [uFrame.Attributes.ComponentId(216)]
     [uFrame.Attributes.uFrameIdentifier("1f363fa1-9272-4208-ac16-ef73e48e1698")]
     public partial class DestroyOnCollision : uFrame.ECS.EcsComponent {
         
         public override int ComponentId {
             get {
-                return 88;
+                return 216;
             }
         }
     }

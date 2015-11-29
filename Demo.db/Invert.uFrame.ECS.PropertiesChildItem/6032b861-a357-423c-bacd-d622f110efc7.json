@@ -1,6 +1,8 @@
 {
 	"FriendlyName":"NextFire"	, 
 	"RelatedType":"Single"	, 
+	"Description":""	, 
 	"Identifier":"6032b861-a357-423c-bacd-d622f110efc7"	, 
 	"NodeId":"eb461b84-87e2-4630-b721-4705c72ae4d6"	, 
+	"Order":0	, 
 	"Name":"NextFire"}
